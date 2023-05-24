@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../utils/AuthProvider';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { User } from '../types/Interfaces';
 
 function Login() {
@@ -11,10 +11,46 @@ function Login() {
 
   const redirectPath = location.state?.path || '/dashboard';
   const handleLogin = () => {
-    auth!.login(user);
+    auth!.login(user!);
     navigate(redirectPath);
   };
-  return <div>Login</div>;
+  return (
+    <div>
+      <h2>Login</h2>
+      <em>
+        <p>Don't have an account yet?</p>
+        <a>Sign Up</a>
+      </em>
+      <div>
+        <div>
+          <label htmlFor='email'>Email</label>
+          <input
+            id='email'
+            type='email'
+            required
+            placeholder='you@domain.com'
+          />
+        </div>
+        <div>
+          <label htmlFor='password'>Password</label>
+          <input
+            id='password'
+            type='password'
+            required
+            placeholder='6 or more characters'
+          />
+        </div>
+        <div>
+          <button>Login</button>
+          <p>or</p>
+          <div>
+            <button>Google</button>
+            <button>Github</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Login;
