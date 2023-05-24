@@ -4,14 +4,15 @@ import { AuthProvider } from './utils/AuthProvider';
 import NavBar from './components/navbar/NavBar';
 import RequireAuth from './components/protectRoutes/RequireAuth';
 import Login from './pages/Login';
+import Register from './pages/Register';
 const ThemeContext = React.createContext<'light' | 'dark'>('dark');
 
 function App() {
   return (
     <AuthProvider>
-      <NavBar />
       <Routes>
         <Route path='login' element={<Login />} />
+        <Route path='register' element={<Register />} />
         <Route element={<RequireAuth />}>
           <Route path='dashboard'>
             <Route path='settings' />

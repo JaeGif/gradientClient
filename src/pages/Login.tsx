@@ -19,7 +19,9 @@ function Login() {
       <h2>Login</h2>
       <em>
         <p>Don't have an account yet?</p>
-        <a>Sign Up</a>
+        <Link to={'/register'} replace>
+          Sign Up
+        </Link>
       </em>
       <div>
         <div>
