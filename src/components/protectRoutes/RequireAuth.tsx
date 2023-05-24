@@ -1,11 +1,12 @@
 import React, { ReactNode } from 'react';
 import { useAuth } from '../../utils/AuthProvider';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 function RequireAuth() {
   const auth = useAuth();
+  const location = useLocation();
   if (!auth!.user) {
-    return <Navigate to='/login' />;
+    return <Navigate to='/login' state={{ path: location.pathname }} />;
   } else {
     return <Outlet />;
   }
