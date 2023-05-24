@@ -1,4 +1,4 @@
-import React, { useState, createContext, ReactNode } from 'react';
+import React, { useState, createContext, useContext, ReactNode } from 'react';
 import { User } from '../types/Interfaces';
 const AuthContext = createContext<{
   user: User | null;
@@ -9,7 +9,8 @@ const AuthContext = createContext<{
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
-  const login = (user: User) => {
+  const login = (user: User | null) => {
+    if (user === null) return;
     setUser(user);
   };
   const logout = () => {
@@ -21,3 +22,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     </AuthContext.Provider>
   );
 }
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
