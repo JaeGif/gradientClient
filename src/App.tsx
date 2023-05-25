@@ -1,10 +1,15 @@
 import { Routes, Route } from 'react-router-dom';
-import React, { useContext } from 'react';
+import React from 'react';
 import { AuthProvider } from './utils/AuthProvider';
 import NavBar from './components/navbar/NavBar';
 import RequireAuth from './components/protectRoutes/RequireAuth';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Dashboard from './pages/home/Dashboard';
+import Settings from './pages/home/Settings';
+import Analytics from './pages/home/analytics/Analytics';
+import Data from './pages/home/analytics/Data';
+
 const ThemeContext = React.createContext<'light' | 'dark'>('dark');
 
 function App() {
@@ -13,14 +18,19 @@ function App() {
       <Routes>
         <Route path='login' element={<Login />} />
         <Route path='register' element={<Register />} />
-        <Route element={<RequireAuth />}>
-          <Route path='dashboard'>
-            <Route path='settings' />
-            <Route path='analytics'>
-              <Route path=':data' />
-            </Route>
+        <Route
+          element={
+            <>
+              <NavBar />
+              <RequireAuth />
+            </>
+          }
+        >
+          <Route path='dashboard' element={<Dashboard />} />
+          <Route path='settings' element={<Settings />} />
+          <Route path='analytics' element={<Analytics />}>
+            <Route path=':data' element={<Data />} />
           </Route>
-          <Route path='new'></Route>
         </Route>
       </Routes>
     </AuthProvider>

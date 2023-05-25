@@ -1,12 +1,13 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-function NavBar() {
+function Analytics() {
   return (
     <>
-      <div>NavBar with outlet</div>
+      <div>Analytics</div>
+      <Outlet />
     </>
   );
 }
 
-export default NavBar;
+export default Analytics;
