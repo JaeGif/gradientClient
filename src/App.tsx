@@ -9,6 +9,7 @@ import Dashboard from './pages/home/Dashboard';
 import Settings from './pages/home/Settings';
 import Analytics from './pages/home/analytics/Analytics';
 import Data from './pages/home/analytics/Data';
+import Workouts from './pages/home/workouts/Workouts';
 
 const ThemeContext = React.createContext<'light' | 'dark'>('dark');
 
@@ -28,6 +29,7 @@ function App() {
         >
           <Route path='dashboard' element={<Dashboard />} />
           <Route path='settings' element={<Settings />} />
+          <Route path='workouts' element={<Workouts />} />
           <Route path='analytics' element={<Analytics />}>
             <Route path=':data' element={<Data />} />
           </Route>
