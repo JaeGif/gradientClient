@@ -20,10 +20,10 @@ function App() {
         <Route path='register' element={<Register />} />
         <Route
           element={
-            <>
+            <div className='flex'>
               <NavBar />
               <RequireAuth />
-            </>
+            </div>
           }
         >
           <Route path='dashboard' element={<Dashboard />} />
