@@ -7,7 +7,7 @@ import {
 } from '../../types/Interfaces';
 import uniqid from 'uniqid';
 
-type WorkoutCardProps = {
+export type WorkoutCardProps = {
   name: string;
   muscleGroup: MuscleGroup;
   exercises: PlannedExercise[]; // An array of exercise IDx's
