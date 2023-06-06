@@ -9,7 +9,7 @@ import uniqid from 'uniqid';
 
 export type WorkoutCardProps = {
   name: string;
-  muscleGroup: MuscleGroup;
+  muscleGroup?: MuscleGroup;
   exercises: PlannedExercise[]; // An array of exercise IDx's
 };
 
@@ -21,7 +21,9 @@ function WorkoutCard({ name, muscleGroup, exercises }: WorkoutCardProps) {
         <span className='border-gray-400 border-b-2 flex p-2'>
           <h6 className='text-sm'>
             Target Groups:{' '}
-            <em className='not-italic text-blue-500'>{muscleGroup.name}</em>
+            <em className='not-italic text-blue-500'>
+              {muscleGroup?.name || ''}
+            </em>
           </h6>
         </span>
         <div className='p-2'>
@@ -32,7 +34,7 @@ function WorkoutCard({ name, muscleGroup, exercises }: WorkoutCardProps) {
                   <h2>{exercise.name}</h2>
                   <div>
                     <p className='text-blue-500'>
-                      {exercise.volume.sets} x {exercise.volume.reps}
+                      {exercise.sets} x {exercise.reps}
                     </p>
                   </div>
                 </span>

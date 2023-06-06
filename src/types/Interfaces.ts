@@ -21,16 +21,15 @@ export interface PerformedExercise {
 export interface PlannedExercise {
   name: string;
   id: string;
-  musclesGroup?: MuscleGroup[];
-  volume: {
-    sets: number;
-    reps: number;
-  };
+  musclesGroup?: MuscleGroup;
+  sets: number;
+  reps: number;
 }
 export interface Workout {
   id: string;
   name: string;
   date: Date;
+  exercises?: PlannedExercise[];
 }
 export interface MuscleGroup {
   id: string;
