@@ -27,13 +27,17 @@ function MyWorkouts() {
   return (
     <div className='flex flex-wrap gap-5'>
       {workoutsQuery.isFetched ? (
-        workoutsQuery.data.map((workout: Workout) => (
-          <WorkoutCard
-            key={uniqid()}
-            name={workout.name}
-            exercises={workout.exercises}
-          />
-        ))
+        workoutsQuery.data.length !== 0 ? (
+          workoutsQuery.data.map((workout: Workout) => (
+            <WorkoutCard
+              key={uniqid()}
+              name={workout.name}
+              exercises={workout.exercises}
+            />
+          ))
+        ) : (
+          <>No data</>
+        )
       ) : (
         <>Loading</>
       )}
