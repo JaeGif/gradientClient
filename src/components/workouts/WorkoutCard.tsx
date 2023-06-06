@@ -10,7 +10,7 @@ import uniqid from 'uniqid';
 export type WorkoutCardProps = {
   name: string;
   muscleGroup?: MuscleGroup;
-  exercises: PlannedExercise[]; // An array of exercise IDx's
+  exercises?: PlannedExercise[]; // An array of exercise IDx's
 };
 
 function WorkoutCard({ name, muscleGroup, exercises }: WorkoutCardProps) {
@@ -28,7 +28,7 @@ function WorkoutCard({ name, muscleGroup, exercises }: WorkoutCardProps) {
         </span>
         <div className='p-2'>
           <ul>
-            {exercises.map((exercise) => (
+            {exercises?.map((exercise) => (
               <li key={uniqid()}>
                 <span className='flex gap-2 justify-start items-center'>
                   <h2>{exercise.name}</h2>
