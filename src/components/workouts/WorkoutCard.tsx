@@ -28,18 +28,24 @@ function WorkoutCard({ name, muscleGroup, exercises }: WorkoutCardProps) {
         </span>
         <div className='p-2'>
           <ul>
-            {exercises?.map((exercise) => (
-              <li key={uniqid()}>
-                <span className='flex gap-2 justify-start items-center'>
-                  <h2>{exercise.name}</h2>
-                  <div>
-                    <p className='text-blue-500'>
-                      {exercise.sets} x {exercise.reps}
-                    </p>
-                  </div>
-                </span>
-              </li>
-            ))}
+            {exercises?.length !== 0 ? (
+              exercises?.map((exercise) => (
+                <li key={uniqid()}>
+                  <span className='flex gap-2 justify-start items-center'>
+                    <h2>{exercise.name}</h2>
+                    <div>
+                      <p className='text-blue-500'>
+                        {exercise.sets} x {exercise.reps}
+                      </p>
+                    </div>
+                  </span>
+                </li>
+              ))
+            ) : (
+              <p>
+                <em className='text-sm'>No exercises planned</em>
+              </p>
+            )}
           </ul>
         </div>
       </div>
