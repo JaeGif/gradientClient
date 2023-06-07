@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import React from 'react';
 import { AuthProvider } from './utils/AuthProvider';
 import NavBar from './components/navbar/NavBar';
@@ -11,6 +11,7 @@ import Analytics from './pages/home/analytics/Analytics';
 import Data from './pages/home/analytics/Data';
 import Workouts from './pages/home/workouts/Workouts';
 import CreateWorkout from './components/workouts/new/CreateWorkout';
+import NotFound from './pages/error/NotFound';
 
 const ThemeContext = React.createContext<'light' | 'dark'>('dark');
 
@@ -37,6 +38,8 @@ function App() {
             <Route path=':data' element={<Data />} />
           </Route>
         </Route>
+        <Route path='/' element={<Navigate to={'/dashboard'} />} />
+        <Route path='/*' element={<NotFound />} />
       </Routes>
     </AuthProvider>
   );
