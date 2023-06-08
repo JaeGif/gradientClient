@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 function NavBar() {
   return (
     <nav className='flex flex-col w-screen sm:w-1/5 sm:min-w-[250px] sm:min-h-screen sm:max-h-screen p-4 shadow-md'>
-      <span>
-        <h1>gradient</h1>
+      <span className='flex flex-col justify-center items-center'>
+        <img className='h-10' src='/gradient-icon.png' />
+        <h1 className='text-xl'>gradient</h1>
       </span>
       <span className='flex justify-center items-center'>
         <img alt='profile' />
