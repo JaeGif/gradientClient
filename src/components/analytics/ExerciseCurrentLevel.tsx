@@ -21,7 +21,11 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
   useEffect(() => {
     console.log(recentExerciseQuery.data);
   }, [recentExerciseQuery.data]);
-  return <div>ExerciseCurrentLevel</div>;
+  return (
+    <div>
+      <LineChart />
+    </div>
+  );
 }
 
 export default ExerciseCurrentLevel;
