@@ -9,6 +9,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartOptions,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 ChartJS.register(
@@ -22,25 +23,14 @@ ChartJS.register(
 );
 
 type LineChartProps = {
-  labels: string[];
+  labels?: string[];
   datasets: {
-    label: string;
+    label?: string;
     data: number[];
-    borderColor: string;
-    backgroundColor: string;
+    borderColor?: string;
+    backgroundColor?: string;
   }[];
-  options: {
-    responsive: boolean;
-    plugins: {
-      legend: {
-        position: 'top';
-      };
-      title: {
-        display: boolean;
-        text: string;
-      };
-    };
-  };
+  options: any;
 };
 function LineChart({ labels, datasets, options }: LineChartProps) {
   const data = { labels, datasets };
