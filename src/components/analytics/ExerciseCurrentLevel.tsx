@@ -47,8 +47,10 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
 
       if (data) {
         let standardDataSet = [];
+        let standardDataSet2 = [];
         for (let i = 0; i < data.length; i++) {
           standardDataSet.push(110);
+          standardDataSet2.push(200);
         }
         const datasetsPre = [
           {
@@ -71,6 +73,15 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
             borderDash: [5, 5],
             tension: 0.1,
           },
+          {
+            data: standardDataSet2,
+            pointRadius: 0,
+            borderColor: 'rgb(8, 143, 143)',
+            backgroundColor: 'rgba(8, 143, 143, 1)',
+            cubicInterpolationMode: 'default',
+            borderDash: [5, 5],
+            tension: 0.1,
+          },
         ];
 
         setDatasets(datasetsPre);
@@ -83,6 +94,7 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
               display: true,
               text: `1RM (${recentExerciseQuery.data[0].unit})`,
             },
+            max: 100,
           },
           x: {
             title: {
