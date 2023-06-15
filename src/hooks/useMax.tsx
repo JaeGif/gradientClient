@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 function useMax(data: []) {
   // unit agnostic
-  console.log(data);
   const [estimatedOneRepMax, setEstimatedOneRepMax] = useState<number[]>();
   const calculateMax = (weight: number, reps: number) => {
     if (reps >= 5) {

@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import LineChart from '../charts/LineChart';
-import { ChartOptions } from 'chart.js';
+import { ChartOptions, DatasetController, Chart, Filler } from 'chart.js';
 import useMax from '../../hooks/useMax';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 
 type ExerciseCurrentLevelProps = {
   exerciseId: string;
 };
-
+Chart.register(Filler);
 function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
   const [xLabels, setXLabels] = useState<string[]>([]);
   const [datasets, setDatasets] = useState<
@@ -46,11 +46,30 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
       setXLabels(label);
 
       if (data) {
+        let standardDataSet = [];
+        for (let i = 0; i < data.length; i++) {
+          standardDataSet.push(110);
+        }
         const datasetsPre = [
           {
             data: data,
             borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            backgroundColor: 'rgba(30,30,30,1)',
+            cubicInterpolationMode: 'default',
+            tension: 0.1,
+            fill: {
+              target: 'origin', // start under line
+              above: 'rgba(255, 30, 30, 0.3)', // under line color
+            },
+          },
+          {
+            data: standardDataSet,
+            pointRadius: 0,
+            borderColor: 'rgb(8, 143, 143)',
+            backgroundColor: 'rgba(8, 143, 143, 1)',
+            cubicInterpolationMode: 'default',
+            borderDash: [5, 5],
+            tension: 0.1,
           },
         ];
 
@@ -70,12 +89,17 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
               display: true,
               text: 'Date',
             },
+            grid: {
+              display: false,
+            },
           },
         },
+
         plugins: {
           legend: {
             display: false,
           },
+
           title: {
             display: true,
             text: `${recentExerciseQuery.data[0].exercise.name}`,
@@ -87,7 +111,7 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
   }, [recentExerciseQuery.isFetched, data]);
 
   return (
-    <div>
+    <div className='h-full w-full debug'>
       {datasets && (
         <LineChart labels={xLabels} datasets={datasets} options={options} />
       )}
