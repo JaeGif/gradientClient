@@ -11,7 +11,7 @@ function useLineChartOptions(
       y: {
         title: {
           display: true,
-          text: `1RM (${recentExerciseQuery.data[0].unit})`,
+          text: `1RM (${recentExerciseQuery.data[0].sets[0].unit})`,
         },
         max: maxExercise1RM,
       },

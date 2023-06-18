@@ -1,6 +1,6 @@
 import React from 'react';
 
-function useLineCartDataSets(data: number[] | undefined) {
+function useLineChartDataSets(data: number[] | undefined) {
   if (!data) return;
   let standardDataSet = [];
   let standardDataSet2 = [];
@@ -41,4 +41,4 @@ function useLineCartDataSets(data: number[] | undefined) {
   return datasetsPre;
 }
 
-export default useLineCartDataSets;
+export default useLineChartDataSets;

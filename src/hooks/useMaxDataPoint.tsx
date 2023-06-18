@@ -4,6 +4,7 @@ import { UseQueryResult } from '@tanstack/react-query';
 function useMaxDataPoint(data: number[] | undefined) {
   // Get highest data point of each analytic chart
   let maxUpperLimit;
+  console.log(data);
   if (data) {
     let weightArr = [];
     for (let i = 0; i < data.length; i++) {

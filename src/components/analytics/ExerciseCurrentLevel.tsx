@@ -7,7 +7,7 @@ import useRecentExerciseData from '../../hooks/useRecentExerciseData';
 import useExerciseDateLabels from '../../hooks/useExerciseDateLabels';
 import useMaxDataPoint from '../../hooks/useMaxDataPoint';
 import useLineChartOptions from '../../hooks/useLineChartOptions';
-import useLineCartDataSets from '../../hooks/useLineCartDataSets';
+import useLineChartDataSets from '../../hooks/useLineChartDataSets';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 
 type ExerciseCurrentLevelProps = {
@@ -36,7 +36,7 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
       const data = use1RepMax(recentExerciseQuery.data);
 
       if (data) {
-        const datasetsPre = useLineCartDataSets(data);
+        const datasetsPre = useLineChartDataSets(data);
         const maxExercise1RM = useMaxDataPoint(data);
         setDatasets(datasetsPre);
         const options = useLineChartOptions(
