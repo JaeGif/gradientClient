@@ -8,14 +8,13 @@ import useExerciseDateLabels from '../../hooks/useExerciseDateLabels';
 import useMaxDataPoint from '../../hooks/useMaxDataPoint';
 import useLineChartOptions from '../../hooks/useLineChartOptions';
 import useLineChartDataSets from '../../hooks/useLineChartDataSets';
-const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 
-type ExerciseCurrentLevelProps = {
+type ExerciseOneRepMaxProps = {
   exerciseId: string;
 };
 Chart.register(Filler);
 
-function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
+function ExerciseOneRepMax({ exerciseId }: ExerciseOneRepMaxProps) {
   const [xLabels, setXLabels] = useState<string[]>([]);
   const [datasets, setDatasets] = useState<
     {
@@ -30,11 +29,10 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
   const recentExerciseQuery = useRecentExerciseData(exerciseId);
 
   useEffect(() => {
-    console.log(recentExerciseQuery);
     if (recentExerciseQuery.data && recentExerciseQuery.data.length !== 0) {
       const labels = useExerciseDateLabels(recentExerciseQuery);
       setXLabels(labels);
-      const data = use1RepMax(recentExerciseQuery.data, true);
+      const data = use1RepMax(recentExerciseQuery.data, false);
 
       if (data) {
         const datasetsPre = useLineChartDataSets(data);
@@ -59,4 +57,4 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
   );
 }
 
-export default ExerciseCurrentLevel;
+export default ExerciseOneRepMax;

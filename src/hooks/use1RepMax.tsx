@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PerformedSets } from '../types/Interfaces';
 
-function use1RepMax(data: []) {
+function use1RepMax(data: [], average: boolean) {
   // unit agnostic
   // use average 1RM averaging the sets in each exercise
   let estimatedORMArray;
@@ -18,7 +18,8 @@ function use1RepMax(data: []) {
         avgForElementArr.push(epley);
       } else return 0;
     }
-    return calculateAverageOfArray(avgForElementArr);
+    if (average) return calculateAverageOfArray(avgForElementArr);
+    else return Math.max(...avgForElementArr);
   };
   const calculateAverageOfArray = (arr: number[]) => {
     let sum = 0;
