@@ -8,7 +8,6 @@ import useExerciseDateLabels from '../../hooks/useExerciseDateLabels';
 import useMaxDataPoint from '../../hooks/useMaxDataPoint';
 import useLineChartOptions from '../../hooks/useLineChartOptions';
 import useLineChartDataSets from '../../hooks/useLineChartDataSets';
-const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 
 type ExerciseCurrentLevelProps = {
   exerciseId: string;

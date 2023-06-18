@@ -9,6 +9,7 @@ function useRecentExerciseData(exerciseId: string) {
       `${apiURL}api/performedexercises?exercise=${exerciseId}&user=f1245e15-7487-48d2-bbd8-738fcdde8f6d`
     );
     const data = await res.json();
+    console.log('passing');
     return data.performedExercises;
   };
   const recentExerciseQuery = useQuery({
