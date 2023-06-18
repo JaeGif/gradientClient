@@ -35,3 +35,9 @@ export interface MuscleGroup {
   id: string;
   name: string;
 }
+export interface PerformedSets {
+  index: number;
+  weight: number;
+  reps: number;
+  rtf?: number;
+}
