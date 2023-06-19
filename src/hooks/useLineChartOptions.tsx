@@ -31,7 +31,9 @@ function useLineChartOptions(
       legend: {
         display: false,
       },
-
+      decimation: {
+        enabled: true,
+      },
       title: {
         display: true,
         text: capitalize(recentExerciseQuery.data[0].exercise.name),
