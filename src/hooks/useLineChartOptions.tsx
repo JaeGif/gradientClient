@@ -1,5 +1,6 @@
 import React from 'react';
 import { UseQueryResult } from '@tanstack/react-query';
+import { capitalize } from '../utils/fnSheet/utilities';
 function useLineChartOptions(
   recentExerciseQuery: UseQueryResult<any, unknown>,
   maxExercise1RM: number | undefined,
@@ -33,7 +34,10 @@ function useLineChartOptions(
 
       title: {
         display: true,
-        text: `${recentExerciseQuery.data[0].exercise.name}`,
+        text: capitalize(recentExerciseQuery.data[0].exercise.name),
+        font: {
+          size: 20,
+        },
       },
     },
   };

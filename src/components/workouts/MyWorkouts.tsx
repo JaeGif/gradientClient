@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import WorkoutCard from './WorkoutCard';
 import { useQuery } from '@tanstack/react-query';
-import { PlannedExercise, Workout } from '../../types/Interfaces';
+import { Workout } from '../../types/Interfaces';
 import uniqid from 'uniqid';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 
@@ -19,10 +19,6 @@ function MyWorkouts() {
     queryKey: ['workouts'],
     queryFn: getWorkouts,
   });
-
-  useEffect(() => {
-    console.log(workoutsQuery.data);
-  }, [workoutsQuery]);
 
   return (
     <div className='flex flex-wrap gap-5'>
