@@ -1,39 +1,39 @@
 import React from 'react';
-
-function useLineChartDataSets(data: number[] | undefined) {
+import useLinearRegression from './useLinearRegression';
+import regression from 'regression';
+function useLineChartDataSets(
+  data: number[] | undefined,
+  linearRegression: regression.Result
+) {
   if (!data) return;
-  let standardDataSet = [];
-  let standardDataSet2 = [];
-  for (let i = 0; i < data.length; i++) {
-    standardDataSet.push(110);
-    standardDataSet2.push(200);
-  }
+
+  const pointToSingleDataPoint = () => {
+    let setPoints = [];
+    for (let i = 0; i < linearRegression.points.length; i++) {
+      setPoints.push(linearRegression.points[i][1]);
+    }
+    return setPoints;
+  };
+
   const datasetsPre = [
     {
+      label: 'Calculated Max',
       data: data,
       borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(30,30,30,1)',
-      cubicInterpolationMode: 'default',
+      backgroundColor: 'rgba(255, 99, 132,1)',
       tension: 0.1,
       fill: {
         target: 'origin', // start under line
-        above: 'rgba(255, 30, 30, 0.3)', // under line color
+        above: 'rgba(255, 30, 30, 0.1)', // under line color
       },
     },
     {
-      data: standardDataSet,
+      label: 'Trend',
+      data: pointToSingleDataPoint(),
       pointRadius: 0,
-      borderColor: 'rgb(8, 143, 143)',
-      backgroundColor: 'rgba(8, 143, 143, 1)',
-      borderDash: [5, 5],
-      tension: 0.1,
-    },
-    {
-      data: standardDataSet2,
-      pointRadius: 0,
-      borderColor: 'rgb(8, 143, 143)',
-      backgroundColor: 'rgba(8, 143, 143, 1)',
-      borderDash: [5, 5],
+      borderWidth: 1,
+      borderColor: 'rgb(34, 34, 34)',
+      backgroundColor: 'rgba(30,30,30,1)',
       tension: 0.1,
     },
   ];

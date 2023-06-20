@@ -8,6 +8,7 @@ import useExerciseDateLabels from '../../hooks/useExerciseDateLabels';
 import useMaxDataPoint from '../../hooks/useMaxDataPoint';
 import useLineChartOptions from '../../hooks/useLineChartOptions';
 import useLineChartDataSets from '../../hooks/useLineChartDataSets';
+import useLinearRegression from '../../hooks/useLinearRegression';
 
 type ExerciseCurrentLevelProps = {
   exerciseId: string;
@@ -24,19 +25,21 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
       backgroundColor?: string | undefined;
     }[]
   >();
-  const [options, setOptions] = useState<ChartOptions>();
+  const [options, setOptions] = useState<any>();
   const [timeFrame, setTimeFrame] = useState('30 days');
   const recentExerciseQuery = useRecentExerciseData(exerciseId);
 
   useEffect(() => {
-    console.log(recentExerciseQuery);
     if (recentExerciseQuery.data && recentExerciseQuery.data.length !== 0) {
       const labels = useExerciseDateLabels(recentExerciseQuery);
       setXLabels(labels);
       const data = use1RepMax(recentExerciseQuery.data, true);
 
       if (data) {
-        const datasetsPre = useLineChartDataSets(data);
+        const datasetsPre = useLineChartDataSets(
+          data,
+          useLinearRegression(data)
+        );
         const maxExercise1RM = useMaxDataPoint(data);
         setDatasets(datasetsPre);
         const options = useLineChartOptions(
