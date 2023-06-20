@@ -4,7 +4,8 @@ import { capitalize } from '../utils/fnSheet/utilities';
 function useLineChartOptions(
   recentExerciseQuery: UseQueryResult<any, unknown>,
   maxExercise1RM: number | undefined,
-  timeFrame: string
+  timeFrame: string,
+  absolute: boolean
 ) {
   const options = {
     responsive: true,
@@ -12,7 +13,13 @@ function useLineChartOptions(
       y: {
         title: {
           display: true,
-          text: `1RM (${recentExerciseQuery.data[0].sets[0].unit})`,
+          text: absolute
+            ? 'Calculated' +
+              ' ' +
+              `1RM (${recentExerciseQuery.data[0].sets[0].unit})`
+            : 'Average Max Load' +
+              ' ' +
+              `(${recentExerciseQuery.data[0].sets[0].unit})`,
         },
         max: maxExercise1RM,
       },
@@ -36,7 +43,15 @@ function useLineChartOptions(
       },
       title: {
         display: true,
-        text: capitalize(recentExerciseQuery.data[0].exercise.name),
+        text: absolute
+          ? 'Absolute' +
+            ' ' +
+            capitalize(recentExerciseQuery.data[0].exercise.name) +
+            ' ' +
+            '1 Rep Max'
+          : capitalize(recentExerciseQuery.data[0].exercise.name) +
+            ' ' +
+            'Progression',
         font: {
           size: 20,
         },

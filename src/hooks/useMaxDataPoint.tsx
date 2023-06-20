@@ -10,6 +10,7 @@ function useMaxDataPoint(data: number[] | undefined) {
     for (let i = 0; i < data.length; i++) {
       weightArr.push(data[i]);
     }
+    console.log(weightArr);
     const max = Math.max(...weightArr);
     maxUpperLimit = max + max * 0.075;
   }

@@ -5,10 +5,10 @@ function use1RepMax(data: [], average: boolean) {
   // unit agnostic
   // use average 1RM averaging the sets in each exercise
   let estimatedORMArray;
-  let avgForElementArr: number[] = [];
 
-  console.log(data);
   const calculateMax = (sets: PerformedSets[]) => {
+    let avgForElementArr: number[] = [];
+
     for (let i = 0; i < sets.length; i++) {
       if (sets[i].reps >= 5) {
         const brzycki = sets[i].weight * (36 / (37 - sets[i].reps));
@@ -26,6 +26,7 @@ function use1RepMax(data: [], average: boolean) {
     for (let i = 0; i < arr.length; i++) {
       sum += arr[i];
     }
+
     return sum / arr.length;
   };
   if (data) {

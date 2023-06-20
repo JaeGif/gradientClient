@@ -42,7 +42,8 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
         const options = useLineChartOptions(
           recentExerciseQuery,
           maxExercise1RM,
-          timeFrame
+          timeFrame,
+          false
         );
         setOptions(options);
       }

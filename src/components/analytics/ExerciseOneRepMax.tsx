@@ -1,7 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import LineChart from '../charts/LineChart';
-import { ChartOptions, DatasetController, Chart, Filler } from 'chart.js';
+import { ChartOptions, Chart, Filler } from 'chart.js';
 import use1RepMax from '../../hooks/use1RepMax';
 import useRecentExerciseData from '../../hooks/useRecentExerciseData';
 import useExerciseDateLabels from '../../hooks/useExerciseDateLabels';
@@ -25,15 +24,14 @@ function ExerciseOneRepMax({ exerciseId }: ExerciseOneRepMaxProps) {
     }[]
   >();
   const [options, setOptions] = useState<ChartOptions>();
-  const [timeFrame, setTimeFrame] = useState('30 days');
+  const [timeFrame, setTimeFrame] = useState('30 days'); // set this is fetched at right intervals
   const recentExerciseQuery = useRecentExerciseData(exerciseId);
 
   useEffect(() => {
     if (recentExerciseQuery.data && recentExerciseQuery.data.length !== 0) {
       const labels = useExerciseDateLabels(recentExerciseQuery);
       setXLabels(labels);
-      const data = use1RepMax(recentExerciseQuery.data, false);
-
+      const data = use1RepMax(recentExerciseQuery.data, false); // returns a number[] of the 1rm for each set
       if (data) {
         const datasetsPre = useLineChartDataSets(data);
         const maxExercise1RM = useMaxDataPoint(data);
@@ -41,7 +39,8 @@ function ExerciseOneRepMax({ exerciseId }: ExerciseOneRepMaxProps) {
         const options = useLineChartOptions(
           recentExerciseQuery,
           maxExercise1RM,
-          timeFrame
+          timeFrame,
+          true
         );
         setOptions(options);
       }
