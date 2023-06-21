@@ -5,7 +5,7 @@ import { ChartOptions, DatasetController, Chart, Filler } from 'chart.js';
 import use1RepMax from '../../hooks/use1RepMax';
 import useRecentExerciseData from '../../hooks/useRecentExerciseData';
 import useExerciseDateLabels from '../../hooks/useExerciseDateLabels';
-import useMaxDataPoint from '../../hooks/useMaxDataPoint';
+import useMaxDataPoint from '../../hooks/useDataPointThreshold';
 import useLineChartOptions from '../../hooks/useLineChartOptions';
 import useLineChartDataSets from '../../hooks/useLineChartDataSets';
 import useLinearRegression from '../../hooks/useLinearRegression';
@@ -40,11 +40,10 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
           data,
           useLinearRegression(data)
         );
-        const maxExercise1RM = useMaxDataPoint(data);
         setDatasets(datasetsPre);
         const options = useLineChartOptions(
           recentExerciseQuery,
-          maxExercise1RM,
+          data,
           timeFrame,
           false
         );

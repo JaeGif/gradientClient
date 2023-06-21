@@ -3,10 +3,10 @@ import { UseQueryResult } from '@tanstack/react-query';
 import { capitalize } from '../utils/fnSheet/utilities';
 import useStandards from './useStandards';
 import useAnnotationStandard from './useAnnotationStandard';
-
+import useDataPointThreshold from './useDataPointThreshold';
 function useLineChartOptions(
   recentExerciseQuery: UseQueryResult<any, unknown>,
-  maxExercise1RM: number | undefined,
+  data: number[],
   timeFrame: string,
   absolute: boolean
 ) {
@@ -26,7 +26,8 @@ function useLineChartOptions(
               ' ' +
               `(${recentExerciseQuery.data[0].sets[0].unit})`,
         },
-        max: maxExercise1RM,
+        max: useDataPointThreshold(data, 'max'),
+        min: useDataPointThreshold(data, 'min'),
       },
       x: {
         title: {

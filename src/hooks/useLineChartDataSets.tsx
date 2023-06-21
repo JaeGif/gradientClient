@@ -28,7 +28,7 @@ function useLineChartDataSets(
       },
     },
     {
-      label: 'Trend',
+      label: 'Linear Regression',
       data: pointToSingleDataPoint(),
       pointRadius: 0,
       borderWidth: 1,

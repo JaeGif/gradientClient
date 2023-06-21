@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import LineChart from '../charts/LineChart';
-import { ChartOptions, Chart, Filler } from 'chart.js';
+import { Chart, Filler } from 'chart.js';
 
 import use1RepMax from '../../hooks/use1RepMax';
 import useRecentExerciseData from '../../hooks/useRecentExerciseData';
 import useExerciseDateLabels from '../../hooks/useExerciseDateLabels';
-import useMaxDataPoint from '../../hooks/useMaxDataPoint';
 import useLineChartOptions from '../../hooks/useLineChartOptions';
 import useLineChartDataSets from '../../hooks/useLineChartDataSets';
 import useLinearRegression from '../../hooks/useLinearRegression';
@@ -38,11 +37,10 @@ function ExerciseOneRepMax({ exerciseId }: ExerciseOneRepMaxProps) {
           data,
           useLinearRegression(data)
         );
-        const maxExercise1RM = useMaxDataPoint(data);
         setDatasets(datasetsPre);
         const options = useLineChartOptions(
           recentExerciseQuery,
-          maxExercise1RM,
+          data,
           timeFrame,
           true
         );
