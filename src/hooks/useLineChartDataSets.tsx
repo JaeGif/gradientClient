@@ -3,7 +3,8 @@ import useLinearRegression from './useLinearRegression';
 import regression from 'regression';
 function useLineChartDataSets(
   data: number[] | undefined,
-  linearRegression: regression.Result
+  linearRegression: regression.Result,
+  lineType: 'average' | 'absolute' | 'overall' | undefined
 ) {
   if (!data) return;
 
@@ -14,17 +15,29 @@ function useLineChartDataSets(
     }
     return setPoints;
   };
+  const pickColor = (opacity: number, highlight: boolean = false) => {
+    switch (lineType) {
+      case 'average':
+        if (highlight) return `rgba(0,255,210, ${opacity})`;
+        return `rgba(255,68,153,${opacity})`;
+      case 'absolute':
+        return `rgba(0,70,135,${opacity})`;
+      case 'overall':
+        return `rgba(0,255,210, ${opacity})`;
+      default:
+        return `rgba(0,0, 0, ${opacity})`;
+    }
+  };
 
   const datasetsPre = [
     {
       label: 'Calculated Max',
       data: data,
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132,1)',
-      tension: 0.1,
+      borderColor: pickColor(1),
+      backgroundColor: pickColor(1),
       fill: {
         target: 'origin', // start under line
-        above: 'rgba(255, 30, 30, 0.1)', // under line color
+        above: pickColor(0.2), // under line color
       },
     },
     {
@@ -32,8 +45,9 @@ function useLineChartDataSets(
       data: pointToSingleDataPoint(),
       pointRadius: 0,
       borderWidth: 1,
-      borderColor: 'rgb(34, 34, 34)',
-      backgroundColor: 'rgba(30,30,30,1)',
+      borderColor: 'rgba(100, 100, 100, .5)',
+      backgroundColor: 'rgba(0,0,0,0)',
+      borderDash: [10, 5],
       tension: 0.1,
     },
   ];

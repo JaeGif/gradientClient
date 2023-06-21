@@ -35,7 +35,8 @@ function ExerciseOneRepMax({ exerciseId }: ExerciseOneRepMaxProps) {
       if (data) {
         const datasetsPre = useLineChartDataSets(
           data,
-          useLinearRegression(data)
+          useLinearRegression(data),
+          'absolute'
         );
         setDatasets(datasetsPre);
         const options = useLineChartOptions(
