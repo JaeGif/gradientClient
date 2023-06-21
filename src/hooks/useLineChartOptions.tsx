@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { UseQueryResult } from '@tanstack/react-query';
 import { capitalize } from '../utils/fnSheet/utilities';
-import data from '../data/standards.json';
+import useStandards from './useStandards';
+import useAnnotationStandard from './useAnnotationStandard';
 
-const userGender = 'm';
 function useLineChartOptions(
   recentExerciseQuery: UseQueryResult<any, unknown>,
   maxExercise1RM: number | undefined,
   timeFrame: string,
   absolute: boolean
 ) {
-  const determineStandards = () => {
-    const key:string = recentExerciseQuery.data[0].exercise.id
-    if (userGender === 'm') return data.standards.m[key];
-    else return data.standards.f[key];
-    
-  };
+  const standardsDataset = useStandards(recentExerciseQuery, { unit: 'kg' });
+  const annotationList = useAnnotationStandard(standardsDataset);
   const options = {
     responsive: true,
     scales: {
@@ -45,20 +41,7 @@ function useLineChartOptions(
     plugins: {
       annotation: {
         drawTime: 'afterDatasetsDraw',
-        annotations: {
-          line1: {
-            type: 'line',
-            borderColor: 'black',
-            borderWidth: 5,
-            label: {
-              backgroundColor: 'red',
-              content: 'Test Label',
-              display: true,
-            },
-            scaleID: 'y',
-            value: ,
-          },
-        },
+        annotations: annotationList ? { ...annotationList } : {},
       },
       decimation: {
         enabled: true,

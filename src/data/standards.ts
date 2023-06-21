@@ -77,3 +77,34 @@
           "elite": { "weight": { "kg": 157, "lb": 345 } }
         }
       } */
+
+export const standards = {
+  gender: {
+    m: [
+      {
+        exercise: 'bench press',
+        exerciseId: 'bf61dcb9-7147-4bdd-af5e-c987f2c2439a',
+        level: {
+          beginner: { weight: { kg: 47, lb: 103 } },
+          novice: { weight: { kg: 70, lb: 154 } },
+          intermediate: { weight: { kg: 98, lb: 217 } },
+          advanced: { weight: { kg: 132, lb: 291 } },
+          elite: { weight: { kg: 169, lb: 372 } },
+        },
+      },
+    ],
+    f: [
+      {
+        exerciseId: 'bf61dcb9-7147-4bdd-af5e-c987f2c2439a',
+        exercise: 'bench press',
+        level: {
+          beginner: { weight: { kg: 17, lb: 38 } },
+          novice: { weight: { kg: 31, lb: 69 } },
+          intermediate: { weight: { kg: 51, lb: 111 } },
+          advanced: { weight: { kg: 74, lb: 164 } },
+          elite: { weight: { kg: 101, lb: 223 } },
+        },
+      },
+    ],
+  },
+};
