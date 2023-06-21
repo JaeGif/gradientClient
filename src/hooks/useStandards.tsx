@@ -9,13 +9,13 @@ type StrengthLevel =
   | 'advanced'
   | 'elite';
 function useStandards(
-  recentExerciseQuery: UseQueryResult<any, unknown>,
+  exerciseId: string,
   config: { unit: 'kg' | 'lb'; select?: StrengthLevel[] }
 ) {
   const determineStandards = () => {
     // returns standards of all levels for the exercise based on
     // exercise ID and on user gender
-    const key: string = recentExerciseQuery.data[0].exercise.id;
+    const key: string = exerciseId;
     if (userGender === 'm') {
       for (let i = 0; i < standards.gender.m.length; i++) {
         if (standards.gender.m[i].exerciseId === key) {

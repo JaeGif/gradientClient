@@ -9,7 +9,10 @@ function useLineChartOptions(
   timeFrame: string,
   absolute: boolean
 ) {
-  const standardsDataset = useStandards(recentExerciseQuery, { unit: 'kg' });
+  const standardsDataset = useStandards(
+    recentExerciseQuery.data[0].exercise.id,
+    { unit: recentExerciseQuery.data[0].sets[0].unit }
+  );
   const annotationList = useAnnotationStandard(standardsDataset);
   const options = {
     responsive: true,
@@ -49,16 +52,17 @@ function useLineChartOptions(
       title: {
         display: true,
         text: absolute
-          ? 'Absolute' +
-            ' ' +
-            capitalize(recentExerciseQuery.data[0].exercise.name) +
+          ? capitalize(recentExerciseQuery.data[0].exercise.name) +
+            ': ' +
+            'Absolute' +
             ' ' +
             '1 Rep Max'
           : capitalize(recentExerciseQuery.data[0].exercise.name) +
-            ' ' +
+            ': ' +
             'Progression',
         font: {
           size: 20,
+          weight: 'normal',
         },
       },
     },

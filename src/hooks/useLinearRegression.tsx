@@ -1,4 +1,3 @@
-import React from 'react';
 import regression from 'regression';
 
 function useLinearRegression(dataset: number[]) {
