@@ -1,31 +1,19 @@
 import React from 'react';
 
-/*           line1: {
-            type: 'line',
-            borderColor: 'black',
-            borderWidth: 5,
-            label: {
-              backgroundColor: 'red',
-              content: 'Test Label',
-              display: true,
-            },
-            scaleID: 'y',
-            value: 90,
-          }, */
 // b, n, i, a, e
 function useAnnotationStandard(dataset: number[] | undefined) {
   const calcStandardLabel = (i: number) => {
     switch (i) {
       case 0:
-        return 'Beginner';
+        return 'Beginner:  5th Percentile';
       case 1:
-        return 'Novice';
+        return 'Novice: 20th Percentile';
       case 2:
-        return 'Intermediate';
+        return 'Intermediate: 50th Percentile';
       case 3:
-        return 'Advanced';
+        return 'Advanced: 80th Percentile';
       case 4:
-        return 'Elite';
+        return 'Elite: 95th Percentile';
       default:
         return;
     }
@@ -35,16 +23,16 @@ function useAnnotationStandard(dataset: number[] | undefined) {
   for (let i = 0; i < dataset.length; i++) {
     annotationArr.push({
       type: 'line',
-      borderColor: 'rgba(30, 30, 30, .2)',
+      borderColor: 'rgba(30, 100, 30, .5)',
       borderWidth: 1,
       borderDash: [5, 5],
 
       label: {
-        backgroundColor: 'rgba(30, 30, 30, 0)',
+        backgroundColor: 'rgba(30, 100, 30, 1)',
         content: calcStandardLabel(i),
         display: true,
         font: 12,
-        color: 'rgba(34, 34, 34, .5)',
+        color: 'rgba(255, 255, 255, 1)',
       },
       scaleID: 'y',
       value: dataset[i],

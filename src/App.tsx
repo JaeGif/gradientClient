@@ -11,6 +11,7 @@ import Analytics from './pages/home/analytics/Analytics';
 import Data from './pages/home/analytics/Data';
 import Workouts from './pages/home/workouts/Workouts';
 import NotFound from './pages/error/NotFound';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const ThemeContext = React.createContext<'light' | 'dark'>('dark');
 
@@ -40,6 +41,7 @@ function App() {
         <Route path='/' element={<Navigate to={'/dashboard'} />} />
         <Route path='/*' element={<NotFound />} />
       </Routes>
+      <ReactQueryDevtools />
     </AuthProvider>
   );
 }

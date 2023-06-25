@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ExerciseCurrentLevel from './ExerciseCurrentLevel';
 import ExerciseOneRepMax from './ExerciseOneRepMax';
+import ChartAnalysis from './ChartAnalysis';
 // toggle the 2 types of charts
 
 type AvgAbs1RepMaxToggleProps = {
@@ -24,8 +25,13 @@ function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
           onClick={toggleChartViews}
           className='border-2 border-gray-700 rounded-md w-fit p-1 text-sm block'
         >
-          {showAbsolute ? 'Show Absolute' : 'Show Average'}
+          {showAbsolute ? 'Absolute' : 'Average'}
         </button>
+        {showAbsolute ? (
+          <ChartAnalysis exerciseId={exerciseId} />
+        ) : (
+          <ChartAnalysis exerciseId={exerciseId} />
+        )}
       </div>
     </div>
   );

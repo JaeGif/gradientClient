@@ -14,7 +14,9 @@ export interface Exercise {
 }
 export interface PerformedExercise {
   // exercise relation id mapped
-  name: string;
+  exercise: string;
+  user: string;
+  performedWorkout: string;
   id: string;
   sets: SetsPerformedDataType[];
 }
