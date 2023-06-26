@@ -8,6 +8,7 @@ import useExerciseDateLabels from '../../hooks/useExerciseDateLabels';
 import useLineChartOptions from '../../hooks/useLineChartOptions';
 import useLineChartDataSets from '../../hooks/useLineChartDataSets';
 import useLinearRegression from '../../hooks/useLinearRegression';
+import useCustomMemo from '../../hooks/useCustomMemo';
 type ExerciseOneRepMaxProps = {
   exerciseId: string;
 };
@@ -26,12 +27,15 @@ function ExerciseOneRepMax({ exerciseId }: ExerciseOneRepMaxProps) {
   const [options, setOptions] = useState<any>();
   const [timeFrame, setTimeFrame] = useState('30 days'); // set this is fetched at right intervals
   const recentExerciseQuery = useRecentExerciseData(exerciseId);
-
+  const [cache, addToCache] = useCustomMemo();
   useEffect(() => {
     if (recentExerciseQuery.data && recentExerciseQuery.data.length !== 0) {
       const labels = useExerciseDateLabels(recentExerciseQuery);
       setXLabels(labels);
       const data = use1RepMax(recentExerciseQuery.data, false); // returns a number[] of the 1rm for each set
+      addToCache(`${exerciseId}_1RM`, data);
+      console.log(cache);
+
       if (data) {
         const datasetsPre = useLineChartDataSets(
           data,

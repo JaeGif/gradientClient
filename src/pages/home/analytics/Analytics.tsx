@@ -1,7 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import ExerciseCurrentLevel from '../../../components/analytics/ExerciseCurrentLevel';
-import ExerciseOneRepMax from '../../../components/analytics/ExerciseOneRepMax';
+
 import AvgAbs1RepMaxToggle from '../../../components/analytics/AvgAbs1RepMaxToggle';
 
 //

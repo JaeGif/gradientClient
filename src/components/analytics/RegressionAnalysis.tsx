@@ -1,16 +1,19 @@
 import React from 'react';
 import GeneralTrendRegressionAnalysis from './GeneralTrendRegressionAnalysis';
 import RecentPerformanceDelta from './RecentPerformanceDelta';
-import { UseQueryResult } from '@tanstack/react-query';
+import { PerformedExercise } from '../../types/Interfaces';
+
 type RegressionAnalysisProps = {
-  recentExerciseQuery: UseQueryResult<any, unknown>;
+  data: [] | PerformedExercise[] | undefined;
 };
-function RegressionAnalysis({ recentExerciseQuery }: RegressionAnalysisProps) {
+
+function RegressionAnalysis({ data }: RegressionAnalysisProps) {
   // regression analysis uses the slope of the line to show general progression rate.
   // Also shows the % change from the most recent attempt at the exercise.
+
   return (
-    <div className='debug flex flex-col gap-2'>
-      <GeneralTrendRegressionAnalysis />
+    <div className='flex flex-col gap-2'>
+      <GeneralTrendRegressionAnalysis data={data} />
       <RecentPerformanceDelta />
     </div>
   );

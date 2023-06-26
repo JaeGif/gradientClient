@@ -22,7 +22,10 @@ function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
       )}
       <div className='debug'>
         <button
-          onClick={toggleChartViews}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleChartViews();
+          }}
           className='border-2 border-gray-700 rounded-md w-fit p-1 text-sm block'
         >
           {showAbsolute ? 'Absolute' : 'Average'}
