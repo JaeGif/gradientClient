@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
-
-type MemoStateObject = { [key: string]: any };
-
+import React, { useContext, useState } from 'react';
+import { CacheContext } from '../App';
 function useCustomMemo() {
+  const { state, handleSetCache } = useContext(CacheContext);
+  console.log(state, handleSetCache);
   // key needs to be a custom signature, and value needs to be the result
-  const [storage, setStorage] = useState<MemoStateObject>({});
   function addToCache(key: string, data?: any, deleteFlag: boolean = false) {
-    if (deleteFlag && !data) {
-      delete storage[key];
-      setStorage(storage);
+    if (deleteFlag && !data && state) {
+      delete state[key];
+      handleSetCache(state);
     }
     if (data && !deleteFlag) {
-      let storageInt = storage;
-      storageInt[key] = data;
-      setStorage(storageInt);
+      let cacheInt;
+      if (typeof state !== 'undefined') {
+        cacheInt = state;
+      } else {
+        cacheInt = {};
+      }
+      cacheInt[key] = data;
+      handleSetCache(cacheInt);
     }
   }
-  return [storage, addToCache];
+  return [state, addToCache];
 }
 
 export default useCustomMemo;
