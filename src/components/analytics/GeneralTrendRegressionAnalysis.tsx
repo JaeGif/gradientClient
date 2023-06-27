@@ -8,8 +8,6 @@ type GeneralTrendRegressionAnalysisProps = {
 function GeneralTrendRegressionAnalysis({
   data,
 }: GeneralTrendRegressionAnalysisProps) {
-  console.log(data);
-
   return <div>GeneralTrendRegressionAnalysis</div>;
 }
 

@@ -27,14 +27,23 @@ function ExerciseOneRepMax({ exerciseId }: ExerciseOneRepMaxProps) {
   const [options, setOptions] = useState<any>();
   const [timeFrame, setTimeFrame] = useState('30 days'); // set this is fetched at right intervals
   const recentExerciseQuery = useRecentExerciseData(exerciseId);
-  const [cache, addToCache] = useCustomMemo();
+  const [state, addToCache] = useCustomMemo();
+
   useEffect(() => {
     if (recentExerciseQuery.data && recentExerciseQuery.data.length !== 0) {
       const labels = useExerciseDateLabels(recentExerciseQuery);
       setXLabels(labels);
-      const data = use1RepMax(recentExerciseQuery.data, false); // returns a number[] of the 1rm for each set
-      addToCache(`${exerciseId}_1RM`, data);
-      console.log(cache);
+      let data;
+
+      // check cache for data, if it's not there, just do the calculation
+      // O(1) hash table so constant time for cache lookup
+      if (!state || !state[`${exerciseId}_Abs1RM`]) {
+        data = use1RepMax(recentExerciseQuery.data, false); // returns a number[] of the 1rm for each set
+        addToCache(`${exerciseId}_Abs1RM`, data);
+      } else {
+        data = state[`${exerciseId}_Abs1RM`];
+        console.log(data);
+      }
 
       if (data) {
         const datasetsPre = useLineChartDataSets(

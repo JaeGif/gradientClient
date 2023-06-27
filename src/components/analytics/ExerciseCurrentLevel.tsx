@@ -7,6 +7,7 @@ import useExerciseDateLabels from '../../hooks/useExerciseDateLabels';
 import useLineChartOptions from '../../hooks/useLineChartOptions';
 import useLineChartDataSets from '../../hooks/useLineChartDataSets';
 import useLinearRegression from '../../hooks/useLinearRegression';
+import useCustomMemo from '../../hooks/useCustomMemo';
 
 type ExerciseCurrentLevelProps = {
   exerciseId: string;
@@ -26,13 +27,19 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
   const [options, setOptions] = useState<any>();
   const [timeFrame, setTimeFrame] = useState('30 days');
   const recentExerciseQuery = useRecentExerciseData(exerciseId);
+  const [state, addToCache] = useCustomMemo();
 
   useEffect(() => {
     if (recentExerciseQuery.data && recentExerciseQuery.data.length !== 0) {
       const labels = useExerciseDateLabels(recentExerciseQuery);
       setXLabels(labels);
-      const data = use1RepMax(recentExerciseQuery.data, true);
-
+      let data;
+      if (!state || !state[`${exerciseId}_Avg1RM`]) {
+        data = use1RepMax(recentExerciseQuery.data, true);
+        addToCache(`${exerciseId}_Avg1RM`, data);
+      } else {
+        data = state[`${exerciseId}_Avg1RM`];
+      }
       if (data) {
         const datasetsPre = useLineChartDataSets(
           data,

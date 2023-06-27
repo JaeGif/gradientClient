@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { PerformedSets } from '../types/Interfaces';
-
 function use1RepMax(data: [], average: boolean) {
   // unit agnostic
   // use average 1RM averaging the sets in each exercise
+
   let estimatedORMArray;
 
   const calculateMax = (sets: PerformedSets[]) => {
