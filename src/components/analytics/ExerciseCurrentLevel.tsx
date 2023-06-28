@@ -33,6 +33,8 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
     if (recentExerciseQuery.data && recentExerciseQuery.data.length !== 0) {
       const labels = useExerciseDateLabels(recentExerciseQuery);
       setXLabels(labels);
+      // check cache for data, if it's not there, just do the calculation
+      // O(1) hash table so constant time for cache lookup
       let data;
       if (!state || !state[`${exerciseId}_Avg1RM`]) {
         data = use1RepMax(recentExerciseQuery.data, true);

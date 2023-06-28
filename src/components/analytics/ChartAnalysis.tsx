@@ -1,23 +1,21 @@
 import RegressionAnalysis from './RegressionAnalysis';
 import StandardsAnalysis from './StandardsAnalysis';
-import useRecentExerciseData from '../../hooks/useRecentExerciseData';
 
 type ChartAnalysisProps = {
   exerciseId: string;
+  showAbsolute: boolean;
 };
 
-function ChartAnalysis({ exerciseId }: ChartAnalysisProps) {
-  const recentExerciseQuery = useRecentExerciseData(exerciseId);
+function ChartAnalysis({ exerciseId, showAbsolute }: ChartAnalysisProps) {
   return (
     <div className=''>
-      {recentExerciseQuery.data ? (
-        <>
-          <RegressionAnalysis data={recentExerciseQuery.data} />
-          <StandardsAnalysis />
-        </>
-      ) : (
-        <>looking up data</>
-      )}
+      <>
+        <RegressionAnalysis
+          exerciseId={exerciseId}
+          showAbsolute={showAbsolute}
+        />
+        <StandardsAnalysis />
+      </>
     </div>
   );
 }

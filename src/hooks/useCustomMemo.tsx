@@ -3,7 +3,12 @@ import { CacheContext } from '../App';
 function useCustomMemo() {
   const { state, handleSetCache } = useContext(CacheContext);
   // key needs to be a custom signature, and value needs to be the result
-  function addToCache(key: string, data?: any, deleteFlag: boolean = false) {
+  function addToCache(
+    key: string,
+    data?: any,
+    deleteFlag: boolean = false,
+    updateFlag: boolean = false
+  ) {
     if (deleteFlag && !data && state) {
       delete state[key];
       handleSetCache(state);

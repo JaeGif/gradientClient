@@ -31,9 +31,9 @@ function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
           {showAbsolute ? 'Absolute' : 'Average'}
         </button>
         {showAbsolute ? (
-          <ChartAnalysis exerciseId={exerciseId} />
+          <ChartAnalysis exerciseId={exerciseId} showAbsolute={showAbsolute} />
         ) : (
-          <ChartAnalysis exerciseId={exerciseId} />
+          <ChartAnalysis exerciseId={exerciseId} showAbsolute={showAbsolute} />
         )}
       </div>
     </div>
