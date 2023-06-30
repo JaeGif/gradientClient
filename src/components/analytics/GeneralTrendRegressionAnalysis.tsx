@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { PerformedExercise } from '../../types/Interfaces';
 import useLinearRegression from '../../hooks/useLinearRegression';
 import { CacheContext } from '../../App';
+const userUnits = 'kg';
 type GeneralTrendRegressionAnalysisProps = {
   exerciseId: string;
   average: boolean;
@@ -9,9 +11,7 @@ function GeneralTrendRegressionAnalysis({
   exerciseId,
   average,
 }: GeneralTrendRegressionAnalysisProps) {
-  const store: {
-    state: {};
-  } = useContext(CacheContext);
+  const store = useContext(CacheContext);
   const [regressionSlope, setRegressionSlope] = useState<number>();
   const [positive, setPositive] = useState<boolean>();
   const [dataLoaded, setDataLoaded] = useState<boolean>(false);
@@ -43,22 +43,25 @@ function GeneralTrendRegressionAnalysis({
       : setStoreKey(`${exerciseId}_Abs1RM`);
 
     if (store.state && store.state[storeKey]) {
-      console.log('hit');
       const regressionData = useLinearRegression(store.state[storeKey]);
       setRegressionSlope(regressionData.equation[0]);
       signOfSlope(regressionData.equation[0]);
       setDataLoaded(true);
+      console.log(store.state);
       return;
     }
-    console.log('miss');
-  }, [Object.keys(store.state).length, average]);
+  }, [store.state, average]);
 
   return (
-    <div>
-      {regressionSlope}
+    <div className='flex justify-center items-center gap-1'>
+      <p className='text-lg'>
+        {positive && '+'}
+        {regressionSlope}
+        {userUnits} / point
+      </p>
       {dataLoaded ? (
         <img
-          className={positive ? 'h-10' : 'h-10 transform rotate-90'}
+          className={positive ? 'h-5' : 'h-5 transform rotate-90'}
           src={
             positive
               ? '/favicons/trend_arrow_positive.svg'
