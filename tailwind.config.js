@@ -10,6 +10,12 @@ export default {
         primaryBtn: '#e44963',
         secondaryBtn: '#fae9e0',
         accent: '#e47d49',
+        blue: {
+          40: '#4A55A2',
+          30: '#7895CB',
+          20: '#A0BFE0',
+          10: '#C5DFF8',
+        },
       },
     },
     gridTemplateColumns: {

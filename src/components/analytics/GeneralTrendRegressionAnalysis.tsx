@@ -52,24 +52,27 @@ function GeneralTrendRegressionAnalysis({
   }, [store.state, average]);
 
   return (
-    <div className='flex justify-center items-center gap-1'>
-      <p className='text-lg'>
-        {positive && '+'}
-        {regressionSlope}
-        {userUnits} / point
-      </p>
-      {dataLoaded ? (
-        <img
-          className={positive ? 'h-5' : 'h-5 transform rotate-90'}
-          src={
-            positive
-              ? '/favicons/trend_arrow_positive.svg'
-              : '/favicons/trend_arrow_negative.svg'
-          }
-        />
-      ) : (
-        <>Loading</>
-      )}
+    <div className='flex justify-start items-center gap-1'>
+      <p className='text-sm font-bold'>Linear Regression Trend: </p>
+      <span className='flex justify-start items-center gap-2'>
+        <p className='text-lg'>
+          {positive && '+'}
+          {regressionSlope}
+          {userUnits}
+        </p>
+        {dataLoaded ? (
+          <img
+            className={positive ? 'h-5' : 'h-5 transform rotate-90'}
+            src={
+              positive
+                ? '/favicons/trend_arrow_positive.svg'
+                : '/favicons/trend_arrow_negative.svg'
+            }
+          />
+        ) : (
+          <>Loading</>
+        )}
+      </span>
     </div>
   );
 }

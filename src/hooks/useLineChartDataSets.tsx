@@ -29,22 +29,22 @@ function useLineChartDataSets(
         if (positive) return `rgba(70,225,70, ${opacity})`;
         else if (!positive && typeof positive !== 'undefined')
           return `rgba(225,70,70, ${opacity})`;
-        return `rgba(120,120,120, ${opacity})`;
+        return `rgba(120, 149, 203, ${opacity})`;
       case 'absolute':
         if (positive) return `rgba(70,225,70, ${opacity})`;
         else if (!positive && typeof positive !== 'undefined')
           return `rgba(225,70,70, ${opacity})`;
-        return `rgba(120,120,120, ${opacity})`;
+        return `rgba(120, 149, 203, ${opacity})`;
       case 'overall':
         if (positive) return `rgba(70,225,70, ${opacity})`;
         else if (!positive && typeof positive !== 'undefined')
           return `rgba(225,70,70, ${opacity})`;
-        return `rgba(120,120,120, ${opacity})`;
+        return `rgba(120, 149, 203, ${opacity})`;
       default:
         if (positive) return `rgba(70,225,70, ${opacity})`;
         else if (!positive && typeof positive !== 'undefined')
           return `rgba(225,70,70, ${opacity})`;
-        return `rgba(120,120,120, ${opacity})`;
+        return `rgba(120, 149, 203, ${opacity})`;
     }
   };
   /* 

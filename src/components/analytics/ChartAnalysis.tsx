@@ -8,14 +8,9 @@ type ChartAnalysisProps = {
 
 function ChartAnalysis({ exerciseId, showAbsolute }: ChartAnalysisProps) {
   return (
-    <div className=''>
-      <>
-        <RegressionAnalysis
-          exerciseId={exerciseId}
-          showAbsolute={showAbsolute}
-        />
-        <StandardsAnalysis />
-      </>
+    <div className='min-w-fit'>
+      <RegressionAnalysis exerciseId={exerciseId} showAbsolute={showAbsolute} />
+      <StandardsAnalysis />
     </div>
   );
 }
