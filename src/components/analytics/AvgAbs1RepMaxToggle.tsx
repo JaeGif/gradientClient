@@ -14,7 +14,7 @@ function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
   };
 
   return (
-    <div className='flex justify-center p-6 debug'>
+    <div className='flex justify-center p-6 h-screen'>
       {showAbsolute ? (
         <ExerciseOneRepMax exerciseId={exerciseId} />
       ) : (
