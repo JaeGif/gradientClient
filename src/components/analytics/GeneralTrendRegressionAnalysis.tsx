@@ -47,7 +47,6 @@ function GeneralTrendRegressionAnalysis({
       setRegressionSlope(regressionData.equation[0]);
       signOfSlope(regressionData.equation[0]);
       setDataLoaded(true);
-      console.log(store.state);
       return;
     }
   }, [store.state, average]);
