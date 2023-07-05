@@ -1,6 +1,5 @@
 import React from 'react';
 const userGender = 'm';
-import { UseQueryResult } from '@tanstack/react-query';
 import { standards } from '../data/standards';
 type StrengthLevel =
   | 'beginner'
@@ -43,33 +42,22 @@ function useStandards(
         }
       | undefined
   ) => {
-    if (config.select) {
-      // config is to select only specific standards rather than all standards.
-    }
     if (!standard) return;
-    switch (config.unit) {
-      case 'kg':
-        return [
-          standard.beginner.weight.kg,
-          standard.novice.weight.kg,
-          standard.intermediate.weight.kg,
-          standard.advanced.weight.kg,
-          standard.elite.weight.kg,
-        ];
-      case 'lb':
-        return [
-          standard.beginner.weight.lb,
-          standard.novice.weight.lb,
-          standard.intermediate.weight.lb,
-          standard.advanced.weight.lb,
-          standard.elite.weight.lb,
-        ];
-      default:
-        console.error(
-          'useLineChartOptions unreachable default case in standardsToDataSets().'
-        );
-        return;
-    }
+    let data: number[] = [];
+    if (config.select) {
+      for (let i = 0; i < config.select.length; i++) {
+        data.push(standard[config.select[i]].weight[config.unit]);
+      }
+      // config is to select only specific standards rather than all standards.
+    } else
+      data = [
+        standard.beginner.weight[config.unit],
+        standard.novice.weight[config.unit],
+        standard.intermediate.weight[config.unit],
+        standard.advanced.weight[config.unit],
+        standard.elite.weight[config.unit],
+      ];
+    return data;
   };
   return standardsToDataSets(determineStandards()!);
 }

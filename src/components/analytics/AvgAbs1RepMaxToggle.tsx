@@ -20,7 +20,7 @@ function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
       ) : (
         <ExerciseCurrentLevel exerciseId={exerciseId} />
       )}
-      <div className='p-4 border-4 rounded-lg border-blue-20 shadow-sm'>
+      <div className='relative p-4'>
         <button
           onClick={(e) => {
             e.stopPropagation();

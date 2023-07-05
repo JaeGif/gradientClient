@@ -20,7 +20,7 @@ function RegressionAnalysis({
         exerciseId={exerciseId}
         average={!showAbsolute}
       />
-      <RecentPerformanceDelta />
+      <RecentPerformanceDelta exerciseId={exerciseId} average={!showAbsolute} />
     </div>
   );
 }
