@@ -14,8 +14,7 @@ function GeneralTrendRegressionAnalysis({
   const store = useContext(CacheContext);
   const [regressionSlope, setRegressionSlope] = useState<number>();
   const [positive, setPositive] = useState<boolean>();
-  const [dataLoaded, setDataLoaded] = useState<boolean>(false);
-  const [storeKey, setStoreKey] = useState(`${exerciseId}_Avg1RM`);
+
   const signOfSlope = (slope: number) => {
     const sign = Math.sign(slope);
     switch (sign) {
@@ -38,16 +37,14 @@ function GeneralTrendRegressionAnalysis({
     // need to wait until the store has something
     // in it to get the next round of data
     // doesn't get triggered if the data takes too long
-    average
-      ? setStoreKey(`${exerciseId}_Avg1RM`)
-      : setStoreKey(`${exerciseId}_Abs1RM`);
+    let storeKey: string = '';
+    if (average) storeKey = `${exerciseId}_Avg1RM`;
+    else storeKey = `${exerciseId}_Abs1RM`;
 
     if (store.state && store.state[storeKey]) {
       const regressionData = useLinearRegression(store.state[storeKey]);
       setRegressionSlope(regressionData.equation[0]);
       signOfSlope(regressionData.equation[0]);
-      setDataLoaded(true);
-      return;
     }
   }, [store.state, average]);
 
@@ -60,7 +57,7 @@ function GeneralTrendRegressionAnalysis({
           {regressionSlope}
           {userUnits}
         </p>
-        {dataLoaded ? (
+        {typeof positive !== 'undefined' && regressionSlope ? (
           <img
             className={positive ? 'h-5' : 'h-5 transform rotate-90'}
             src={

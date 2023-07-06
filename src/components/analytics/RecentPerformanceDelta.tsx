@@ -15,7 +15,6 @@ function RecentPerformanceDelta({
   const [dataLoaded, setDataLoaded] = useState<boolean>(false);
   const [positive, setPositive] = useState<boolean>();
   const [delta, setDelta] = useState<number>();
-  const [storeKey, setStoreKey] = useState(`${exerciseId}_Avg1RM`);
 
   const signOfSlope = (slope: number) => {
     const sign = Math.sign(slope);
@@ -39,9 +38,9 @@ function RecentPerformanceDelta({
     // need to wait until the store has something
     // in it to get the next round of data
     // doesn't get triggered if the data takes too long
-    average
-      ? setStoreKey(`${exerciseId}_Avg1RM`)
-      : setStoreKey(`${exerciseId}_Abs1RM`);
+    let storeKey: string = '';
+    if (average) storeKey = `${exerciseId}_Avg1RM`;
+    else storeKey = `${exerciseId}_Abs1RM`;
 
     if (store.state && store.state[storeKey]) {
       const change =

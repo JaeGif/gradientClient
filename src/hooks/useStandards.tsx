@@ -57,6 +57,7 @@ function useStandards(
         standard.advanced.weight[config.unit],
         standard.elite.weight[config.unit],
       ];
+
     return data;
   };
   return standardsToDataSets(determineStandards()!);

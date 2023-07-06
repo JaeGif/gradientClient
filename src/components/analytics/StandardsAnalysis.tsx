@@ -1,7 +1,20 @@
 import React from 'react';
+import useNextHighestNumber from '../../hooks/useNextHighestNumber';
 
-function StandardsAnalysis() {
-  return <div>StandardsAnalysis</div>;
+type StandardsAnalysisProps = {
+  averagePerformance: number;
+  standards: number[] | undefined;
+};
+function StandardsAnalysis({
+  averagePerformance,
+  standards,
+}: StandardsAnalysisProps) {
+  if (!standards) return <></>;
+  const closestStandardWeight = useNextHighestNumber(
+    averagePerformance,
+    standards
+  );
+  return <div>{closestStandardWeight}</div>;
 }
 
 export default StandardsAnalysis;
