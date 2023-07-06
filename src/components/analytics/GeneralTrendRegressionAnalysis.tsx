@@ -7,14 +7,14 @@ type GeneralTrendRegressionAnalysisProps = {
   exerciseId: string;
   average: boolean;
 };
+import useCustomMemo from '../../hooks/useCustomMemo';
 function GeneralTrendRegressionAnalysis({
   exerciseId,
   average,
 }: GeneralTrendRegressionAnalysisProps) {
-  const store = useContext(CacheContext);
   const [regressionSlope, setRegressionSlope] = useState<number>();
   const [positive, setPositive] = useState<boolean>();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [state, addToCache] = useCustomMemo();
 
   const signOfSlope = (slope: number) => {
     const sign = Math.sign(slope);
@@ -34,6 +34,7 @@ function GeneralTrendRegressionAnalysis({
         break;
     }
   };
+
   useEffect(() => {
     // need to wait until the store has something
     // in it to get the next round of data
@@ -42,15 +43,16 @@ function GeneralTrendRegressionAnalysis({
     if (average) storeKey = `${exerciseId}_Avg1RM`;
     else storeKey = `${exerciseId}_Abs1RM`;
 
-    if (store.state && store.state[storeKey]) {
+    if (state && state[storeKey]) {
       const handleRegressionData = () => {
-        const regressionData = useLinearRegression(store.state[storeKey]);
+        const regressionData = useLinearRegression(state[storeKey]);
         setRegressionSlope(regressionData.equation[0]);
         signOfSlope(regressionData.equation[0]);
       };
+
       handleRegressionData();
     }
-  }, [store.state, average, exerciseId]);
+  }, [average, exerciseId]);
 
   return (
     <div className='flex justify-start items-center gap-1'>

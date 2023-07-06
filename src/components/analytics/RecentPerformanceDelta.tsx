@@ -55,7 +55,7 @@ function RecentPerformanceDelta({
       };
       handleDeltaData();
     }
-  }, [store.state, average, exerciseId]);
+  }, [average, exerciseId]);
 
   return (
     <>

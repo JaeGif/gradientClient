@@ -5,3 +5,10 @@ export const capitalize = (str: string) => {
   }
   return words.join(' ');
 };
+export const averageArray = (arr: number[]) => {
+  let average: number = 0;
+  for (let i = 0; i < arr.length; i++) {
+    average += arr[i];
+  }
+  return average / arr.length;
+};

@@ -1,27 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ExerciseCurrentLevel from './ExerciseCurrentLevel';
 import ExerciseOneRepMax from './ExerciseOneRepMax';
 import ChartAnalysis from './ChartAnalysis';
 import uniqid from 'uniqid';
+import useCustomMemo from '../../hooks/useCustomMemo';
 // toggle the 2 types of charts
 
 type AvgAbs1RepMaxToggleProps = {
   exerciseId: string;
 };
 function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
-  const [showAbsolute, setShowAbsolute] = useState(false);
+  const [showAbsolute, setShowAbsolute] = useState<boolean>(false);
+  const [showAnalysis, setShowAnalysis] = useState(false);
   const toggleChartViews = () => {
     setShowAbsolute((prev) => !prev);
   };
+  const toggleShowAnalysis = () => {
+    setShowAnalysis((prev) => !prev);
+  };
 
   return (
-    <div className='flex justify-center p-6 h-screen'>
+    <div className='flex flex-col justify-center p-6 h-screen'>
       {showAbsolute ? (
         <ExerciseOneRepMax exerciseId={exerciseId} />
       ) : (
         <ExerciseCurrentLevel exerciseId={exerciseId} />
       )}
-      <div className='relative p-4'>
+
+      <span className='p-4 debug'>
         <button
           onClick={(e) => {
             e.stopPropagation();
@@ -31,18 +37,25 @@ function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
         >
           {showAbsolute ? 'Absolute' : 'Average'}
         </button>
-        {showAbsolute ? (
+        <p
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleShowAnalysis();
+          }}
+          className='cursor-pointer'
+        >
+          {!showAnalysis ? 'Breakdown' : 'Hide'}
+        </p>
+      </span>
+      <div>
+        {showAnalysis ? (
           <ChartAnalysis
             key={uniqid()}
             exerciseId={exerciseId}
             showAbsolute={showAbsolute}
           />
         ) : (
-          <ChartAnalysis
-            key={uniqid()}
-            exerciseId={exerciseId}
-            showAbsolute={showAbsolute}
-          />
+          <></>
         )}
       </div>
     </div>

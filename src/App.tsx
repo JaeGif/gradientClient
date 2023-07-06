@@ -17,7 +17,9 @@ type MemoStateObject = { [key: string]: any };
 const ThemeContext = React.createContext<'light' | 'dark'>('dark');
 const CacheContext = React.createContext<any>(null);
 function App() {
-  const [cache, setCache] = useState<MemoStateObject | undefined>();
+  const [cache, setCache] = useState<MemoStateObject | undefined>({
+    updateFlag: false,
+  });
   const handleSetCache = (data: MemoStateObject | undefined) => {
     setCache(data);
   };
