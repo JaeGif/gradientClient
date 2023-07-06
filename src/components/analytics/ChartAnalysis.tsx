@@ -10,7 +10,8 @@ function ChartAnalysis({ exerciseId, showAbsolute }: ChartAnalysisProps) {
   return (
     <div className='min-w-fit'>
       <RegressionAnalysis exerciseId={exerciseId} showAbsolute={showAbsolute} />
-      <StandardsAnalysis />
+      {/*       <StandardsAnalysis />
+       */}{' '}
     </div>
   );
 }

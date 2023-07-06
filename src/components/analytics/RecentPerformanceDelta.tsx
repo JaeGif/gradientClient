@@ -12,7 +12,7 @@ function RecentPerformanceDelta({
   average,
 }: RecentPerformanceDeltaProps) {
   const store = useContext(CacheContext);
-  const [dataLoaded, setDataLoaded] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [positive, setPositive] = useState<boolean>();
   const [delta, setDelta] = useState<number>();
 
@@ -41,35 +41,35 @@ function RecentPerformanceDelta({
     let storeKey: string = '';
     if (average) storeKey = `${exerciseId}_Avg1RM`;
     else storeKey = `${exerciseId}_Abs1RM`;
-
     if (store.state && store.state[storeKey]) {
-      const change =
-        Math.round(
-          (store.state[storeKey][store.state[storeKey].length - 1] -
-            store.state[storeKey][store.state[storeKey].length - 2] +
-            Number.EPSILON) *
-            100
-        ) / 100;
-      setDelta(change);
-      signOfSlope(change);
-      setDataLoaded(true);
-      return;
+      const handleDeltaData = () => {
+        const change =
+          Math.round(
+            (store.state[storeKey][store.state[storeKey].length - 1] -
+              store.state[storeKey][store.state[storeKey].length - 2] +
+              Number.EPSILON) *
+              100
+          ) / 100;
+        setDelta(change); // takes a moment to resolve w/o a wrapper
+        signOfSlope(change); // THIS WORKS BECAUSE THE ASYNC IS INSIDE OF the FN
+      };
+      handleDeltaData();
     }
-  }, [store.state, average]);
+  }, [store.state, average, exerciseId]);
 
   return (
     <>
-      {dataLoaded ? (
-        <div>
-          <p className='font-bold'>Recent &#916;:</p>
+      <div>
+        <p className='font-bold'>Recent &#916;:</p>
+        {typeof delta !== 'undefined' && typeof positive !== 'undefined' ? (
           <p>
             {positive && '+'}
             {delta}
           </p>
-        </div>
-      ) : (
-        <>Loading</>
-      )}
+        ) : (
+          <>Loading</>
+        )}
+      </div>
     </>
   );
 }

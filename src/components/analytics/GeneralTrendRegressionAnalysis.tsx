@@ -14,6 +14,7 @@ function GeneralTrendRegressionAnalysis({
   const store = useContext(CacheContext);
   const [regressionSlope, setRegressionSlope] = useState<number>();
   const [positive, setPositive] = useState<boolean>();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const signOfSlope = (slope: number) => {
     const sign = Math.sign(slope);
@@ -42,22 +43,25 @@ function GeneralTrendRegressionAnalysis({
     else storeKey = `${exerciseId}_Abs1RM`;
 
     if (store.state && store.state[storeKey]) {
-      const regressionData = useLinearRegression(store.state[storeKey]);
-      setRegressionSlope(regressionData.equation[0]);
-      signOfSlope(regressionData.equation[0]);
+      const handleRegressionData = () => {
+        const regressionData = useLinearRegression(store.state[storeKey]);
+        setRegressionSlope(regressionData.equation[0]);
+        signOfSlope(regressionData.equation[0]);
+      };
+      handleRegressionData();
     }
-  }, [store.state, average]);
+  }, [store.state, average, exerciseId]);
 
   return (
     <div className='flex justify-start items-center gap-1'>
       <p className='text-sm font-bold'>Linear Regression Trend: </p>
-      <span className='flex justify-start items-center gap-2'>
-        <p className='text-lg'>
-          {positive && '+'}
-          {regressionSlope}
-          {userUnits}
-        </p>
-        {typeof positive !== 'undefined' && regressionSlope ? (
+      {regressionSlope && typeof positive !== 'undefined' ? (
+        <span className='flex justify-start items-center gap-2'>
+          <p className='text-lg'>
+            {positive && '+'}
+            {regressionSlope}
+            {userUnits}
+          </p>
           <img
             className={positive ? 'h-5' : 'h-5 transform rotate-90'}
             src={
@@ -66,10 +70,10 @@ function GeneralTrendRegressionAnalysis({
                 : '/favicons/trend_arrow_negative.svg'
             }
           />
-        ) : (
-          <>Loading</>
-        )}
-      </span>
+        </span>
+      ) : (
+        <>Loading</>
+      )}
     </div>
   );
 }
