@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import useNextHighestNumber from '../../hooks/useNextHighestNumber';
-import { averageArray } from '../../utils/fnSheet/utilities';
+import {
+  averageArray,
+  capitalize,
+  roundHundredth,
+} from '../../utils/fnSheet/utilities';
 import useCustomMemo from '../../hooks/useCustomMemo';
 import { standards } from '../../data/standards';
 import useRecentExerciseData from '../../hooks/useRecentExerciseData';
@@ -13,6 +17,7 @@ type StandardsAnalysisProps = {
 function StandardsAnalysis({ exerciseId, average }: StandardsAnalysisProps) {
   const [state, addToCache] = useCustomMemo();
   const [exerciseStandard, setExerciseStandard] = useState<any>();
+  const [bestPerformance, setBestPerformance] = useState<number | undefined>();
   const [closestStandard, setClosestStandard] = useState<
     | {
         level: string;
@@ -21,6 +26,8 @@ function StandardsAnalysis({ exerciseId, average }: StandardsAnalysisProps) {
     | undefined
   >();
   let tempStandard = exerciseStandard;
+  let storeKey: string = '';
+
   if (!tempStandard) {
     for (let i = 0; i < standards.gender[userGender].length; i++) {
       if (standards.gender[userGender][i].exerciseId === exerciseId) {
@@ -70,27 +77,34 @@ function StandardsAnalysis({ exerciseId, average }: StandardsAnalysisProps) {
     // need to wait until the store has something
     // in it to get the next round of data
     // doesn't get triggered if the data takes too long
-    let storeKey: string = '';
     if (average) storeKey = `${exerciseId}_Avg1RM`;
     else storeKey = `${exerciseId}_Abs1RM`;
-    console.log('check 1');
-
     if (state && state[storeKey] && exerciseStandard) {
-      console.log('check 2');
-      const lastPerformance = state[storeKey][state[storeKey].length - 1];
-      console.log(lastPerformance);
+      const lastPerformance: number =
+        state[storeKey][state[storeKey].length - 1];
       const closestStandard = useNextHighestNumber(
         lastPerformance,
         exerciseStandard
       );
-      console.log('check 3');
+      setBestPerformance(lastPerformance);
       setClosestStandard(closestStandard);
     }
   }, [average, exerciseId, exerciseStandard]);
 
   return (
     <div>
-      Closest: {closestStandard ? <p>{closestStandard.level}</p> : <>Loading</>}
+      Next Level:{' '}
+      {closestStandard && bestPerformance ? (
+        <>
+          <p>
+            {capitalize(closestStandard.level)} {closestStandard.weight}
+            {userPreferenceWeight}
+          </p>
+          <p>Delta {(closestStandard.weight - bestPerformance).toFixed(2)}</p>
+        </>
+      ) : (
+        <>Loading</>
+      )}
     </div>
   );
 }

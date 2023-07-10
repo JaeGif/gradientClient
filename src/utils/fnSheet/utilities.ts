@@ -12,3 +12,6 @@ export const averageArray = (arr: number[]) => {
   }
   return average / arr.length;
 };
+export const roundHundredth = (val: number) => {
+  return Math.round(((val + Number.EPSILON) * 100) / 100);
+};
