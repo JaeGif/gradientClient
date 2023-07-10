@@ -9,7 +9,8 @@ function useNextHighestNumber(
   let smallestDelta;
 
   for (let i = 0; i < comparison.length; i++) {
-    if (comparison[i].weight < value) break;
+    console.log(comparison[i]);
+    if (comparison[i].weight < value) continue;
     if (!smallestDelta) {
       smallestDelta = Math.abs(comparison[i].weight - value);
       closestIndex = i;
@@ -18,6 +19,7 @@ function useNextHighestNumber(
       smallestDelta = Math.abs(comparison[i].weight - value);
       closestIndex = i;
     }
+    console.log(smallestDelta, comparison);
   }
   return comparison[closestIndex];
 }
