@@ -8,13 +8,18 @@ import useLineChartOptions from '../../hooks/useLineChartOptions';
 import useLineChartDataSets from '../../hooks/useLineChartDataSets';
 import useLinearRegression from '../../hooks/useLinearRegression';
 import useCustomMemo from '../../hooks/useCustomMemo';
+import { UseQueryResult } from '@tanstack/react-query';
 
 type ExerciseCurrentLevelProps = {
   exerciseId: string;
+  recentExerciseQuery: UseQueryResult<any, unknown>;
 };
 Chart.register(Filler);
 
-function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
+function ExerciseCurrentLevel({
+  exerciseId,
+  recentExerciseQuery,
+}: ExerciseCurrentLevelProps) {
   const [xLabels, setXLabels] = useState<string[]>([]);
   const [datasets, setDatasets] = useState<
     {
@@ -26,7 +31,6 @@ function ExerciseCurrentLevel({ exerciseId }: ExerciseCurrentLevelProps) {
   >();
   const [options, setOptions] = useState<any>();
   const [timeFrame, setTimeFrame] = useState('30 days');
-  const recentExerciseQuery = useRecentExerciseData(exerciseId);
   const [state, addToCache] = useCustomMemo();
 
   useEffect(() => {

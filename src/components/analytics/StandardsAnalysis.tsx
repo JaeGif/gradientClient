@@ -3,7 +3,9 @@ import useNextHighestNumber from '../../hooks/useNextHighestNumber';
 import { averageArray } from '../../utils/fnSheet/utilities';
 import useCustomMemo from '../../hooks/useCustomMemo';
 import { standards } from '../../data/standards';
+import useRecentExerciseData from '../../hooks/useRecentExerciseData';
 const userGender = 'm';
+const userPreferenceWeight = 'kg';
 type StandardsAnalysisProps = {
   exerciseId: string;
   average: boolean;
@@ -11,41 +13,84 @@ type StandardsAnalysisProps = {
 function StandardsAnalysis({ exerciseId, average }: StandardsAnalysisProps) {
   const [state, addToCache] = useCustomMemo();
   const [exerciseStandard, setExerciseStandard] = useState<any>();
-  const [closestStandardWeight, setClosestStandardWeight] = useState<
-    number | undefined
+  const [closestStandard, setClosestStandard] = useState<
+    | {
+        level: string;
+        weight: number;
+      }
+    | undefined
   >();
-
-  useEffect(() => {
-    let tempStandard = exerciseStandard;
-    if (!tempStandard) {
-      for (let i = 0; i < standards.gender[userGender].length; i++) {
-        if (standards.gender[userGender][i].exerciseId === exerciseId) {
-          tempStandard = standards.gender[userGender][i].level;
-          setExerciseStandard(tempStandard);
-          break;
-        }
+  let tempStandard = exerciseStandard;
+  if (!tempStandard) {
+    for (let i = 0; i < standards.gender[userGender].length; i++) {
+      if (standards.gender[userGender][i].exerciseId === exerciseId) {
+        tempStandard = [
+          {
+            level: 'beginner',
+            weight:
+              standards.gender[userGender][i].level.beginner.weight[
+                userPreferenceWeight
+              ],
+          },
+          {
+            level: 'novice',
+            weight:
+              standards.gender[userGender][i].level.novice.weight[
+                userPreferenceWeight
+              ],
+          },
+          {
+            level: 'intermediate',
+            weight:
+              standards.gender[userGender][i].level.intermediate.weight[
+                userPreferenceWeight
+              ],
+          },
+          {
+            level: 'advanced',
+            weight:
+              standards.gender[userGender][i].level.advanced.weight[
+                userPreferenceWeight
+              ],
+          },
+          {
+            level: 'elite',
+            weight:
+              standards.gender[userGender][i].level.elite.weight[
+                userPreferenceWeight
+              ],
+          },
+        ];
+        setExerciseStandard(tempStandard);
+        break;
       }
     }
+  }
+  useEffect(() => {
     // need to wait until the store has something
     // in it to get the next round of data
     // doesn't get triggered if the data takes too long
     let storeKey: string = '';
     if (average) storeKey = `${exerciseId}_Avg1RM`;
     else storeKey = `${exerciseId}_Abs1RM`;
+    console.log('check 1');
 
     if (state && state[storeKey] && exerciseStandard) {
-      const averagePerformance = averageArray(state[storeKey]);
-      const closestStandardWeightVal = useNextHighestNumber(
-        averagePerformance,
-        tempStandard
+      console.log('check 2');
+      const lastPerformance = state[storeKey][state[storeKey].length - 1];
+      console.log(lastPerformance);
+      const closestStandard = useNextHighestNumber(
+        lastPerformance,
+        exerciseStandard
       );
-      setClosestStandardWeight(closestStandardWeightVal);
+      console.log('check 3');
+      setClosestStandard(closestStandard);
     }
-  }, [average, exerciseId]);
+  }, [average, exerciseId, exerciseStandard]);
 
   return (
     <div>
-      Closest: {closestStandardWeight ? closestStandardWeight : <>Loading</>}
+      Closest: {closestStandard ? <p>{closestStandard.level}</p> : <>Loading</>}
     </div>
   );
 }

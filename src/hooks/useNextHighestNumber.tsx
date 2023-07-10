@@ -1,20 +1,25 @@
 import React from 'react';
+import { StrengthLevels } from '../types/Interfaces';
 
-function useNextHighestNumber(value: number, comparisonArray: number[]) {
+function useNextHighestNumber(
+  value: number,
+  comparison: { level: string; weight: number }[]
+) {
   let closestIndex: number = 0;
   let smallestDelta;
-  for (let i = 0; i < comparisonArray.length; i++) {
-    if (comparisonArray[i] < value) break;
+
+  for (let i = 0; i < comparison.length; i++) {
+    if (comparison[i].weight < value) break;
     if (!smallestDelta) {
-      smallestDelta = Math.abs(comparisonArray[i] - value);
+      smallestDelta = Math.abs(comparison[i].weight - value);
       closestIndex = i;
     }
-    if (comparisonArray[i] - value < smallestDelta) {
-      smallestDelta = Math.abs(comparisonArray[i] - value);
+    if (comparison[i].weight - value < smallestDelta) {
+      smallestDelta = Math.abs(comparison[i].weight - value);
       closestIndex = i;
     }
   }
-  return comparisonArray[closestIndex];
+  return comparison[closestIndex];
 }
 
 export default useNextHighestNumber;

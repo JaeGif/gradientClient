@@ -43,3 +43,6 @@ export interface PerformedSets {
   reps: number;
   rtf?: number;
 }
+export interface StrengthLevels {
+  level: 'beginner' | 'novice' | 'intermediate' | 'advanced' | 'elite';
+}

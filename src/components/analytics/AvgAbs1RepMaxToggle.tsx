@@ -3,6 +3,7 @@ import ExerciseCurrentLevel from './ExerciseCurrentLevel';
 import ExerciseOneRepMax from './ExerciseOneRepMax';
 import ChartAnalysis from './ChartAnalysis';
 import uniqid from 'uniqid';
+import useRecentExerciseData from '../../hooks/useRecentExerciseData';
 import useCustomMemo from '../../hooks/useCustomMemo';
 // toggle the 2 types of charts
 
@@ -18,46 +19,59 @@ function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
   const toggleShowAnalysis = () => {
     setShowAnalysis((prev) => !prev);
   };
+  const recentExerciseQuery = useRecentExerciseData(exerciseId);
 
   return (
     <div className='flex flex-col justify-center p-6 h-screen'>
-      {showAbsolute ? (
-        <ExerciseOneRepMax exerciseId={exerciseId} />
-      ) : (
-        <ExerciseCurrentLevel exerciseId={exerciseId} />
-      )}
+      {recentExerciseQuery.isFetched ? (
+        <>
+          {showAbsolute ? (
+            <ExerciseOneRepMax
+              exerciseId={exerciseId}
+              recentExerciseQuery={recentExerciseQuery}
+            />
+          ) : (
+            <ExerciseCurrentLevel
+              exerciseId={exerciseId}
+              recentExerciseQuery={recentExerciseQuery}
+            />
+          )}
 
-      <span className='p-4 debug'>
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            toggleChartViews();
-          }}
-          className='border-2 border-gray-700 rounded-md w-fit p-1 text-sm block'
-        >
-          {showAbsolute ? 'Absolute' : 'Average'}
-        </button>
-        <p
-          onClick={(e) => {
-            e.stopPropagation();
-            toggleShowAnalysis();
-          }}
-          className='cursor-pointer'
-        >
-          {!showAnalysis ? 'Breakdown' : 'Hide'}
-        </p>
-      </span>
-      <div>
-        {showAnalysis ? (
-          <ChartAnalysis
-            key={uniqid()}
-            exerciseId={exerciseId}
-            showAbsolute={showAbsolute}
-          />
-        ) : (
-          <></>
-        )}
-      </div>
+          <span className='p-4 debug'>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleChartViews();
+              }}
+              className='border-2 border-gray-700 rounded-md w-fit p-1 text-sm block'
+            >
+              {showAbsolute ? 'Absolute' : 'Average'}
+            </button>
+            <p
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleShowAnalysis();
+              }}
+              className='cursor-pointer'
+            >
+              {!showAnalysis ? 'Breakdown' : 'Hide'}
+            </p>
+          </span>
+          <div>
+            {showAnalysis ? (
+              <ChartAnalysis
+                key={uniqid()}
+                exerciseId={exerciseId}
+                showAbsolute={showAbsolute}
+              />
+            ) : (
+              <></>
+            )}
+          </div>
+        </>
+      ) : (
+        <>Loading</>
+      )}
     </div>
   );
 }

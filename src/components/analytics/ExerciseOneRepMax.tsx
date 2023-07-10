@@ -9,12 +9,17 @@ import useLineChartOptions from '../../hooks/useLineChartOptions';
 import useLineChartDataSets from '../../hooks/useLineChartDataSets';
 import useLinearRegression from '../../hooks/useLinearRegression';
 import useCustomMemo from '../../hooks/useCustomMemo';
+import { UseQueryResult } from '@tanstack/react-query';
 type ExerciseOneRepMaxProps = {
   exerciseId: string;
+  recentExerciseQuery: UseQueryResult<any, unknown>;
 };
 Chart.register(Filler);
 
-function ExerciseOneRepMax({ exerciseId }: ExerciseOneRepMaxProps) {
+function ExerciseOneRepMax({
+  exerciseId,
+  recentExerciseQuery,
+}: ExerciseOneRepMaxProps) {
   const [xLabels, setXLabels] = useState<string[]>([]);
   const [datasets, setDatasets] = useState<
     {
@@ -26,7 +31,6 @@ function ExerciseOneRepMax({ exerciseId }: ExerciseOneRepMaxProps) {
   >();
   const [options, setOptions] = useState<any>();
   const [timeFrame, setTimeFrame] = useState('30 days'); // set this is fetched at right intervals
-  const recentExerciseQuery = useRecentExerciseData(exerciseId);
   const [state, addToCache] = useCustomMemo();
 
   useEffect(() => {
