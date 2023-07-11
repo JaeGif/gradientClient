@@ -5,6 +5,8 @@ import ChartAnalysis from './ChartAnalysis';
 import uniqid from 'uniqid';
 import useRecentExerciseData from '../../hooks/useRecentExerciseData';
 import useCustomMemo from '../../hooks/useCustomMemo';
+import Audio from 'react-loading-icons/dist/esm/components/audio';
+import BallTriangle from 'react-loading-icons/dist/esm/components/ball-triangle';
 // toggle the 2 types of charts
 
 type AvgAbs1RepMaxToggleProps = {
@@ -12,17 +14,13 @@ type AvgAbs1RepMaxToggleProps = {
 };
 function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
   const [showAbsolute, setShowAbsolute] = useState<boolean>(false);
-  const [showAnalysis, setShowAnalysis] = useState(false);
   const toggleChartViews = () => {
     setShowAbsolute((prev) => !prev);
   };
-  const toggleShowAnalysis = () => {
-    setShowAnalysis((prev) => !prev);
-  };
   const recentExerciseQuery = useRecentExerciseData(exerciseId);
-
+  console.log(recentExerciseQuery.isFetched);
   return (
-    <div className='flex flex-col justify-center p-6 h-screen'>
+    <div className='flex justify-center p-6 h-screen debug'>
       {recentExerciseQuery.isFetched ? (
         <>
           {showAbsolute ? (
@@ -36,8 +34,12 @@ function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
               recentExerciseQuery={recentExerciseQuery}
             />
           )}
-
-          <span className='p-4 debug'>
+          <div className='flex flex-col'>
+            <ChartAnalysis
+              key={uniqid()}
+              exerciseId={exerciseId}
+              showAbsolute={showAbsolute}
+            />
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -47,30 +49,12 @@ function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
             >
               {showAbsolute ? 'Absolute' : 'Average'}
             </button>
-            <p
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleShowAnalysis();
-              }}
-              className='cursor-pointer'
-            >
-              {!showAnalysis ? 'Breakdown' : 'Hide'}
-            </p>
-          </span>
-          <div>
-            {showAnalysis ? (
-              <ChartAnalysis
-                key={uniqid()}
-                exerciseId={exerciseId}
-                showAbsolute={showAbsolute}
-              />
-            ) : (
-              <></>
-            )}
           </div>
         </>
       ) : (
-        <>Loading</>
+        <div className='flex justify-center items-center'>
+          <Audio stroke='#000000' fill='#000000' speed={0.5} />
+        </div>
       )}
     </div>
   );
