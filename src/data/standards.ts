@@ -77,8 +77,49 @@
           "elite": { "weight": { "kg": 157, "lb": 345 } }
         }
       } */
-
-export const standards = {
+type exerciseLevel = {
+  exercise: string;
+  exerciseId: string;
+  level: {
+    beginner: {
+      weight: {
+        kg: number;
+        lb: number;
+      };
+    };
+    novice: {
+      weight: {
+        kg: number;
+        lb: number;
+      };
+    };
+    intermediate: {
+      weight: {
+        kg: number;
+        lb: number;
+      };
+    };
+    advanced: {
+      weight: {
+        kg: number;
+        lb: number;
+      };
+    };
+    elite: {
+      weight: {
+        kg: number;
+        lb: number;
+      };
+    };
+  };
+};
+export const standards: {
+  gender: {
+    [key: string]: exerciseLevel[];
+    m: exerciseLevel[];
+    f: exerciseLevel[];
+  };
+} = {
   gender: {
     m: [
       {

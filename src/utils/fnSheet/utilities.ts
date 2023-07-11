@@ -1,3 +1,5 @@
+import { standards } from '../../data/standards';
+
 export const capitalize = (str: string) => {
   let words = str.split(' ');
   for (let i = 0; i < words.length; i++) {
@@ -14,4 +16,12 @@ export const averageArray = (arr: number[]) => {
 };
 export const roundHundredth = (val: number) => {
   return Math.round(((val + Number.EPSILON) * 100) / 100);
+};
+export const exerciseInStandards = (id: string, userGender: string) => {
+  for (let i = 0; i < standards.gender[userGender].length; i++) {
+    if (standards.gender[userGender][i].exerciseId === id) {
+      return true;
+    }
+  }
+  return false;
 };
