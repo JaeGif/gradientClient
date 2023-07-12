@@ -3,7 +3,8 @@ const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 
 function Progress() {
   const getMajorExerciseData = async () => {
-    // should be one call to return them.
+    // should be one call to return averaged data
+    // every single datapoint is averaged for the standards
     const res = await fetch(`${apiURL}`);
     // should return the last 30 days data points for graphing
   };

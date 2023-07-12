@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 function Options() {
   return (
     <div className='flex justify-center items-center w-full'>

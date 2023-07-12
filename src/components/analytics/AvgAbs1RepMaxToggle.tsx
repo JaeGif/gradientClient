@@ -18,9 +18,8 @@ function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
     setShowAbsolute((prev) => !prev);
   };
   const recentExerciseQuery = useRecentExerciseData(exerciseId);
-  console.log(recentExerciseQuery.isFetched);
   return (
-    <div className='flex justify-center p-6 h-screen debug'>
+    <div className='flex justify-center p-6 h-screen'>
       {recentExerciseQuery.isFetched ? (
         <>
           {showAbsolute ? (
