@@ -4,6 +4,7 @@ const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 type ProgressData = {
   average: number;
   averagedStandards: {
+    [key: string]: number | 'kg' | 'lb';
     beginner: number;
     novice: number;
     intermediate: number;

@@ -25,3 +25,41 @@ export const exerciseInStandards = (id: string, userGender: string) => {
   }
   return false;
 };
+
+export function findNextHighestNumber(
+  value: number,
+  comparison: { level: string; weight: number }[]
+) {
+  let closestIndex: number = 0;
+  let smallestDelta;
+
+  for (let i = 0; i < comparison.length; i++) {
+    if (comparison[i].weight < value) continue;
+    if (!smallestDelta) {
+      smallestDelta = Math.abs(comparison[i].weight - value);
+      closestIndex = i;
+    }
+    if (comparison[i].weight - value < smallestDelta) {
+      smallestDelta = Math.abs(comparison[i].weight - value);
+      closestIndex = i;
+    }
+  }
+  return comparison[closestIndex];
+}
+
+export const getCurrentLevelFromNextLevel = (nextLevel: string) => {
+  switch (nextLevel) {
+    case 'beginner':
+      return 'start';
+    case 'novice':
+      return 'beginner';
+    case 'intermediate':
+      return 'novice';
+    case 'advanced':
+      return 'intermediate';
+    case 'elite':
+      return 'advanced';
+    default:
+      return 'elite';
+  }
+};
