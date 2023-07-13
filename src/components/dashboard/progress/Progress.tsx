@@ -1,15 +1,18 @@
 import React from 'react';
+import useGeneralProgressData from '../../../hooks/useGeneralProgressData';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
-
+const userId = 'f1245e15-7487-48d2-bbd8-738fcdde8f6d';
+const userGender = 'm';
 function Progress() {
-  const getMajorExerciseData = async () => {
-    // should be one call to return averaged data
-    // every single datapoint is averaged for the standards
-    const res = await fetch(`${apiURL}`);
-    // should return the last 30 days data points for graphing
-  };
+  const progressQuery = useGeneralProgressData(userId, userGender);
   return (
-    <div className='debug w-2/3 rounded-lg p-2 min-w-[420px]'>Progress</div>
+    <div className='debug w-2/3 rounded-lg p-2 min-w-[420px]'>
+      {progressQuery.isFetched ? (
+        progressQuery.data && <div>{progressQuery.data.average}</div>
+      ) : (
+        <>Loading</>
+      )}
+    </div>
   );
 }
 
