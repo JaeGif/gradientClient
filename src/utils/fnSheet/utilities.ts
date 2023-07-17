@@ -1,7 +1,9 @@
 import { standards } from '../../data/standards';
 
 export const capitalize = (str: string) => {
+  if (str === '') return '';
   let words = str.split(' ');
+
   for (let i = 0; i < words.length; i++) {
     words[i] = words[i][0].toUpperCase() + words[i].substring(1);
   }

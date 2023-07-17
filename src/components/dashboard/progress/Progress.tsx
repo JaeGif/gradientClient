@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import useGeneralProgressData from '../../../hooks/useGeneralProgressData';
-import useNextHighestNumber from '../../../hooks/useNextHighestNumber';
 import {
+  capitalize,
   findNextHighestNumber,
   getCurrentLevelFromNextLevel,
 } from '../../../utils/fnSheet/utilities';
+import OverlayProgressBarChart from '../../charts/OverlayProgressBarChart';
+import Info from './progressComponents/Info';
+import OverlayAllLevels from '../../charts/OverlayAllLevels';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 const userId = 'f1245e15-7487-48d2-bbd8-738fcdde8f6d';
 const userGender = 'm';
 function Progress() {
-  const [nextLevel, setNextLevel] = useState<string>();
-  const [distanceToNextLevel, setDistanceToNextLevel] = useState<number>();
-  const [currentLevel, setCurrentLevel] = useState<string>();
-  const [currentDistance, setCurrentDistance] = useState<number>();
+  const [showNext, setShowNext] = useState<boolean>(true);
+  const [nextLevel, setNextLevel] = useState<string>('');
+  const [distanceToNextLevel, setDistanceToNextLevel] = useState<number>(0);
+  const [currentLevel, setCurrentLevel] = useState<string>('');
+  const [userLevel, setUserLevel] = useState<number>();
+  const [currentDistance, setCurrentDistance] = useState<number>(0);
+  const [levelsData, setLevelsData] = useState<
+    {
+      level: string;
+      weight: number;
+    }[]
+  >();
   const progressQuery = useGeneralProgressData(userId, userGender);
 
   useEffect(() => {
@@ -39,6 +50,8 @@ function Progress() {
           weight: progressQuery.data.averagedStandards.elite,
         },
       ];
+      if (checkArr) setLevelsData(checkArr);
+
       const nextLevelData = findNextHighestNumber(
         progressQuery.data.average,
         checkArr
@@ -52,9 +65,9 @@ function Progress() {
       const currentLevelValue: number = progressQuery.data.averagedStandards[
         currentLevel
       ] as number;
+      setUserLevel(currentLevelValue);
       const delta = nextLevelValue - currentLevelValue;
       const currentDistance = progressQuery.data.average - currentLevelValue;
-      console.log(currentLevelValue, nextLevelValue, currentDistance);
       const percentageOfNextLevel = parseFloat(
         ((currentDistance / delta) * 100).toFixed(2)
       );
@@ -65,10 +78,36 @@ function Progress() {
   return (
     <div className='debug w-2/3 rounded-lg p-2 min-w-[420px]'>
       {progressQuery.isFetched ? (
-        progressQuery.data && (
-          <div>
-            You are currently {currentLevel}. {distanceToNextLevel}% of the way
-            to {nextLevel}
+        progressQuery.data &&
+        levelsData &&
+        userLevel && (
+          <div className='flex flex-col'>
+            <span className='flex'>
+              {showNext ? (
+                <OverlayProgressBarChart
+                  nextLevel={capitalize(nextLevel)}
+                  userPercentage={distanceToNextLevel}
+                />
+              ) : (
+                <OverlayAllLevels
+                  levelsData={levelsData}
+                  userLevel={userLevel}
+                />
+              )}
+            </span>
+            <p
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowNext((prev) => !prev);
+              }}
+            >
+              Toggle
+            </p>
+            <Info
+              currentLevel={capitalize(currentLevel)}
+              nextLevel={capitalize(nextLevel)}
+              distanceToNextLevel={distanceToNextLevel}
+            />
           </div>
         )
       ) : (
