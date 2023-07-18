@@ -13,7 +13,7 @@ import {
   BarController,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
-
+import { capitalize } from '../../utils/fnSheet/utilities';
 ChartJS.register(
   LinearScale,
   CategoryScale,
@@ -50,31 +50,31 @@ function OverlayAllLevels({
     },
     {
       type: 'bar' as const,
-      label: levelsData[0].level,
+      label: capitalize(levelsData[0].level),
       backgroundColor: 'rgba(197, 223, 248, 1)',
       data: [levelsData[0].weight],
     },
     {
       type: 'bar' as const,
-      label: levelsData[1].level,
+      label: capitalize(levelsData[1].level),
       backgroundColor: 'rgba(160, 191, 224, 1)',
       data: [levelsData[1].weight],
     },
     {
       type: 'bar' as const,
-      label: levelsData[2].level,
+      label: capitalize(levelsData[2].level),
       backgroundColor: 'rgba(120, 149, 203, 1)',
       data: [levelsData[2].weight],
     },
     {
       type: 'bar' as const,
-      label: levelsData[3].level,
+      label: capitalize(levelsData[3].level),
       backgroundColor: 'rgba(74, 85, 162, 1)',
       data: [levelsData[3].weight * 0.9],
     },
     {
       type: 'bar' as const,
-      label: levelsData[4].level,
+      label: capitalize(levelsData[4].level),
       backgroundColor: 'rgba(24, 15, 122, 1)',
       data: [levelsData[4].weight * 0.95],
     },
@@ -89,29 +89,33 @@ function OverlayAllLevels({
         interaction: { mode: 'dataset' },
         plugins: {
           datalabels: {
+            anchor: 'end',
+            align: 'start',
+            offset: -10,
+            display: 'auto',
             formatter: function (value, context) {
-              return context.chart.data.labels![context.dataIndex];
+              return context.dataset.label;
             },
             color: 'white',
           },
           legend: {
-            display: false,
+            display: true,
           },
           title: {
             display: true,
             text: 'Overall Progression',
           },
           tooltip: {
-            callbacks: {
+            enabled: false,
+            /*             callbacks: {
               label: function (context) {
                 return ' ' + context.dataset.label;
               },
-            },
+            }, */
           },
         },
         responsive: true,
         scales: {
-          yAxes: { ticks: { mirror: false } },
           x: {
             stacked: true,
             display: false,
