@@ -90,6 +90,7 @@ function Progress() {
                 />
               ) : (
                 <OverlayAllLevels
+                  userCurrentLevel={capitalize(currentLevel)}
                   levelsData={levelsData}
                   userLevel={userLevel}
                 />
