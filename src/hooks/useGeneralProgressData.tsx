@@ -21,17 +21,6 @@ function useGeneralProgressData(userId: string, gender: 'm' | 'f', count = 5) {
       `${apiURL}api/standardizedPerformances?user=${userId}&count=${count}&userGender=${gender}`
     );
     const data = await res.json();
-    /*     {
-      "average": 66.88,
-      "averagedStandards": {
-          "beginner": 17,
-          "novice": 39,
-          "intermediate": 66,
-          "advanced": 97.5,
-          "elite": 131,
-          "units": "kg"
-      }
-  } */
 
     return data;
   };

@@ -101,8 +101,9 @@ function Progress() {
                 e.stopPropagation();
                 setShowNext((prev) => !prev);
               }}
+              className='hover:cursor-pointer h-fit w-fit p-2 bg-blue-30 rounded-md'
             >
-              Toggle
+              {showNext ? 'Overall' : 'Progress'}
             </p>
             <Info
               currentLevel={capitalize(currentLevel)}

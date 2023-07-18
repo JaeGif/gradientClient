@@ -7,10 +7,9 @@ type InfoProps = {
 };
 function Info({ nextLevel, currentLevel, distanceToNextLevel }: InfoProps) {
   return (
-    <div>
-      You are currently {currentLevel}. {distanceToNextLevel}% of the way to{' '}
-      {nextLevel}
-    </div>
+    <p>
+      Current Level: {currentLevel}. {distanceToNextLevel}% to {nextLevel}
+    </p>
   );
 }
 
