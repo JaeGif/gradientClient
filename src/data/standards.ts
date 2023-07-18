@@ -180,17 +180,6 @@ export const standards: {
         },
       },
       {
-        exerciseId: '5850e575-4f8d-4723-bb1f-6807fbab1458',
-        exercise: 'squat',
-        level: {
-          beginner: { weight: { kg: 30, lb: 65 } },
-          novice: { weight: { kg: 48, lb: 107 } },
-          intermediate: { weight: { kg: 73, lb: 161 } },
-          advanced: { weight: { kg: 103, lb: 227 } },
-          elite: { weight: { kg: 136, lb: 300 } },
-        },
-      },
-      {
         exerciseId: '6a10f694-25bd-4824-b2a2-bfb21b4167c4',
         exercise: 'pull up',
         level: {
@@ -201,6 +190,18 @@ export const standards: {
           elite: { weight: { kg: 51, lb: 112 } },
         },
       },
+      {
+        exerciseId: '5850e575-4f8d-4723-bb1f-6807fbab1458',
+        exercise: 'squat',
+        level: {
+          beginner: { weight: { kg: 30, lb: 65 } },
+          novice: { weight: { kg: 48, lb: 107 } },
+          intermediate: { weight: { kg: 73, lb: 161 } },
+          advanced: { weight: { kg: 103, lb: 227 } },
+          elite: { weight: { kg: 136, lb: 300 } },
+        },
+      },
+
       {
         exerciseId: '4c08bff3-33d6-4ff2-9252-97ab9164349d',
         exercise: 'deadlift',
