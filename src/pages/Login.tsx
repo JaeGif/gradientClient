@@ -4,15 +4,13 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { User } from '../types/Interfaces';
 
 function Login() {
-  const [user, setUser] = useState<User | null>(null);
   const auth = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   const redirectPath = location.state?.path || '/dashboard';
   const handleLogin = () => {
-    auth!.login(user!);
-    navigate(redirectPath);
+    auth!.login('giffordjacob0', 'cat0both');
   };
   return (
     <div>
@@ -43,7 +41,7 @@ function Login() {
           />
         </div>
         <div>
-          <button>Login</button>
+          <button onClick={handleLogin}>Login</button>
           <p>or</p>
           <div>
             <button>Google</button>

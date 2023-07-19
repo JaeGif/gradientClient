@@ -6,6 +6,8 @@ import React, {
   useEffect,
 } from 'react';
 import { User } from '../types/Interfaces';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 const AuthContext = createContext<{
   user: User | null;
@@ -17,6 +19,8 @@ const AuthContext = createContext<{
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const login = (email: string, password: string) => {
     if (!email || !password) return;
@@ -44,6 +48,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           weight: result.data.user.weight,
           age: result.data.user.age,
         };
+        console.log(result);
         setUser(userResult);
         setToken(result.data.token);
       }
@@ -54,10 +59,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   };
 
-  // REMOVE THIS LATER, IT BELONGS IN THE LOGIN PAGE
   useEffect(() => {
-    login('giffordjacob0@gmail.com', 'cat0both');
-  }, []);
+    if (user && token) {
+      const redirectPath = location.state?.path || '/dashboard';
+      navigate(redirectPath);
+    }
+  }, [user, token]);
+
   return (
     <AuthContext.Provider value={{ user, login, logout, token }}>
       {children}
