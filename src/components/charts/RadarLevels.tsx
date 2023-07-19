@@ -38,7 +38,7 @@ function RadarLevels({ exerciseLevels, userExerciseLevels }: RadarLevelsProps) {
       {
         label: 'Current Level',
         data: userExerciseLevels.map((el) => el.value),
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        backgroundColor: 'rgba(100, 255, 100, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1,
       },

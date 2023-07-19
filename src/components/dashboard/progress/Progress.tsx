@@ -7,12 +7,10 @@ import {
 } from '../../../utils/fnSheet/utilities';
 import OverlayProgressBarChart from '../../charts/OverlayProgressBarChart';
 import Info from './progressComponents/Info';
-import OverlayAllLevels from '../../charts/OverlayAllLevels';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 const userId = 'f1245e15-7487-48d2-bbd8-738fcdde8f6d';
 const userGender = 'm';
 function Progress() {
-  const [showNext, setShowNext] = useState<boolean>(true);
   const [nextLevel, setNextLevel] = useState<string>('');
   const [distanceToNextLevel, setDistanceToNextLevel] = useState<number>(0);
   const [currentLevel, setCurrentLevel] = useState<string>('');
@@ -83,28 +81,11 @@ function Progress() {
         userLevel && (
           <div className='flex flex-col'>
             <span className='flex'>
-              {showNext ? (
-                <OverlayProgressBarChart
-                  nextLevel={capitalize(nextLevel)}
-                  userPercentage={distanceToNextLevel}
-                />
-              ) : (
-                <OverlayAllLevels
-                  userCurrentLevel={capitalize(currentLevel)}
-                  levelsData={levelsData}
-                  userLevel={userLevel}
-                />
-              )}
+              <OverlayProgressBarChart
+                nextLevel={capitalize(nextLevel)}
+                userPercentage={distanceToNextLevel}
+              />
             </span>
-            <p
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowNext((prev) => !prev);
-              }}
-              className='hover:cursor-pointer h-fit w-fit p-2 bg-blue-30 rounded-md'
-            >
-              {showNext ? 'Overall' : 'Progress'}
-            </p>
             <Info
               currentLevel={capitalize(currentLevel)}
               nextLevel={capitalize(nextLevel)}

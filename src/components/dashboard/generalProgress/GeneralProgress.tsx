@@ -6,7 +6,7 @@ const userId = 'f1245e15-7487-48d2-bbd8-738fcdde8f6d';
 const userGender = 'm';
 const units = 'kg';
 import { standards } from '../../../data/standards';
-function WeeklySetsPerMuscleGroupChart() {
+function GeneralProgressChart() {
   // use max values from last 30 days on standard exercises as the users current values
   // standards can be added programmatically from the DB
   const genderedStandards = standards.gender[userGender];
@@ -58,4 +58,4 @@ function WeeklySetsPerMuscleGroupChart() {
   );
 }
 
-export default WeeklySetsPerMuscleGroupChart;
+export default GeneralProgressChart;
