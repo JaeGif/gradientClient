@@ -8,7 +8,7 @@ import useLineChartDataSets from '../../hooks/useLineChartDataSets';
 import useLinearRegression from '../../hooks/useLinearRegression';
 import useCustomMemo from '../../hooks/useCustomMemo';
 import { UseQueryResult } from '@tanstack/react-query';
-
+import { useAuth } from '../../utils/AuthProvider';
 type ExerciseOneRepMaxProps = {
   exerciseId: string;
   recentExerciseQuery: UseQueryResult<any, unknown>;
@@ -24,6 +24,8 @@ function ExerciseOneRepMax({
   const [options, setOptions] = useState<any>();
   const [timeFrame, setTimeFrame] = useState('30 days'); // set this is fetched at right intervals
   const [state, addToCache] = useCustomMemo();
+  const userWeight = useAuth()!.user!.weight.value;
+  const userGender = useAuth()!.user!.gender;
 
   useEffect(() => {
     if (recentExerciseQuery.data && recentExerciseQuery.data.length !== 0) {
@@ -34,7 +36,16 @@ function ExerciseOneRepMax({
       // O(1) hash table so constant time for cache lookup
       let data;
       if (!state || !state[`${exerciseId}_Abs1RM`]) {
-        data = use1RepMax(recentExerciseQuery.data, false); // returns a number[] of the 1rm for each set
+        let isPullups = false;
+        if (exerciseId === '6a10f694-25bd-4824-b2a2-bfb21b4167c4') {
+          isPullups = true;
+        }
+        data = use1RepMax(
+          recentExerciseQuery.data,
+          false,
+          isPullups,
+          userWeight
+        ); // returns a number[] of the 1rm for each set
         addToCache(`${exerciseId}_Abs1RM`, data);
       } else {
         data = state[`${exerciseId}_Abs1RM`];
@@ -51,6 +62,7 @@ function ExerciseOneRepMax({
           recentExerciseQuery,
           data,
           timeFrame,
+          userGender,
           true
         );
         setOptions(options);

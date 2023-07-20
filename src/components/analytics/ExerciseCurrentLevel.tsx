@@ -24,9 +24,11 @@ function ExerciseCurrentLevel({
   const [options, setOptions] = useState<any>();
   const [timeFrame, setTimeFrame] = useState('30 days');
   const [state, addToCache] = useCustomMemo();
+  const userWeight = useAuth()!.user!.weight.value;
   const userGender = useAuth()!.user!.gender;
-
   useEffect(() => {
+    console.log(exerciseId);
+
     if (recentExerciseQuery.data && recentExerciseQuery.data.length !== 0) {
       const labels = useExerciseDateLabels(recentExerciseQuery);
       setXLabels(labels);
@@ -34,7 +36,16 @@ function ExerciseCurrentLevel({
       // O(1) hash table so constant time for cache lookup
       let data;
       if (!state || !state[`${exerciseId}_Avg1RM`]) {
-        data = use1RepMax(recentExerciseQuery.data, true);
+        let isPullups = false;
+        if (exerciseId === '6a10f694-25bd-4824-b2a2-bfb21b4167c4') {
+          isPullups = true;
+        }
+        data = use1RepMax(
+          recentExerciseQuery.data,
+          true,
+          isPullups,
+          userWeight
+        );
         addToCache(`${exerciseId}_Avg1RM`, data);
       } else {
         data = state[`${exerciseId}_Avg1RM`];
