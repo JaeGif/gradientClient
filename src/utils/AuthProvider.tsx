@@ -8,7 +8,9 @@ import React, {
 import { User } from '../types/Interfaces';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
+
 const AuthContext = createContext<{
   user: User | null;
   login: (email: string, password: string) => void;
@@ -22,6 +24,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const persistLoginLocalStorage = (userRes: User, tokenRes: string) => {
+    const loginLocalObject = {
+      user: userRes,
+      token: tokenRes,
+    };
+    localStorage.setItem(
+      'gradientLoggedInUser',
+      JSON.stringify(loginLocalObject)
+    );
+  };
+  const retrieveLoginLocalStorage = () => {
+    const storage = localStorage.getItem('gradientLoggedInUser');
+    if (!storage) return;
+    const storageData = JSON.parse(storage);
+    if (storageData.token && storageData.user) {
+      setUser(storageData.user);
+      setToken(storageData.token);
+    }
+  };
   const login = (email: string, password: string) => {
     if (!email || !password) return;
     const loginUserWithCredentials = async () => {
@@ -38,7 +59,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify(data),
       });
       const result = await response.json();
-
       if (result.data) {
         const userResult: User = {
           id: result.data.user.id,
@@ -48,9 +68,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           weight: result.data.user.weight,
           age: result.data.user.age,
         };
-        console.log(result);
         setUser(userResult);
         setToken(result.data.token);
+        persistLoginLocalStorage(userResult, result.data.token);
       }
     };
     loginUserWithCredentials();
@@ -60,6 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    if (!user && !token) retrieveLoginLocalStorage();
     if (user && token) {
       const redirectPath = location.state?.path || '/dashboard';
       navigate(redirectPath);

@@ -7,27 +7,11 @@ export interface User {
   id: string;
   username: string;
   gender: 'm' | 'f';
-  preferences: { units: 'kg' | 'lb'; standards: 'ratio' | 'percentile' };
-  weight: number;
+  preferences: { unit: 'kg' | 'lb'; standard: 'ratio' | 'percentile' };
+  weight: { unit: 'kg' | 'lb'; value: number };
   age: number;
 }
-/*   id                String              @id @default(uuid())
-  googleId          String?
-  githubId          String?
-  username          String              @unique @default(uuid())
-  accountId         String?
-  password          String?
-  age               Int
-  weight            Int
-  level             String?
-  email             String?
-  preferences       Json?
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @updatedAt
-  workouts          Workout[]
-  performedWorkouts PerformedWorkout[]
-  performedExercise PerformedExercise[]
-  gender            String */
+
 export interface Exercise {
   id: string;
   name: string;

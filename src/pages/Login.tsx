@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { useAuth } from '../utils/AuthProvider';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { User } from '../types/Interfaces';
+import { Link } from 'react-router-dom';
 
 function Login() {
   const auth = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
 
-  const redirectPath = location.state?.path || '/dashboard';
   const handleLogin = () => {
-    auth!.login('giffordjacob0', 'cat0both');
+    auth!.login('giffordjacob0@gmail.com', 'cat0both');
   };
   return (
     <div>
