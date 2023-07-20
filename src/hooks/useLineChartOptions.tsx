@@ -3,14 +3,13 @@ import { capitalize } from '../utils/fnSheet/utilities';
 import useStandards from './useStandards';
 import useAnnotationStandard from './useAnnotationStandard';
 import useDataPointThreshold from './useDataPointThreshold';
-import { useAuth } from '../utils/AuthProvider';
 function useLineChartOptions(
   recentExerciseQuery: UseQueryResult<any, unknown>,
   data: number[],
   timeFrame: string,
+  userGender: 'm' | 'f',
   absolute: boolean
 ) {
-  const userGender = useAuth()!.user!.gender;
   const standardsDataset = useStandards(
     recentExerciseQuery.data[0].exercise.id,
     { unit: recentExerciseQuery.data[0].sets[0].unit },
