@@ -1,10 +1,4 @@
-import React from 'react';
-import {
-  Exercise,
-  MuscleGroup,
-  PerformedExercise,
-  PlannedExercise,
-} from '../../types/Interfaces';
+import { MuscleGroup, PlannedExercise } from '../../types/Interfaces';
 import uniqid from 'uniqid';
 
 export type WorkoutCardProps = {

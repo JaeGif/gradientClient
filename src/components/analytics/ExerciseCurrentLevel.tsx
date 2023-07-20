@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import LineChart from '../charts/LineChart';
 import { Chart, Filler } from 'chart.js';
 import use1RepMax from '../../hooks/use1RepMax';
-import useRecentExerciseData from '../../hooks/useRecentExerciseData';
 import useExerciseDateLabels from '../../hooks/useExerciseDateLabels';
 import useLineChartOptions from '../../hooks/useLineChartOptions';
 import useLineChartDataSets from '../../hooks/useLineChartDataSets';
@@ -21,14 +20,7 @@ function ExerciseCurrentLevel({
   recentExerciseQuery,
 }: ExerciseCurrentLevelProps) {
   const [xLabels, setXLabels] = useState<string[]>([]);
-  const [datasets, setDatasets] = useState<
-    {
-      label?: string | undefined;
-      data: number[];
-      borderColor?: string | undefined;
-      backgroundColor?: string | undefined;
-    }[]
-  >();
+  const [datasets, setDatasets] = useState<any>();
   const [options, setOptions] = useState<any>();
   const [timeFrame, setTimeFrame] = useState('30 days');
   const [state, addToCache] = useCustomMemo();

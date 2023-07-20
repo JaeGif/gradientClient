@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useQueryClient, QueryCache } from '@tanstack/react-query';
-import useRecentExerciseData from '../../hooks/useRecentExerciseData';
-import use1RepMax from '../../hooks/use1RepMax';
+import { useState, useEffect, useContext } from 'react';
+
 import { CacheContext } from '../../App';
 type RecentPerformanceDeltaProps = {
   exerciseId: string;
@@ -12,7 +10,6 @@ function RecentPerformanceDelta({
   average,
 }: RecentPerformanceDeltaProps) {
   const store = useContext(CacheContext);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [positive, setPositive] = useState<boolean>();
   const [delta, setDelta] = useState<number>();
 

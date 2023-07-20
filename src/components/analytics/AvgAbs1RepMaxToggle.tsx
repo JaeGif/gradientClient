@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import ExerciseCurrentLevel from './ExerciseCurrentLevel';
 import ExerciseOneRepMax from './ExerciseOneRepMax';
 import ChartAnalysis from './ChartAnalysis';
 import uniqid from 'uniqid';
 import useRecentExerciseData from '../../hooks/useRecentExerciseData';
-import useCustomMemo from '../../hooks/useCustomMemo';
 import Audio from 'react-loading-icons/dist/esm/components/audio';
-import BallTriangle from 'react-loading-icons/dist/esm/components/ball-triangle';
-// toggle the 2 types of charts
+import { useAuth } from '../../utils/AuthProvider';
 
 type AvgAbs1RepMaxToggleProps = {
   exerciseId: string;
@@ -17,7 +15,8 @@ function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
   const toggleChartViews = () => {
     setShowAbsolute((prev) => !prev);
   };
-  const recentExerciseQuery = useRecentExerciseData(exerciseId);
+  const userId = useAuth()!.user!.id;
+  const recentExerciseQuery = useRecentExerciseData(exerciseId, userId);
   return (
     <div className='flex justify-center p-6 h-screen'>
       {recentExerciseQuery.isFetched ? (

@@ -1,4 +1,3 @@
-import React from 'react';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {
   Chart as ChartJS,

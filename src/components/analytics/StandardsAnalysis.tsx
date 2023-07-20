@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useNextHighestNumber from '../../hooks/useNextHighestNumber';
-import {
-  averageArray,
-  capitalize,
-  roundHundredth,
-} from '../../utils/fnSheet/utilities';
+import { capitalize } from '../../utils/fnSheet/utilities';
 import useCustomMemo from '../../hooks/useCustomMemo';
 import { standards } from '../../data/standards';
-import useRecentExerciseData from '../../hooks/useRecentExerciseData';
-const userGender = 'm';
-const userPreferenceWeight = 'kg';
+import { useAuth } from '../../utils/AuthProvider';
 type StandardsAnalysisProps = {
   exerciseId: string;
   average: boolean;
@@ -25,6 +19,9 @@ function StandardsAnalysis({ exerciseId, average }: StandardsAnalysisProps) {
       }
     | undefined
   >();
+  const userGender = useAuth()!.user!.gender;
+  const userPreferenceWeight = useAuth()!.user!.preferences.unit;
+
   let tempStandard = exerciseStandard;
   let storeKey: string = '';
 

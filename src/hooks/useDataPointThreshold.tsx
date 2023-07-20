@@ -1,6 +1,3 @@
-import React, { useEffect, useState } from 'react';
-import { UseQueryResult } from '@tanstack/react-query';
-
 function useDataPointThreshold(
   data: number[] | undefined,
   mode: 'min' | 'max'

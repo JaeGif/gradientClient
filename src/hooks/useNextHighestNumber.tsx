@@ -1,6 +1,3 @@
-import React from 'react';
-import { StrengthLevels } from '../types/Interfaces';
-
 function useNextHighestNumber(
   value: number,
   comparison: { level: string; weight: number }[]

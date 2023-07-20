@@ -1,4 +1,3 @@
-import React from 'react';
 import GeneralTrendRegressionAnalysis from './GeneralTrendRegressionAnalysis';
 import RecentPerformanceDelta from './RecentPerformanceDelta';
 

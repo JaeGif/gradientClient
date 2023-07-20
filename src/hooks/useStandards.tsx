@@ -1,5 +1,3 @@
-import React from 'react';
-const userGender = 'm';
 import { standards } from '../data/standards';
 type StrengthLevel =
   | 'beginner'
@@ -9,7 +7,8 @@ type StrengthLevel =
   | 'elite';
 function useStandards(
   exerciseId: string,
-  config: { unit: 'kg' | 'lb'; select?: StrengthLevel[] }
+  config: { unit: 'kg' | 'lb'; select?: StrengthLevel[] },
+  userGender: 'm' | 'f'
 ) {
   const determineStandards = () => {
     // returns standards of all levels for the exercise based on

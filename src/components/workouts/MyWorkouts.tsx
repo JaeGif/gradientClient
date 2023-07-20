@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
 import WorkoutCard from './WorkoutCard';
 import { useQuery } from '@tanstack/react-query';
 import { Workout } from '../../types/Interfaces';
 import uniqid from 'uniqid';
+import { useAuth } from '../../utils/AuthProvider';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 
 function MyWorkouts() {
   // map users workouts to a card, dummy content here for now
+  const userid = useAuth()?.user?.id;
   const getWorkouts = async () => {
-    const userid: string = 'f1245e15-7487-48d2-bbd8-738fcdde8f6d';
     const res = await fetch(`${apiURL}api/workouts?userid=${userid}`, {
       mode: 'cors',
     });

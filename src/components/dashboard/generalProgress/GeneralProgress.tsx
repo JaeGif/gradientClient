@@ -1,14 +1,11 @@
-import React from 'react';
 import RadarLevels from '../../charts/RadarLevels';
-import useGeneralProgressData from '../../../hooks/useGeneralProgressData';
-const apiURL = import.meta.env.VITE_LOCAL_API_URL;
-const userId = 'f1245e15-7487-48d2-bbd8-738fcdde8f6d';
-const userGender = 'm';
 const units = 'kg';
 import { standards } from '../../../data/standards';
+import { useAuth } from '../../../utils/AuthProvider';
 function GeneralProgressChart() {
   // use max values from last 30 days on standard exercises as the users current values
   // standards can be added programmatically from the DB
+  const userGender = useAuth()!.user!.gender;
   const genderedStandards = standards.gender[userGender];
 
   // bench, pullup, squat, deadlift, shoulder press

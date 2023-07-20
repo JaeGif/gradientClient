@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import useGeneralProgressData from '../../../hooks/useGeneralProgressData';
 import {
   capitalize,
@@ -7,22 +7,24 @@ import {
 } from '../../../utils/fnSheet/utilities';
 import OverlayProgressBarChart from '../../charts/OverlayProgressBarChart';
 import Info from './progressComponents/Info';
-const apiURL = import.meta.env.VITE_LOCAL_API_URL;
-const userId = 'f1245e15-7487-48d2-bbd8-738fcdde8f6d';
-const userGender = 'm';
+import { useAuth } from '../../../utils/AuthProvider';
+
 function Progress() {
   const [nextLevel, setNextLevel] = useState<string>('');
   const [distanceToNextLevel, setDistanceToNextLevel] = useState<number>(0);
   const [currentLevel, setCurrentLevel] = useState<string>('');
   const [userLevel, setUserLevel] = useState<number>();
-  const [currentDistance, setCurrentDistance] = useState<number>(0);
   const [levelsData, setLevelsData] = useState<
     {
       level: string;
       weight: number;
     }[]
   >();
-  const progressQuery = useGeneralProgressData(userId, userGender);
+  const userData = useAuth();
+  const progressQuery = useGeneralProgressData(
+    userData!.user!.id,
+    userData!.user!.gender
+  );
 
   useEffect(() => {
     if (progressQuery.data && progressQuery.isFetched) {

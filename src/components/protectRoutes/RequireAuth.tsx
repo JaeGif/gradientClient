@@ -1,4 +1,3 @@
-import React, { ReactNode } from 'react';
 import { useAuth } from '../../utils/AuthProvider';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
