@@ -44,6 +44,9 @@ function useLineChartOptions(
       },
     },
     plugins: {
+      datalabels: {
+        display: false,
+      },
       annotation: {
         drawTime: 'afterDatasetsDraw',
         annotations: annotationList ? { ...annotationList } : {},

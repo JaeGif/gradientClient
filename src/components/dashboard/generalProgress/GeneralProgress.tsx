@@ -47,7 +47,7 @@ function GeneralProgressChart() {
     }
   }, [userStandardsPerformancesMax.isFetched]);
   return (
-    <div className='debug w-2/3 rounded-lg p-2 min-w-[420px]'>
+    <div className='w-2/3 rounded-lg p-2 min-w-[420px] shadow-md'>
       {userExerciseLevels && (
         <RadarLevels
           units={units}

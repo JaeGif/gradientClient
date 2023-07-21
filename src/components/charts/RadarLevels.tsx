@@ -103,6 +103,12 @@ function RadarLevels({
       data={data}
       options={{
         plugins: {
+          datalabels: {
+            display: false,
+          },
+          legend: {
+            position: 'left',
+          },
           title: {
             display: true,
             text: 'Current 1RM Comparison',
@@ -112,7 +118,8 @@ function RadarLevels({
             },
           },
         },
-
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
           r: {
             ticks: {
