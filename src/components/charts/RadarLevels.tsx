@@ -50,8 +50,10 @@ function RadarLevels({
         setIsSmall(false);
       }
     };
-    window.addEventListener('resize', (e) => handleWindowResize(e));
-    return window.removeEventListener('resize', (e) => handleWindowResize(e));
+    window.addEventListener('resize', handleWindowResize);
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
   }, []);
   const data = {
     labels: userExerciseLevels.map((el) => el.exercise),
