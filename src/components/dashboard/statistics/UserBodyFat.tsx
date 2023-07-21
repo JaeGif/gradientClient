@@ -2,7 +2,7 @@ import React from 'react';
 
 function UserBodyFat() {
   return (
-    <div className='relative shadow-md p-2 rounded-lg h-full flex w-1/4 flex-col justify-center items-center gap-2'>
+    <div className='relative shadow-md p-2 rounded-lg h-full flex w-1/4 flex-col justify-center items-center gap-2 text-center'>
       <h2 className='text-xl'>Body Fat Percentage</h2>
       <p className='text-4xl text-blue-500'>14%</p>
       <p className=''>Goal: 10%</p>

@@ -4,7 +4,7 @@ function PopularExercise() {
   // exercise where you are the strongest
   const [isStrongest, setIsStrongest] = useState(true);
   return (
-    <div className='relative shadow-md p-2 rounded-lg h-full flex w-1/4 flex-col justify-center items-center gap-2'>
+    <div className='relative shadow-md p-2 rounded-lg h-full flex w-1/4 flex-col justify-center items-center gap-2 text-center'>
       {isStrongest ? (
         <>
           <h2 className='text-xl'>Strongest</h2>

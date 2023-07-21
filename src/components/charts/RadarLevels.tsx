@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { useEffect, useState } from 'react';
 ChartJS.register(
   RadialLinearScale,
   PointElement,
@@ -37,6 +38,21 @@ function RadarLevels({
   exerciseLevels,
   userExerciseLevels,
 }: RadarLevelsProps) {
+  const [isSmall, setIsSmall] = useState(false);
+
+  useEffect(() => {
+    const handleWindowResize = (e: any) => {
+      console.log(window.innerWidth);
+      if (innerWidth <= 1200 && !isSmall) {
+        setIsSmall(true);
+      }
+      if (innerWidth > 1200 && isSmall) {
+        setIsSmall(false);
+      }
+    };
+    window.addEventListener('resize', (e) => handleWindowResize(e));
+    return window.removeEventListener('resize', (e) => handleWindowResize(e));
+  }, []);
   const data = {
     labels: userExerciseLevels.map((el) => el.exercise),
     datasets: [
@@ -107,7 +123,16 @@ function RadarLevels({
             display: false,
           },
           legend: {
-            position: 'left',
+            position: isSmall ? 'bottom' : 'left',
+            title: {
+              display: true,
+              text: 'Toggle Comparisons',
+
+              font: {
+                weight: 'bold',
+                size: 12,
+              },
+            },
           },
           title: {
             display: true,
