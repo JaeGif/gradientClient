@@ -20,7 +20,9 @@ ChartJS.register(
 // levels in the same order and userExercise LEvels
 
 type RadarLevelsProps = {
+  units: 'kg' | 'lb';
   exerciseLevels: {
+    untrained: number[];
     beginner: number[];
     novice: number[];
     intermediate: number[];
@@ -30,7 +32,11 @@ type RadarLevelsProps = {
   userExerciseLevels: { exercise: string; value: number }[];
 };
 
-function RadarLevels({ exerciseLevels, userExerciseLevels }: RadarLevelsProps) {
+function RadarLevels({
+  units,
+  exerciseLevels,
+  userExerciseLevels,
+}: RadarLevelsProps) {
   const data = {
     labels: userExerciseLevels.map((el) => el.exercise),
     datasets: [
@@ -40,6 +46,14 @@ function RadarLevels({ exerciseLevels, userExerciseLevels }: RadarLevelsProps) {
         backgroundColor: 'rgba(154, 196, 248, 0.5)',
         borderColor: 'rgba(154, 196, 248, 1)',
         borderWidth: 1,
+      },
+      {
+        label: 'Untrained',
+        data: exerciseLevels.untrained,
+        backgroundColor: 'rgba(254, 52, 126, 0.1)',
+        borderColor: 'rgba(254, 52, 126, 1)',
+        borderWidth: 1,
+        hidden: true,
       },
       {
         label: 'Beginner',
@@ -88,8 +102,24 @@ function RadarLevels({ exerciseLevels, userExerciseLevels }: RadarLevelsProps) {
     <Radar
       data={data}
       options={{
+        plugins: {
+          title: {
+            display: true,
+            text: 'Current 1RM Comparison',
+            font: {
+              size: 16,
+              weight: 'bold',
+            },
+          },
+        },
+
         scales: {
           r: {
+            ticks: {
+              callback: (value) => {
+                return `${value} ${units}`;
+              },
+            },
             angleLines: {
               display: true,
             },

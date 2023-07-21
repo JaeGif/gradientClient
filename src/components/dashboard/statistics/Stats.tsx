@@ -1,13 +1,13 @@
 import React from 'react';
 import AvgDaysPerWeek from './AvgDaysPerWeek';
-import SetsPerMuscleGroupWeek from './SetsPerMuscleGroupWeek';
+import UserWeight from './UserWeight';
 import PopularExercise from './PopularExercise';
 
 function Stats() {
   return (
     <div className='flex justify-evenly items-center w-full h-36'>
       <AvgDaysPerWeek />
-      <SetsPerMuscleGroupWeek />
+      <UserWeight />
       <PopularExercise />
     </div>
   );

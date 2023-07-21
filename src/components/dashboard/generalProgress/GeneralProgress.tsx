@@ -50,7 +50,15 @@ function GeneralProgressChart() {
     <div className='debug w-2/3 rounded-lg p-2 min-w-[420px]'>
       {userExerciseLevels && (
         <RadarLevels
+          units={units}
           exerciseLevels={{
+            untrained: [
+              genderedStandards[0].level.untrained.weight[units],
+              genderedStandards[1].level.untrained.weight[units],
+              genderedStandards[2].level.untrained.weight[units],
+              genderedStandards[3].level.untrained.weight[units],
+              genderedStandards[4].level.untrained.weight[units],
+            ],
             beginner: [
               genderedStandards[0].level.beginner.weight[units],
               genderedStandards[1].level.beginner.weight[units],
