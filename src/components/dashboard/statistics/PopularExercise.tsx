@@ -1,29 +1,91 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../../utils/AuthProvider';
+import usePerformedStandardsMax from '../../../hooks/usePerformedStandardsMax';
+import { compareExercisesAgainstStandards } from '../../../utils/fnSheet/utilities';
 
 function PopularExercise() {
-  const userId = useAuth()!.user?.id;
+  const userId = useAuth()!.user!.id;
+  const userGender = useAuth()!.user!.gender;
+  const userUnits = useAuth()!.user!.preferences.unit;
+
   // exercise where you are the strongest
-
+  const [best, setBest] = useState<{
+    level: string;
+    delta: number;
+    exercise: string;
+  }>({
+    level: '',
+    delta: 0,
+    exercise: '',
+  });
+  const [worst, setWorst] = useState<{
+    level: string;
+    delta: number;
+    exercise: string;
+  }>({ level: '', delta: 0, exercise: '' });
   const [isStrongest, setIsStrongest] = useState(true);
+  const userStandardsPerformancesMax = usePerformedStandardsMax(userId, 10);
 
-  const findStrongestExercise = () => {}; // highest level
+  useEffect(() => {
+    if (userStandardsPerformancesMax.data) {
+      const userPerformances: {
+        exercise: string;
+        value: number;
+      }[] = [
+        {
+          exercise: 'Bench',
+          value: userStandardsPerformancesMax.data[0] || 0,
+        },
+        {
+          exercise: 'Pullups',
+          value: userStandardsPerformancesMax.data[1] || 0,
+        },
+        {
+          exercise: 'Squat',
+          value: userStandardsPerformancesMax.data[2] || 0,
+        },
+        {
+          exercise: 'Deadlift',
+          value: userStandardsPerformancesMax.data[3] || 0,
+        },
+        {
+          exercise: 'Shoulder Press',
+          value: userStandardsPerformancesMax.data[4] || 0,
+        },
+      ];
+      const result = compareExercises(userPerformances);
+      setBest(result.max.max);
+      setWorst(result.min.min);
+    }
+  }, [userStandardsPerformancesMax.isFetched]);
 
-  const findWeakestExercise = () => {}; // lowest level
+  const compareExercises = (
+    userPerformances: { exercise: string; value: number }[]
+  ) => {
+    const max = compareExercisesAgainstStandards(userPerformances, true, {
+      userGender,
+      userUnits,
+    });
+    const min = compareExercisesAgainstStandards(userPerformances, false, {
+      userGender,
+      userUnits,
+    });
+    return { max, min };
+  }; // highest level
 
   return (
     <div className='relative shadow-md p-2 rounded-lg h-full flex w-1/4 flex-col justify-center items-center gap-2 text-center'>
       {isStrongest ? (
         <>
           <h2 className='text-xl'>Strongest</h2>
-          <p className='text-3xl text-blue-500'>Bench Press</p>
-          <p className=''>Intermediate</p>
+          <p className='text-3xl text-blue-500'>{best.exercise}</p>
+          <p className=''>{best.level}</p>
         </>
       ) : (
         <>
           <h2 className='text-xl'>Weakest</h2>
-          <p className='text-3xl text-blue-500'>Squat</p>
-          <p>Beginner</p>
+          <p className='text-3xl text-blue-500'>{worst.exercise}</p>
+          <p>{worst.level}</p>
         </>
       )}
       <span className='absolute bottom-0 flex justify-end p-2 w-full'>
