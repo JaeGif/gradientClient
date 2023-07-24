@@ -9,6 +9,7 @@ export interface User {
   gender: 'm' | 'f';
   preferences: { unit: 'kg' | 'lb'; standard: 'ratio' | 'percentile' };
   weight: { unit: 'kg' | 'lb'; value: number };
+  bodyFatPercentage?: number;
   age: number;
 }
 

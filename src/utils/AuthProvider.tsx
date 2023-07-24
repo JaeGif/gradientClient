@@ -66,6 +66,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           gender: result.data.user.gender,
           preferences: result.data.user.preferences,
           weight: result.data.user.weight,
+          bodyFatPercentage: result.data.user.bodyFatPercentage,
           age: result.data.user.age,
         };
         setUser(userResult);

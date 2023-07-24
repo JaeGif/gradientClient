@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../../utils/AuthProvider';
 
 function PopularExercise() {
+  const userId = useAuth()!.user?.id;
   // exercise where you are the strongest
+
   const [isStrongest, setIsStrongest] = useState(true);
+
+  const findStrongestExercise = () => {}; // highest level
+
+  const findWeakestExercise = () => {}; // lowest level
+
   return (
     <div className='relative shadow-md p-2 rounded-lg h-full flex w-1/4 flex-col justify-center items-center gap-2 text-center'>
       {isStrongest ? (
