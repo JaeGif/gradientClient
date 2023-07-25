@@ -1,6 +1,6 @@
 import React from 'react';
 import Activity from '../../components/dashboard/progress/Activity';
-import Progress from '../../components/dashboard/progress/Progress';
+import Notes from '../../components/dashboard/Notes';
 import StrengthByMuscleGroup from '../../components/dashboard/muscleGroup/StrengthByMuscleGroup';
 import GeneralProgressChart from '../../components/dashboard/generalProgress/GeneralProgress';
 import Stats from '../../components/dashboard/statistics/Stats';
@@ -20,7 +20,7 @@ export default function Dashboard() {
         <GeneralProgressChart />
         <Activity />
         <StrengthByMuscleGroup />
-        <Progress />
+        <Notes />
       </div>
     </GoalContext.Provider>
   );
