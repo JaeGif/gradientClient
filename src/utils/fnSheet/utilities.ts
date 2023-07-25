@@ -258,7 +258,6 @@ export const compareExercisesAgainstStandards = (
   for (let i = 0; i < fullInfoArr.length; i++) {
     const level = fullInfoArr[i][0].level as string;
     const delta = fullInfoArr[i][1] as number;
-    console.log(i, max, level, delta);
     if (max.exercise === '' && min.exercise === '') {
       max = {
         exercise: indexToExercise(i),
@@ -447,4 +446,16 @@ const indexToExercise = (index: number) => {
     default:
       return 'Error';
   }
+};
+
+const JSON = {
+  lifts: {
+    squat: null,
+    pullup: 100,
+    deadlift: 200,
+    benchPress: 100,
+    shoulderPress: 50,
+  },
+  weight: null,
+  bodyFatPercentage: 12,
 };

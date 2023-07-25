@@ -12,6 +12,18 @@ export interface User {
   bodyFatPercentage?: number;
   age: number;
 }
+export interface GoalType {
+  id: string;
+  lifts: {
+    squats: number | undefined;
+    benchPress: number | undefined;
+    deadlift: number | undefined;
+    pullup: number | undefined;
+    shoulderPress: number | undefined;
+  };
+  weight: number | undefined;
+  bodyFatPercentage: number | undefined;
+}
 
 export interface Exercise {
   id: string;

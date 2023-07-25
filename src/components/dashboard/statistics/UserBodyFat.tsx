@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useAuth } from '../../../utils/AuthProvider';
+import { GoalContext } from '../../../pages/home/Dashboard';
 
 function UserBodyFat() {
   const userBodyFat = useAuth()!.user?.bodyFatPercentage || 'Unknown';
+  const bodyFatGoal = useContext(GoalContext)?.bodyFatPercentage;
   return (
     <div className='relative shadow-md p-2 rounded-lg h-full flex w-1/4 flex-col justify-center items-center gap-2 text-center'>
       <h2 className='text-xl'>Body Fat Percentage</h2>
       <p className='text-4xl text-blue-500'>{userBodyFat}%</p>
-      <p className=''>Goal: 10%</p>
+      {bodyFatGoal && <p className=''>Goal: {bodyFatGoal}%</p>}
       <span className='absolute bottom-0 flex justify-end p-3 w-full'>
         <img
           alt='record'

@@ -43,6 +43,7 @@ function GeneralProgressChart() {
           value: userStandardsPerformancesMax.data[4] || 0,
         },
       ];
+
       setUserExerciseLevels(userPerformances);
     }
   }, [userStandardsPerformancesMax.isFetched]);
