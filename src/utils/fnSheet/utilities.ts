@@ -448,14 +448,51 @@ const indexToExercise = (index: number) => {
   }
 };
 
-const JSON = {
-  lifts: {
-    squat: null,
-    pullup: 100,
-    deadlift: 200,
-    benchPress: 100,
-    shoulderPress: 50,
-  },
-  weight: null,
-  bodyFatPercentage: 12,
+export const compareExerciseProgressAgainstMaxPossible = (
+  performances: number[],
+  config: {
+    userGender: 'm' | 'f';
+    userUnits: 'kg' | 'lb';
+  }
+) => {
+  const genderedStandards = standards.gender[config.userGender];
+  // order -> Bench Press | Pullups | Squats | Deadlifts | Shoulder Press
+  let result: number[] = [];
+  // for back, average deadlift and pullup progression
+  // for chest, bench press
+  // for legs, average squats and deadlifts
+  // for shoulders shoulder press
+  // for core, avg all
+  for (let i = 0; i < performances.length; i++) {
+    result.push(
+      parseInt(
+        (
+          (performances[i] /
+            genderedStandards[i].level.elite.weight[config.userUnits]) *
+          100
+        ).toFixed(2)
+      )
+    );
+  }
+  const data = [
+    { name: 'Chest', data: result[0] },
+    { name: 'Back', data: parseInt(((result[1] + result[3]) / 2).toFixed(2)) },
+    {
+      name: 'Legs',
+      data: parseInt(((result[2] + result[3]) / 2).toFixed(2)),
+    },
+    { name: 'Shoulders', data: result[4] },
+    {
+      name: 'Core',
+      data: parseInt(
+        (
+          (result[0] + result[1] + result[2] + result[3] + result[4]) /
+          5
+        ).toFixed(2)
+      ),
+    },
+  ];
+
+  console.log(data);
+  return data;
 };

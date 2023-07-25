@@ -17,7 +17,6 @@ function GeneralProgressChart() {
   const userStandardsPerformancesMax = usePerformedStandardsMax(userId, 10);
   useEffect(() => {
     if (userStandardsPerformancesMax.data) {
-      console.log(userStandardsPerformancesMax.data);
       const userPerformances: {
         exercise: string;
         value: number;

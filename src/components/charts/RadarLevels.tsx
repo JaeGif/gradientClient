@@ -8,7 +8,8 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { GoalContext } from '../../pages/home/Dashboard';
 ChartJS.register(
   RadialLinearScale,
   PointElement,
@@ -39,10 +40,9 @@ function RadarLevels({
   userExerciseLevels,
 }: RadarLevelsProps) {
   const [isSmall, setIsSmall] = useState(false);
-
+  const userLiftGoal = useContext(GoalContext)?.lifts;
   useEffect(() => {
     const handleWindowResize = (e: any) => {
-      console.log(window.innerWidth);
       if (innerWidth <= 1200 && !isSmall) {
         setIsSmall(true);
       }
@@ -64,6 +64,22 @@ function RadarLevels({
         backgroundColor: 'rgba(154, 196, 248, 0.5)',
         borderColor: 'rgba(154, 196, 248, 1)',
         borderWidth: 1,
+      },
+      {
+        label: 'Goal',
+        data: [
+          userLiftGoal?.benchPress,
+          userLiftGoal?.pullup,
+          userLiftGoal?.squats,
+          userLiftGoal?.deadlift,
+          userLiftGoal?.shoulderPress,
+        ],
+        borderWidth: 0,
+        fill: false,
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        pointBorderColor: 'rgba(255, 215, 0, .5)',
+        backgroundColor: 'rgba(255, 215, 0, 1)',
       },
       {
         label: 'Untrained',

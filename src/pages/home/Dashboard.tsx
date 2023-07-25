@@ -1,7 +1,7 @@
 import React from 'react';
 import Activity from '../../components/dashboard/progress/Activity';
 import Progress from '../../components/dashboard/progress/Progress';
-import Goal from '../../components/dashboard/goal/Goal';
+import StrengthByMuscleGroup from '../../components/dashboard/muscleGroup/StrengthByMuscleGroup';
 import GeneralProgressChart from '../../components/dashboard/generalProgress/GeneralProgress';
 import Stats from '../../components/dashboard/statistics/Stats';
 import useGetUserGoals from '../../hooks/useGetUserGoals';
@@ -15,14 +15,12 @@ export default function Dashboard() {
 
   return (
     <GoalContext.Provider value={goal}>
-      <div className='flex flex-col gap-5 p-6 w-full'>
-        <div className='flex flex-wrap w-full h-full gap-5 justify-center'>
-          <Stats />
-          <GeneralProgressChart />
-          <Activity />
-          <Goal />
-          <Progress />
-        </div>
+      <div className='flex flex-wrap w-full h-full gap-5 justify-center p-6 overflow-y-scroll'>
+        <Stats />
+        <GeneralProgressChart />
+        <Activity />
+        <StrengthByMuscleGroup />
+        <Progress />
       </div>
     </GoalContext.Provider>
   );
