@@ -45,7 +45,6 @@ export function PolarChart({ dataset }: PolarChartType) {
     <PolarArea
       data={data}
       options={{
-        maintainAspectRatio: false,
         responsive: true,
         scales: {
           r: {

@@ -35,7 +35,7 @@ function App() {
           <Route path='register' element={<Register />} />
           <Route
             element={
-              <div className='flex'>
+              <div className='flex justify-center gap-5'>
                 <NavBar />
                 <RequireAuth />
               </div>
