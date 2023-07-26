@@ -10,7 +10,6 @@ function useRecentExerciseData(exerciseId: string, userId: string) {
       `${apiURL}api/performedexercises?exercise=${exerciseId}&user=${userId}`
     );
     const data = await res.json();
-
     return data.performedExercises;
   };
 

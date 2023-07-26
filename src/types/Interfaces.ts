@@ -63,3 +63,8 @@ export interface PerformedSets {
 export interface StrengthLevels {
   level: 'beginner' | 'novice' | 'intermediate' | 'advanced' | 'elite';
 }
+export interface Note {
+  createdAt: string;
+  userId: string;
+  text: string;
+}
