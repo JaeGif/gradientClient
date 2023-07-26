@@ -59,7 +59,7 @@ function Note({ note }: NoteProps) {
       ) : (
         <div onClick={(e) => handleDoubleClick(e)}>
           <ReactMarkdown
-            className='debug p-2 w-full'
+            className='p-2 w-full'
             children={text ? text : ''}
             remarkPlugins={[remarkGfm]}
           />
