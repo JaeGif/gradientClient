@@ -9,7 +9,7 @@ function StrengthByMuscleGroup() {
   const userId = useAuth()!.user!.id;
   const userGender = useAuth()!.user!.gender;
   const userUnits = useAuth()!.user!.preferences.unit;
-  const [muscleGroupProgression, setMusceGroupProgression] = useState<
+  const [muscleGroupProgression, setMuscleGroupProgression] = useState<
     {
       name: string;
       data: number;
@@ -23,7 +23,7 @@ function StrengthByMuscleGroup() {
     for (let i = 0; i < userStandardPerformancesMax.data.length; i++) {
       checkArr.push(userStandardPerformancesMax.data[i] || 0);
     }
-    setMusceGroupProgression(
+    setMuscleGroupProgression(
       compareExerciseProgressAgainstMaxPossible(checkArr, {
         userGender,
         userUnits,
@@ -31,11 +31,13 @@ function StrengthByMuscleGroup() {
     );
   }, [userStandardPerformancesMax.isFetched]);
   return (
-    <div className='rounded-lg w-1/4 p-2 min-w-[200px] shadow-md flex justify-center items-center'>
+    <>
       {muscleGroupProgression && (
-        <PolarChart dataset={muscleGroupProgression} />
+        <div className='h-96 rounded-lg w-1/4 p-2 min-w-[200px] shadow-md flex justify-center items-center'>
+          <PolarChart dataset={muscleGroupProgression} />
+        </div>
       )}
-    </div>
+    </>
   );
 }
 

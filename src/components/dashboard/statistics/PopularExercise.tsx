@@ -13,16 +13,12 @@ function PopularExercise() {
     level: string;
     delta: number;
     exercise: string;
-  }>({
-    level: '',
-    delta: 0,
-    exercise: '',
-  });
+  }>();
   const [worst, setWorst] = useState<{
     level: string;
     delta: number;
     exercise: string;
-  }>({ level: '', delta: 0, exercise: '' });
+  }>();
   const [isStrongest, setIsStrongest] = useState(true);
   const userStandardsPerformancesMax = usePerformedStandardsMax(userId, 10);
 
@@ -74,31 +70,35 @@ function PopularExercise() {
   }; // highest level
 
   return (
-    <div className='relative shadow-md p-2 rounded-lg h-full flex w-1/4 flex-col justify-center items-center gap-2 text-center'>
-      {isStrongest ? (
-        <>
-          <h2 className='text-xl'>Strongest</h2>
-          <p className='text-3xl text-blue-500'>{best.exercise}</p>
-          <p className=''>{best.level}</p>
-        </>
-      ) : (
-        <>
-          <h2 className='text-xl'>Weakest</h2>
-          <p className='text-3xl text-blue-500'>{worst.exercise}</p>
-          <p>{worst.level}</p>
-        </>
+    <>
+      {best && worst && (
+        <div className='relative shadow-md p-2 rounded-lg h-full flex w-1/4 flex-col justify-center items-center gap-2 text-center'>
+          {isStrongest ? (
+            <>
+              <h2 className='text-xl'>Strongest</h2>
+              <p className='text-3xl text-blue-500'>{best.exercise}</p>
+              <p className=''>{best.level}</p>
+            </>
+          ) : (
+            <>
+              <h2 className='text-xl'>Weakest</h2>
+              <p className='text-3xl text-blue-500'>{worst.exercise}</p>
+              <p>{worst.level}</p>
+            </>
+          )}
+          <span className='absolute bottom-0 flex justify-end p-2 w-full'>
+            <img
+              alt='toggle'
+              className='h-6 hover:cursor-pointer hover:animate-spin'
+              src='/favicons/swap.svg'
+              onClick={() => {
+                setIsStrongest((prev) => !prev);
+              }}
+            />
+          </span>
+        </div>
       )}
-      <span className='absolute bottom-0 flex justify-end p-2 w-full'>
-        <img
-          alt='toggle'
-          className='h-6 hover:cursor-pointer hover:animate-spin'
-          src='/favicons/swap.svg'
-          onClick={() => {
-            setIsStrongest((prev) => !prev);
-          }}
-        />
-      </span>
-    </div>
+    </>
   );
 }
 

@@ -1,7 +1,7 @@
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 import { useQueryClient } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
-function usePerformedStandardsMax(userId: string, count: number = 10) {
+function usePerformedStandardsMax(userId?: string, count: number = 10) {
   const queryClient = useQueryClient();
 
   const getUserMaxStandardPerformances = async () => {

@@ -46,6 +46,7 @@ export function PolarChart({ dataset }: PolarChartType) {
       data={data}
       options={{
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
           r: {
             ticks: {

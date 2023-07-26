@@ -76,27 +76,26 @@ function Activity() {
   }, [progressQuery.isFetched, progressQuery.data]);
 
   return (
-    <div className='w-1/4 rounded-lg p-2 min-w-[200px] shadow-md'>
-      {progressQuery.isFetched ? (
+    <>
+      {progressQuery.isFetched &&
         progressQuery.data &&
         levelsData &&
         userLevel && (
-          <div className='flex flex-col justify-between h-full'>
-            <OverlayProgressBarChart
-              nextLevel={capitalize(nextLevel)}
-              userPercentage={distanceToNextLevel}
-            />
-            <Info
-              currentLevel={capitalize(currentLevel)}
-              nextLevel={capitalize(nextLevel)}
-              distanceToNextLevel={distanceToNextLevel}
-            />
+          <div className='w-1/4 rounded-lg p-2 min-w-[200px] shadow-md'>
+            <div className='flex flex-col justify-between h-full'>
+              <OverlayProgressBarChart
+                nextLevel={capitalize(nextLevel)}
+                userPercentage={distanceToNextLevel}
+              />
+              <Info
+                currentLevel={capitalize(currentLevel)}
+                nextLevel={capitalize(nextLevel)}
+                distanceToNextLevel={distanceToNextLevel}
+              />
+            </div>
           </div>
-        )
-      ) : (
-        <>Loading</>
-      )}
-    </div>
+        )}
+    </>
   );
 }
 

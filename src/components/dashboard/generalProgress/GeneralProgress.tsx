@@ -47,58 +47,60 @@ function GeneralProgressChart() {
     }
   }, [userStandardsPerformancesMax.isFetched]);
   return (
-    <div className='w-2/3 rounded-lg p-2 min-w-[420px] shadow-md'>
+    <>
       {userExerciseLevels && (
-        <RadarLevels
-          units={units}
-          exerciseLevels={{
-            untrained: [
-              genderedStandards[0].level.untrained.weight[units],
-              genderedStandards[1].level.untrained.weight[units],
-              genderedStandards[2].level.untrained.weight[units],
-              genderedStandards[3].level.untrained.weight[units],
-              genderedStandards[4].level.untrained.weight[units],
-            ],
-            beginner: [
-              genderedStandards[0].level.beginner.weight[units],
-              genderedStandards[1].level.beginner.weight[units],
-              genderedStandards[2].level.beginner.weight[units],
-              genderedStandards[3].level.beginner.weight[units],
-              genderedStandards[4].level.beginner.weight[units],
-            ],
-            novice: [
-              genderedStandards[0].level.novice.weight[units],
-              genderedStandards[1].level.novice.weight[units],
-              genderedStandards[2].level.novice.weight[units],
-              genderedStandards[3].level.novice.weight[units],
-              genderedStandards[4].level.novice.weight[units],
-            ],
-            intermediate: [
-              genderedStandards[0].level.intermediate.weight[units],
-              genderedStandards[1].level.intermediate.weight[units],
-              genderedStandards[2].level.intermediate.weight[units],
-              genderedStandards[3].level.intermediate.weight[units],
-              genderedStandards[4].level.intermediate.weight[units],
-            ],
-            advanced: [
-              genderedStandards[0].level.advanced.weight[units],
-              genderedStandards[1].level.advanced.weight[units],
-              genderedStandards[2].level.advanced.weight[units],
-              genderedStandards[3].level.advanced.weight[units],
-              genderedStandards[4].level.advanced.weight[units],
-            ],
-            elite: [
-              genderedStandards[0].level.elite.weight[units],
-              genderedStandards[1].level.elite.weight[units],
-              genderedStandards[2].level.elite.weight[units],
-              genderedStandards[3].level.elite.weight[units],
-              genderedStandards[4].level.elite.weight[units],
-            ],
-          }}
-          userExerciseLevels={userExerciseLevels}
-        />
+        <div className='w-2/3 rounded-lg p-2 min-w-[420px] shadow-md'>
+          <RadarLevels
+            units={units}
+            exerciseLevels={{
+              untrained: [
+                genderedStandards[0].level.untrained.weight[units],
+                genderedStandards[1].level.untrained.weight[units],
+                genderedStandards[2].level.untrained.weight[units],
+                genderedStandards[3].level.untrained.weight[units],
+                genderedStandards[4].level.untrained.weight[units],
+              ],
+              beginner: [
+                genderedStandards[0].level.beginner.weight[units],
+                genderedStandards[1].level.beginner.weight[units],
+                genderedStandards[2].level.beginner.weight[units],
+                genderedStandards[3].level.beginner.weight[units],
+                genderedStandards[4].level.beginner.weight[units],
+              ],
+              novice: [
+                genderedStandards[0].level.novice.weight[units],
+                genderedStandards[1].level.novice.weight[units],
+                genderedStandards[2].level.novice.weight[units],
+                genderedStandards[3].level.novice.weight[units],
+                genderedStandards[4].level.novice.weight[units],
+              ],
+              intermediate: [
+                genderedStandards[0].level.intermediate.weight[units],
+                genderedStandards[1].level.intermediate.weight[units],
+                genderedStandards[2].level.intermediate.weight[units],
+                genderedStandards[3].level.intermediate.weight[units],
+                genderedStandards[4].level.intermediate.weight[units],
+              ],
+              advanced: [
+                genderedStandards[0].level.advanced.weight[units],
+                genderedStandards[1].level.advanced.weight[units],
+                genderedStandards[2].level.advanced.weight[units],
+                genderedStandards[3].level.advanced.weight[units],
+                genderedStandards[4].level.advanced.weight[units],
+              ],
+              elite: [
+                genderedStandards[0].level.elite.weight[units],
+                genderedStandards[1].level.elite.weight[units],
+                genderedStandards[2].level.elite.weight[units],
+                genderedStandards[3].level.elite.weight[units],
+                genderedStandards[4].level.elite.weight[units],
+              ],
+            }}
+            userExerciseLevels={userExerciseLevels}
+          />
+        </div>
       )}
-    </div>
+    </>
   );
 }
 

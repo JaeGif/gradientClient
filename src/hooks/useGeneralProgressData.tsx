@@ -13,7 +13,11 @@ type ProgressData = {
     units: 'kg' | 'lb';
   };
 };
-function useGeneralProgressData(userId: string, gender: 'm' | 'f', count = 5) {
+function useGeneralProgressData(
+  userId?: string,
+  gender?: 'm' | 'f',
+  count = 5
+) {
   const queryClient = useQueryClient();
 
   const getGeneralProgressData = async (): Promise<ProgressData> => {

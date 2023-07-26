@@ -50,7 +50,7 @@ function Notes() {
     setPage(e.target.value);
   };
   return (
-    <div className='relative shadow-md w-2/3 rounded-lg p-2 min-w-[200px]'>
+    <div className='relative shadow-md w-2/3 rounded-lg p-2 min-w-[200px] h-96'>
       <span className='flex justify-between items-center'>
         <span className='flex justify-center gap-2 items-center'>
           <h2>Notes</h2>
