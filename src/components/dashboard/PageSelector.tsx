@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 const PageChangeContext = React.createContext<{
-  pageInfo: { page: number; totalPages: number };
+  page: number;
+  totalPages: number;
   pageChangeFn: Function;
 } | null>(null);
 type PageSelectorProps = {
@@ -10,7 +11,8 @@ type PageSelectorProps = {
   firstPageFn: Function;
   lastPageFn: Function;
   pageChangeFn: Function;
-  pageInfo: { page: number; totalPages: number };
+  page: number;
+  totalPages: number;
 };
 function PageSelector({
   children,
@@ -19,7 +21,8 @@ function PageSelector({
   nextPageFn,
   previousPageFn,
   pageChangeFn,
-  pageInfo,
+  page,
+  totalPages,
 }: PageSelectorProps) {
   return (
     <div className='flex justify-center items-center gap-2'>
@@ -35,7 +38,7 @@ function PageSelector({
           src='/favicons/left_chevron.svg'
         />
       </span>
-      <PageChangeContext.Provider value={{ pageInfo, pageChangeFn }}>
+      <PageChangeContext.Provider value={{ page, totalPages, pageChangeFn }}>
         {children}
       </PageChangeContext.Provider>
       <span className='w-full flex justify-between items-center'>

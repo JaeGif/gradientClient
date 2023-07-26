@@ -2,7 +2,7 @@ const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { Note } from '../types/Interfaces';
-function useNotes(userId: string) {
+function useNotes(userId?: string) {
   const queryClient = useQueryClient();
 
   const getNotes = async (): Promise<any> => {
@@ -24,7 +24,8 @@ function useNotes(userId: string) {
   });
 
   const postNotesMutation = useMutation({
-    mutationFn: async (note) => {
+    mutationFn: async (note: { userId: string; text: string }) => {
+      console.log('submitting note', note);
       const res = await fetch(`${apiURL}api/notes`, {
         mode: 'cors',
         method: 'POST',

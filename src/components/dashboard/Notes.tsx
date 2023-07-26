@@ -5,54 +5,50 @@ import useNotes from '../../hooks/useNotes';
 import { useAuth } from '../../utils/AuthProvider';
 import PageSelector from './PageSelector';
 import PageCounter from './PageCounter';
-
+import Note from './Note';
+import uniqid from 'uniqid';
 function Notes() {
   const userId = useAuth()!.user!.id;
   const notesQuery = useNotes(userId);
-  const [text, setText] = useState('');
-  const [editing, setEditing] = useState(false);
-  const [pageInfo, setPageInfo] = useState<{
-    page: number;
-    totalPages: number;
-  }>();
+
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [newNote, setNewNote] = useState(false);
+
   useEffect(() => {
-    console.log(notesQuery.getNotesQuery.data);
     if (notesQuery.getNotesQuery.data && notesQuery.getNotesQuery.isFetched) {
-      setPageInfo({
-        page: 1,
-        totalPages: notesQuery.getNotesQuery.data.length || 1,
-      });
+      console.log(notesQuery.getNotesQuery.data);
+      setTotalPages(notesQuery.getNotesQuery.data.length || 1);
     }
   }, [notesQuery.getNotesQuery.isFetched]);
-  const handleDoubleClick = (e: React.MouseEvent) => {
-    switch (e.detail) {
-      case 1: {
-        break;
-      }
-      case 2: {
-        setEditing(true);
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-  };
-  const handleEnterPress = (e: any) => {
-    if (e.key === 'Enter') {
-      setText(e.target.value);
-      setEditing(false);
-    }
-  };
+
   const handleNewNotePage = () => {
-    setText('');
-    setEditing(true);
+    if (!totalPages) return;
+    if (totalPages === 10) return;
+    setNewNote(true);
+    setTotalPages((prev) => prev + 1);
+    setPage(totalPages);
   };
-  const nextPageFn = () => {};
-  const previousPageFn = () => {};
-  const firstPageFn = () => {};
-  const lastPageFn = () => {};
-  const pageChangeFn = () => {};
+  const nextPageFn = () => {
+    if (page === totalPages) return;
+    setPage((prev) => prev + 1);
+  };
+  const previousPageFn = () => {
+    if (page === 1) return;
+    setPage((prev) => prev - 1);
+  };
+  const firstPageFn = () => {
+    setPage(1);
+  };
+  const lastPageFn = () => {
+    if (!totalPages) return;
+    setPage(totalPages);
+  };
+  const pageChangeFn = (e: any) => {
+    if (!totalPages) return;
+    if (e.target.value < 1 || e.target.value > totalPages) return;
+    setPage(e.target.value);
+  };
   return (
     <div className='relative shadow-md w-2/3 rounded-lg p-2 min-w-[200px]'>
       <span className='flex justify-between items-center'>
@@ -81,29 +77,21 @@ function Notes() {
           aria-label='start new note'
         />
       </span>
-      <div className=''>
-        {editing ? (
-          <input
-            type='text'
-            className='w-full outline-none p-2'
-            placeholder='Keep notes written in markdown.'
-            onKeyDown={(e) => handleEnterPress(e)}
-            defaultValue={text}
-          />
+      <div className='p-2'>
+        {notesQuery.getNotesQuery.data &&
+        notesQuery.getNotesQuery.data.length &&
+        page &&
+        !newNote ? (
+          <Note key={uniqid()} note={notesQuery.getNotesQuery.data[page - 1]} />
         ) : (
-          <div onClick={(e) => handleDoubleClick(e)}>
-            <ReactMarkdown
-              className='debug p-2 w-full'
-              children={text}
-              remarkPlugins={[remarkGfm]}
-            />
-          </div>
+          <Note key={uniqid()} note={{ userId: userId, text: undefined }} />
         )}
       </div>
       <span className='absolute bottom-0 left-0 p-2 w-full justify-center items-center'>
-        {pageInfo && (
+        {totalPages && (
           <PageSelector
-            pageInfo={pageInfo}
+            page={page}
+            totalPages={totalPages}
             pageChangeFn={pageChangeFn}
             nextPageFn={nextPageFn}
             previousPageFn={previousPageFn}

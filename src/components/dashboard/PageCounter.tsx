@@ -5,7 +5,7 @@ type PageCounterProps = {
   twClasses?: string;
 };
 function PageCounter({ twClasses }: PageCounterProps) {
-  const { pageInfo, pageChangeFn } = useContext(PageChangeContext)!;
+  const { page, totalPages, pageChangeFn } = useContext(PageChangeContext)!;
   const [edit, setEdit] = useState(false);
   const toggleEdit = () => {
     setEdit((prev) => !prev);
@@ -21,12 +21,12 @@ function PageCounter({ twClasses }: PageCounterProps) {
         max={10}
         min={1}
         onChange={(e) => pageChangeFn(e)}
-        defaultValue={pageInfo.page}
+        defaultValue={page}
         onKeyDown={(e) => {
           if (e.key === 'Enter') toggleEdit();
         }}
       />
-      {' / '} <p>{pageInfo.totalPages}</p>
+      {' / '} <p>{totalPages}</p>
     </span>
   );
 }
