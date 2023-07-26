@@ -1,9 +1,6 @@
-import React, { ReactNode } from 'react';
-const PageChangeContext = React.createContext<{
-  page: number;
-  totalPages: number;
-  pageChangeFn: Function;
-} | null>(null);
+import React, { ReactNode, useEffect, useState } from 'react';
+import PageCounter from './PageCounter';
+
 type PageSelectorProps = {
   children?: ReactNode;
   nextPageFn: Function;
@@ -29,27 +26,29 @@ function PageSelector({
       <span className='w-full flex justify-between items-center'>
         <img
           className='h-6 hover:cursor-pointer'
-          onClick={() => firstPageFn}
+          onClick={() => firstPageFn()}
           src='/favicons/first_chevron.svg'
         />
         <img
           className='h-6 hover:cursor-pointer'
-          onClick={() => previousPageFn}
+          onClick={() => previousPageFn()}
           src='/favicons/left_chevron.svg'
         />
       </span>
-      <PageChangeContext.Provider value={{ page, totalPages, pageChangeFn }}>
-        {children}
-      </PageChangeContext.Provider>
+      <PageCounter
+        page={page}
+        totalPages={totalPages}
+        pageChangeFn={pageChangeFn}
+      />
       <span className='w-full flex justify-between items-center'>
         <img
           className='h-6 hover:cursor-pointer'
-          onClick={() => nextPageFn}
+          onClick={() => nextPageFn()}
           src='/favicons/right_chevron.svg'
         />
         <img
           className='h-6 hover:cursor-pointer'
-          onClick={() => lastPageFn}
+          onClick={() => lastPageFn()}
           src='/favicons/last_chevron.svg'
         />
       </span>
@@ -58,4 +57,3 @@ function PageSelector({
 }
 
 export default PageSelector;
-export { PageChangeContext };

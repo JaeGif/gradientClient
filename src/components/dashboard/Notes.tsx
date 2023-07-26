@@ -42,6 +42,7 @@ function Notes() {
   };
   const lastPageFn = () => {
     if (!totalPages) return;
+    console.log(totalPages);
     setPage(totalPages);
   };
   const pageChangeFn = (e: any) => {
@@ -97,7 +98,6 @@ function Notes() {
             previousPageFn={previousPageFn}
             lastPageFn={lastPageFn}
             firstPageFn={firstPageFn}
-            children={<PageCounter />}
           ></PageSelector>
         )}
       </span>

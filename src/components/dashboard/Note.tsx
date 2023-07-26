@@ -9,7 +9,6 @@ type NoteProps = {
   };
 };
 function Note({ note }: NoteProps) {
-  console.log('note recieved', note);
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(note?.text);
   const postNotesMutation = useNotes().postNotesMutation;
@@ -18,7 +17,7 @@ function Note({ note }: NoteProps) {
     if (!text) setEditing(true);
   }, [text]);
   useEffect(() => {
-    if (note.text) {
+    if (note && note.text) {
       setText(note.text);
     }
   }, [note]);
