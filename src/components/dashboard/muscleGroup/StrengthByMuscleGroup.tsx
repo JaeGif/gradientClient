@@ -31,7 +31,7 @@ function StrengthByMuscleGroup() {
     );
   }, [userStandardPerformancesMax.isFetched]);
   return (
-    <div className='rounded-lg p-2 min-w-[200px] shadow-md flex justify-center items-center'>
+    <div className='rounded-lg w-1/4 p-2 min-w-[200px] shadow-md flex justify-center items-center'>
       {muscleGroupProgression && (
         <PolarChart dataset={muscleGroupProgression} />
       )}

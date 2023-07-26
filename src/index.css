@@ -10,6 +10,21 @@
   html {
     font-family: inter, system-ui, sans-serif;
   }
+  h1 {
+    font-size: xx-large;
+  }
+  h2 {
+    font-size: x-large;
+  }
+  h3 {
+    font-size: larger;
+  }
+  h4 {
+    font-size: medium;
+  }
+  h5 {
+    font-size: small;
+  }
 }
 @layer components {
   .dark {

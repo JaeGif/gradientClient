@@ -60,8 +60,10 @@ export function PolarChart({ dataset }: PolarChartType) {
           datalabels: {
             color: 'black',
             display: true,
+            anchor: 'center',
+            align: 'center',
             font: {
-              size: 14,
+              size: 11,
             },
           },
           legend: {
