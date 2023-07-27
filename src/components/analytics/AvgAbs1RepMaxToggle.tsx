@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ExerciseCurrentLevel from './ExerciseCurrentLevel';
 import ExerciseOneRepMax from './ExerciseOneRepMax';
 import ChartAnalysis from './ChartAnalysis';
@@ -17,24 +17,26 @@ function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
   };
   const userId = useAuth()!.user!.id;
   const recentExerciseQuery = useRecentExerciseData(exerciseId, userId);
+
   return (
     <div className='flex justify-center p-6 h-screen'>
       {recentExerciseQuery.isFetched ? (
         <>
           {showAbsolute ? (
             <ExerciseOneRepMax
+              key={uniqid()}
               exerciseId={exerciseId}
               recentExerciseQuery={recentExerciseQuery}
             />
           ) : (
             <ExerciseCurrentLevel
+              key={uniqid()}
               exerciseId={exerciseId}
               recentExerciseQuery={recentExerciseQuery}
             />
           )}
-          <div className='flex flex-col'>
+          <div key={uniqid()} className='flex flex-col'>
             <ChartAnalysis
-              key={uniqid()}
               exerciseId={exerciseId}
               showAbsolute={showAbsolute}
             />

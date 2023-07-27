@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import React, { useState } from 'react';
 import { AuthProvider } from './utils/AuthProvider';
 import NavBar from './components/navbar/NavBar';
@@ -8,10 +8,10 @@ import Register from './pages/Register';
 import Dashboard from './pages/home/Dashboard';
 import Settings from './pages/home/Settings';
 import Analytics from './pages/home/analytics/Analytics';
-import Data from './pages/home/analytics/Data';
 import Workouts from './pages/home/workouts/Workouts';
 import NotFound from './pages/error/NotFound';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import SelectedMuscleGroup from './pages/home/analytics/SelectedMuscleGroup';
 type MemoStateObject = { [key: string]: any };
 
 const ThemeContext = React.createContext<'light' | 'dark'>('dark');
@@ -47,7 +47,20 @@ function App() {
               <Route path='new' element={<>Something</>} />
             </Route>
             <Route path='analytics' element={<Analytics />}>
-              <Route path=':data' element={<Data />} />
+              <Route
+                path='muscleGroups'
+                element={
+                  <>
+                    {location.pathname === '/analytics/muscleGroups' ? (
+                      <Navigate to={'all'} />
+                    ) : (
+                      <Outlet />
+                    )}
+                  </>
+                }
+              >
+                <Route path=':muscleGroup' element={<SelectedMuscleGroup />} />
+              </Route>
             </Route>
           </Route>
           <Route path='/' element={<Navigate to={'/dashboard'} />} />

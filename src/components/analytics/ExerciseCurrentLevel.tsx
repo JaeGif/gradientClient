@@ -27,8 +27,6 @@ function ExerciseCurrentLevel({
   const userWeight = useAuth()!.user!.weight.value;
   const userGender = useAuth()!.user!.gender;
   useEffect(() => {
-    console.log(exerciseId);
-
     if (recentExerciseQuery.data && recentExerciseQuery.data.length !== 0) {
       const labels = useExerciseDateLabels(recentExerciseQuery);
       setXLabels(labels);

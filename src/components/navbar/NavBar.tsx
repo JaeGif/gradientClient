@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function NavBar() {
   return (
     <>
-      <div className='sm:w-1/5 w-screen sm:min-w-[250px] sm:min-h-screen sm:max-h-screen'></div>
+      <div className=' w-screen sm:w-1/5 sm:min-w-[250px] sm:min-h-screen sm:max-h-screen sm:m-3 pl-4 pr-4 pt-4'></div>
       <nav className='fixed top-0 left-0 flex flex-col w-screen sm:w-1/5 sm:min-w-[250px] sm:min-h-screen sm:max-h-screen pl-4 pr-4 pt-4 shadow-md'>
         <span className='flex flex-col justify-center items-center'>
           <img className='h-10' src='/gradient-icon.png' />
