@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import remarkGfm from 'remark-gfm';
-import useNotes from '../../hooks/useNotes';
+import useNotes from '../../../hooks/useNotes';
+import rehypeRaw from 'rehype-raw';
 type NoteProps = {
   note: {
     userId: string;
@@ -50,7 +51,7 @@ function Note({ note }: NoteProps) {
       {editing ? (
         <input
           type='text'
-          className='w-full outline-none p-2'
+          className='w-full p-2'
           placeholder='Keep notes written in markdown...'
           onKeyDown={(e) => handleEnterPress(e)}
           defaultValue={text}
@@ -61,6 +62,7 @@ function Note({ note }: NoteProps) {
             className='p-2 w-full'
             children={text ? text : ''}
             remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
           />
         </div>
       )}

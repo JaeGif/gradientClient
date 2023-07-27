@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import remarkGfm from 'remark-gfm';
-import useNotes from '../../hooks/useNotes';
-import { useAuth } from '../../utils/AuthProvider';
+import useNotes from '../../../hooks/useNotes';
+import { useAuth } from '../../../utils/AuthProvider';
 import PageSelector from './PageSelector';
 import PageCounter from './PageCounter';
 import Note from './Note';

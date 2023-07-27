@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Activity from '../../components/dashboard/progress/Activity';
-import Notes from '../../components/dashboard/Notes';
+import Notes from '../../components/dashboard/notes/Notes';
 import StrengthByMuscleGroup from '../../components/dashboard/muscleGroup/StrengthByMuscleGroup';
 import GeneralProgressChart from '../../components/dashboard/generalProgress/GeneralProgress';
 import Stats from '../../components/dashboard/statistics/Stats';
