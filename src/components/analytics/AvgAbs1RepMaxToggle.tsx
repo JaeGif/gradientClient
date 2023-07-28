@@ -37,7 +37,7 @@ function AvgAbs1RepMaxToggle({
               e.stopPropagation();
               toggleChartViews();
             }}
-            className='flex justify-between gap-2 items-center border-2 border-gray-700 rounded-md w-fit p-1 text-sm '
+            className='flex justify-between gap-2 items-center border-2 border-gray-700 rounded-md w-fit p-2 text-sm '
           >
             {showAbsolute ? 'Absolute' : 'Average'}
             <img className='h-6 hover:animate-spin' src='/favicons/swap.svg' />

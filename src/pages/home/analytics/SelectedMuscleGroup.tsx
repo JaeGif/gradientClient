@@ -7,6 +7,7 @@ import uniqid from 'uniqid';
 function SelectedMuscleGroup() {
   const userId = useAuth()!.user!.id;
   let extension = useMatch('/analytics/muscleGroups/*')?.params['*']!;
+  const location = useLocation();
   const [exerciseIdx, setExerciseIdx] = useState<string[]>();
   // needs to get the idx of exercises that have the muscle group related
   const muscleSpecificExercisesQuery = useMuscleSpecificExercises(
@@ -22,9 +23,10 @@ function SelectedMuscleGroup() {
       for (let i = 0; i < muscleSpecificExercisesQuery.data.length; i++) {
         result.push(muscleSpecificExercisesQuery.data[i].id);
       }
+      console.log(result);
       setExerciseIdx(result);
     }
-  }, [muscleSpecificExercisesQuery.isSuccess]);
+  }, [muscleSpecificExercisesQuery.isFetched, location.pathname]);
   return (
     <div>
       {muscleSpecificExercisesQuery.data &&

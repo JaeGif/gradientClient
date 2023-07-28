@@ -11,7 +11,6 @@ function ChartAnalysis({ exerciseId, showAbsolute }: ChartAnalysisProps) {
   const userGender = useAuth()!.user!.gender;
   return (
     <div className='min-w-fit flex flex-col w-full justify-center gap-2 pl-6'>
-      <p>Details</p>
       <RegressionAnalysis exerciseId={exerciseId} showAbsolute={showAbsolute} />
       {exerciseInStandards(exerciseId, userGender) && (
         <StandardsAnalysis exerciseId={exerciseId} average={!showAbsolute} />

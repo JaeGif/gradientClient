@@ -16,7 +16,7 @@ function Analytics() {
 
   return (
     <div className='gap-2 flex flex-col w-full max-h-screen overflow-x-scroll p-2'>
-      <div className='shadow-md p-2 rounded-md'>
+      <div className='shadow-md p-2 pl-4 rounded-md'>
         <AnalyticsTitle />
         <AnalyticsFilter />
       </div>
