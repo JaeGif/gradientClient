@@ -4,8 +4,10 @@ import useMuscleSpecificExercises from '../../hooks/useMuscleSpecificExercises';
 import { useAuth } from '../../utils/AuthProvider';
 import uniqid from 'uniqid';
 import { capitalize } from '../../utils/fnSheet/utilities';
+import SetPerformed from './SetPerformed';
 function RecordExercise() {
   const [s, setS] = useState<string>();
+  const [setCount, setSetCount] = useState([0]);
   const [selectedExercise, setSelectedExercise] = useState<{
     id: string;
     muscleGroupsId: string;
@@ -33,31 +35,43 @@ function RecordExercise() {
     }
   }, [matchingExercisesQuery.isFetched]);
   return (
-    <div className='shadow-md p-6'>
+    <div className='shadow-md p-6 rounded-sm flex flex-col gap-2'>
       {selectedExercise ? (
-        <span className='flex gap-5 items-center '>
-          <h2>{capitalize(selectedExercise.name)}</h2>
+        <div className='flex justify-between items-center'>
+          <span className='flex gap-2 items-center '>
+            <h2>{capitalize(selectedExercise.name)}</h2>
+            <img
+              title='Change Exercise'
+              onClick={() => {
+                setSelectedExercise(undefined);
+              }}
+              className='h-4 hover:cursor-pointer'
+              alt='change exercise'
+              src='/favicons/edit.svg'
+            />
+          </span>
           <img
             onClick={() => {
-              setSelectedExercise(undefined);
+              setSetCount((prev) => [...prev, 0]);
             }}
-            className='h-6 hover:cursor-pointer'
-            alt='change exercise'
-            src='/favicons/edit.svg'
+            title='Add Set'
+            className='h-8 hover:cursor-pointer'
+            alt='add new set'
+            src='/favicons/new.svg'
           />
-        </span>
+        </div>
       ) : (
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col'>
           <input
             onChange={(e) => {
               setS(e.target.value);
             }}
-            className='border-2 rounded-md p-2'
+            className='border-[1px] rounded-md rounded-b-none p-2'
             type='text'
             placeholder='Search for exercise...'
           />
           {matchedExercises && matchedExercises.length && (
-            <div className='flex flex-col'>
+            <div className='flex flex-col border-[1px] border-t-0 rounded-t-none rounded-sm border-b-slate-200'>
               {matchedExercises.map((exercise) => (
                 <div
                   className='p-2 hover:bg-slate-100 hover:cursor-pointer rounded-sm'
@@ -73,6 +87,7 @@ function RecordExercise() {
           )}
         </div>
       )}
+      <SetPerformed setCount={setCount} />
     </div>
   );
 }
