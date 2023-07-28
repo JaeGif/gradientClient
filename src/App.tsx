@@ -8,10 +8,10 @@ import Register from './pages/Register';
 import Dashboard from './pages/home/Dashboard';
 import Settings from './pages/home/Settings';
 import Analytics from './pages/home/analytics/Analytics';
-import Workouts from './pages/home/workouts/Workouts';
 import NotFound from './pages/error/NotFound';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import SelectedMuscleGroup from './pages/home/analytics/SelectedMuscleGroup';
+import Record from './components/record/Record';
 type MemoStateObject = { [key: string]: any };
 
 const ThemeContext = React.createContext<'light' | 'dark'>('dark');
@@ -43,9 +43,10 @@ function App() {
           >
             <Route path='dashboard' element={<Dashboard />} />
             <Route path='settings' element={<Settings />} />
-            <Route path='workouts' element={<Workouts />}>
+            <Route path='exercises' element={<>Enter exercises</>}>
               <Route path='new' element={<>Something</>} />
             </Route>
+            <Route path='record' element={<Record />} />
             <Route path='analytics/*' element={<Analytics />}>
               <Route
                 path='muscleGroups'

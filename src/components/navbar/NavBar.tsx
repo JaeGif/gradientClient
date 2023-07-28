@@ -47,7 +47,23 @@ function NavBar() {
             </Link>
           </li>
           <li className='w-full'>
-            <Link to={'/workouts'}>
+            <Link to={'/record'}>
+              <button
+                type='button'
+                className='flex gap-5 items-center w-full pt-2 pb-2 pr-4 pl-4 rounded-3xl hover:bg-gray-200'
+              >
+                <img
+                  src='/favicons/new.svg'
+                  alt='workouts icon'
+                  aria-label='workouts icon'
+                  className='h-8'
+                />
+                Record
+              </button>
+            </Link>
+          </li>
+          <li className='w-full'>
+            <Link to={'/exercises'}>
               <button
                 type='button'
                 className='flex gap-5 items-center w-full pt-2 pb-2 pr-4 pl-4 rounded-3xl hover:bg-gray-200'
@@ -58,7 +74,7 @@ function NavBar() {
                   aria-label='workouts icon'
                   className='h-8'
                 />
-                Workouts
+                Exercises
               </button>
             </Link>
           </li>
