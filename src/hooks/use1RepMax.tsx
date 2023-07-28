@@ -14,7 +14,6 @@ function use1RepMax(
   // use average 1RM averaging the sets in each exercise
 
   let estimatedORMArray;
-  console.log(isPullups, userWeight);
 
   const calculateMax = (sets: PerformedSets[]) => {
     let avgForElementArr: number[] = [];

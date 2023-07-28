@@ -16,6 +16,12 @@ export default {
           20: '#A0BFE0',
           10: '#C5DFF8',
         },
+        chartBlue: {
+          10: 'rgb(70,70,225)',
+        },
+        chartGreen: {
+          10: 'rgb(70,225,70)',
+        },
       },
     },
     gridTemplateColumns: {

@@ -46,7 +46,7 @@ function App() {
             <Route path='workouts' element={<Workouts />}>
               <Route path='new' element={<>Something</>} />
             </Route>
-            <Route path='analytics' element={<Analytics />}>
+            <Route path='analytics/*' element={<Analytics />}>
               <Route
                 path='muscleGroups'
                 element={

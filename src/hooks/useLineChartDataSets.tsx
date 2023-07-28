@@ -1,11 +1,9 @@
 import regression from 'regression';
-import { Chart as ChartJS } from 'chart.js';
 
 function useLineChartDataSets(
   data: number[] | undefined,
   linearRegression: regression.Result,
-  lineType: 'average' | 'absolute' | 'overall' | undefined,
-  chartRef?: ChartJS | null
+  lineType: 'average' | 'absolute' | 'overall' | undefined
 ) {
   if (!data) return;
   const processData = (data: number[]) => {
@@ -26,7 +24,7 @@ function useLineChartDataSets(
   const pickColor = (opacity: number, positive?: boolean) => {
     switch (lineType) {
       case 'average':
-        if (positive) return `rgba(70,225,70, ${opacity})`;
+        if (positive) return `rgba(70,70,225, ${opacity})`;
         else if (!positive && typeof positive !== 'undefined')
           return `rgba(225,70,70, ${opacity})`;
         return `rgba(120, 149, 203, ${opacity})`;
@@ -34,7 +32,7 @@ function useLineChartDataSets(
         if (positive) return `rgba(70,225,70, ${opacity})`;
         else if (!positive && typeof positive !== 'undefined')
           return `rgba(225,70,70, ${opacity})`;
-        return `rgba(120, 149, 203, ${opacity})`;
+        return `rgba(70,225,70, ${opacity})`;
       case 'overall':
         if (positive) return `rgba(70,225,70, ${opacity})`;
         else if (!positive && typeof positive !== 'undefined')

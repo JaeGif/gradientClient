@@ -9,19 +9,39 @@ import { useAuth } from '../../utils/AuthProvider';
 
 type AvgAbs1RepMaxToggleProps = {
   exerciseId: string;
+  i: number;
+  idxArr: string[];
 };
-function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
+function AvgAbs1RepMaxToggle({
+  exerciseId,
+  i,
+  idxArr,
+}: AvgAbs1RepMaxToggleProps) {
   const [showAbsolute, setShowAbsolute] = useState<boolean>(false);
   const toggleChartViews = () => {
     setShowAbsolute((prev) => !prev);
   };
   const userId = useAuth()!.user!.id;
   const recentExerciseQuery = useRecentExerciseData(exerciseId, userId);
-
+  const opacityValue = (i + 1) / idxArr.length;
+  const highlightColor = showAbsolute ? '70, 225, 70' : '70, 70, 225';
   return (
-    <div className='flex justify-center p-6 h-screen'>
+    <div
+      style={{ borderLeftColor: `rgba(${highlightColor}, ${opacityValue})` }}
+      className={`flex flex-col shadow-md border-l-[5px] justify-center p-6 rounded-md`}
+    >
       {recentExerciseQuery.isFetched ? (
         <>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleChartViews();
+            }}
+            className='flex justify-between gap-2 items-center border-2 border-gray-700 rounded-md w-fit p-1 text-sm '
+          >
+            {showAbsolute ? 'Absolute' : 'Average'}
+            <img className='h-6 hover:animate-spin' src='/favicons/swap.svg' />
+          </button>
           {showAbsolute ? (
             <ExerciseOneRepMax
               key={uniqid()}
@@ -40,15 +60,6 @@ function AvgAbs1RepMaxToggle({ exerciseId }: AvgAbs1RepMaxToggleProps) {
               exerciseId={exerciseId}
               showAbsolute={showAbsolute}
             />
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleChartViews();
-              }}
-              className='border-2 border-gray-700 rounded-md w-fit p-1 text-sm block'
-            >
-              {showAbsolute ? 'Absolute' : 'Average'}
-            </button>
           </div>
         </>
       ) : (

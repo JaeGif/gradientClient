@@ -89,20 +89,29 @@ function StandardsAnalysis({ exerciseId, average }: StandardsAnalysisProps) {
   }, [average, exerciseId, exerciseStandard]);
 
   return (
-    <div>
-      Next Level:{' '}
-      {closestStandard && bestPerformance ? (
-        <>
-          <p>
-            {capitalize(closestStandard.level)} {closestStandard.weight}
-            {userPreferenceWeight}
-          </p>
-          <p>Delta {(closestStandard.weight - bestPerformance).toFixed(2)}</p>
-        </>
-      ) : (
-        <>Loading</>
+    <>
+      {closestStandard && bestPerformance && (
+        <div className='flex gap-10 text-sm'>
+          <span className='flex gap-1'>
+            <p className='text-sm font-semibold'>Next Level: </p>
+
+            <p>
+              {capitalize(closestStandard.level)} {closestStandard.weight}
+              {userPreferenceWeight}
+            </p>
+          </span>
+          <span className='flex justify-center items-center gap-1'>
+            <p className='font-semibold'>
+              {capitalize(closestStandard.level)} Delta:{' '}
+            </p>
+            <p>
+              {(closestStandard.weight - bestPerformance).toFixed(2)}
+              {userPreferenceWeight}
+            </p>
+          </span>
+        </div>
       )}
-    </div>
+    </>
   );
 }
 

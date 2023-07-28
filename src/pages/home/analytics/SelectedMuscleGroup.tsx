@@ -9,7 +9,6 @@ function SelectedMuscleGroup() {
   let extension = useMatch('/analytics/muscleGroups/*')?.params['*']!;
   const [exerciseIdx, setExerciseIdx] = useState<string[]>();
   // needs to get the idx of exercises that have the muscle group related
-  console.log(extension);
   const muscleSpecificExercisesQuery = useMuscleSpecificExercises(
     extension,
     userId
@@ -19,12 +18,10 @@ function SelectedMuscleGroup() {
       muscleSpecificExercisesQuery.data &&
       muscleSpecificExercisesQuery.data.length
     ) {
-      console.log(muscleSpecificExercisesQuery.data);
       let result = [];
       for (let i = 0; i < muscleSpecificExercisesQuery.data.length; i++) {
         result.push(muscleSpecificExercisesQuery.data[i].id);
       }
-      console.log(muscleSpecificExercisesQuery.data);
       setExerciseIdx(result);
     }
   }, [muscleSpecificExercisesQuery.isSuccess]);
@@ -33,9 +30,19 @@ function SelectedMuscleGroup() {
       {muscleSpecificExercisesQuery.data &&
       muscleSpecificExercisesQuery.data.length &&
       exerciseIdx ? (
-        exerciseIdx.map((id) => (
-          <AvgAbs1RepMaxToggle key={uniqid()} exerciseId={id} />
-        ))
+        <div className='flex flex-col gap-5'>
+          {exerciseIdx.map((id, i, idxArr) => (
+            <AvgAbs1RepMaxToggle
+              key={uniqid()}
+              exerciseId={id}
+              i={i}
+              idxArr={idxArr}
+            />
+          ))}
+        </div>
+      ) : muscleSpecificExercisesQuery.data &&
+        muscleSpecificExercisesQuery.data.length === 0 ? (
+        <p>No exercises in this category</p>
       ) : (
         <>Loading</>
       )}

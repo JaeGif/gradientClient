@@ -3,12 +3,14 @@ import useLinearRegression from '../../hooks/useLinearRegression';
 type GeneralTrendRegressionAnalysisProps = {
   exerciseId: string;
   average: boolean;
+  timePeriod?: string;
 };
 import useCustomMemo from '../../hooks/useCustomMemo';
 import { useAuth } from '../../utils/AuthProvider';
 function GeneralTrendRegressionAnalysis({
   exerciseId,
   average,
+  timePeriod = '30 Day',
 }: GeneralTrendRegressionAnalysisProps) {
   const [regressionSlope, setRegressionSlope] = useState<number>();
   const [positive, setPositive] = useState<boolean>();
@@ -54,17 +56,17 @@ function GeneralTrendRegressionAnalysis({
   }, [average, exerciseId]);
 
   return (
-    <div className='flex justify-start items-center gap-1'>
-      <p className='text-sm font-bold'>Linear Regression Trend: </p>
-      {regressionSlope && typeof positive !== 'undefined' ? (
+    <div className='flex justify-start items-center gap-1 text-sm'>
+      <p className='font-semibold'>{timePeriod} Trend: </p>
+      {regressionSlope && typeof positive !== 'undefined' && (
         <span className='flex justify-start items-center gap-2'>
-          <p className='text-lg'>
+          <p>
             {positive && '+'}
             {regressionSlope}
             {userUnits}
           </p>
           <img
-            className={positive ? 'h-5' : 'h-5 transform rotate-90'}
+            className={positive ? 'h-4' : 'h-4 transform rotate-90'}
             src={
               positive
                 ? '/favicons/trend_arrow_positive.svg'
@@ -72,8 +74,6 @@ function GeneralTrendRegressionAnalysis({
             }
           />
         </span>
-      ) : (
-        <>Loading</>
       )}
     </div>
   );

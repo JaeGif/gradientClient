@@ -56,17 +56,25 @@ function RecentPerformanceDelta({
 
   return (
     <>
-      <div>
-        <p className='font-bold'>Recent &#916;:</p>
-        {typeof delta !== 'undefined' && typeof positive !== 'undefined' ? (
-          <p>
-            {positive && '+'}
-            {delta}
-          </p>
-        ) : (
-          <>Loading</>
-        )}
-      </div>
+      {typeof delta !== 'undefined' && typeof positive !== 'undefined' && (
+        <div className='flex gap-2 justify-center items-center text-sm'>
+          <span className='flex gap-1 justify-center items-center '>
+            <p className='font-semibold'>Last Performance: </p>
+            <p>
+              {positive && '+'}
+              {delta}
+            </p>
+          </span>
+          <img
+            className={positive ? 'h-4' : 'h-4 transform rotate-90'}
+            src={
+              positive
+                ? '/favicons/trend_arrow_positive.svg'
+                : '/favicons/trend_arrow_negative.svg'
+            }
+          />
+        </div>
+      )}
     </>
   );
 }
