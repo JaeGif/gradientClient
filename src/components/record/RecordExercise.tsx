@@ -5,6 +5,12 @@ import { useAuth } from '../../utils/AuthProvider';
 import uniqid from 'uniqid';
 import { capitalize } from '../../utils/fnSheet/utilities';
 import SetPerformed from './SetPerformed';
+type SetType = {
+  weight: number;
+  reps: number;
+  units: 'kg' | 'lb';
+  rtf?: number;
+};
 function RecordExercise() {
   const [s, setS] = useState<string>();
   const [setCount, setSetCount] = useState([0]);
@@ -16,6 +22,7 @@ function RecordExercise() {
     sets?: number;
     standardized: boolean;
   }>();
+  const [sets, setSets] = useState<SetType[]>([]);
   const [matchedExercises, setMatchedExercises] = useState<
     {
       id: string;
@@ -28,7 +35,9 @@ function RecordExercise() {
   >();
   const userId = useAuth()!.user!.id;
   const matchingExercisesQuery = useMatchingExerciseSearch(s, userId);
-
+  const handleLogNewSet = (set: SetType) => {
+    setSets((prev) => [...prev, set]);
+  };
   useEffect(() => {
     if (matchingExercisesQuery.data && matchingExercisesQuery.data.length) {
       setMatchedExercises(matchingExercisesQuery.data);
@@ -87,7 +96,7 @@ function RecordExercise() {
           )}
         </div>
       )}
-      <SetPerformed setCount={setCount} />
+      <SetPerformed logSet={handleLogNewSet} setCount={setCount} />
     </div>
   );
 }
