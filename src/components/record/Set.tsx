@@ -9,18 +9,19 @@ type SetProps = {
     reps?: number | undefined;
     weight?: number | undefined;
     unit: 'kg' | 'lb';
+    logged: boolean;
   };
 };
 const Set = memo(({ index, i, handleSets, set }: SetProps) => {
   const userUnits = useAuth()!.user!.preferences.unit;
   const [weight, setWeight] = useState<number | undefined>(set?.weight);
   const [reps, setReps] = useState<number | undefined>(set?.reps);
-  const [isLogged, setIsLogged] = useState(false);
-  useEffect(() => {
+  const [isLogged, setIsLogged] = useState(set?.logged);
+  /*   useEffect(() => {
     if (set?.reps && set?.weight) {
       setIsLogged(true);
     }
-  }, []);
+  }, []); */
   return (
     <span className='mt-1 border-t-[1px] border-t-gray-100 flex pt-1'>
       <p className='p-2 text-center w-24'>{i + 1}</p>
@@ -46,6 +47,7 @@ const Set = memo(({ index, i, handleSets, set }: SetProps) => {
               weight: weight,
               reps: reps,
               unit: userUnits,
+              logged: true,
             });
           }
         }}

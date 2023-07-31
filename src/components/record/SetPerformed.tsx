@@ -7,6 +7,7 @@ type SetPerformedProps = {
     reps?: number | undefined;
     weight?: number | undefined;
     unit: 'kg' | 'lb';
+    logged: boolean;
   }[];
   handleSets: Function;
   index: number;

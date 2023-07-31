@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import useMatchingExerciseSearch from '../../hooks/useMatchingExerciseSearch';
-import useMuscleSpecificExercises from '../../hooks/useMuscleSpecificExercises';
 import { useAuth } from '../../utils/AuthProvider';
 import uniqid from 'uniqid';
 import { capitalize } from '../../utils/fnSheet/utilities';
 import SetPerformed from './SetPerformed';
-type SetType = {
-  weight: number;
-  reps: number;
-  unit: 'kg' | 'lb';
-  rtf?: number;
-};
+
 type RecordExerciseProps = {
   handleExerciseId: Function;
   handleSets: Function;
@@ -25,7 +19,12 @@ type RecordExerciseProps = {
     };
     performedWorkout: string;
     user: string;
-    sets: { reps?: number; weight?: number; unit: 'kg' | 'lb' }[];
+    sets: {
+      reps?: number;
+      weight?: number;
+      unit: 'kg' | 'lb';
+      logged: boolean;
+    }[];
   };
   index: number;
 };

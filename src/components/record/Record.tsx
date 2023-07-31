@@ -17,7 +17,12 @@ function Record() {
       };
       performedWorkout: string;
       user: string;
-      sets: { reps?: number; weight?: number; unit: 'kg' | 'lb' }[];
+      sets: {
+        reps?: number;
+        weight?: number;
+        unit: 'kg' | 'lb';
+        logged: boolean;
+      }[];
     }[]
   >([
     {
@@ -31,7 +36,9 @@ function Record() {
       },
       performedWorkout: '',
       user: userId,
-      sets: [{ reps: undefined, weight: undefined, unit: userUnit }],
+      sets: [
+        { reps: undefined, weight: undefined, unit: userUnit, logged: false },
+      ],
     },
   ]);
 
@@ -47,32 +54,30 @@ function Record() {
     index: number
   ) => {
     let previousState = [...exerciseData];
-    console.log(previousState, index);
     previousState[index].exercise = exercise;
-    console.log(previousState, exercise);
-
     setExerciseData(previousState);
   };
   const handleUpdateSets = (
     index: number,
     i: number,
-    set: { reps?: number; weight?: number; unit: 'kg' | 'lb' }
+    set: {
+      reps?: number;
+      weight?: number;
+      unit: 'kg' | 'lb';
+      logged: boolean;
+    }
   ) => {
     let previousState = [...exerciseData];
-    console.log('exercise index', index, 'sets index', i);
-    console.log(previousState[index].sets[i]);
+
     if (!previousState[index].sets[i]) {
       // add new set
-      console.log('entering');
       previousState[index].sets.push(set);
     } else {
       // edit existing set
-      console.log('editing');
       previousState[index].sets[i] = set;
     }
     // set sets
-    console.log(previousState);
-    console.log(exerciseData);
+
     setExerciseData(previousState);
   };
   return (
@@ -95,7 +100,14 @@ function Record() {
               },
               performedWorkout: '',
               user: userId,
-              sets: [{ reps: undefined, weight: undefined, unit: userUnit }],
+              sets: [
+                {
+                  reps: undefined,
+                  weight: undefined,
+                  unit: userUnit,
+                  logged: false,
+                },
+              ],
             },
           ]);
         }}
