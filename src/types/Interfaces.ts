@@ -1,6 +1,8 @@
 export interface SetsPerformedDataType {
-  setIndex: number;
+  index: number;
   reps: number;
+  weight: number;
+  unit: 'kg' | 'lb';
   rtf?: number;
 }
 export interface User {
@@ -36,6 +38,21 @@ export interface PerformedExercise {
   performedWorkout: string;
   id: string;
   sets: SetsPerformedDataType[];
+}
+export interface PerformanceFull {
+  date: string;
+  exercise: Exercise;
+  user: string;
+  performedWorkout: string;
+  id: string;
+  sets: SetsPerformedDataType[];
+}
+export interface Exercise {
+  name: string;
+  id: string;
+  musclesGroup?: MuscleGroup;
+  sets?: number;
+  standardized: boolean;
 }
 export interface PlannedExercise {
   name: string;

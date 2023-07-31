@@ -27,7 +27,13 @@ export const exerciseInStandards = (id: string, userGender: string) => {
   }
   return false;
 };
-
+export const convertDate = (s: any) => {
+  const date = new Date(s);
+  const day = date.getUTCDate();
+  const month = date.getUTCMonth();
+  const year = date.getUTCFullYear();
+  return `${day}-${month}-${year}`;
+};
 export function findNextHighestNumber(
   value: number,
   comparison: { level: string; weight: number }[],

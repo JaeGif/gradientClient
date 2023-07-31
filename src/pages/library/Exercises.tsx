@@ -5,7 +5,8 @@ import ExerciseSearch from '../../components/exercises/exerciseSearch/ExerciseSe
 function Exercises() {
   return (
     <div className='flex justify-center'>
-      <ExerciseSearch />
+      {/*       <ExerciseSearch />
+       */}{' '}
       <ExerciseLibrary />
     </div>
   );
