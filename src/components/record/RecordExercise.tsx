@@ -59,14 +59,14 @@ function RecordExercise({
 
   return (
     <div className='shadow-md p-6 rounded-sm flex flex-col gap-2'>
-      {data.exercise.name ? (
+      {data.exercise && data.exercise.name ? (
         <div className='flex justify-between items-center'>
           <span className='flex gap-2 items-center '>
             <h2>{capitalize(data.exercise.name)}</h2>
             <img
               title='Change Exercise'
               onClick={() => {
-                handleExerciseId(undefined);
+                handleExerciseId(undefined, index);
               }}
               className='h-4 hover:cursor-pointer'
               alt='change exercise'

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { useAuth } from '../../utils/AuthProvider';
 
 type SetProps = {
@@ -11,12 +11,16 @@ type SetProps = {
     unit: 'kg' | 'lb';
   };
 };
-function Set({ index, i, handleSets, set }: SetProps) {
-  console.log('weight', set?.weight, 'reps', set?.reps);
+const Set = memo(({ index, i, handleSets, set }: SetProps) => {
   const userUnits = useAuth()!.user!.preferences.unit;
   const [weight, setWeight] = useState<number | undefined>(set?.weight);
   const [reps, setReps] = useState<number | undefined>(set?.reps);
   const [isLogged, setIsLogged] = useState(false);
+  useEffect(() => {
+    if (set?.reps && set?.weight) {
+      setIsLogged(true);
+    }
+  }, []);
   return (
     <span className='mt-1 border-t-[1px] border-t-gray-100 flex pt-1'>
       <p className='p-2 text-center w-24'>{i + 1}</p>
@@ -37,7 +41,6 @@ function Set({ index, i, handleSets, set }: SetProps) {
       <button
         onClick={() => {
           if (weight && reps && userUnits) {
-            setIsLogged(true);
             // i is the set index, index is the exercise index
             handleSets(index, i, {
               weight: weight,
@@ -46,16 +49,20 @@ function Set({ index, i, handleSets, set }: SetProps) {
             });
           }
         }}
-        className='bg-blue-20 rounded-md w-24'
+        className={
+          isLogged
+            ? 'bg-green-300 rounded-md w-24 flex justify-center items-center'
+            : 'bg-blue-20 rounded-md w-24 flex justify-center items-center'
+        }
       >
         {isLogged ? (
-          <img className='h-4' src='/favicons/check.svg' alt='check' />
+          <img className='h-6' src='/favicons/check.svg' alt='check' />
         ) : (
           'Log Set'
         )}
       </button>
     </span>
   );
-}
+});
 
 export default Set;

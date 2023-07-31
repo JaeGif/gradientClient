@@ -34,6 +34,7 @@ function Record() {
       sets: [{ reps: undefined, weight: undefined, unit: userUnit }],
     },
   ]);
+
   const handleExerciseId = (
     exercise: {
       id: string;
