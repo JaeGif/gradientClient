@@ -54,7 +54,7 @@ const Set = memo(({ index, i, handleSets, set }: SetProps) => {
         className={
           isLogged
             ? 'bg-green-300 rounded-md w-24 flex justify-center items-center'
-            : 'bg-blue-20 rounded-md w-24 flex justify-center items-center'
+            : 'bg-blue-20 rounded-md w-24 flex justify-center items-center hover:bg-blue-10'
         }
       >
         {isLogged ? (

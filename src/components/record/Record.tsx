@@ -143,52 +143,55 @@ function Record() {
     Promise.all(promiseArr()).then((value) => console.log(value));
   };
   return (
-    <div className='flex flex-col w-full h-full p-6 gap-2'>
-      <span className='flex justify-center items-center w-full flex-wrap'>
-        <h3>Record Exercise</h3>
-      </span>
-      <span
-        onClick={() => {
-          setExerciseData((prev) => [
-            ...prev,
-            {
-              exercise: {
-                id: '',
-                muscleGroupsId: '',
-                name: '',
-                reps: undefined,
-                sets: undefined,
-                standardized: false,
-              },
-              performedWorkout: '844dfd43-7360-45a3-a6f9-14c5e663df05',
-              user: userId,
-              sets: [
+    <div className='flex flex-col w-full h-full p-2 gap-2'>
+      <div className='shadow-md p-4 pt-2 flex gap-2 flex-col rounded-md'>
+        <h1>Record Exercise</h1>
+        <span className='flex flex-wrap justify-between'>
+          <span
+            onClick={() => {
+              setExerciseData((prev) => [
+                ...prev,
                 {
-                  reps: undefined,
-                  weight: undefined,
-                  unit: userUnit,
-                  logged: false,
+                  exercise: {
+                    id: '',
+                    muscleGroupsId: '',
+                    name: '',
+                    reps: undefined,
+                    sets: undefined,
+                    standardized: false,
+                  },
+                  performedWorkout: '844dfd43-7360-45a3-a6f9-14c5e663df05',
+                  user: userId,
+                  sets: [
+                    {
+                      reps: undefined,
+                      weight: undefined,
+                      unit: userUnit,
+                      logged: false,
+                    },
+                  ],
                 },
-              ],
-            },
-          ]);
-        }}
-        className='border-2 border-slate-300 rounded-md p-2 w-fit flex justify-center items-center gap-2 hover:cursor-pointer hover:bg-slate-300'
-      >
-        <h6>Add New Exercise</h6>
-        <img
-          className='h-8'
-          src='/favicons/new.svg'
-          alt='new exercise button'
-        />
-      </span>
-      <button
-        onClick={() => {
-          submitExercises();
-        }}
-      >
-        Submit
-      </button>
+              ]);
+            }}
+            className='bg-slate-300 rounded-md p-2 w-fit flex justify-center items-center gap-2 hover:cursor-pointer hover:bg-slate-200'
+          >
+            <h6>Add New Exercise</h6>
+            <img
+              className='h-8'
+              src='/favicons/new.svg'
+              alt='new exercise button'
+            />
+          </span>
+          <button
+            className='bg-slate-400 pl-4 pr-4 rounded-md hover:bg-blue-20'
+            onClick={() => {
+              submitExercises();
+            }}
+          >
+            Submit
+          </button>
+        </span>
+      </div>
       <div className='flex flex-wrap gap-5 justify-center items-start'>
         {exerciseData.map((data, i) => (
           <RecordExercise
