@@ -34,7 +34,6 @@ function RecordExercise({
   data,
   index,
 }: RecordExerciseProps) {
-  console.log(data.sets);
   const userUnit = useAuth()!.user!.preferences.unit;
   const [s, setS] = useState<string>();
   const [matchedExercises, setMatchedExercises] = useState<

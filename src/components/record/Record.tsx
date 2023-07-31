@@ -120,7 +120,7 @@ function Record() {
           alt='new exercise button'
         />
       </span>
-      <div className='flex flex-col gap-2 justify-center items-center'>
+      <div className='flex flex-wrap gap-2 justify-center items-start'>
         {exerciseData.map((data, i) => (
           <RecordExercise
             index={i}
