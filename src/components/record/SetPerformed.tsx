@@ -3,10 +3,15 @@ import Set from './Set';
 import uniqid from 'uniqid';
 
 type SetPerformedProps = {
-  setCount: number[];
-  logSet: Function;
+  setsData: {
+    reps?: number | undefined;
+    weight?: number | undefined;
+    unit: 'kg' | 'lb';
+  }[];
+  handleSets: Function;
+  index: number;
 };
-function SetPerformed({ setCount, logSet }: SetPerformedProps) {
+function SetPerformed({ handleSets, setsData, index }: SetPerformedProps) {
   return (
     <div className='flex flex-col'>
       <span className='flex justify-start items-center'>
@@ -15,8 +20,14 @@ function SetPerformed({ setCount, logSet }: SetPerformedProps) {
         <p className='w-24 text-center'>REPS</p>
         <p className='invisible w-24'>Placeholder</p>
       </span>
-      {setCount.map((set, i) => (
-        <Set logSet={logSet} key={uniqid()} i={i} />
+      {setsData.map((set, i) => (
+        <Set
+          handleSets={handleSets}
+          key={uniqid()}
+          i={i}
+          index={index}
+          set={set}
+        />
       ))}
     </div>
   );

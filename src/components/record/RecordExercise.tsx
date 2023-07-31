@@ -8,21 +8,36 @@ import SetPerformed from './SetPerformed';
 type SetType = {
   weight: number;
   reps: number;
-  units: 'kg' | 'lb';
+  unit: 'kg' | 'lb';
   rtf?: number;
 };
-function RecordExercise() {
+type RecordExerciseProps = {
+  handleExerciseId: Function;
+  handleSets: Function;
+  data: {
+    exercise: {
+      id: string;
+      muscleGroupsId: string;
+      name: string;
+      reps?: number | undefined;
+      sets?: number | undefined;
+      standardized: boolean;
+    };
+    performedWorkout: string;
+    user: string;
+    sets: { reps?: number; weight?: number; unit: 'kg' | 'lb' }[];
+  };
+  index: number;
+};
+function RecordExercise({
+  handleExerciseId,
+  handleSets,
+  data,
+  index,
+}: RecordExerciseProps) {
+  console.log(data.sets);
+  const userUnit = useAuth()!.user!.preferences.unit;
   const [s, setS] = useState<string>();
-  const [setCount, setSetCount] = useState([0]);
-  const [selectedExercise, setSelectedExercise] = useState<{
-    id: string;
-    muscleGroupsId: string;
-    name: string;
-    reps?: number;
-    sets?: number;
-    standardized: boolean;
-  }>();
-  const [sets, setSets] = useState<SetType[]>([]);
   const [matchedExercises, setMatchedExercises] = useState<
     {
       id: string;
@@ -35,24 +50,23 @@ function RecordExercise() {
   >();
   const userId = useAuth()!.user!.id;
   const matchingExercisesQuery = useMatchingExerciseSearch(s, userId);
-  const handleLogNewSet = (set: SetType) => {
-    setSets((prev) => [...prev, set]);
-  };
+
   useEffect(() => {
     if (matchingExercisesQuery.data && matchingExercisesQuery.data.length) {
       setMatchedExercises(matchingExercisesQuery.data);
     }
   }, [matchingExercisesQuery.isFetched]);
+
   return (
     <div className='shadow-md p-6 rounded-sm flex flex-col gap-2'>
-      {selectedExercise ? (
+      {data.exercise.name ? (
         <div className='flex justify-between items-center'>
           <span className='flex gap-2 items-center '>
-            <h2>{capitalize(selectedExercise.name)}</h2>
+            <h2>{capitalize(data.exercise.name)}</h2>
             <img
               title='Change Exercise'
               onClick={() => {
-                setSelectedExercise(undefined);
+                handleExerciseId(undefined);
               }}
               className='h-4 hover:cursor-pointer'
               alt='change exercise'
@@ -61,7 +75,11 @@ function RecordExercise() {
           </span>
           <img
             onClick={() => {
-              setSetCount((prev) => [...prev, 0]);
+              handleSets(index, data.sets.length, {
+                reps: undefined,
+                weight: undefined,
+                unit: userUnit,
+              });
             }}
             title='Add Set'
             className='h-8 hover:cursor-pointer'
@@ -86,7 +104,7 @@ function RecordExercise() {
                   className='p-2 hover:bg-slate-100 hover:cursor-pointer rounded-sm'
                   key={uniqid()}
                   onClick={() => {
-                    setSelectedExercise(exercise);
+                    handleExerciseId(exercise, index);
                   }}
                 >
                   {capitalize(exercise.name)}
@@ -96,7 +114,11 @@ function RecordExercise() {
           )}
         </div>
       )}
-      <SetPerformed logSet={handleLogNewSet} setCount={setCount} />
+      <SetPerformed
+        handleSets={handleSets}
+        setsData={data.sets}
+        index={index}
+      />
     </div>
   );
 }
