@@ -140,7 +140,31 @@ function Record() {
       }
       return arr;
     };
-    Promise.all(promiseArr()).then((value) => console.log(value));
+    Promise.all(promiseArr()).then((value) => {
+      setExerciseData([
+        {
+          exercise: {
+            id: '',
+            muscleGroupsId: '',
+            name: '',
+            reps: undefined,
+            sets: undefined,
+            standardized: false,
+          },
+          performedWorkout: '844dfd43-7360-45a3-a6f9-14c5e663df05',
+          user: userId,
+          sets: [
+            {
+              reps: undefined,
+              weight: undefined,
+              unit: userUnit,
+              logged: false,
+            },
+          ],
+        },
+      ]);
+    });
+    // IF submission is successful then the promise should make a quick message popup and refresh the forms
   };
   return (
     <div className='flex flex-col w-full h-full p-2 gap-2'>

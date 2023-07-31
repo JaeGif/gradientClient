@@ -12,6 +12,7 @@ import NotFound from './pages/error/NotFound';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import SelectedMuscleGroup from './pages/home/analytics/SelectedMuscleGroup';
 import Record from './components/record/Record';
+import Exercises from './pages/library/Exercises';
 type MemoStateObject = { [key: string]: any };
 
 const ThemeContext = React.createContext<'light' | 'dark'>('dark');
@@ -43,7 +44,7 @@ function App() {
           >
             <Route path='dashboard' element={<Dashboard />} />
             <Route path='settings' element={<Settings />} />
-            <Route path='exercises' element={<>Enter exercises</>}>
+            <Route path='exercises' element={<Exercises />}>
               <Route path='new' element={<>Something</>} />
             </Route>
             <Route path='record' element={<Record />} />
