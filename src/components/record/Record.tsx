@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import RecordExercise from './RecordExercise';
 import uniqid from 'uniqid';
 import { useAuth } from '../../utils/AuthProvider';
+const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 function Record() {
   const userId = useAuth()!.user!.id;
   const userUnit = useAuth()!.user!.preferences.unit;
@@ -34,7 +35,7 @@ function Record() {
         sets: undefined,
         standardized: false,
       },
-      performedWorkout: '',
+      performedWorkout: '844dfd43-7360-45a3-a6f9-14c5e663df05',
       user: userId,
       sets: [
         { reps: undefined, weight: undefined, unit: userUnit, logged: false },
@@ -80,6 +81,67 @@ function Record() {
 
     setExerciseData(previousState);
   };
+  const submitExercises = async () => {
+    const submitData = async (data: {
+      exercise: string;
+      performedWorkout: string;
+      user: string;
+      sets: {
+        index: number;
+        reps?: number;
+        weight?: number;
+        unit: 'kg' | 'lb';
+      }[];
+    }) => {
+      const res = await fetch(`${apiURL}api/performedExercises`, {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      return result.performedExercise;
+    };
+
+    const promiseArr = () => {
+      let arr = [];
+      for (let i = 0; i < exerciseData.length; i++) {
+        if (exerciseData[i].exercise.id && exerciseData[i].user) {
+          let data: {
+            exercise: string;
+            performedWorkout: string;
+            user: string;
+            sets: {
+              index: number;
+              reps?: number;
+              weight?: number;
+              unit: 'kg' | 'lb';
+            }[];
+          } = {
+            exercise: exerciseData[i].exercise.id,
+            user: exerciseData[i].user,
+            performedWorkout: exerciseData[i].performedWorkout,
+            sets: [],
+          };
+          for (let j = 0; j < exerciseData[i].sets.length; j++) {
+            if (exerciseData[i].sets[j].logged) {
+              data.sets.push({
+                index: j,
+                reps: exerciseData[i].sets[j].reps,
+                weight: exerciseData[i].sets[j].weight,
+                unit: exerciseData[i].sets[j].unit,
+              });
+            }
+          }
+          arr.push(submitData(data));
+        }
+      }
+      return arr;
+    };
+    Promise.all(promiseArr()).then((value) => console.log(value));
+  };
   return (
     <div className='flex flex-col w-full h-full p-6 gap-2'>
       <span className='flex justify-center items-center w-full flex-wrap'>
@@ -98,7 +160,7 @@ function Record() {
                 sets: undefined,
                 standardized: false,
               },
-              performedWorkout: '',
+              performedWorkout: '844dfd43-7360-45a3-a6f9-14c5e663df05',
               user: userId,
               sets: [
                 {
@@ -120,7 +182,14 @@ function Record() {
           alt='new exercise button'
         />
       </span>
-      <div className='flex flex-wrap gap-2 justify-center items-start'>
+      <button
+        onClick={() => {
+          submitExercises();
+        }}
+      >
+        Submit
+      </button>
+      <div className='flex flex-wrap gap-5 justify-center items-start'>
         {exerciseData.map((data, i) => (
           <RecordExercise
             index={i}
