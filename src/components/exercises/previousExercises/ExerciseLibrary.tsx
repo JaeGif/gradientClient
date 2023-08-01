@@ -14,7 +14,7 @@ function ExerciseLibrary({ searchedExerciseId }: ExerciseLibraryProps) {
   const recentExercisesQuery = useLastestPerformances(
     userId,
     searchedExerciseId
-  );
+  ).recentExerciseQuery;
   const [recentExercises, setRecentExercises] = useState<PerformanceFull[]>([]);
   useEffect(() => {
     console.log('effect fired');

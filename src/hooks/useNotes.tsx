@@ -25,7 +25,6 @@ function useNotes(userId?: string) {
 
   const postNotesMutation = useMutation({
     mutationFn: async (note: { userId: string; text: string }) => {
-      console.log('submitting note', note);
       const res = await fetch(`${apiURL}api/notes`, {
         mode: 'cors',
         method: 'POST',
