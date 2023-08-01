@@ -10,7 +10,6 @@ function useLastestPerformances(userId: string, limit: number = 10) {
       `${apiURL}api/performedexercises?user=${userId}&sort=desc&limit=${limit}`
     );
     const data = await res.json();
-    console.log(data.performedExercises);
     return data.performedExercises;
   };
 

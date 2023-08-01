@@ -35,7 +35,7 @@ function ExerciseSearch() {
         placeholder='Search for exercise...'
       />
       {matchedExercises && matchedExercises.length && (
-        <div className='flex flex-col border-[1px] border-t-0 rounded-t-none rounded-sm border-b-slate-200'>
+        <div className='flex flex-col border-[1px] border-t-0 rounded-t-none rounded-sm border-b-slate-200 max-h-[35vh] overflow-scroll'>
           {matchedExercises.map((exercise) => (
             <div
               className='p-2 hover:bg-slate-100 hover:cursor-pointer rounded-sm'

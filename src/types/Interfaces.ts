@@ -50,7 +50,8 @@ export interface PerformanceFull {
 export interface Exercise {
   name: string;
   id: string;
-  musclesGroup?: MuscleGroup;
+  muscleGroups?: MuscleGroup;
+  muscleGroupsId: string;
   sets?: number;
   standardized: boolean;
 }

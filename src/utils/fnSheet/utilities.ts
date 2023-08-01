@@ -32,7 +32,7 @@ export const convertDate = (s: any) => {
   const day = date.getUTCDate();
   const month = date.getUTCMonth();
   const year = date.getUTCFullYear();
-  return `${day}-${month}-${year}`;
+  return `${day}-${month + 1}-${year}`;
 };
 export function findNextHighestNumber(
   value: number,

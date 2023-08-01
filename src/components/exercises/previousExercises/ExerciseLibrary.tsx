@@ -13,8 +13,8 @@ function ExerciseLibrary() {
 
   useEffect(() => {
     if (recentExercisesQuery.data) {
+      console.log(recentExercisesQuery.data);
       setRecentExercises(recentExercisesQuery.data);
-      console.log(recentExercises);
     }
   }, [recentExercisesQuery.isFetched]);
   return (
