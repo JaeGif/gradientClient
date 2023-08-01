@@ -4,12 +4,15 @@ import { useAuth } from '../../../utils/AuthProvider';
 import { PerformanceFull, PerformedExercise } from '../../../types/Interfaces';
 import ExerciseEntry from './ExerciseEntry';
 import uniqid from 'uniqid';
+import { useQueryClient } from '@tanstack/react-query';
 
 type ExerciseLibraryProps = {
   searchedExerciseId?: string;
 };
+
 function ExerciseLibrary({ searchedExerciseId }: ExerciseLibraryProps) {
   const userId = useAuth()!.user!.id;
+  const queryClient = useQueryClient();
   // map the users last 10 exercises here, paginate by 10
   const recentExercisesQuery = useLastestPerformances(
     userId,
@@ -18,10 +21,15 @@ function ExerciseLibrary({ searchedExerciseId }: ExerciseLibraryProps) {
   const [recentExercises, setRecentExercises] = useState<PerformanceFull[]>([]);
   useEffect(() => {
     console.log('effect fired');
+    console.log(recentExercisesQuery.fetchStatus);
     if (recentExercisesQuery.data) {
       setRecentExercises(recentExercisesQuery.data);
     }
-  }, [recentExercisesQuery.isFetched, searchedExerciseId]);
+  }, [
+    recentExercisesQuery.isFetched,
+    searchedExerciseId,
+    recentExercisesQuery.fetchStatus,
+  ]);
   return (
     <div className='flex flex-col'>
       <span className='flex justify-between p-2 text-white bg-slate-700 sm:rounded-t-md'>

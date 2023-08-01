@@ -8,10 +8,12 @@ import { capitalize, convertDate } from '../../../utils/fnSheet/utilities';
 import uniqid from 'uniqid';
 import { motion } from 'framer-motion';
 import useLastestPerformances from '../../../hooks/useLatestPerformances';
+import { useQueryClient } from '@tanstack/react-query';
 type ExerciseEntryProps = {
   data: PerformanceFull;
 };
 function ExerciseEntry({ data }: ExerciseEntryProps) {
+  const queryClient = useQueryClient();
   const [editing, setEditing] = useState(false);
   const [weight, setWeight] = useState<number>();
   const [reps, setReps] = useState<number>();
@@ -116,7 +118,13 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
           />
           <motion.img
             onClick={() => {
-              deleteExerciseMutation.mutate(data.id);
+              deleteExerciseMutation.mutate(data.id, {
+                onSuccess: () => {
+                  queryClient.invalidateQueries({
+                    queryKey: ['performedexercise'],
+                  });
+                },
+              });
             }}
             variants={variants}
             animate={isHovered ? 'hover' : 'initial'}

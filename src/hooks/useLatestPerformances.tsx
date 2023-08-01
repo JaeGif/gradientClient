@@ -11,7 +11,6 @@ function useLastestPerformances(
   const queryClient = useQueryClient();
 
   const getLastestPerformances = async (): Promise<any> => {
-    console.log('calling on ', exerciseId);
     const res = await fetch(
       `${apiURL}api/performedexercises?exercise=${exerciseId}&user=${userId}&sort=desc&limit=${limit}`
     );
