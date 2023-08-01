@@ -27,10 +27,6 @@ export interface GoalType {
   bodyFatPercentage: number | undefined;
 }
 
-export interface Exercise {
-  id: string;
-  name: string;
-}
 export interface PerformedExercise {
   // exercise relation id mapped
   exercise: string;
@@ -53,6 +49,7 @@ export interface Exercise {
   muscleGroups?: MuscleGroup;
   muscleGroupsId: string;
   sets?: number;
+  reps?: number;
   standardized: boolean;
 }
 export interface PlannedExercise {

@@ -6,10 +6,9 @@ type ExerciseEntryProps = {
   data: PerformanceFull;
 };
 function ExerciseEntry({ data }: ExerciseEntryProps) {
-  console.log('dataset = ', data.exercise);
   return (
-    <span className='p-1 pl-4 pr-4 flex gap-5 border-2 border-slate-100 justify-center items-center'>
-      <div>
+    <span className='p-1 pl-4 pr-4 flex gap-5 border-2 border-slate-100 justify-between items-center'>
+      <div className='flex flex-col'>
         <p className='w-24'>{capitalize(data.exercise.name)}</p>
         <p className='text-sm text-slate-500'>
           {data.exercise.muscleGroups &&

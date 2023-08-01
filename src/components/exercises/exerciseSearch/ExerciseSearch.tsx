@@ -3,8 +3,13 @@ import { capitalize } from '../../../utils/fnSheet/utilities';
 import uniqid from 'uniqid';
 import { useAuth } from '../../../utils/AuthProvider';
 import useMatchingExerciseSearch from '../../../hooks/useMatchingExerciseSearch';
-function ExerciseSearch() {
+
+type ExerciseSearchProps = {
+  setSearchedExercise: Function;
+};
+function ExerciseSearch({ setSearchedExercise }: ExerciseSearchProps) {
   const [s, setS] = useState<string>();
+  const [searching, setSearching] = useState(false);
   const [matchedExercises, setMatchedExercises] = useState<
     {
       id: string;
@@ -23,25 +28,31 @@ function ExerciseSearch() {
       setMatchedExercises(matchingExercisesQuery.data);
     }
   }, [matchingExercisesQuery.isFetched]);
-
+  useEffect(() => {
+    if (s === '' || !s) {
+      setSearching(false);
+    }
+  }, [s]);
   return (
     <div>
       <input
         onChange={(e) => {
+          setSearching(true);
           setS(e.target.value);
         }}
         className='border-[1px] rounded-md rounded-b-none p-2'
         type='text'
         placeholder='Search for exercise...'
       />
-      {matchedExercises && matchedExercises.length && (
+      {searching && matchedExercises && matchedExercises.length && (
         <div className='flex flex-col border-[1px] border-t-0 rounded-t-none rounded-sm border-b-slate-200 max-h-[35vh] overflow-scroll'>
           {matchedExercises.map((exercise) => (
             <div
               className='p-2 hover:bg-slate-100 hover:cursor-pointer rounded-sm'
               key={uniqid()}
               onClick={() => {
-                console.log(exercise.name);
+                setSearching(false);
+                setSearchedExercise(exercise);
               }}
             >
               {capitalize(exercise.name)}
