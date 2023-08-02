@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import RecordExercise from './RecordExercise';
 import uniqid from 'uniqid';
 import { useAuth } from '../../utils/AuthProvider';
+import CreateExercise from './CreateExercise';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 function Record() {
   const userId = useAuth()!.user!.id;
   const userUnit = useAuth()!.user!.preferences.unit;
+  const [creatingExercise, setCreatingExercise] = useState(false);
+
   const [exerciseData, setExerciseData] = useState<
     {
       exercise: {
@@ -216,9 +219,14 @@ function Record() {
           </button>
         </span>
       </div>
-      <div className='flex flex-wrap gap-5 justify-center items-start'>
+      <div className='relative flex flex-wrap gap-5 justify-center items-start'>
+        {creatingExercise && (
+          <CreateExercise setCreatingExercise={setCreatingExercise} />
+        )}
+
         {exerciseData.map((data, i) => (
           <RecordExercise
+            setCreatingExercise={setCreatingExercise}
             index={i}
             data={data}
             key={uniqid()}

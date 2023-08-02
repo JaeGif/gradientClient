@@ -27,12 +27,14 @@ type RecordExerciseProps = {
     }[];
   };
   index: number;
+  setCreatingExercise: Function;
 };
 function RecordExercise({
   handleExerciseId,
   handleSets,
   data,
   index,
+  setCreatingExercise,
 }: RecordExerciseProps) {
   const userUnit = useAuth()!.user!.preferences.unit;
   const [s, setS] = useState<string>();
@@ -108,6 +110,16 @@ function RecordExercise({
                   {capitalize(exercise.name)}
                 </div>
               ))}
+              <div className='p-2 text-sm text-blue-500 hover:text-blue-400 rounded-sm'>
+                <p
+                  onClick={() => {
+                    setCreatingExercise(true);
+                  }}
+                  className='hover:cursor-pointer w-fit'
+                >
+                  Create new exercise...
+                </p>
+              </div>
             </div>
           )}
         </div>
