@@ -13,6 +13,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import SelectedMuscleGroup from './pages/home/analytics/SelectedMuscleGroup';
 import Record from './components/record/Record';
 import Exercises from './pages/library/Exercises';
+import UserProfile from './pages/profile/UserProfile';
 type MemoStateObject = { [key: string]: any };
 
 const ThemeContext = React.createContext<'light' | 'dark'>('dark');
@@ -43,10 +44,9 @@ function App() {
             }
           >
             <Route path='dashboard' element={<Dashboard />} />
-            <Route path='settings' element={<Settings />} />
-            <Route path='exercises' element={<Exercises />}>
-              <Route path='new' element={<>Something</>} />
-            </Route>
+            <Route path='settings' element={<UserProfile />} />
+            <Route path='exercises' element={<Exercises />} />
+
             <Route path='record' element={<Record />} />
             <Route path='analytics/*' element={<Analytics />}>
               <Route
