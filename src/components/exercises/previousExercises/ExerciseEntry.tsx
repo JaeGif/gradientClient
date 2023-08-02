@@ -44,16 +44,13 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
   }, [data.exercise.name]);
   const handleRepsChange = (index: number, newReps: number) => {
     let repsCopy = [...reps];
-    console.log(repsCopy);
     if (repsCopy.length) {
       for (let i = 0; i < repsCopy.length; i++) {
         if (repsCopy[i].index === index) repsCopy[i].reps === newReps;
         setReps(repsCopy);
-        console.log('quitting middle');
         return;
       }
     }
-    console.log('reaching end');
     setReps((prev) => [...prev, { index, reps: newReps }]);
   };
   const handleWeightChange = (index: number, newWeight: number) => {
@@ -70,7 +67,6 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
       for (let i = 0; i < weight.length; i++) {
         sets[weight[i].index].weight = weight[i].weight;
       }
-    console.log('new sets', sets);
     /*     putExerciseMutation.mutate({ sets, id: data.id });
      */
   };
@@ -155,7 +151,7 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
           alt='submit edits'
         />
       ) : (
-        <div className='absolute top-0 -right-16 h-full gap-2 flex items-center'>
+        <div className='absolute top-0 -right-8 h-full gap-2 flex items-center'>
           {/*           <motion.img
             onClick={() => {
               setEditing(true);

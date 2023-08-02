@@ -27,11 +27,13 @@ function Exercises() {
       <div className='flex justify-evenly'>
         <div className='flex flex-col gap-5'>
           <ExerciseSearch setSearchedExercise={setSearchedExercise} />
-          {recentlySearchedExercises && recentlySearchedExercises.length && (
+          {recentlySearchedExercises && recentlySearchedExercises.length ? (
             <RecentlySearched
               selectExercise={setSearchedExercise}
               exercises={recentlySearchedExercises}
             />
+          ) : (
+            <p className='text-gray-400 p-2'>No recent searches...</p>
           )}
         </div>
         <ExerciseLibrary searchedExerciseId={searchedExercise?.id} />

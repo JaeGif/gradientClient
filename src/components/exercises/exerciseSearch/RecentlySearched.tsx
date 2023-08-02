@@ -12,7 +12,7 @@ function RecentlySearched({
 }: RecentlySearchedProps) {
   return (
     <div className='flex flex-col'>
-      <h3>Recent Searches</h3>
+      <h3 className='pb-2'>Recent Searches</h3>
       {exercises.map((exercise) => (
         <RecentSearch
           selectExercise={selectExercise}

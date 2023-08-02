@@ -34,13 +34,13 @@ function ExerciseSearch({ setSearchedExercise }: ExerciseSearchProps) {
     }
   }, [s]);
   return (
-    <div>
+    <div className='min-w-[33vw]'>
       <input
         onChange={(e) => {
           setSearching(true);
           setS(e.target.value);
         }}
-        className='border-[1px] rounded-md rounded-b-none p-2'
+        className='border-[1px] rounded-md rounded-b-none p-2 w-full'
         type='text'
         placeholder='Search for exercise...'
       />

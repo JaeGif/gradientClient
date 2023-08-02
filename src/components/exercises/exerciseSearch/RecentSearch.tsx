@@ -9,12 +9,15 @@ type RecentSearchProps = {
 function RecentSearch({ exercise, selectExercise }: RecentSearchProps) {
   return (
     <span
-      className='p-2 bg-slate-100 hover:bg-slate-200 hover:cursor-pointer overflow-scroll'
+      className='p-2 bg-slate-100 hover:bg-slate-200 hover:cursor-pointer overflow-scroll flex gap-5 items-center'
       onClick={() => {
         selectExercise(exercise);
       }}
     >
-      {capitalize(exercise.name)}
+      <p>{capitalize(exercise.name)}</p>
+      <p className='text-slate-500 text-sm'>
+        {exercise.muscleGroups && capitalize(exercise.muscleGroups.name)}
+      </p>
     </span>
   );
 }
