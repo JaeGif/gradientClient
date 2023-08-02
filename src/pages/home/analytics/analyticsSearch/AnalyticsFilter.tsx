@@ -34,6 +34,11 @@ function AnalyticsFilter() {
             Shoulders
           </button>
         </Link>
+        <Link to={'muscleGroups/arms'}>
+          <button className='p-2 pl-4 pr-4 rounded-md hover:bg-blue-100'>
+            Arms
+          </button>
+        </Link>
         <Link to={'muscleGroups/all'}>
           <button className='p-2 pl-4 pr-4 rounded-md hover:bg-blue-100'>
             All

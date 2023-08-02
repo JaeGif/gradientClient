@@ -12,8 +12,6 @@ function CreateExercise({ setCreatingExercise }: CreateExerciseProps) {
   const [submitting, setSubmitting] = useState(false);
 
   const createExercise = async () => {
-    console.log('starting submit');
-    console.log(exerciseName, muscleId);
     if (exerciseName && muscleId) {
       setSubmitting(true);
       const res = await fetch(`${apiURL}api/exercises`, {
@@ -35,7 +33,6 @@ function CreateExercise({ setCreatingExercise }: CreateExerciseProps) {
   return (
     <div
       onClick={(e) => {
-        console.log('click');
         e.stopPropagation();
         setCreatingExercise(false);
       }}

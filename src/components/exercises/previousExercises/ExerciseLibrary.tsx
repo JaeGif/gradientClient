@@ -37,10 +37,13 @@ function ExerciseLibrary({ searchedExerciseId }: ExerciseLibraryProps) {
           Date <em className='text-gray-500'></em>
         </p>
       </span>
-      {recentExercises.length &&
+      {recentExercises.length ? (
         recentExercises.map((performance) => (
           <ExerciseEntry key={uniqid()} data={performance} />
-        ))}
+        ))
+      ) : (
+        <p className='text-gray-400 p-2'>No exercises match the query...</p>
+      )}
     </div>
   );
 }
