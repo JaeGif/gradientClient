@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Exercise,
   PerformanceFull,
@@ -18,6 +18,7 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
   const [weight, setWeight] = useState<number>();
   const [reps, setReps] = useState<number>();
   const [fullSets, setFullSets] = useState<PerformedSets[]>();
+  const [isBodyWeightExercise, setIsBodyWeightExercise] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const variants = {
     hover: {
@@ -35,6 +36,11 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
   const deleteExerciseMutation =
     useLastestPerformances().deleteRecentExerciseMutation;
 
+  useEffect(() => {
+    if (data.exercise.name === 'pullups') {
+      setIsBodyWeightExercise(true);
+    }
+  }, [data.exercise.name]);
   return (
     <span
       onMouseEnter={() => setIsHovered(true)}
@@ -42,7 +48,7 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
       className={
         editing
           ? 'relative border-2 border-red-600 flex items-center'
-          : 'relative flex items-center'
+          : 'relative flex items-center hover:bg-slate-100'
       }
     >
       <span className='min-w-full p-1 pl-4 pr-4 flex gap-5 border-2 border-slate-100 justify-between items-center'>
@@ -83,12 +89,22 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
                     }}
                     type='number'
                     placeholder='weight'
-                    defaultValue={set.weight}
+                    defaultValue={
+                      isBodyWeightExercise ? `BW + ${set.weight}` : set.weight
+                    }
                   />
+                ) : isBodyWeightExercise ? (
+                  <>
+                    BW
+                    {set.weight === 0
+                      ? ''
+                      : `+ ${set.weight}${set.unit}
+                  `}
+                  </>
                 ) : (
-                  `${set.weight}`
+                  `${set.weight}${set.unit}
+                  `
                 )}
-                {set.unit}
               </p>
             </div>
           ))}
