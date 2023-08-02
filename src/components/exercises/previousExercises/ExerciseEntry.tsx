@@ -9,15 +9,16 @@ import uniqid from 'uniqid';
 import { motion } from 'framer-motion';
 import useLastestPerformances from '../../../hooks/useLatestPerformances';
 import { useQueryClient } from '@tanstack/react-query';
+import { useAuth } from '../../../utils/AuthProvider';
 type ExerciseEntryProps = {
   data: PerformanceFull;
 };
 function ExerciseEntry({ data }: ExerciseEntryProps) {
+  const userUnit = useAuth()!.user!.preferences.unit;
   const queryClient = useQueryClient();
   const [editing, setEditing] = useState(false);
-  const [weight, setWeight] = useState<number>();
-  const [reps, setReps] = useState<number>();
-  const [fullSets, setFullSets] = useState<PerformedSets[]>();
+  const [weight, setWeight] = useState<{ index: number; weight: number }[]>([]);
+  const [reps, setReps] = useState<{ index: number; reps: number }[]>([]);
   const [isBodyWeightExercise, setIsBodyWeightExercise] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const variants = {
@@ -41,13 +42,46 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
       setIsBodyWeightExercise(true);
     }
   }, [data.exercise.name]);
+  const handleRepsChange = (index: number, newReps: number) => {
+    let repsCopy = [...reps];
+    console.log(repsCopy);
+    if (repsCopy.length) {
+      for (let i = 0; i < repsCopy.length; i++) {
+        if (repsCopy[i].index === index) repsCopy[i].reps === newReps;
+        setReps(repsCopy);
+        console.log('quitting middle');
+        return;
+      }
+    }
+    console.log('reaching end');
+    setReps((prev) => [...prev, { index, reps: newReps }]);
+  };
+  const handleWeightChange = (index: number, newWeight: number) => {
+    setWeight((prev) => [...prev, { index, weight: newWeight }]);
+  };
+  const handlePutExercise = () => {
+    let sets = data.sets;
+
+    if (reps)
+      for (let i = 0; i < reps.length; i++) {
+        sets[reps[i].index].reps = reps[i].reps;
+      }
+    if (weight)
+      for (let i = 0; i < weight.length; i++) {
+        sets[weight[i].index].weight = weight[i].weight;
+      }
+    console.log('new sets', sets);
+    /*     putExerciseMutation.mutate({ sets, id: data.id });
+     */
+  };
+
   return (
     <span
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={
         editing
-          ? 'relative border-2 border-red-600 flex items-center'
+          ? 'relative border-2 border-blue-300 flex items-center'
           : 'relative flex items-center hover:bg-slate-100'
       }
     >
@@ -59,7 +93,7 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
               capitalize(data.exercise.muscleGroups?.name)}
           </p>
         </div>
-        <span>
+        <span className={editing ? 'flex flex-col gap-2' : 'flex flex-col'}>
           {data.sets.map((set, i) => (
             <div key={uniqid()} className='flex gap-2'>
               <p>Set: {i + 1} |</p>
@@ -67,13 +101,14 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
                 Reps:{' '}
                 {editing ? (
                   <input
-                    className='w-20'
-                    onChange={(e) => {
-                      setReps(parseInt(e.target.value));
+                    key={uniqid()}
+                    className='pl-1 w-10'
+                    onBlur={(e) => {
+                      e.preventDefault();
+                      handleRepsChange(set.index, parseInt(e.target.value));
                     }}
                     type='number'
                     placeholder='reps'
-                    defaultValue={set.reps}
                   />
                 ) : (
                   set.reps
@@ -83,12 +118,14 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
                 Weight:{' '}
                 {editing ? (
                   <input
-                    className='w-20'
+                    key={uniqid()}
+                    className='w-20 pl-1'
                     onChange={(e) => {
-                      setReps(parseInt(e.target.value));
+                      e.preventDefault();
+                      handleWeightChange(set.index, parseFloat(e.target.value));
                     }}
                     type='number'
-                    placeholder='weight'
+                    placeholder={userUnit}
                     defaultValue={
                       isBodyWeightExercise ? `BW + ${set.weight}` : set.weight
                     }
@@ -96,14 +133,10 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
                 ) : isBodyWeightExercise ? (
                   <>
                     BW
-                    {set.weight === 0
-                      ? ''
-                      : `+ ${set.weight}${set.unit}
-                  `}
+                    {set.weight === 0 ? '' : `+ ${set.weight}${set.unit}`}
                   </>
                 ) : (
-                  `${set.weight}${set.unit}
-                  `
+                  `${set.weight}${set.unit}`
                 )}
               </p>
             </div>
@@ -114,6 +147,7 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
       {editing ? (
         <img
           onClick={() => {
+            handlePutExercise();
             setEditing(false);
           }}
           className='h-6 ml-2 hover:cursor-pointer'
@@ -122,7 +156,7 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
         />
       ) : (
         <div className='absolute top-0 -right-16 h-full gap-2 flex items-center'>
-          <motion.img
+          {/*           <motion.img
             onClick={() => {
               setEditing(true);
             }}
@@ -131,7 +165,7 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
             className='h-6 hover:cursor-pointer'
             src='/favicons/edit.svg'
             alt='edit entry'
-          />
+          /> */}
           <motion.img
             onClick={() => {
               deleteExerciseMutation.mutate(data.id, {
