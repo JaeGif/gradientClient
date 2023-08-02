@@ -4,6 +4,7 @@ import useMuscleSpecificExercises from '../../../hooks/useMuscleSpecificExercise
 import { useAuth } from '../../../utils/AuthProvider';
 import AvgAbs1RepMaxToggle from '../../../components/analytics/AvgAbs1RepMaxToggle';
 import uniqid from 'uniqid';
+import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 function SelectedMuscleGroup() {
   const userId = useAuth()!.user!.id;
   let extension = useMatch('/analytics/muscleGroups/*')?.params['*']!;
@@ -28,11 +29,11 @@ function SelectedMuscleGroup() {
     }
   }, [muscleSpecificExercisesQuery.isFetched, location.pathname]);
   return (
-    <div>
+    <div className='flex w-full justify-center items-center'>
       {muscleSpecificExercisesQuery.data &&
       muscleSpecificExercisesQuery.data.length &&
       exerciseIdx ? (
-        <div className='flex flex-col gap-5'>
+        <div className='flex flex-col gap-5 w-full'>
           {exerciseIdx.map((id, i, idxArr) => (
             <AvgAbs1RepMaxToggle
               key={uniqid()}
@@ -46,7 +47,7 @@ function SelectedMuscleGroup() {
         muscleSpecificExercisesQuery.data.length === 0 ? (
         <p>No exercises in this category</p>
       ) : (
-        <>Loading</>
+        <TailSpin stroke='#000000' />
       )}
     </div>
   );

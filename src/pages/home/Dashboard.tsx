@@ -11,6 +11,7 @@ import ThreeDots from 'react-loading-icons/dist/esm/components/three-dots';
 import useNotes from '../../hooks/useNotes';
 import usePerformedStandardsMax from '../../hooks/usePerformedStandardsMax';
 import useGeneralProgressData from '../../hooks/useGeneralProgressData';
+import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 const GoalContext = React.createContext<GoalType | null>(null);
 
 export default function Dashboard() {
@@ -20,7 +21,8 @@ export default function Dashboard() {
   const notesQuery = useNotes(userId).getNotesQuery;
   const performedStandardsQuery = usePerformedStandardsMax(userId);
   const progressQuery = useGeneralProgressData(userId, userGender);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     if (notesQuery.data && performedStandardsQuery.data && progressQuery.data) {
       setIsLoading(false);
@@ -32,37 +34,32 @@ export default function Dashboard() {
   ]);
   return (
     <GoalContext.Provider value={goal}>
-      <div
-        className={
-          isLoading
-            ? 'fixed w-full top-0 right-0 h-screen flex flex-col justify-center items-center'
-            : 'invisible hidden'
-        }
-      >
-        <h1 className='m-0 p-0'>Loading</h1>
-        <ThreeDots
-          className='h-40 -mt-10'
-          strokeWidth={0.3}
-          strokeOpacity={0.5}
-          stroke='#000000'
-          speed={0.75}
-          fill='#000000'
-        />
-      </div>
-
-      <div
-        className={
-          isLoading
-            ? 'hidden'
-            : 'flex flex-wrap w-full h-full gap-5 justify-center p-6 overflow-y-scroll'
-        }
-      >
-        <Stats />
-        <GeneralProgressChart />
-        <Activity />
-        <StrengthByMuscleGroup />
-        <Notes />
-      </div>
+      {isLoading ? (
+        <div
+          className={
+            isLoading
+              ? 'fixed w-full top-0 right-0 h-screen flex flex-col items-center gap-5 p-5'
+              : 'invisible hidden'
+          }
+        >
+          <h1 className='m-0 p-0'>Loading Dashboard</h1>
+          <TailSpin stroke='#000000' />
+        </div>
+      ) : (
+        <div
+          className={
+            isLoading
+              ? 'hidden'
+              : 'flex flex-wrap w-full h-full gap-5 justify-center p-6 overflow-y-scroll'
+          }
+        >
+          <Stats />
+          <GeneralProgressChart />
+          <Activity />
+          <StrengthByMuscleGroup />
+          <Notes />
+        </div>
+      )}
     </GoalContext.Provider>
   );
 }
