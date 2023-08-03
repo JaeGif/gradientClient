@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
 import { useAuth } from '../../../utils/AuthProvider';
 import { GoalContext } from '../../../pages/home/Dashboard';
+import { UserQueryResult } from '../../../types/Interfaces';
 
-function UserBodyFat() {
-  const userBodyFat = useAuth()!.user?.bodyFatPercentage || 'Unknown';
+type UserBodyFatProps = {
+  user: UserQueryResult;
+};
+function UserBodyFat({ user }: UserBodyFatProps) {
+  const userBodyFat = user.bodyFatPercentage;
   const bodyFatGoal = useContext(GoalContext)?.bodyFatPercentage;
   return (
     <div className='relative shadow-md p-2 rounded-lg h-full flex w-1/4 flex-col justify-center items-center gap-2 text-center'>

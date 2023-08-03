@@ -1,18 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { User, UserQueryResult } from '../../types/Interfaces';
 import useUserQuery from '../../hooks/useUserQuery';
+import { useQueryClient } from '@tanstack/react-query';
+import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 type EditUserStatsProps = {
   user: UserQueryResult;
 };
 function EditUserStats({ user }: EditUserStatsProps) {
+  const queryClient = useQueryClient();
   const [newWeight, setNewWeight] = useState<number>(user.weight);
   const [newBodyFatPercentage, setNewBodyFatPercentage] = useState<number>(
     user.bodyFatPercentage!
   );
+  const [submitting, setSubmitting] = useState(false);
   const [edited, setEdited] = useState(false);
 
   const putUserStatsMutation = useUserQuery().putUserStatsMutation();
 
+  useEffect(() => {
+    if (
+      newWeight === user.weight &&
+      newBodyFatPercentage === user.bodyFatPercentage
+    ) {
+      setEdited(false);
+    }
+  }, [newWeight, newBodyFatPercentage]);
   return (
     <div className='flex flex-col gap-2'>
       <h3>User Stats</h3>
@@ -53,15 +65,28 @@ function EditUserStats({ user }: EditUserStatsProps) {
           type='button'
           onClick={() => {
             if (edited) {
-              putUserStatsMutation.mutate({
+              setSubmitting(true);
+              const edits = {
                 weight: newWeight,
                 bodyFatPercentage: newBodyFatPercentage,
+              };
+              putUserStatsMutation.mutate(edits, {
+                onSuccess: () => {
+                  queryClient.invalidateQueries({
+                    queryKey: ['user', { id: user.id }],
+                  });
+                  setSubmitting(false);
+                },
               });
             }
           }}
-          className='border-2 border-slate-500 p-2 hover:bg-slate-500 hover:text-white rounded-sm'
+          className='flex items-center justify-center border-2 border-slate-500 p-2 hover:bg-slate-500 hover:text-white rounded-sm'
         >
-          Submit Changes
+          {submitting ? (
+            <TailSpin className='h-6' stroke='#000000' />
+          ) : (
+            'Submit Changes'
+          )}
         </button>
       </div>
     </div>
