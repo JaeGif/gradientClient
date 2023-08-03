@@ -14,6 +14,15 @@ export interface User {
   bodyFatPercentage?: number;
   age: number;
 }
+export interface UserQueryResult {
+  id: string;
+  username: string;
+  gender: 'm' | 'f';
+  preferences: { unit: 'kg' | 'lb'; standard: 'ratio' | 'percentile' };
+  weight: number;
+  bodyFatPercentage?: number;
+  age: number;
+}
 export interface GoalType {
   id: string;
   lifts: {

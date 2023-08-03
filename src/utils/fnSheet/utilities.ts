@@ -1,5 +1,12 @@
 import { standards } from '../../data/standards';
 
+export const manuallyUpdateUserStorage = (
+  weight: number,
+  bodyFatPercentage: number
+) => {
+  console.log(localStorage);
+  let fullUser = JSON.parse(localStorage.getItem('gradientLoggedInUser')!);
+};
 export const capitalize = (str: string) => {
   if (str === '') return '';
   let words = str.split(' ');

@@ -29,6 +29,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       user: userRes,
       token: tokenRes,
     };
+
     localStorage.setItem(
       'gradientLoggedInUser',
       JSON.stringify(loginLocalObject)

@@ -41,11 +41,9 @@ function useLastestPerformances(
   });
   const deleteRecentExerciseMutation = useMutation({
     mutationFn: async (id: string) => {
-      console.log('delete entering');
       const res = await fetch(`${apiURL}api/performedexercises/${id}`, {
         mode: 'cors',
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
       });
       const result = await res.json();
       return result.performedExercise;

@@ -6,12 +6,12 @@ function NavBar() {
     <>
       <div className=' w-screen sm:w-1/5 sm:min-w-[250px] sm:min-h-screen sm:max-h-screen sm:m-3 pl-4 pr-4 pt-4'></div>
       <nav className='fixed top-0 left-0 flex flex-col w-screen sm:w-1/5 sm:min-w-[250px] sm:min-h-screen sm:max-h-screen pl-4 pr-4 pt-4 shadow-md'>
-        <span className='flex flex-col justify-center items-center'>
+        <span className='flex flex-col justify-center items-center gap-2'>
           <img className='h-10' src='/gradient-icon.png' />
-          <h1 className='text-xl'>gradient</h1>
-        </span>
-        <span className='flex justify-center items-center'>
-          <img alt='profile' />
+          <span className='flex gap-1'>
+            <h1 className='text-xl'>Gradient</h1>
+            <h1 className='text-xl'>Fitness</h1>
+          </span>
         </span>
         <ul className='flex flex-col justify-center items-center pt-2 pb-2 gap-2'>
           <li className='w-full'>
