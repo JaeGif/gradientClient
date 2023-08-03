@@ -14,30 +14,31 @@ function useUserQuery() {
     queryKey: ['user', { id: userId }],
     queryFn: getUserData,
   });
-  const putUserStats = async (statsUpdate: {
+  const putUser = async (update: {
     weight?: number;
     bodyFatPercentage?: number;
+    preferences?: {
+      unit?: 'kg' | 'lb';
+      standard?: 'percentile' | 'ratio';
+    };
   }) => {
-    let updateFields: { weight?: number; bodyFatPercentage?: number } = {};
-    if (statsUpdate.weight) {
-      updateFields.weight = statsUpdate.weight;
-    }
-    if (statsUpdate.bodyFatPercentage) {
-      updateFields.bodyFatPercentage = statsUpdate.bodyFatPercentage;
-    }
     const res = await fetch(`${apiURL}api/users/${userId}`, {
       mode: 'cors',
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updateFields),
+      body: JSON.stringify(update),
     });
   };
   const putUserStatsMutation = () =>
     useMutation({
-      mutationFn: (statsUpdate: {
+      mutationFn: (update: {
         weight?: number;
         bodyFatPercentage?: number;
-      }) => putUserStats(statsUpdate),
+        preferences?: {
+          unit?: 'kg' | 'lb';
+          standard?: 'percentile' | 'ratio';
+        };
+      }) => putUser(update),
     });
 
   return { getUserQuery, putUserStatsMutation };
