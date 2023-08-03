@@ -1,13 +1,13 @@
 import React from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
-type GoalPutType = {
+export type GoalPutType = {
   lifts?: {
-    benchPress?: string;
-    pullups?: string;
-    squats?: string;
-    deadlifts?: string;
-    shoulderPress?: string;
+    benchPress?: number;
+    pullup?: number;
+    squats?: number;
+    deadlift?: number;
+    shoulderPress?: number;
   };
   weight?: number;
   bodyFatPercentage?: number;

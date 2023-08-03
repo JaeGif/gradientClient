@@ -75,6 +75,7 @@ function EditUserStats({ user }: EditUserStatsProps) {
                   queryClient.invalidateQueries({
                     queryKey: ['user', { id: user.id }],
                   });
+
                   setSubmitting(false);
                 },
               });
