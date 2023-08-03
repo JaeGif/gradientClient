@@ -4,6 +4,7 @@ import { GoalType } from '../../types/Interfaces';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 import { useQueryClient } from '@tanstack/react-query';
 import useUserGoalsMutation, { GoalPutType } from '../../hooks/useUserGoals';
+
 type EditUserGoalsProps = {
   user: UserQueryResult;
   goals: GoalType;
@@ -34,9 +35,9 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
   const userGoalsMutation = useUserGoalsMutation().putUserGoalsMutation;
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col gap-5 bg-slate-100 p-2 rounded-md'>
       <div className='flex gap-5'>
-        <div className='flex flex-col'>
+        <div className='flex flex-col gap-2'>
           <h3>Body Goals</h3>
           <span className='flex flex-col'>
             <label>Body Fat Goal</label>
@@ -45,7 +46,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                 setEdited(true);
                 setBodyFatPercentageGoal(parseFloat(e.target.value));
               }}
-              className='p-2 bg-slate-200'
+              className='p-2 bg-slate-200 rounded-sm'
               type='number'
               placeholder={`${goals.bodyFatPercentage}%`}
             />
@@ -57,13 +58,13 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                 setEdited(true);
                 setWeightGoal(parseFloat(e.target.value));
               }}
-              className='p-2 bg-slate-200'
+              className='p-2 bg-slate-200 rounded-sm'
               type='number'
               placeholder={`${goals.weight}${user.preferences.unit}`}
             />
           </span>
         </div>
-        <div className='flex flex-col'>
+        <div className='flex flex-col gap-2'>
           <h3>Lifts</h3>
           <span className='flex flex-col'>
             <label>Bench Press</label>
@@ -72,7 +73,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                 setEdited(true);
                 setBenchPressGoal(parseFloat(e.target.value));
               }}
-              className='p-2 bg-slate-200'
+              className='p-2 bg-slate-200 rounded-sm'
               type='number'
               placeholder={`${goals.lifts.benchPress}${user.preferences.unit}`}
             />
@@ -84,7 +85,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                 setEdited(true);
                 setDeadliftGoal(parseFloat(e.target.value));
               }}
-              className='p-2 bg-slate-200'
+              className='p-2 bg-slate-200 rounded-sm'
               type='number'
               placeholder={`${goals.lifts.deadlift}${user.preferences.unit}`}
             />
@@ -96,7 +97,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                 setEdited(true);
                 setPullupGoal(parseFloat(e.target.value));
               }}
-              className='p-2 bg-slate-200'
+              className='p-2 bg-slate-200 rounded-sm'
               type='number'
               placeholder={`${goals.lifts.pullup}${user.preferences.unit}`}
             />
@@ -108,7 +109,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                 setEdited(true);
                 setShoulderPressGoal(parseFloat(e.target.value));
               }}
-              className='p-2 bg-slate-200'
+              className='p-2 bg-slate-200 rounded-sm'
               type='number'
               placeholder={`${goals.lifts.shoulderPress}${user.preferences.unit}`}
             />
@@ -120,7 +121,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                 setEdited(true);
                 setSquatsGoal(parseFloat(e.target.value));
               }}
-              className='p-2 bg-slate-200'
+              className='p-2 bg-slate-200 rounded-sm'
               type='number'
               placeholder={`${goals.lifts.squats || '~'}${
                 user.preferences.unit
@@ -134,6 +135,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
         onClick={() => {
           if (edited) {
             setSubmitting(true);
+            console.log('submitting');
             const goalEdits: GoalPutType = {
               lifts: {
                 benchPress: benchPressGoal,
@@ -154,6 +156,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                   });
 
                   setSubmitting(false);
+                  console.log('submitted');
                 },
               }
             );

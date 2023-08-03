@@ -1,5 +1,12 @@
 import { standards } from '../../data/standards';
 
+export const kgToLb = (kg: number) => {
+  return parseFloat((kg * 2.20462).toFixed(2));
+};
+export const lbToKg = (lb: number) => {
+  return parseFloat((lb / 2.20462).toFixed(2));
+};
+
 export const manuallyUpdateUserStorage = (
   weight: number,
   bodyFatPercentage: number

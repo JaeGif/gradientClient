@@ -39,29 +39,33 @@ function UserPreferences({ user }: UserPreferencesProps) {
   return (
     <span>
       <h2>Settings</h2>
-      <div>
-        <p>Standard Type</p>
-        <select
-          onChange={(e) => {
-            handleStandardChange(e.target.value as 'percentile' | 'ratio');
-          }}
-          defaultValue={standard}
-          className='p-2 rounded-md'
-        >
-          <option value={'percentile'}>Percentile</option>
-          <option value={'ratio'}>Body Weight Ratio</option>
-        </select>
-        <p>Units</p>
-        <select
-          onChange={(e) => {
-            handleUnitChange(e.target.value as 'kg' | 'lb');
-          }}
-          defaultValue={unit}
-          className='p-2 rounded-md'
-        >
-          <option value={'kg'}>Kilograms (kg)</option>
-          <option value={'lb'}>Pounds (lb)</option>
-        </select>
+      <div className='flex flex-col gap-2 w-fit'>
+        <div className='flex flex-col'>
+          <p>Standard Type</p>
+          <select
+            onChange={(e) => {
+              handleStandardChange(e.target.value as 'percentile' | 'ratio');
+            }}
+            defaultValue={standard}
+            className='p-2 rounded-md'
+          >
+            <option value={'percentile'}>Percentile</option>
+            <option value={'ratio'}>Body Weight Ratio</option>
+          </select>
+        </div>
+        <div className='flex flex-col'>
+          <p>Units</p>
+          <select
+            onChange={(e) => {
+              handleUnitChange(e.target.value as 'kg' | 'lb');
+            }}
+            defaultValue={unit}
+            className='p-2 rounded-md'
+          >
+            <option value={'kg'}>Kilograms (kg)</option>
+            <option value={'lb'}>Pounds (lb)</option>
+          </select>
+        </div>
       </div>
     </span>
   );
