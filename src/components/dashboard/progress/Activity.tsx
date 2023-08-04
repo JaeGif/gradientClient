@@ -8,6 +8,7 @@ import {
 import OverlayProgressBarChart from '../../charts/OverlayProgressBarChart';
 import Info from './progressComponents/Info';
 import { useAuth } from '../../../utils/AuthProvider';
+import { useUser } from '../../../utils/UserProvider';
 
 function Activity() {
   const [nextLevel, setNextLevel] = useState<string>('');
@@ -20,11 +21,9 @@ function Activity() {
       weight: number;
     }[]
   >();
-  const userData = useAuth();
-  const progressQuery = useGeneralProgressData(
-    userData!.user!.id,
-    userData!.user!.gender
-  );
+  const userId = useAuth()!.user!.id;
+  const userGender = useUser()!.gender;
+  const progressQuery = useGeneralProgressData(userId, userGender);
 
   useEffect(() => {
     if (progressQuery.data && progressQuery.isFetched) {

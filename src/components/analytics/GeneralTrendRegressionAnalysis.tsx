@@ -7,6 +7,7 @@ type GeneralTrendRegressionAnalysisProps = {
 };
 import useCustomMemo from '../../hooks/useCustomMemo';
 import { useAuth } from '../../utils/AuthProvider';
+import { useUser } from '../../utils/UserProvider';
 function GeneralTrendRegressionAnalysis({
   exerciseId,
   average,
@@ -15,7 +16,7 @@ function GeneralTrendRegressionAnalysis({
   const [regressionSlope, setRegressionSlope] = useState<number>();
   const [positive, setPositive] = useState<boolean>();
   const [state, addToCache] = useCustomMemo();
-  const userUnits = useAuth()!.user?.preferences.unit;
+  const userUnits = useUser()!.preferences.unit;
 
   const signOfSlope = (slope: number) => {
     const sign = Math.sign(slope);

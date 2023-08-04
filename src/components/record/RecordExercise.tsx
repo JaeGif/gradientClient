@@ -4,6 +4,7 @@ import { useAuth } from '../../utils/AuthProvider';
 import uniqid from 'uniqid';
 import { capitalize } from '../../utils/fnSheet/utilities';
 import SetPerformed from './SetPerformed';
+import { useUser } from '../../utils/UserProvider';
 
 type RecordExerciseProps = {
   handleExerciseId: Function;
@@ -36,7 +37,7 @@ function RecordExercise({
   index,
   setCreatingExercise,
 }: RecordExerciseProps) {
-  const userUnit = useAuth()!.user!.preferences.unit;
+  const userUnit = useUser()!.preferences.unit;
   const [s, setS] = useState<string>();
   const [matchedExercises, setMatchedExercises] = useState<
     {

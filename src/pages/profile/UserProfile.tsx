@@ -4,9 +4,10 @@ import Profile from '../../components/profile/Profile';
 import useGetUserGoals from '../../hooks/useGetUserGoals';
 import { GoalType } from '../../types/Interfaces';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
+import { useUser } from '../../utils/UserProvider';
 
 function UserProfile() {
-  const user = useAuth()!.user;
+  const user = useUser()!;
   const goal: GoalType = useGetUserGoals(user!.id);
 
   return (

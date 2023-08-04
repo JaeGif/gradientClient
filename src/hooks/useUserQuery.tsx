@@ -4,8 +4,10 @@ import { useAuth } from '../utils/AuthProvider';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 
 function useUserQuery() {
-  const userId = useAuth()!.user!.id;
+  const auth = useAuth();
+  const userId = auth!.user?.id;
   const getUserData = async () => {
+    if (!userId) return {};
     const res = await fetch(`${apiURL}api/users/${userId}`, { mode: 'cors' });
     const data = await res.json();
     return data.user;

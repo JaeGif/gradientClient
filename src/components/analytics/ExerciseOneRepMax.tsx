@@ -9,6 +9,7 @@ import useLinearRegression from '../../hooks/useLinearRegression';
 import useCustomMemo from '../../hooks/useCustomMemo';
 import { UseQueryResult } from '@tanstack/react-query';
 import { useAuth } from '../../utils/AuthProvider';
+import { useUser } from '../../utils/UserProvider';
 type ExerciseOneRepMaxProps = {
   exerciseId: string;
   recentExerciseQuery: UseQueryResult<any, unknown>;
@@ -24,8 +25,9 @@ function ExerciseOneRepMax({
   const [options, setOptions] = useState<any>();
   const [timeFrame, setTimeFrame] = useState('30 days'); // set this is fetched at right intervals
   const [state, addToCache] = useCustomMemo();
-  const userWeight = useAuth()!.user!.weight.value;
-  const userGender = useAuth()!.user!.gender;
+
+  const userWeight = useUser()!.weight;
+  const userGender = useUser()!.gender;
 
   useEffect(() => {
     if (recentExerciseQuery.data && recentExerciseQuery.data.length !== 0) {

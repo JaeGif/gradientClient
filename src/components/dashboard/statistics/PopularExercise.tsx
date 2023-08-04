@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../../utils/AuthProvider';
 import usePerformedStandardsMax from '../../../hooks/usePerformedStandardsMax';
 import { compareExercisesAgainstStandards } from '../../../utils/fnSheet/utilities';
+import { useUser } from '../../../utils/UserProvider';
 
 function PopularExercise() {
   const userId = useAuth()!.user!.id;
-  const userGender = useAuth()!.user!.gender;
-  const userUnits = useAuth()!.user!.preferences.unit;
+  const userGender = useUser()!.gender;
+  const userUnits = useUser()!.preferences.unit;
 
   // exercise where you are the strongest
   const [best, setBest] = useState<{

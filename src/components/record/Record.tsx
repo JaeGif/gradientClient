@@ -3,10 +3,11 @@ import RecordExercise from './RecordExercise';
 import uniqid from 'uniqid';
 import { useAuth } from '../../utils/AuthProvider';
 import CreateExercise from './CreateExercise';
+import { useUser } from '../../utils/UserProvider';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 function Record() {
   const userId = useAuth()!.user!.id;
-  const userUnit = useAuth()!.user!.preferences.unit;
+  const userUnit = useUser()!.preferences.unit;
   const [creatingExercise, setCreatingExercise] = useState(false);
 
   const [exerciseData, setExerciseData] = useState<

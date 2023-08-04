@@ -4,6 +4,7 @@ import { capitalize } from '../../utils/fnSheet/utilities';
 import useCustomMemo from '../../hooks/useCustomMemo';
 import { standards } from '../../data/standards';
 import { useAuth } from '../../utils/AuthProvider';
+import { useUser } from '../../utils/UserProvider';
 type StandardsAnalysisProps = {
   exerciseId: string;
   average: boolean;
@@ -19,8 +20,8 @@ function StandardsAnalysis({ exerciseId, average }: StandardsAnalysisProps) {
       }
     | undefined
   >();
-  const userGender = useAuth()!.user!.gender;
-  const userPreferenceWeight = useAuth()!.user!.preferences.unit;
+  const userGender = useUser()!.gender;
+  const userPreferenceWeight = useUser()!.preferences.unit;
 
   let tempStandard = exerciseStandard;
   let storeKey: string = '';

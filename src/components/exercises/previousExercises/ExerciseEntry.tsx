@@ -10,11 +10,12 @@ import { motion } from 'framer-motion';
 import useLastestPerformances from '../../../hooks/useLatestPerformances';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../../utils/AuthProvider';
+import { useUser } from '../../../utils/UserProvider';
 type ExerciseEntryProps = {
   data: PerformanceFull;
 };
 function ExerciseEntry({ data }: ExerciseEntryProps) {
-  const userUnit = useAuth()!.user!.preferences.unit;
+  const userUnit = useUser()!.preferences.unit;
   const queryClient = useQueryClient();
   const [editing, setEditing] = useState(false);
   const [weight, setWeight] = useState<{ index: number; weight: number }[]>([]);

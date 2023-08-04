@@ -12,11 +12,12 @@ import useNotes from '../../hooks/useNotes';
 import usePerformedStandardsMax from '../../hooks/usePerformedStandardsMax';
 import useGeneralProgressData from '../../hooks/useGeneralProgressData';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
+import { useUser } from '../../utils/UserProvider';
 const GoalContext = React.createContext<GoalType | null>(null);
 
 export default function Dashboard() {
   const userId = useAuth()!.user!.id;
-  const userGender = useAuth()!.user!.gender;
+  const userGender = useUser()!.gender;
   const goal: GoalType = useGetUserGoals(userId);
   const notesQuery = useNotes(userId).getNotesQuery;
   const performedStandardsQuery = usePerformedStandardsMax(userId);

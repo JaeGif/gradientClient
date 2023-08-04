@@ -9,6 +9,7 @@ import useLinearRegression from '../../hooks/useLinearRegression';
 import useCustomMemo from '../../hooks/useCustomMemo';
 import { UseQueryResult } from '@tanstack/react-query';
 import { useAuth } from '../../utils/AuthProvider';
+import { useUser } from '../../utils/UserProvider';
 type ExerciseCurrentLevelProps = {
   exerciseId: string;
   recentExerciseQuery: UseQueryResult<any, unknown>;
@@ -24,8 +25,9 @@ function ExerciseCurrentLevel({
   const [options, setOptions] = useState<any>();
   const [timeFrame, setTimeFrame] = useState('30 days');
   const [state, addToCache] = useCustomMemo();
-  const userWeight = useAuth()!.user!.weight.value;
-  const userGender = useAuth()!.user!.gender;
+
+  const userWeight = useUser()!.weight;
+  const userGender = useUser()!.gender;
   useEffect(() => {
     if (recentExerciseQuery.data && recentExerciseQuery.data.length !== 0) {
       const labels = useExerciseDateLabels(recentExerciseQuery);

@@ -3,15 +3,18 @@ import { standards } from '../../../data/standards';
 import { useAuth } from '../../../utils/AuthProvider';
 import usePerformedStandardsMax from '../../../hooks/usePerformedStandardsMax';
 import { useEffect, useState } from 'react';
+import useUserQuery from '../../../hooks/useUserQuery';
+import { useUser } from '../../../utils/UserProvider';
 function GeneralProgressChart() {
   // use max values from last 30 days on standard exercises as the users current values
   // standards can be added programmatically from the DB
   const [userExerciseLevels, setUserExerciseLevels] = useState<
     { exercise: string; value: number }[] | null
   >(null);
-  const userGender = useAuth()!.user!.gender;
+
+  const userGender = useUser()!.gender;
   const genderedStandards = standards.gender[userGender];
-  const units = useAuth()!.user!.preferences.unit;
+  const units = useUser()!.preferences.unit;
   const userId = useAuth()!.user!.id;
   // bench, pullup, squat, deadlift, shoulder press
   const userStandardsPerformancesMax = usePerformedStandardsMax(userId, 10);

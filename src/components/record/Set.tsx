@@ -1,5 +1,6 @@
 import React, { useEffect, useState, memo } from 'react';
 import { useAuth } from '../../utils/AuthProvider';
+import { useUser } from '../../utils/UserProvider';
 
 type SetProps = {
   i: number;
@@ -13,7 +14,7 @@ type SetProps = {
   };
 };
 const Set = memo(({ index, i, handleSets, set }: SetProps) => {
-  const userUnits = useAuth()!.user!.preferences.unit;
+  const userUnits = useUser()!.preferences.unit;
   const [weight, setWeight] = useState<number | undefined>(set?.weight);
   const [reps, setReps] = useState<number | undefined>(set?.reps);
   const [isLogged, setIsLogged] = useState(set?.logged);

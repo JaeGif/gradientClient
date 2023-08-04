@@ -4,11 +4,12 @@ import usePerformedStandardsMax from '../../../hooks/usePerformedStandardsMax';
 import { useAuth } from '../../../utils/AuthProvider';
 import { compareExerciseProgressAgainstMaxPossible } from '../../../utils/fnSheet/utilities';
 import { PolarChart } from '../../charts/PolarChart';
+import { useUser } from '../../../utils/UserProvider';
 
 function StrengthByMuscleGroup() {
   const userId = useAuth()!.user!.id;
-  const userGender = useAuth()!.user!.gender;
-  const userUnits = useAuth()!.user!.preferences.unit;
+  const userGender = useUser()!.gender;
+  const userUnits = useUser()!.preferences.unit;
   const [muscleGroupProgression, setMuscleGroupProgression] = useState<
     {
       name: string;
