@@ -10,6 +10,7 @@ type UserBodyFatProps = {
 };
 function UserBodyFat({ user }: UserBodyFatProps) {
   const userBodyFat = user.bodyFatPercentage!;
+
   const bodyFatGoal = useContext(GoalContext)?.bodyFatPercentage;
   const [editing, setEditing] = useState(false);
   const [newBodyFatPercentage, setNewBodyFatPercentage] =

@@ -5,6 +5,7 @@ import { useAuth } from '../../../utils/AuthProvider';
 import AvgAbs1RepMaxToggle from '../../../components/analytics/AvgAbs1RepMaxToggle';
 import uniqid from 'uniqid';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
+
 function SelectedMuscleGroup() {
   const userId = useAuth()!.user!.id;
   let extension = useMatch('/analytics/muscleGroups/*')?.params['*']!;
@@ -24,7 +25,6 @@ function SelectedMuscleGroup() {
       for (let i = 0; i < muscleSpecificExercisesQuery.data.length; i++) {
         result.push(muscleSpecificExercisesQuery.data[i].id);
       }
-      console.log(result);
       setExerciseIdx(result);
     }
   }, [muscleSpecificExercisesQuery.isFetched, location.pathname]);

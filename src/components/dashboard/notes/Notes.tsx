@@ -17,7 +17,6 @@ function Notes() {
 
   useEffect(() => {
     if (notesQuery.getNotesQuery.data && notesQuery.getNotesQuery.isFetched) {
-      console.log(notesQuery.getNotesQuery.data);
       setTotalPages(notesQuery.getNotesQuery.data.length || 1);
     }
   }, [notesQuery.getNotesQuery.isFetched]);
@@ -42,7 +41,6 @@ function Notes() {
   };
   const lastPageFn = () => {
     if (!totalPages) return;
-    console.log(totalPages);
     setPage(totalPages);
   };
   const pageChangeFn = (e: any) => {

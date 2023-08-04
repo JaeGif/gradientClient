@@ -21,12 +21,24 @@ function useGeneralProgressData(
   const queryClient = useQueryClient();
 
   const getGeneralProgressData = async (): Promise<ProgressData> => {
-    const res = await fetch(
-      `${apiURL}api/standardizedPerformances?user=${userId}&count=${count}&userGender=${gender}`
-    );
-    const data = await res.json();
-
-    return data;
+    if (gender) {
+      const res = await fetch(
+        `${apiURL}api/standardizedPerformances?user=${userId}&count=${count}&userGender=${gender}`
+      );
+      const data = await res.json();
+      return data;
+    }
+    return {
+      average: 0,
+      averagedStandards: {
+        beginner: 0,
+        novice: 0,
+        intermediate: 0,
+        advanced: 0,
+        elite: 0,
+        units: 'kg',
+      },
+    };
   };
 
   const generalTrendQuery = useQuery<ProgressData>({

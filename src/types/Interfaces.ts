@@ -19,12 +19,13 @@ export interface UserQueryResult {
   username: string;
   gender: 'm' | 'f';
   preferences: { unit: 'kg' | 'lb'; standard: 'ratio' | 'percentile' };
-  weight: number;
+  weight: { value: number; unit: 'kg' | 'lb' };
   bodyFatPercentage?: number;
   age: number;
 }
 export interface GoalType {
   id: string;
+  unit: 'kg' | 'lb';
   lifts: {
     squats: number | undefined;
     benchPress: number | undefined;

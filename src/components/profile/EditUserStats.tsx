@@ -8,7 +8,7 @@ type EditUserStatsProps = {
 };
 function EditUserStats({ user }: EditUserStatsProps) {
   const queryClient = useQueryClient();
-  const [newWeight, setNewWeight] = useState<number>(user.weight);
+  const [newWeight, setNewWeight] = useState<number>(user.weight.value);
   const [newBodyFatPercentage, setNewBodyFatPercentage] = useState<number>(
     user.bodyFatPercentage!
   );
@@ -19,7 +19,7 @@ function EditUserStats({ user }: EditUserStatsProps) {
 
   useEffect(() => {
     if (
-      newWeight === user.weight &&
+      newWeight === user.weight.value &&
       newBodyFatPercentage === user.bodyFatPercentage
     ) {
       setEdited(false);
@@ -70,6 +70,7 @@ function EditUserStats({ user }: EditUserStatsProps) {
           if (edited) {
             setSubmitting(true);
             const edits = {
+              preferences: user.preferences,
               weight: newWeight,
               bodyFatPercentage: newBodyFatPercentage,
             };

@@ -18,7 +18,6 @@ function StrengthByMuscleGroup() {
   >();
   const userStandardPerformancesMax = usePerformedStandardsMax(userId);
   useEffect(() => {
-    console.log(userStandardPerformancesMax.data);
     if (!userStandardPerformancesMax.data) return;
     let checkArr = [];
     for (let i = 0; i < userStandardPerformancesMax.data.length; i++) {

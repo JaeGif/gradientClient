@@ -2,6 +2,7 @@ import React from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 export type GoalPutType = {
+  unit?: 'kg' | 'lb';
   lifts?: {
     benchPress?: number;
     pullup?: number;

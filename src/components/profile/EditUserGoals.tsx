@@ -137,6 +137,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
             setSubmitting(true);
             console.log('submitting');
             const goalEdits: GoalPutType = {
+              unit: user.preferences.unit,
               lifts: {
                 benchPress: benchPressGoal,
                 pullup: pullupGoal,

@@ -11,7 +11,6 @@ export const manuallyUpdateUserStorage = (
   weight: number,
   bodyFatPercentage: number
 ) => {
-  console.log(localStorage);
   let fullUser = JSON.parse(localStorage.getItem('gradientLoggedInUser')!);
 };
 export const capitalize = (str: string) => {
@@ -513,6 +512,5 @@ export const compareExerciseProgressAgainstMaxPossible = (
     },
   ];
 
-  console.log(data);
   return data;
 };

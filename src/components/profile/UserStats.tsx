@@ -18,8 +18,8 @@ function UserStats({ user }: UserStatsProps) {
         <p className='p-1 pl-2'>
           Current Weight:{' '}
           <em className='not-italic text-blue-500'>
-            {user.weight}
-            {user.preferences.unit}
+            {user.weight.value}
+            {user.weight.unit}
           </em>
         </p>
       </div>
