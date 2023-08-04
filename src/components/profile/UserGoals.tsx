@@ -22,7 +22,7 @@ function UserGoals({ user, goals }: UserGoalsProps) {
             Weight:{' '}
             <em className='not-italic text-blue-500'>
               {goals.weight}
-              {user.preferences.unit}
+              {goals.unit}
             </em>
           </p>
         </div>
@@ -33,7 +33,7 @@ function UserGoals({ user, goals }: UserGoalsProps) {
             {goals.lifts.benchPress ? (
               <em className='not-italic text-blue-500'>
                 {goals.lifts.benchPress}
-                {user.preferences.unit}
+                {goals.unit}
               </em>
             ) : (
               'No goal set ...'
@@ -44,7 +44,7 @@ function UserGoals({ user, goals }: UserGoalsProps) {
             {goals.lifts.deadlift ? (
               <em className='not-italic text-blue-500'>
                 {goals.lifts.deadlift}
-                {user.preferences.unit}
+                {goals.unit}
               </em>
             ) : (
               'No goal set ...'
@@ -55,7 +55,7 @@ function UserGoals({ user, goals }: UserGoalsProps) {
             {goals.lifts.pullup ? (
               <em className='not-italic text-blue-500'>
                 {goals.lifts.pullup}
-                {user.preferences.unit}
+                {goals.unit}
               </em>
             ) : (
               'No goal set ...'
@@ -66,7 +66,7 @@ function UserGoals({ user, goals }: UserGoalsProps) {
             {goals.lifts.shoulderPress ? (
               <em className='not-italic text-blue-500'>
                 {goals.lifts.shoulderPress}
-                {user.preferences.unit}
+                {goals.unit}
               </em>
             ) : (
               'No goal set ...'
@@ -77,7 +77,7 @@ function UserGoals({ user, goals }: UserGoalsProps) {
             {goals.lifts.squats ? (
               <em className='not-italic text-blue-500'>
                 {goals.lifts.squats}
-                {user.preferences.unit}
+                {goals.unit}
               </em>
             ) : (
               'No goal set ...'

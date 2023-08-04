@@ -20,25 +20,20 @@ function UserWeight({ user }: UserWeightProps) {
   const [modifiedGoalWeight, setModifiedGoalWeight] = useState(weightGoal);
 
   useEffect(() => {
-    console.log(weightGoalUnits, userUnits);
     switch (userUnits) {
       case 'kg':
         if (weightGoalUnits === 'lb') {
-          console.log('entering kg->lb');
           if (weightGoal) setModifiedGoalWeight(lbToKg(weightGoal));
         }
         if (userWeightUnits === 'lb') {
-          console.log('entering kg->lb');
           if (userWeight) setNewWeight(lbToKg(userWeight));
         }
         break;
       case 'lb':
         if (weightGoalUnits === 'kg') {
-          console.log('entering lb->kg');
           if (weightGoal) setModifiedGoalWeight(kgToLb(weightGoal));
         }
         if (userWeightUnits === 'kg') {
-          console.log('entering lb->kg');
           if (userWeight) setNewWeight(kgToLb(userWeight));
         }
         break;

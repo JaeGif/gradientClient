@@ -43,7 +43,7 @@ function EditUserStats({ user }: EditUserStatsProps) {
               id='weight'
               name='weight'
               type='number'
-              placeholder={`Current: ${user.weight}${user.preferences.unit}`}
+              placeholder={`Current: ${user.weight.value}${user.weight.unit}`}
             />
           </span>
           <span className='flex flex-col'>
