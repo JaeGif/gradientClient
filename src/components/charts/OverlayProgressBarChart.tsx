@@ -1,7 +1,19 @@
 import { Chart } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  DoughnutController,
+} from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  ChartDataLabels,
+  DoughnutController
+);
 
 // takes in the users current distance to next level
 type OverlayProgressBarChartProps = {
