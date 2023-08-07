@@ -6,12 +6,20 @@ import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 function Login() {
   const auth = useAuth();
   const [attemptingLogin, setAttemptingLogin] = useState(false);
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
+  // email 'giffordjacob0@gmail.com'
+  // passcode 'cat0both'
   const handleLogin = () => {
-    auth!.login('giffordjacob0@gmail.com', 'cat0both');
+    if (email && password) {
+      auth!.login(email, password);
+    } else {
+      setAttemptingLogin(false);
+    }
   };
   return (
     <div className='flex h-screen bg-[rgb(86,94,101)] justify-center items-center'>
-      <div className='flex flex-col sm:pl-6 sm:pr-6 p-4 rounded-md justify-center items-center bg-[rgb(47,49,54)] shadow-lg'>
+      <div className='flex flex-col p-6 rounded-md justify-center items-center bg-[rgb(47,49,54)] shadow-lg'>
         <div className='flex flex-wrap flex-col gap-2 justify-center items-center'>
           <h2 className='text-4xl text-white'>Gradient Fitness</h2>
           <img className='h-14' src='gradient-icon.png' />
@@ -22,7 +30,10 @@ function Login() {
               Email
             </label>
             <input
-              className='p-2 rounded-md'
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              className='p-2 text-white rounded-md bg-[rgb(34,37,39)]'
               id='email'
               type='email'
               required
@@ -34,7 +45,10 @@ function Login() {
               Password
             </label>
             <input
-              className='p-2 rounded-md'
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              className='p-2 rounded-md text-white bg-[rgb(34,37,39)]'
               id='password'
               type='password'
               required
@@ -43,7 +57,8 @@ function Login() {
           </div>
           <div className='w-full'>
             <button
-              className='w-full flex justify-center items-center text-lg bg-blue-600 text-white p-4 rounded-md shadow-md'
+              type='submit'
+              className='w-full flex justify-center items-center text-lg bg-blue-600 text-white p-3 rounded-md shadow-md'
               onClick={() => {
                 setAttemptingLogin(true);
                 handleLogin();
