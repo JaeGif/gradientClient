@@ -11,7 +11,7 @@ function EditProfileSections({ user, goals }: EditProfileSectionsProps) {
   return (
     <div className='flex flex-col gap-2'>
       <h2>Edit Details</h2>
-      <div className='flex justify-between'>
+      <div className='flex flex-wrap justify-between'>
         <EditUserStats user={user} />
         <EditUserGoals user={user} goals={goals} />
       </div>

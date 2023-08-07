@@ -36,7 +36,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
 
   return (
     <div className='flex flex-col gap-5 bg-slate-100 p-2 rounded-md'>
-      <div className='flex gap-5'>
+      <div className='flex flex-wrap gap-5'>
         <div className='flex flex-col gap-2'>
           <h3>Body Goals</h3>
           <span className='flex flex-col'>

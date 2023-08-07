@@ -26,7 +26,7 @@ function EditUserStats({ user }: EditUserStatsProps) {
     }
   }, [newWeight, newBodyFatPercentage]);
   return (
-    <div className='flex flex-col justify-between bg-slate-100 p-2 rounded-md'>
+    <div className='flex flex-col gap-5 justify-between bg-slate-100 p-2 rounded-md'>
       <div className='flex flex-col gap-2'>
         <h3>User Stats</h3>
         <div className='flex flex-col gap-5'>
@@ -90,7 +90,7 @@ function EditUserStats({ user }: EditUserStatsProps) {
         {submitting ? (
           <TailSpin className='h-6' stroke='#000000' />
         ) : (
-          'Submit Changes'
+          'Submit Stats'
         )}
       </button>
     </div>
