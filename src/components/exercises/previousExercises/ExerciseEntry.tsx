@@ -13,8 +13,9 @@ import { useAuth } from '../../../utils/AuthProvider';
 import { useUser } from '../../../utils/UserProvider';
 type ExerciseEntryProps = {
   data: PerformanceFull;
+  index: number;
 };
-function ExerciseEntry({ data }: ExerciseEntryProps) {
+function ExerciseEntry({ data, index }: ExerciseEntryProps) {
   const userUnit = useUser()!.preferences.unit;
   const queryClient = useQueryClient();
   const [editing, setEditing] = useState(false);
@@ -77,9 +78,13 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={
-        editing
-          ? 'max-w-[calc(100%-2rem)] relative border-2 border-blue-300 flex items-center'
-          : 'max-w-[calc(100%-2rem)] relative flex items-center hover:bg-slate-100'
+        index % 2 === 0
+          ? editing
+            ? 'bg-blue-20 bg-opacity-40 max-w-[calc(100%)] relative border-2 border-blue-300 flex items-center'
+            : 'bg-blue-20 bg-opacity-40 max-w-[calc(100%)] relative flex items-center hover:bg-slate-100'
+          : editing
+          ? 'max-w-[calc(100%)] relative border-2 border-blue-300 flex items-center'
+          : 'max-w-[calc(100%)] relative flex items-center hover:bg-slate-100'
       }
     >
       <span className='min-w-full p-1 overflow-scroll sm:pl-4 sm:pr-4 flex gap-2 sm:gap-5 border-2 border-slate-100 justify-between items-center'>
@@ -92,14 +97,14 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
         </div>
         <span className={editing ? 'flex flex-col gap-2' : 'flex flex-col'}>
           {data.sets.map((set, i) => (
-            <div key={uniqid()} className='flex gap-2'>
+            <div key={uniqid()} className={'flex gap-2'}>
               <p>Set: {i + 1} |</p>
               <p>
                 Reps:{' '}
                 {editing ? (
                   <input
                     key={uniqid()}
-                    className='pl-1 w-10'
+                    className={'pl-1 w-10'}
                     onBlur={(e) => {
                       e.preventDefault();
                       handleRepsChange(set.index, parseInt(e.target.value));
@@ -175,7 +180,7 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
             }}
             variants={variants}
             animate={isHovered ? 'hover' : 'initial'}
-            className='h-7 hover:cursor-pointer'
+            className='hidden sm:flex h-7 hover:cursor-pointer'
             src='/favicons/delete.svg'
             alt='edit entry'
           />{' '}

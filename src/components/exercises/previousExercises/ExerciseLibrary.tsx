@@ -30,7 +30,7 @@ function ExerciseLibrary({ searchedExerciseId }: ExerciseLibraryProps) {
   ]);
   return (
     <div className='flex flex-col'>
-      <span className='flex w-[calc(100%-2rem)] justify-between p-2 text-white bg-slate-700 sm:rounded-t-md'>
+      <span className='flex w-[calc(100%)] justify-between p-2 text-white bg-slate-700 sm:rounded-t-md'>
         <p>Exercise</p>
         <p>Performed Sets</p>
         <p>
@@ -38,8 +38,8 @@ function ExerciseLibrary({ searchedExerciseId }: ExerciseLibraryProps) {
         </p>
       </span>
       {recentExercises.length ? (
-        recentExercises.map((performance) => (
-          <ExerciseEntry key={uniqid()} data={performance} />
+        recentExercises.map((performance, i) => (
+          <ExerciseEntry key={uniqid()} data={performance} index={i} />
         ))
       ) : (
         <p className='text-gray-400 p-2'>No exercises match the query...</p>
