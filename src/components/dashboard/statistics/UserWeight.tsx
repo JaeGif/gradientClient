@@ -41,6 +41,21 @@ function UserWeight({ user }: UserWeightProps) {
         break;
     }
   }, [userUnits, weightGoalUnits, userWeightUnits]);
+
+  const handleDoubleClick = (e: React.MouseEvent) => {
+    switch (e.detail) {
+      case 1: {
+        break;
+      }
+      case 2: {
+        setEditing(true);
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  };
   const putUserStats = useUserQuery().putUserStatsMutation();
   const queryClient = useQueryClient();
   const submitEdits = () => {
@@ -60,8 +75,13 @@ function UserWeight({ user }: UserWeightProps) {
     }
   };
   return (
-    <div className='relative shadow-md p-2 rounded-lg h-full flex w-1/4 flex-col justify-center items-center gap-2 text-center'>
-      <h2 className='text-xl'>Current Weight</h2>
+    <div
+      onClick={(e) => {
+        handleDoubleClick(e);
+      }}
+      className='relative shadow-md p-2 rounded-lg h-full flex w-1/4 flex-col justify-center items-center gap-2 text-center'
+    >
+      <h2 className='text-base lg:text-xl'>Current Weight</h2>
 
       {editing ? (
         <input
@@ -80,7 +100,7 @@ function UserWeight({ user }: UserWeightProps) {
           }}
         />
       ) : (
-        <p className='text-4xl text-blue-500'>
+        <p className='text-2xl lg:text-4xl text-blue-500'>
           {newWeight} {user.preferences.unit}
         </p>
       )}
@@ -90,7 +110,7 @@ function UserWeight({ user }: UserWeightProps) {
           Goal: {modifiedGoalWeight} {user.preferences.unit}
         </p>
       )}
-      <span className='absolute bottom-0 flex justify-end p-3 w-full'>
+      <span className='flex absolute bottom-0 justify-end p-3 w-full'>
         <img
           className='h-6 hover:cursor-pointer hover:animate-bounce'
           title='Record Weight'

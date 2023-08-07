@@ -35,7 +35,7 @@ function UserBodyFat({ user }: UserBodyFatProps) {
   };
   return (
     <div className='relative shadow-md p-2 rounded-lg h-full flex w-1/4 flex-col justify-center items-center gap-2 text-center'>
-      <h2 className='text-xl'>Body Fat Percentage</h2>
+      <h2 className='text-base lg:text-xl'>Body Fat Percentage</h2>
       {editing ? (
         <input
           type='number'
@@ -53,7 +53,9 @@ function UserBodyFat({ user }: UserBodyFatProps) {
           }}
         />
       ) : (
-        <p className='text-4xl text-blue-500'>{newBodyFatPercentage}%</p>
+        <p className='text-2xl lg:text-4xl text-blue-500'>
+          {newBodyFatPercentage}%
+        </p>
       )}
       {bodyFatGoal && <p className=''>Goal: {bodyFatGoal}%</p>}
       <span className='absolute bottom-0 flex justify-end p-3 w-full'>

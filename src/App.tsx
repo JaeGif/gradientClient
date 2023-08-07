@@ -73,8 +73,8 @@ function App() {
             <Route path='/*' element={<NotFound />} />
           </Routes>
         </UserProvider>
-
-        <ReactQueryDevtools />
+        {/*         <ReactQueryDevtools />
+         */}{' '}
       </CacheContext.Provider>
     </AuthProvider>
   );

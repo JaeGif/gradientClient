@@ -76,13 +76,15 @@ function PopularExercise() {
         <div className='relative shadow-md p-2 rounded-lg h-full flex w-1/4 flex-col justify-center items-center gap-2 text-center'>
           {isStrongest ? (
             <>
-              <h2 className='text-xl'>Strongest</h2>
-              <p className='text-3xl text-blue-500'>{best.exercise}</p>
+              <h2 className='text-base lg:text-xl'>Strongest</h2>
+              <p className='text-2xl lg:text-3xl text-blue-500'>
+                {best.exercise}
+              </p>
               <p className=''>{best.level}</p>
             </>
           ) : (
             <>
-              <h2 className='text-xl'>Weakest</h2>
+              <h2 className='text-lg'>Weakest</h2>
               <p className='text-3xl text-blue-500'>{worst.exercise}</p>
               <p>{worst.level}</p>
             </>
