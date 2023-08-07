@@ -33,7 +33,7 @@ function StrengthByMuscleGroup() {
   return (
     <>
       {muscleGroupProgression && (
-        <div className='h-96 rounded-lg w-1/4 p-2 min-w-[200px] shadow-md flex justify-center items-center'>
+        <div className='h-96 rounded-lg sm:w-1/4 p-2 w-full sm:min-w-[200px] shadow-md flex justify-center items-center'>
           <PolarChart dataset={muscleGroupProgression} />
         </div>
       )}
