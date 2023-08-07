@@ -80,12 +80,14 @@ function Activity() {
         progressQuery.data &&
         levelsData &&
         userLevel && (
-          <div className='sm:w-1/4 rounded-lg sm:p-2 sm:min-w-[200px] shadow-md'>
+          <div className='sm:w-1/4 w-full rounded-lg sm:p-2 sm:min-w-[200px] shadow-md'>
             <div className='flex flex-col justify-between h-full'>
-              <OverlayProgressBarChart
-                nextLevel={capitalize(nextLevel)}
-                userPercentage={distanceToNextLevel}
-              />
+              <span className='p-2 flex justify-center items-center'>
+                <OverlayProgressBarChart
+                  nextLevel={capitalize(nextLevel)}
+                  userPercentage={distanceToNextLevel}
+                />
+              </span>
               <Info
                 currentLevel={capitalize(currentLevel)}
                 nextLevel={capitalize(nextLevel)}
