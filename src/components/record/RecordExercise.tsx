@@ -111,7 +111,7 @@ function RecordExercise({
                   {capitalize(exercise.name)}
                 </div>
               ))}
-              <div className='p-2 text-sm text-blue-500 hover:text-blue-400 rounded-sm'>
+              <div className=' p-2 text-sm text-blue-500 hover:text-blue-400 rounded-sm'>
                 <p
                   onClick={() => {
                     setCreatingExercise(true);

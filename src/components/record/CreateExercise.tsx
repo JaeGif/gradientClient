@@ -36,7 +36,7 @@ function CreateExercise({ setCreatingExercise }: CreateExerciseProps) {
         e.stopPropagation();
         setCreatingExercise(false);
       }}
-      className='p-2 fixed bg-slate-200 bg-opacity-75 w-full h-full top-0 left-0 debug z-50 flex justify-center items-center'
+      className='p-2 fixed bg-slate-200 bg-opacity-75 w-full h-full top-0 left-0 z-50 flex justify-center items-center'
     >
       <div
         onClick={(e) => e.stopPropagation()}

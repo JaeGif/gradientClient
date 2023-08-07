@@ -25,17 +25,17 @@ const Set = memo(({ index, i, handleSets, set }: SetProps) => {
   }, []); */
   return (
     <span className='mt-1 border-t-[1px] border-t-gray-100 flex pt-1'>
-      <p className='p-2 text-center w-24'>{i + 1}</p>
+      <p className='p-2 text-center w-16 sm:w-24'>{i + 1}</p>
       <input
         onChange={(e) => setWeight(parseFloat(e.target.value))}
-        className='w-24 text-center outline-none'
+        className='sm:w-24 w-16 text-center outline-none'
         type='number'
         placeholder={`${userUnits}`}
         defaultValue={weight || undefined}
       />
       <input
         onChange={(e) => setReps(parseInt(e.target.value))}
-        className='w-24 text-center outline-none'
+        className='sm:w-24 w-16 text-center outline-none'
         type='number'
         placeholder={`reps`}
         defaultValue={reps || undefined}
@@ -54,8 +54,8 @@ const Set = memo(({ index, i, handleSets, set }: SetProps) => {
         }}
         className={
           isLogged
-            ? 'bg-green-300 rounded-md w-24 flex justify-center items-center'
-            : 'bg-blue-20 rounded-md w-24 flex justify-center items-center hover:bg-blue-10'
+            ? 'bg-green-300 rounded-md sm:w-24 w-16 flex justify-center items-center'
+            : 'bg-blue-20 rounded-md sm:w-24 w-16 flex justify-center items-center hover:bg-blue-10'
         }
       >
         {isLogged ? (

@@ -171,7 +171,7 @@ function Record() {
     // IF submission is successful then the promise should make a quick message popup and refresh the forms
   };
   return (
-    <div className='flex flex-col w-full h-full p-2 gap-2'>
+    <div className='flex flex-col w-full h-full sm:p-2 gap-2'>
       <div className='shadow-md p-4 pt-2 flex gap-2 flex-col rounded-md'>
         <h1>Record Exercise</h1>
         <span className='flex flex-wrap justify-between'>
@@ -203,7 +203,11 @@ function Record() {
             }}
             className='bg-slate-300 rounded-md p-2 w-fit flex justify-center items-center gap-2 hover:cursor-pointer hover:bg-slate-200'
           >
-            <h6>Add New Exercise</h6>
+            <span className='flex gap-1'>
+              <h6>Add </h6>
+              <h6 className='hidden sm:flex'> New </h6>
+              <h6>Exercise</h6>
+            </span>
             <img
               className='h-8'
               src='/favicons/new.svg'
