@@ -14,7 +14,7 @@ function Stats() {
   return (
     <>
       {user && (
-        <div className='flex justify-evenly items-center w-full h-36'>
+        <div className='flex flex-wrap justify-evenly items-center w-full'>
           <UserBodyFat user={user} />
           <UserWeight user={user} />
           <PopularExercise />

@@ -34,7 +34,7 @@ function UserBodyFat({ user }: UserBodyFatProps) {
     }
   };
   return (
-    <div className='relative shadow-md p-2 rounded-lg h-full flex w-1/4 flex-col justify-center items-center gap-2 text-center'>
+    <div className='w-[calc(100%-1rem)] relative shadow-md p-2 rounded-lg sm:h-full flex sm:w-1/4 flex-col justify-center items-center gap-2 text-center'>
       <h2 className='text-base lg:text-xl'>Body Fat Percentage</h2>
       {editing ? (
         <input

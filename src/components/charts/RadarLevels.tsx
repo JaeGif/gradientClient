@@ -10,6 +10,7 @@ import {
 } from 'chart.js';
 import { useContext, useEffect, useState } from 'react';
 import { GoalContext } from '../../pages/home/Dashboard';
+import useMediaQuery from '../../hooks/useMediaQuery';
 ChartJS.register(
   RadialLinearScale,
   PointElement,
@@ -41,7 +42,12 @@ function RadarLevels({
 }: RadarLevelsProps) {
   const [isSmall, setIsSmall] = useState(false);
   const userLiftGoal = useContext(GoalContext)?.lifts;
+  const isUnder1200 = useMediaQuery('(max-width: 1200px)');
   useEffect(() => {
+    if (isUnder1200) {
+      setIsSmall(true);
+      return;
+    }
     const handleWindowResize = (e: any) => {
       if (innerWidth <= 1200 && !isSmall) {
         setIsSmall(true);
@@ -54,7 +60,7 @@ function RadarLevels({
     return () => {
       window.removeEventListener('resize', handleWindowResize);
     };
-  }, []);
+  }, [isUnder1200]);
   const data = {
     labels: userExerciseLevels.map((el) => el.exercise),
     datasets: [
@@ -162,7 +168,7 @@ function RadarLevels({
           },
         },
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
         scales: {
           r: {
             ticks: {

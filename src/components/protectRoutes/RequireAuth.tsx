@@ -9,7 +9,7 @@ function RequireAuth() {
     return <Navigate to='/login' state={{ path: location.pathname }} replace />;
   } else {
     return (
-      <div className='mb-10 sm:mb-0'>
+      <div className='mb-14 lg:mb-0'>
         <Outlet />
       </div>
     );

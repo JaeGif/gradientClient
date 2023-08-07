@@ -52,7 +52,7 @@ function GeneralProgressChart() {
   return (
     <>
       {userExerciseLevels && (
-        <div className='w-2/3 rounded-lg p-2 min-w-[420px] shadow-md'>
+        <div className='flex justify-center w-full sm:w-2/3 rounded-lg sm:p-2 sm:min-w-[420px] shadow-md'>
           <RadarLevels
             units={units}
             exerciseLevels={{

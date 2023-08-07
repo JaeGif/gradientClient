@@ -13,8 +13,8 @@ function NavBar() {
             <h1 className='text-xl'>Fitness</h1>
           </span>
         </span>
-        <ul className='sm:w-full w-screen flex lg:flex-col justify-center items-center lg:pt-2 lg:pb-2 gap-2'>
-          <li className='w-full'>
+        <ul className='sm:w-full w-screen flex lg:flex-col justify-evenly sm:justify-center items-center pt-1 pb-1 lg:pt-2 lg:pb-2 gap-2'>
+          <li className='sm:w-full '>
             <Link to={'/dashboard'}>
               <button
                 type='button'
@@ -30,7 +30,7 @@ function NavBar() {
               </button>
             </Link>
           </li>
-          <li className='w-full'>
+          <li className='sm:w-full'>
             <Link to={'/analytics'}>
               <button
                 type='button'
@@ -46,7 +46,7 @@ function NavBar() {
               </button>
             </Link>
           </li>
-          <li className='w-full'>
+          <li className='sm:w-full'>
             <Link to={'/record'}>
               <button
                 type='button'
@@ -62,7 +62,7 @@ function NavBar() {
               </button>
             </Link>
           </li>
-          <li className='w-full'>
+          <li className='sm:w-full'>
             <Link to={'/exercises'}>
               <button
                 type='button'
@@ -78,7 +78,7 @@ function NavBar() {
               </button>
             </Link>
           </li>
-          <li className='w-full'>
+          <li className='sm:w-full'>
             <Link to={'/settings'}>
               <button
                 type='button'
