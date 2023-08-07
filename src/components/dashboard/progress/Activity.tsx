@@ -80,7 +80,7 @@ function Activity() {
         progressQuery.data &&
         levelsData &&
         userLevel && (
-          <div className='w-1/4 rounded-lg p-2 min-w-[200px] shadow-md'>
+          <div className='sm:w-1/4 rounded-lg sm:p-2 sm:min-w-[200px] shadow-md'>
             <div className='flex flex-col justify-between h-full'>
               <OverlayProgressBarChart
                 nextLevel={capitalize(nextLevel)}
