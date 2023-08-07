@@ -7,7 +7,7 @@ type InfoProps = {
 };
 function Info({ nextLevel, currentLevel, distanceToNextLevel }: InfoProps) {
   return (
-    <div className='flex flex-col text-xl gap-8'>
+    <div className='flex flex-col text-xl gap-8 p-2 sm:p-0'>
       <div className='flex flex-col gap-2'>
         <p>
           Current Level:{' '}
