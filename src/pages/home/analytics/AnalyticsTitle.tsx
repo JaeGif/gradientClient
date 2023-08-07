@@ -16,7 +16,7 @@ function AnalyticsTitle() {
     }
   }, [location]);
   return (
-    <span className='flex justify-start items-center'>
+    <span className='flex flex-wrap justify-start items-center'>
       <h1>{muscleGroup} Analytics</h1>
     </span>
   );

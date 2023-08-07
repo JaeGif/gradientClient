@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 function AnalyticsFilter() {
   return (
     <div className='flex justify-start items-center gap-2'>
-      <span className='flex justify-center items-center'>
+      <span className='flex flex-wrap justify-center items-center'>
         <Link to={'muscleGroups/standards'}>
           <button className='p-2 pl-4 pr-4 rounded-md hover:bg-blue-100'>
             Standards

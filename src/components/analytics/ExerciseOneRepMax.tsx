@@ -73,7 +73,7 @@ function ExerciseOneRepMax({
   }, [recentExerciseQuery.isFetched]);
 
   return (
-    <div className='h-full w-full'>
+    <div className='w-full'>
       {datasets && (
         <LineChart labels={xLabels} datasets={datasets} options={options} />
       )}

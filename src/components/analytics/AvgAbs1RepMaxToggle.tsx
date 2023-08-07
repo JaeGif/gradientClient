@@ -28,7 +28,7 @@ function AvgAbs1RepMaxToggle({
   return (
     <div
       style={{ borderLeftColor: `rgba(${highlightColor}, ${opacityValue})` }}
-      className={`flex flex-col shadow-md border-l-[5px] justify-center p-6 rounded-md`}
+      className={`flex flex-col max-w-[100vw] shadow-md border-l-[5px] justify-center p-6 rounded-md overflow-scroll`}
     >
       {recentExerciseQuery.isFetched ? (
         <>
@@ -43,17 +43,21 @@ function AvgAbs1RepMaxToggle({
             <img className='h-6 hover:animate-spin' src='/favicons/swap.svg' />
           </button>
           {showAbsolute ? (
-            <ExerciseOneRepMax
-              key={uniqid()}
-              exerciseId={exerciseId}
-              recentExerciseQuery={recentExerciseQuery}
-            />
+            <span className='w-[600px] overflow-x-scroll'>
+              <ExerciseOneRepMax
+                key={uniqid()}
+                exerciseId={exerciseId}
+                recentExerciseQuery={recentExerciseQuery}
+              />
+            </span>
           ) : (
-            <ExerciseCurrentLevel
-              key={uniqid()}
-              exerciseId={exerciseId}
-              recentExerciseQuery={recentExerciseQuery}
-            />
+            <span className='w-[600px] overflow-x-scroll'>
+              <ExerciseCurrentLevel
+                key={uniqid()}
+                exerciseId={exerciseId}
+                recentExerciseQuery={recentExerciseQuery}
+              />
+            </span>
           )}
           <div key={uniqid()} className='flex flex-col'>
             <ChartAnalysis

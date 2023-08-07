@@ -18,6 +18,8 @@ function useLineChartOptions(
   const annotationList = useAnnotationStandard(standardsDataset);
   const options = {
     responsive: true,
+    maintainAspectRatio: true,
+
     scales: {
       y: {
         title: {

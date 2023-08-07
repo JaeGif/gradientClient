@@ -92,7 +92,7 @@ function StandardsAnalysis({ exerciseId, average }: StandardsAnalysisProps) {
   return (
     <>
       {closestStandard && bestPerformance && (
-        <div className='flex gap-10 text-sm'>
+        <div className='flex flex-wrap gap-2 sm:gap-10 text-sm'>
           <span className='flex gap-1'>
             <p className='text-sm font-semibold'>Next Level: </p>
 

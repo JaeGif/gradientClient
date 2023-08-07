@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-import AvgAbs1RepMaxToggle from '../../../components/analytics/AvgAbs1RepMaxToggle';
 import AnalyticsFilter from './analyticsSearch/AnalyticsFilter';
 import AnalyticsTitle from './AnalyticsTitle';
 
@@ -15,8 +14,8 @@ function Analytics() {
   }, [location.pathname]);
 
   return (
-    <div className='gap-2 flex flex-col w-full max-h-screen overflow-x-scroll p-2'>
-      <div className='shadow-md p-2 pl-4 rounded-md'>
+    <div className='gap-2 flex flex-col w-full sm:p-2'>
+      <div className='max-w-screen shadow-md p-2 sm:pl-4 rounded-md'>
         <AnalyticsTitle />
         <AnalyticsFilter />
       </div>

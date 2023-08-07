@@ -29,7 +29,7 @@ function SelectedMuscleGroup() {
     }
   }, [muscleSpecificExercisesQuery.isFetched, location.pathname]);
   return (
-    <div className='flex w-full justify-center items-center'>
+    <div className='flex flex-wrap justify-center items-center'>
       {muscleSpecificExercisesQuery.data &&
       muscleSpecificExercisesQuery.data.length &&
       exerciseIdx ? (

@@ -10,7 +10,7 @@ type ChartAnalysisProps = {
 function ChartAnalysis({ exerciseId, showAbsolute }: ChartAnalysisProps) {
   const userGender = useUser()!.gender;
   return (
-    <div className='min-w-fit flex flex-col w-full justify-center gap-2 pl-6'>
+    <div className='flex flex-col w-full justify-center gap-2 pl-6'>
       <RegressionAnalysis exerciseId={exerciseId} showAbsolute={showAbsolute} />
       {exerciseInStandards(exerciseId, userGender) && (
         <StandardsAnalysis exerciseId={exerciseId} average={!showAbsolute} />

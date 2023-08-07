@@ -14,7 +14,7 @@ function RegressionAnalysis({
   // Also shows the % change from the most recent attempt at the exercise.
 
   return (
-    <div className='flex gap-10'>
+    <div className='flex flex-wrap gap-2 sm:gap-10'>
       <GeneralTrendRegressionAnalysis
         exerciseId={exerciseId}
         average={!showAbsolute}
