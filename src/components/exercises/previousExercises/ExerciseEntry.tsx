@@ -78,13 +78,13 @@ function ExerciseEntry({ data }: ExerciseEntryProps) {
       onMouseLeave={() => setIsHovered(false)}
       className={
         editing
-          ? 'relative border-2 border-blue-300 flex items-center'
-          : 'relative flex items-center hover:bg-slate-100'
+          ? 'max-w-[calc(100%-2rem)] relative border-2 border-blue-300 flex items-center'
+          : 'max-w-[calc(100%-2rem)] relative flex items-center hover:bg-slate-100'
       }
     >
-      <span className='min-w-full p-1 pl-4 pr-4 flex gap-5 border-2 border-slate-100 justify-between items-center'>
-        <div className='flex flex-col'>
-          <p className='w-24'>{capitalize(data.exercise.name)}</p>
+      <span className='min-w-full p-1 overflow-scroll sm:pl-4 sm:pr-4 flex gap-2 sm:gap-5 border-2 border-slate-100 justify-between items-center'>
+        <div className='flex flex-col flex-wrap'>
+          <p className=''>{capitalize(data.exercise.name)}</p>
           <p className='text-sm text-slate-500'>
             {data.exercise.muscleGroups &&
               capitalize(data.exercise.muscleGroups?.name)}

@@ -19,13 +19,13 @@ function Exercises() {
     if (searchedExercise) updateRecentlySearchedExercises(searchedExercise);
   }, [searchedExercise]);
   return (
-    <div className='flex flex-col w-full gap-5 p-2'>
-      <span className='flex flex-col p-2 pl-4 shadow-md rounded-md'>
+    <div className='flex flex-col w-full gap-5 sm:p-2'>
+      <span className='flex flex-wrap flex-col p-2 sm:pl-4 shadow-md rounded-md'>
         <h1>Exercise Library</h1>
         <p className='text-slate-400'>View or edit your exercise history</p>
       </span>
-      <div className='flex justify-evenly'>
-        <div className='flex flex-col gap-5'>
+      <div className='flex flex-wrap gap-2 sm:gap-0 justify-evenly'>
+        <div className='flex flex-col gap-5 p-2'>
           <ExerciseSearch setSearchedExercise={setSearchedExercise} />
           {recentlySearchedExercises && recentlySearchedExercises.length ? (
             <RecentlySearched
