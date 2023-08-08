@@ -39,6 +39,7 @@ function RecordExercise({
 }: RecordExerciseProps) {
   const userUnit = useUser()!.preferences.unit;
   const [s, setS] = useState<string>();
+  const [isSearching, setIsSearching] = useState(false);
   const [matchedExercises, setMatchedExercises] = useState<
     {
       id: string;
@@ -91,6 +92,8 @@ function RecordExercise({
       ) : (
         <div className='flex flex-col'>
           <input
+            onFocus={() => setIsSearching(true)}
+            onBlur={() => setIsSearching(false)}
             onChange={(e) => {
               setS(e.target.value);
             }}
@@ -98,19 +101,21 @@ function RecordExercise({
             type='text'
             placeholder='Search for exercise...'
           />
-          {matchedExercises && matchedExercises.length && (
+          {isSearching && (
             <div className='flex flex-col border-[1px] border-t-0 rounded-t-none rounded-sm border-b-slate-200'>
-              {matchedExercises.map((exercise) => (
-                <div
-                  className='p-2 hover:bg-slate-100 hover:cursor-pointer rounded-sm'
-                  key={uniqid()}
-                  onClick={() => {
-                    handleExerciseId(exercise, index);
-                  }}
-                >
-                  {capitalize(exercise.name)}
-                </div>
-              ))}
+              {matchedExercises &&
+                matchedExercises.length &&
+                matchedExercises.map((exercise) => (
+                  <div
+                    className='p-2 hover:bg-slate-100 hover:cursor-pointer rounded-sm'
+                    key={uniqid()}
+                    onClick={() => {
+                      handleExerciseId(exercise, index);
+                    }}
+                  >
+                    {capitalize(exercise.name)}
+                  </div>
+                ))}
               <div className=' p-2 text-sm text-blue-500 hover:text-blue-400 rounded-sm'>
                 <p
                   onClick={() => {

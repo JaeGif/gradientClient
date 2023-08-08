@@ -135,7 +135,6 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
         onClick={() => {
           if (edited) {
             setSubmitting(true);
-            console.log('submitting');
             const goalEdits: GoalPutType = {
               unit: user.preferences.unit,
               lifts: {
