@@ -39,7 +39,6 @@ function Register() {
   const validityCheck = (
     e: React.KeyboardEvent<HTMLElement> | React.MouseEvent<HTMLElement>
   ) => {
-    console.log('check');
     const button = e.target as HTMLButtonElement;
     button.setCustomValidity('');
     let invalidStr = '';
@@ -59,7 +58,6 @@ function Register() {
       }
       button.setCustomValidity(`Please correct invalid ${invalidStr}.`);
       button.reportValidity();
-      console.log('invalid');
     }
   };
 
@@ -77,24 +75,22 @@ function Register() {
   function validatePassword(e: React.ChangeEvent<HTMLInputElement>) {
     const password = e.target;
     password.setCustomValidity('');
-
-    if (password.checkValidity()) {
-      const pattern = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$/;
-      if (pattern.test(password.value)) {
-        password.setCustomValidity('');
-        handlePassword(e);
-        setButtonDisabled(false);
-        setValidObj({ ...validObj, password: true });
-        setPasswordInvalid(false);
-      } else {
-        password.setCustomValidity(
-          'Minimum six characters, at least one uppercase letter, one lowercase letter, and one number.'
-        );
-        setPasswordInvalid(true);
-        setValidObj({ ...validObj, password: false });
-        setButtonDisabled(true);
-        password.reportValidity();
-      }
+    setPasswordInvalid(false);
+    const pattern = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$/;
+    if (pattern.test(password.value)) {
+      password.setCustomValidity('');
+      handlePassword(e);
+      setButtonDisabled(false);
+      setValidObj({ ...validObj, password: true });
+      setPasswordInvalid(false);
+    } else {
+      password.setCustomValidity(
+        'Minimum six characters, at least one uppercase letter, one lowercase letter, and one number.'
+      );
+      setPasswordInvalid(true);
+      setValidObj({ ...validObj, password: false });
+      setButtonDisabled(true);
+      password.reportValidity();
     }
   }
   function matchPasswords(e: React.ChangeEvent<HTMLInputElement>) {
@@ -117,52 +113,43 @@ function Register() {
   const checkUnique = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const email = e.target;
     email.setCustomValidity('');
-    validateEmail(e);
     setEmailTaken(false);
-    if (email.checkValidity()) {
-      const res = await fetch(`${apiURL}api/users/emailcheck`, {
-        mode: 'cors',
-        method: 'POST',
-        body: JSON.stringify({ email: e.target.value }),
-        headers: { 'Content-Type': 'application/json' },
-      });
+    const res = await fetch(`${apiURL}api/users/emailcheck`, {
+      mode: 'cors',
+      method: 'POST',
+      body: JSON.stringify({ email: e.target.value }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (res.status === 200) {
+      setEmailTaken(false);
+      email.setCustomValidity('');
+      handleEmail(e);
+      setValidObj({ ...validObj, email: true });
+    } else if (res.status === 409) {
+      setEmailTaken(true);
+      email.setCustomValidity('This email is already in use.');
+      setValidObj({ ...validObj, email: false });
+      email.reportValidity();
+    } else {
       console.log(res);
-      if (res.status === 200) {
-        setEmailTaken(false);
-        email.setCustomValidity('');
-        handleEmail(e);
-        setValidObj({ ...validObj, email: true });
-      } else if (res.status === 409) {
-        setEmailTaken(true);
-        console.log('check failed');
-        email.setCustomValidity('This email is already in use.');
-        setValidObj({ ...validObj, email: false });
-        email.reportValidity();
-      } else {
-        console.log(res);
-      }
     }
   };
 
   const validateEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const email = e.target;
     email.setCustomValidity('');
-    if (email.checkValidity()) {
-      console.log('checking email');
-      const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-      if (pattern.test(email.value)) {
-        console.log('pass');
-        setEmailInvalid(false);
-        email.setCustomValidity('');
-        handleEmail(e);
-        setValidObj({ ...validObj, email: true });
-      } else {
-        console.log('fail');
-        setEmailInvalid(true);
-        email.setCustomValidity('Please enter a valid email address.');
-        setValidObj({ ...validObj, email: false });
-        email.reportValidity();
-      }
+    setEmailInvalid(false);
+    const checkValidity = email.checkValidity();
+    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if (pattern.test(email.value)) {
+      setEmailInvalid(false);
+      email.setCustomValidity('');
+      handleEmail(e);
+      setValidObj({ ...validObj, email: true });
+    } else {
+      setEmailInvalid(true);
+      email.setCustomValidity('Please enter a valid email address.');
+      setValidObj({ ...validObj, email: false });
     }
   };
 
@@ -170,7 +157,7 @@ function Register() {
   // passcode 'cat0both'
   return (
     <div className='flex h-screen bg-[rgb(86,94,101)] justify-center items-center'>
-      <div className='flex flex-col p-6 rounded-md justify-center items-center bg-[rgb(47,49,54)] shadow-lg'>
+      <div className='flex flex-col pt-6 pb-6 rounded-md justify-center items-center bg-[rgb(47,49,54)] shadow-lg'>
         <div className='flex flex-wrap flex-col gap-2 justify-center items-center'>
           <h2 className='text-white'>Register Account</h2>
           <div className='flex flex-col justify-center items-center p-6 gap-5'>
@@ -184,6 +171,9 @@ function Register() {
               Email<em className='not-italic text-red-600 text-lg'> *</em>
             </label>
             <input
+              onBlur={(e) => {
+                validateEmail(e);
+              }}
               onChange={(e) => {
                 checkUnique(e);
               }}
@@ -195,12 +185,12 @@ function Register() {
               placeholder='Type your email'
             />
             {emailTaken ? (
-              <p className='text-sm text-red-500 pl-2'>Email already taken</p>
+              <p className='text-sm text-red-500 pl-2'>Email already in use</p>
             ) : (
               <></>
             )}
             {emailInvalid ? (
-              <p className='text-sm text-red-500 pl-2'>Email invalid</p>
+              <p className='text-sm text-red-500 pl-2'>Invalid email format</p>
             ) : (
               <></>
             )}
@@ -221,7 +211,7 @@ function Register() {
               placeholder='Type your password'
             />
             {passwordInvalid && (
-              <p className='text-sm text-red-500 pl-2'>Invalid Password</p>
+              <p className='text-sm text-red-500 pl-2'>Invalid password</p>
             )}
           </div>
           <div className='flex flex-col'>
