@@ -36,6 +36,7 @@ function Login() {
               className='p-2 text-white rounded-md bg-[rgb(34,37,39)]'
               id='email'
               type='email'
+              name='email'
               required
               placeholder='Type your email'
             />
@@ -51,6 +52,7 @@ function Login() {
               className='p-2 rounded-md text-white bg-[rgb(34,37,39)]'
               id='password'
               type='password'
+              name='password'
               required
               placeholder='Type your password'
             />
