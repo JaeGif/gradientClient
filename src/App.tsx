@@ -14,6 +14,7 @@ import Record from './components/record/Record';
 import Exercises from './pages/library/Exercises';
 import UserProfile from './pages/profile/UserProfile';
 import { UserProvider } from './utils/UserProvider';
+import CreateAccountSequence from './pages/CreateAccountSequence';
 type MemoStateObject = { [key: string]: any };
 
 const ThemeContext = React.createContext<'light' | 'dark'>('dark');

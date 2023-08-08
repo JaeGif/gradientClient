@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../utils/AuthProvider';
+import CreateAccountSequence from './CreateAccountSequence';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 type ValidityObject = {
   password: boolean;
@@ -14,14 +16,35 @@ function Register() {
   const [emailTaken, setEmailTaken] = useState(false);
   const [emailInvalid, setEmailInvalid] = useState(false);
   const [passwordInvalid, setPasswordInvalid] = useState(false);
-
+  const [userId, setUserId] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [confirmPassword, setConfirmPassword] = useState<string>();
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
+  const registerUser = async () => {
+    const jsonBody = {
+      email: email,
+      password: password,
+      gender: 'm',
+      preferences: { unit: 'kg', standard: 'percentile' },
+      weight: { unit: 'kg', value: 70 },
+      age: 21,
+      username: 'User',
+    };
+    const res = await fetch(`${apiURL}auth/register`, {
+      mode: 'cors',
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(jsonBody),
+    });
+    setRegisterStatus(res.status);
+    const data = await res.json();
+    setUserId(data.data.user.id);
+  };
   const handleRegister = () => {
     if (email && password && confirmPassword) {
+      registerUser();
       console.log('send to register api route');
     }
     // if register returns 200, redirect to the sign up questionaire
@@ -66,11 +89,6 @@ function Register() {
     email: false,
     confirmPassword: false,
   });
-  useEffect(() => {
-    if (registerStatus === 200) {
-      navigate('/login');
-    }
-  }, [registerStatus]);
 
   function validatePassword(e: React.ChangeEvent<HTMLInputElement>) {
     const password = e.target;
@@ -139,7 +157,6 @@ function Register() {
     const email = e.target;
     email.setCustomValidity('');
     setEmailInvalid(false);
-    const checkValidity = email.checkValidity();
     const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     if (pattern.test(email.value)) {
       setEmailInvalid(false);
@@ -157,109 +174,121 @@ function Register() {
   // passcode 'cat0both'
   return (
     <div className='flex h-screen bg-[rgb(86,94,101)] justify-center items-center'>
-      <div className='flex flex-col pt-6 pb-6 rounded-md justify-center items-center bg-[rgb(47,49,54)] shadow-lg'>
-        <div className='flex flex-wrap flex-col gap-2 justify-center items-center'>
-          <h2 className='text-white'>Register Account</h2>
-          <div className='flex flex-col justify-center items-center p-6 gap-5'>
-            <h2 className='text-4xl text-white'>Gradient Fitness</h2>
-            <img className='h-14' src='gradient-icon.png' alt='brand logo' />
+      {!email || !password || !userId || registerStatus !== 201 ? (
+        <div className='flex flex-col pt-6 pb-6 rounded-md justify-center items-center bg-[rgb(47,49,54)] shadow-lg'>
+          <div className='flex flex-wrap flex-col gap-2 justify-center items-center'>
+            <h2 className='text-white'>Register Account</h2>
+            <div className='flex flex-col justify-center items-center p-6 gap-5'>
+              <h2 className='text-4xl text-white'>Gradient Fitness</h2>
+              <img className='h-14' src='gradient-icon.png' alt='brand logo' />
+            </div>
           </div>
-        </div>
-        <div className='flex flex-col gap-5 justify-center items-center'>
-          <div className='flex flex-col gap-1'>
-            <label className='text-white' htmlFor='email'>
-              Email<em className='not-italic text-red-600 text-lg'> *</em>
-            </label>
-            <input
-              onBlur={(e) => {
-                validateEmail(e);
-              }}
-              onChange={(e) => {
-                checkUnique(e);
-              }}
-              className='p-2 text-white rounded-md bg-[rgb(34,37,39)]'
-              id='email'
-              type='email'
-              name='email'
-              required
-              placeholder='Type your email'
-            />
-            {emailTaken ? (
-              <p className='text-sm text-red-500 pl-2'>Email already in use</p>
-            ) : (
-              <></>
-            )}
-            {emailInvalid ? (
-              <p className='text-sm text-red-500 pl-2'>Invalid email format</p>
-            ) : (
-              <></>
-            )}
-          </div>
-          <div className='flex flex-col'>
-            <label className='text-white' htmlFor='password'>
-              Password<em className='not-italic text-red-600 text-lg'> *</em>
-            </label>
-            <input
-              onChange={(e) => {
-                validatePassword(e);
-              }}
-              className='p-2 rounded-md text-white bg-[rgb(34,37,39)]'
-              id='password'
-              name='password'
-              type='password'
-              required
-              placeholder='Type your password'
-            />
-            {passwordInvalid && (
-              <p className='text-sm text-red-500 pl-2'>Invalid password</p>
-            )}
-          </div>
-          <div className='flex flex-col'>
-            <label className='text-white' htmlFor='confirm password'>
-              Confirm Password
-              <em className='not-italic text-red-600 text-lg'> *</em>
-            </label>
-            <input
-              onChange={(e) => {
-                matchPasswords(e);
-              }}
-              className='p-2 rounded-md text-white bg-[rgb(34,37,39)]'
-              id='confirm password'
-              name='confirm password'
-              type='password'
-              required
-            />
-          </div>
-          <div className='w-full'>
-            <button
-              type='submit'
-              className='w-full flex justify-center items-center text-lg bg-blue-600 text-white p-3 rounded-md shadow-md'
-              onClick={(e) => {
-                validityCheck(e);
-              }}
-            >
-              {attemptingRegister ? (
-                <TailSpin className='h-7' stroke='#FFFFFF' />
+          <div className='flex flex-col gap-5 justify-center items-center'>
+            <div className='flex flex-col gap-1'>
+              <label className='text-white' htmlFor='email'>
+                Email<em className='not-italic text-red-600 text-lg'> *</em>
+              </label>
+              <input
+                onBlur={(e) => {
+                  validateEmail(e);
+                }}
+                onChange={(e) => {
+                  checkUnique(e);
+                }}
+                className='p-2 text-white rounded-md bg-[rgb(34,37,39)]'
+                id='email'
+                type='email'
+                name='email'
+                required
+                placeholder='Type your email'
+              />
+              {emailTaken ? (
+                <p className='text-sm text-red-500 pl-2'>
+                  Email already in use
+                </p>
               ) : (
-                'Create Account'
+                <></>
               )}
-            </button>
-            {/*           <p>or</p>
+              {emailInvalid ? (
+                <p className='text-sm text-red-500 pl-2'>
+                  Invalid email format
+                </p>
+              ) : (
+                <></>
+              )}
+            </div>
+            <div className='flex flex-col'>
+              <label className='text-white' htmlFor='password'>
+                Password<em className='not-italic text-red-600 text-lg'> *</em>
+              </label>
+              <input
+                onChange={(e) => {
+                  validatePassword(e);
+                }}
+                className='p-2 rounded-md text-white bg-[rgb(34,37,39)]'
+                id='password'
+                name='password'
+                type='password'
+                required
+                placeholder='Type your password'
+              />
+              {passwordInvalid && (
+                <p className='text-sm text-red-500 pl-2'>Invalid password</p>
+              )}
+            </div>
+            <div className='flex flex-col'>
+              <label className='text-white' htmlFor='confirm password'>
+                Confirm Password
+                <em className='not-italic text-red-600 text-lg'> *</em>
+              </label>
+              <input
+                onChange={(e) => {
+                  matchPasswords(e);
+                }}
+                className='p-2 rounded-md text-white bg-[rgb(34,37,39)]'
+                id='confirm password'
+                name='confirm password'
+                type='password'
+                required
+              />
+            </div>
+            <div className='w-full'>
+              <button
+                type='submit'
+                className='w-full flex justify-center items-center text-lg bg-blue-600 text-white p-3 rounded-md shadow-md'
+                onClick={(e) => {
+                  validityCheck(e);
+                }}
+              >
+                {attemptingRegister ? (
+                  <TailSpin className='h-7' stroke='#FFFFFF' />
+                ) : (
+                  'Create Account'
+                )}
+              </button>
+              {/*           <p>or</p>
           <div>
             <button>Google</button>
             <button>Github</button>
           </div> */}
+            </div>
+            <span className='w-full'>
+              <em className='not-italic'>
+                <p className='text-white'>Already have an account?</p>
+                <Link to={'/login'} replace>
+                  <p className='text-blue-400'>Login</p>
+                </Link>
+              </em>
+            </span>
           </div>
-          <span className='w-full'>
-            <em className='not-italic'>
-              <p className='text-white'>Already have an account?</p>
-              <Link to={'/login'} replace>
-                <p className='text-blue-400'>Login</p>
-              </Link>
-            </em>
-          </span>
         </div>
-      </div>
+      ) : (
+        <CreateAccountSequence
+          email={email!}
+          password={password!}
+          userId={userId!}
+        />
+      )}
     </div>
   );
 }

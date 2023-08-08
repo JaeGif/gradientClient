@@ -18,6 +18,7 @@ function useUserQuery() {
   });
   const putUser = async (update: {
     weight?: number;
+    gender?: 'm' | 'f';
     bodyFatPercentage?: number;
     preferences?: {
       unit?: 'kg' | 'lb';
@@ -35,6 +36,7 @@ function useUserQuery() {
     useMutation({
       mutationFn: (update: {
         weight?: number;
+        gender?: 'm' | 'f';
         bodyFatPercentage?: number;
         preferences?: {
           unit?: 'kg' | 'lb';
