@@ -60,7 +60,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify(data),
       });
       const result = await response.json();
-      if (result.data) {
+      if (result.data && result.data.user.id) {
         let userResult: User = {
           id: result.data.user.id,
           username: result.data.user.username,

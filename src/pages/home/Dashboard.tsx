@@ -51,7 +51,7 @@ export default function Dashboard() {
           className={
             isLoading
               ? 'hidden'
-              : 'flex flex-wrap w-full h-full gap-5 justify-center pt-1 sm:pt-0 sm:p-6'
+              : 'flex flex-wrap w-full h-full gap-5 justify-center pt-1 sm:p-6'
           }
         >
           <Stats />
