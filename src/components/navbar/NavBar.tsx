@@ -18,7 +18,7 @@ function NavBar() {
             <Link to={'/dashboard'}>
               <button
                 type='button'
-                className='flex gap-5 items-center sm:justify-start sm:w-full pt-2 pb-2 pr-4 pl-4 rounded-3xl hover:bg-gray-200'
+                className='flex justify-center gap-5 items-center lg:justify-start sm:w-full pt-2 pb-2 pr-4 pl-4 rounded-3xl hover:bg-gray-200'
               >
                 <img
                   src='/favicons/dashboard.svg'
@@ -34,7 +34,7 @@ function NavBar() {
             <Link to={'/analytics'}>
               <button
                 type='button'
-                className='sm:justify-start justify-center sm:w-full flex gap-5 items-center pt-2 pb-2 pr-4 pl-4 rounded-3xl hover:bg-gray-200'
+                className='lg:justify-start justify-center sm:w-full flex gap-5 items-center pt-2 pb-2 pr-4 pl-4 rounded-3xl hover:bg-gray-200'
               >
                 <img
                   src='/favicons/analytics.svg'
@@ -50,7 +50,7 @@ function NavBar() {
             <Link to={'/record'}>
               <button
                 type='button'
-                className='sm:justify-start justify-center sm:w-full flex gap-5 items-center pt-2 pb-2 pr-4 pl-4 rounded-3xl hover:bg-gray-200'
+                className='lg:justify-start justify-center sm:w-full flex gap-5 items-center pt-2 pb-2 pr-4 pl-4 rounded-3xl hover:bg-gray-200'
               >
                 <img
                   src='/favicons/new.svg'
@@ -66,7 +66,7 @@ function NavBar() {
             <Link to={'/exercises'}>
               <button
                 type='button'
-                className='sm:justify-start justify-center sm:w-full flex gap-5 items-center pt-2 pb-2 pr-4 pl-4 rounded-3xl hover:bg-gray-200'
+                className='lg:justify-start justify-center sm:w-full flex gap-5 items-center pt-2 pb-2 pr-4 pl-4 rounded-3xl hover:bg-gray-200'
               >
                 <img
                   src='/favicons/sports.svg'
@@ -82,7 +82,7 @@ function NavBar() {
             <Link to={'/settings'}>
               <button
                 type='button'
-                className='sm:justify-start justify-center sm:w-full flex gap-5 items-center pt-2 pb-2 pr-4 pl-4 rounded-3xl hover:bg-gray-200'
+                className='lg:justify-start justify-center sm:w-full flex gap-5 items-center pt-2 pb-2 pr-4 pl-4 rounded-3xl hover:bg-gray-200'
               >
                 <img
                   src='/favicons/settings.svg'
