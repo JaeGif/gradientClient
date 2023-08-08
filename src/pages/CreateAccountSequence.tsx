@@ -13,7 +13,7 @@ function CreateAccountSequence({
   userId,
 }: CreateAccountSequenceProps) {
   const [units, setUnits] = useState<'kg' | 'lb'>('kg');
-  const [gender, setGender] = useState<'m' | 'f'>();
+  const [gender, setGender] = useState<'m' | 'f'>('m');
   const [username, setUsername] = useState<string>();
   const [bodyFatPercentage, setBodyFatPercentage] = useState<number>();
   const [weight, setWeight] = useState<number>();
@@ -88,6 +88,7 @@ function CreateAccountSequence({
             if (weight && bodyFatPercentage && units)
               userMutation.mutate(
                 {
+                  registerUserId: userId,
                   weight: weight,
                   gender: gender,
                   bodyFatPercentage: bodyFatPercentage,

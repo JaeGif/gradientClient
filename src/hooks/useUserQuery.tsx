@@ -17,6 +17,7 @@ function useUserQuery() {
     queryFn: getUserData,
   });
   const putUser = async (update: {
+    registerUserId?: string;
     weight?: number;
     gender?: 'm' | 'f';
     bodyFatPercentage?: number;
@@ -25,7 +26,11 @@ function useUserQuery() {
       standard?: 'percentile' | 'ratio';
     };
   }) => {
-    const res = await fetch(`${apiURL}api/users/${userId}`, {
+    let optionalUser = '';
+    if (userId) optionalUser = userId;
+    else if (update.registerUserId) optionalUser = update.registerUserId;
+
+    const res = await fetch(`${apiURL}api/users/${optionalUser}`, {
       mode: 'cors',
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -35,6 +40,7 @@ function useUserQuery() {
   const putUserStatsMutation = () =>
     useMutation({
       mutationFn: (update: {
+        registerUserId?: string;
         weight?: number;
         gender?: 'm' | 'f';
         bodyFatPercentage?: number;
