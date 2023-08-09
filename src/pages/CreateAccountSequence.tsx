@@ -42,7 +42,7 @@ function CreateAccountSequence({
             <option value={'f'}>Female</option>
           </select>
         </span>
-        <span className='flex flex-col gap-1'>
+        {/*         <span className='flex flex-col gap-1'>
           <label htmlFor='weight'>Preferred Units</label>
           <select
             onChange={(e) => {
@@ -53,7 +53,7 @@ function CreateAccountSequence({
             <option value={'kg'}>Kilograms (kg)</option>
             <option value={'lb'}>Pounds (lb)</option>
           </select>
-        </span>
+        </span> */}
         <span className='flex flex-col gap-1'>
           <label htmlFor='weight'>Weight</label>
           <input
