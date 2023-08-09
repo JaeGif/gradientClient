@@ -73,7 +73,7 @@ function AvgAbs1RepMaxToggle({
             />
           </div>
         </>
-      ) : (
+      ) : recentExerciseQuery.isFetched ? (
         <div className='flex flex-col justify-center items-center'>
           <h2 className='text-gray-600'>
             {capitalize(exerciseName)} Progression
@@ -84,6 +84,10 @@ function AvgAbs1RepMaxToggle({
             alt='no line chart data found'
           />
           <p>No data for {exerciseName} found</p>
+        </div>
+      ) : (
+        <div className='flex flex-col justify-center items-center'>
+          <Audio stroke='#000000' fill='#000000' />
         </div>
       )}
     </div>

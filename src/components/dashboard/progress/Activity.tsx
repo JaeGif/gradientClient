@@ -30,6 +30,8 @@ function Activity() {
     if (progressQuery.data && progressQuery.isFetched) {
       if (progressQuery.data.average === 0) {
         return setIsData(false);
+      } else {
+        setIsData(true);
       }
       let checkArr = [
         {

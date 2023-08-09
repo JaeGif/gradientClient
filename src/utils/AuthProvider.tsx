@@ -39,12 +39,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const storage = localStorage.getItem('gradientLoggedInUser');
     if (!storage) return;
     const storageData = JSON.parse(storage);
-    if (storageData.token && storageData.user) {
+    if (storageData.token && storageData.user && storageData.user.id) {
+      console.log('get from storage');
       setUser(storageData.user);
       setToken(storageData.token);
+    } else {
+      localStorage.clear();
+      return;
     }
   };
   const login = (email: string, password: string) => {
+    console.log('start login');
     if (!email || !password) return;
     const loginUserWithCredentials = async () => {
       const data = {
@@ -83,7 +88,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!user && !token) retrieveLoginLocalStorage();
-    if (user && token) {
+    if (user && user.id && token) {
       const redirectPath = location.state?.path || '/dashboard';
       navigate(redirectPath);
     }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../utils/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 
 function Login() {
@@ -8,6 +8,7 @@ function Login() {
   const [attemptingLogin, setAttemptingLogin] = useState(false);
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
+  const navigate = useNavigate();
   // email 'giffordjacob0@gmail.com'
   // passcode 'cat0both'
   const handleLogin = () => {
