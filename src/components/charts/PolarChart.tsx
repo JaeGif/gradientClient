@@ -17,8 +17,6 @@ type PolarChartType = {
 };
 
 export function PolarChart({ dataset }: PolarChartType) {
-  console.log(dataset);
-
   const data = {
     labels: dataset.map((el) => el.name),
     datasets: [

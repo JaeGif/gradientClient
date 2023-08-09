@@ -531,7 +531,6 @@ export const compareExerciseProgressAgainstMaxPossible = (
       data: coreData,
     },
   ];
-  console.log(data);
 
   return data;
 };

@@ -6,13 +6,17 @@ import uniqid from 'uniqid';
 import useRecentExerciseData from '../../hooks/useRecentExerciseData';
 import Audio from 'react-loading-icons/dist/esm/components/audio';
 import { useAuth } from '../../utils/AuthProvider';
+import { Exercise } from '../../types/Interfaces';
+import { capitalize } from '../../utils/fnSheet/utilities';
 
 type AvgAbs1RepMaxToggleProps = {
+  exerciseName: string;
   exerciseId: string;
   i: number;
-  idxArr: string[];
+  idxArr: Exercise[];
 };
 function AvgAbs1RepMaxToggle({
+  exerciseName,
   exerciseId,
   i,
   idxArr,
@@ -21,16 +25,20 @@ function AvgAbs1RepMaxToggle({
   const toggleChartViews = () => {
     setShowAbsolute((prev) => !prev);
   };
+  console.log(idxArr);
   const userId = useAuth()!.user!.id;
   const recentExerciseQuery = useRecentExerciseData(exerciseId, userId);
   const opacityValue = (i + 1) / idxArr.length;
   const highlightColor = showAbsolute ? '70, 225, 70' : '70, 70, 225';
   return (
     <div
-      style={{ borderLeftColor: `rgba(${highlightColor}, ${opacityValue})` }}
+      style={{
+        borderLeftColor: `rgba(${highlightColor}, ${opacityValue})`,
+      }}
       className={`flex flex-col max-w-[100vw] shadow-md border-l-[5px] justify-center p-6 rounded-md overflow-scroll`}
     >
-      {recentExerciseQuery.isFetched ? (
+      {' '}
+      {recentExerciseQuery.data && recentExerciseQuery.data.length ? (
         <>
           <button
             onClick={(e) => {
@@ -67,8 +75,16 @@ function AvgAbs1RepMaxToggle({
           </div>
         </>
       ) : (
-        <div className='flex justify-center items-center'>
-          <Audio stroke='#000000' fill='#000000' speed={0.5} />
+        <div className='flex flex-col justify-center items-center'>
+          <h2 className='text-gray-600'>
+            {capitalize(exerciseName)} Progression
+          </h2>
+          <img
+            className='h-24'
+            src='/favicons/line.svg'
+            alt='no line chart data found'
+          />
+          <p>No data for {exerciseName} found</p>
         </div>
       )}
     </div>

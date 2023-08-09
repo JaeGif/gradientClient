@@ -5,12 +5,13 @@ import { useAuth } from '../../../utils/AuthProvider';
 import AvgAbs1RepMaxToggle from '../../../components/analytics/AvgAbs1RepMaxToggle';
 import uniqid from 'uniqid';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
+import { Exercise } from '../../../types/Interfaces';
 
 function SelectedMuscleGroup() {
   const userId = useAuth()!.user!.id;
   let extension = useMatch('/analytics/muscleGroups/*')?.params['*']!;
   const location = useLocation();
-  const [exerciseIdx, setExerciseIdx] = useState<string[]>();
+  const [exercise, setExercise] = useState<Exercise[]>();
   // needs to get the idx of exercises that have the muscle group related
   const muscleSpecificExercisesQuery = useMuscleSpecificExercises(
     extension,
@@ -22,22 +23,24 @@ function SelectedMuscleGroup() {
       muscleSpecificExercisesQuery.data.length
     ) {
       let result = [];
+      console.log(muscleSpecificExercisesQuery.data);
       for (let i = 0; i < muscleSpecificExercisesQuery.data.length; i++) {
-        result.push(muscleSpecificExercisesQuery.data[i].id);
+        result.push(muscleSpecificExercisesQuery.data[i]);
       }
-      setExerciseIdx(result);
+      setExercise(result);
     }
   }, [muscleSpecificExercisesQuery.isFetched, location.pathname]);
   return (
     <div className='flex flex-wrap justify-center items-center'>
       {muscleSpecificExercisesQuery.data &&
       muscleSpecificExercisesQuery.data.length &&
-      exerciseIdx ? (
+      exercise ? (
         <div className='flex flex-col gap-5 w-full'>
-          {exerciseIdx.map((id, i, idxArr) => (
+          {exercise.map((exercise, i, idxArr) => (
             <AvgAbs1RepMaxToggle
+              exerciseName={exercise.name}
               key={uniqid()}
-              exerciseId={id}
+              exerciseId={exercise.id}
               i={i}
               idxArr={idxArr}
             />
