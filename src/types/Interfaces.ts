@@ -27,14 +27,14 @@ export interface GoalType {
   id: string;
   unit: 'kg' | 'lb';
   lifts: {
-    squats: number | undefined;
-    benchPress: number | undefined;
-    deadlift: number | undefined;
-    pullup: number | undefined;
-    shoulderPress: number | undefined;
+    squats: number | undefined | null;
+    benchPress: number | undefined | null;
+    deadlift: number | undefined | null;
+    pullup: number | undefined | null;
+    shoulderPress: number | undefined | null;
   };
-  weight: number | undefined;
-  bodyFatPercentage: number | undefined;
+  weight: number | undefined | null;
+  bodyFatPercentage: number | undefined | null;
 }
 
 export interface PerformedExercise {

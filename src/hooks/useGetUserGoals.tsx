@@ -9,7 +9,21 @@ function useGetUserGoals(userId: string) {
       method: 'GET',
     });
     const data = await res.json();
-    return data.user.goal;
+    if (data.user.goal) return data.user.goal;
+    else {
+      return {
+        unit: 'kg',
+        lifts: {
+          squats: undefined,
+          benchPress: undefined,
+          deadlift: undefined,
+          pullup: undefined,
+          shoulderPress: undefined,
+        },
+        weight: undefined,
+        bodyFatPercentage: undefined,
+      };
+    }
   };
   const getUserGoalsQuery = useQuery<any>({
     queryKey: ['userGoals', { id: userId }],

@@ -48,7 +48,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
               }}
               className='p-2 bg-slate-200 rounded-sm'
               type='number'
-              placeholder={`${goals.bodyFatPercentage}%`}
+              placeholder={`${goals.bodyFatPercentage || ''}%`}
             />
           </span>
           <span className='flex flex-col'>
@@ -60,7 +60,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
               }}
               className='p-2 bg-slate-200 rounded-sm'
               type='number'
-              placeholder={`${goals.weight}${user.preferences.unit}`}
+              placeholder={`${goals.weight || ''}${user.preferences.unit}`}
             />
           </span>
         </div>
@@ -75,7 +75,9 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
               }}
               className='p-2 bg-slate-200 rounded-sm'
               type='number'
-              placeholder={`${goals.lifts.benchPress}${user.preferences.unit}`}
+              placeholder={`${goals.lifts.benchPress || ''}${
+                user.preferences.unit
+              }`}
             />
           </span>
           <span className='flex flex-col'>
@@ -87,7 +89,9 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
               }}
               className='p-2 bg-slate-200 rounded-sm'
               type='number'
-              placeholder={`${goals.lifts.deadlift}${user.preferences.unit}`}
+              placeholder={`${goals.lifts.deadlift || ''}${
+                user.preferences.unit
+              }`}
             />
           </span>
           <span className='flex flex-col'>
@@ -99,7 +103,9 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
               }}
               className='p-2 bg-slate-200 rounded-sm'
               type='number'
-              placeholder={`${goals.lifts.pullup}${user.preferences.unit}`}
+              placeholder={`${goals.lifts.pullup || ''}${
+                user.preferences.unit
+              }`}
             />
           </span>
           <span className='flex flex-col'>
@@ -111,7 +117,9 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
               }}
               className='p-2 bg-slate-200 rounded-sm'
               type='number'
-              placeholder={`${goals.lifts.shoulderPress}${user.preferences.unit}`}
+              placeholder={`${goals.lifts.shoulderPress || ''}${
+                user.preferences.unit
+              }`}
             />
           </span>
           <span className='flex flex-col'>
@@ -123,7 +131,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
               }}
               className='p-2 bg-slate-200 rounded-sm'
               type='number'
-              placeholder={`${goals.lifts.squats || '~'}${
+              placeholder={`${goals.lifts.squats || ''}${
                 user.preferences.unit
               }`}
             />

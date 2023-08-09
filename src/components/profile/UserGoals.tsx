@@ -15,14 +15,15 @@ function UserGoals({ user, goals }: UserGoalsProps) {
           <p className='p-1 pl-2'>
             Body Fat Percentage:{' '}
             <em className='not-italic text-blue-500'>
-              {goals.bodyFatPercentage}%
+              {goals.bodyFatPercentage || 'No body fat goal'}
+              {goals.bodyFatPercentage && '%'}
             </em>
           </p>
           <p className='p-1 pl-2'>
             Weight:{' '}
             <em className='not-italic text-blue-500'>
-              {goals.weight}
-              {goals.unit}
+              {goals.weight || 'No weight goal'}
+              {goals.weight && goals.unit}
             </em>
           </p>
         </div>

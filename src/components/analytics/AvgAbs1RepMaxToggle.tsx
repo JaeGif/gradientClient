@@ -25,7 +25,6 @@ function AvgAbs1RepMaxToggle({
   const toggleChartViews = () => {
     setShowAbsolute((prev) => !prev);
   };
-  console.log(idxArr);
   const userId = useAuth()!.user!.id;
   const recentExerciseQuery = useRecentExerciseData(exerciseId, userId);
   const opacityValue = (i + 1) / idxArr.length;
