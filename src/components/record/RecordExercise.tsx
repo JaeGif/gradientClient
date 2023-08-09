@@ -93,7 +93,6 @@ function RecordExercise({
         <div className='flex flex-col'>
           <input
             onFocus={() => setIsSearching(true)}
-            onBlur={() => setIsSearching(false)}
             onChange={(e) => {
               setS(e.target.value);
             }}
@@ -109,7 +108,9 @@ function RecordExercise({
                   <div
                     className='p-2 hover:bg-slate-100 hover:cursor-pointer rounded-sm'
                     key={uniqid()}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsSearching(false);
                       handleExerciseId(exercise, index);
                     }}
                   >

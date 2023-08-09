@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../utils/AuthProvider';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 
 function Login() {
@@ -8,9 +8,7 @@ function Login() {
   const [attemptingLogin, setAttemptingLogin] = useState(false);
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
-  const navigate = useNavigate();
-  // email 'giffordjacob0@gmail.com'
-  // passcode 'cat0both'
+
   const handleLogin = () => {
     if (email && password) {
       auth!.login(email, password);
@@ -62,7 +60,7 @@ function Login() {
           <div className='w-full'>
             <button
               type='submit'
-              className='w-full flex justify-center items-center text-lg bg-blue-600 text-white p-3 rounded-md shadow-md'
+              className='hover:cursor-pointer w-full flex justify-center items-center text-lg bg-blue-600 text-white p-3 rounded-md shadow-md'
               onClick={() => {
                 setAttemptingLogin(true);
                 handleLogin();
@@ -83,7 +81,7 @@ function Login() {
           <span className='w-full'>
             <em className='not-italic'>
               <p className='text-white'>Don't have an account?</p>
-              <Link to={'/register'} replace>
+              <Link className='hover:cursor-pointer' to={'/register'} replace>
                 <p className='text-blue-400'>Sign Up</p>
               </Link>
             </em>
