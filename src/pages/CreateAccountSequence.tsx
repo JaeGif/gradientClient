@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useUserQuery from '../hooks/useUserQuery';
 import { useAuth } from '../utils/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 type CreateAccountSequenceProps = {
   email: string;
   password: string;
@@ -17,8 +18,8 @@ function CreateAccountSequence({
   const [username, setUsername] = useState<string>();
   const [bodyFatPercentage, setBodyFatPercentage] = useState<number>();
   const [weight, setWeight] = useState<number>();
+  const [attemptingLogin, setAttemptingLogin] = useState(false);
   const login = useAuth()!.login;
-  const navigate = useNavigate();
   const userMutation = useUserQuery().putUserStatsMutation();
 
   return (
@@ -85,6 +86,7 @@ function CreateAccountSequence({
         </span>
         <button
           onClick={(e) => {
+            setAttemptingLogin(true);
             if (weight && bodyFatPercentage && units)
               userMutation.mutate(
                 {
@@ -97,7 +99,6 @@ function CreateAccountSequence({
                 {
                   onSuccess: () => {
                     login(email, password);
-                    navigate('/dashboard');
                   },
                 }
               );
@@ -105,7 +106,11 @@ function CreateAccountSequence({
           type='button'
           className='w-full flex justify-center items-center text-lg bg-blue-600 text-white p-3 rounded-md shadow-md'
         >
-          Finish Up
+          {attemptingLogin ? (
+            <TailSpin className='h-7' stroke='#FFFFFF' />
+          ) : (
+            'Finish Up'
+          )}
         </button>
       </div>
     </div>

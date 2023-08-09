@@ -18,7 +18,7 @@ function Login() {
   };
   return (
     <div className='flex h-screen bg-[rgb(86,94,101)] justify-center items-center'>
-      <div className='flex flex-col p-6 rounded-md justify-center items-center bg-[rgb(47,49,54)] shadow-lg'>
+      <div className='z-10 flex flex-col p-6 rounded-md justify-center items-center bg-[rgb(47,49,54)] shadow-lg'>
         <div className='flex flex-wrap flex-col gap-2 justify-center items-center'>
           <h2 className='text-white'>Login</h2>
           <h2 className='text-4xl text-white'>Gradient Fitness</h2>
