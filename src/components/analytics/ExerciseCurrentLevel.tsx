@@ -44,7 +44,7 @@ function ExerciseCurrentLevel({
           recentExerciseQuery.data,
           true,
           isPullups,
-          userWeight
+          userWeight.value
         );
         addToCache(`${exerciseId}_Avg1RM`, data);
       } else {

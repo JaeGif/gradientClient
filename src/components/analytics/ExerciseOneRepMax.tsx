@@ -46,7 +46,7 @@ function ExerciseOneRepMax({
           recentExerciseQuery.data,
           false,
           isPullups,
-          userWeight
+          userWeight.value
         ); // returns a number[] of the 1rm for each set
         addToCache(`${exerciseId}_Abs1RM`, data);
       } else {
