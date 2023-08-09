@@ -89,6 +89,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!user && !token) retrieveLoginLocalStorage();
     if (user && user.id && token) {
+      console.log('attempt redirect');
       const redirectPath = location.state?.path || '/dashboard';
       navigate(redirectPath);
     }

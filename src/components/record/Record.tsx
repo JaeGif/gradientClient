@@ -228,7 +228,6 @@ function Record() {
         {creatingExercise && (
           <CreateExercise setCreatingExercise={setCreatingExercise} />
         )}
-
         {exerciseData.map((data, i) => (
           <RecordExercise
             setCreatingExercise={setCreatingExercise}
