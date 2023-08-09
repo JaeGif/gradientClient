@@ -12,6 +12,7 @@ import { useUser } from '../../../utils/UserProvider';
 
 function Activity() {
   const [nextLevel, setNextLevel] = useState<string>('');
+  const [isData, setIsData] = useState(true);
   const [distanceToNextLevel, setDistanceToNextLevel] = useState<number>(0);
   const [currentLevel, setCurrentLevel] = useState<string>('');
   const [userLevel, setUserLevel] = useState<number>();
@@ -27,6 +28,9 @@ function Activity() {
 
   useEffect(() => {
     if (progressQuery.data && progressQuery.isFetched) {
+      if (progressQuery.data.average === 0) {
+        return setIsData(false);
+      }
       let checkArr = [
         {
           level: 'beginner',
@@ -67,21 +71,24 @@ function Activity() {
       setUserLevel(currentLevelValue);
       const delta = nextLevelValue - currentLevelValue;
       const currentDistance = progressQuery.data.average - currentLevelValue;
-      const percentageOfNextLevel = parseFloat(
-        ((currentDistance / delta) * 100).toFixed(2)
-      );
+      const percentageOfNextLevel =
+        parseFloat(((currentDistance / delta) * 100).toFixed(2)) || 0;
+
+      console.log(delta, currentDistance, percentageOfNextLevel);
       setDistanceToNextLevel(percentageOfNextLevel);
+      console.log(currentLevel, nextLevel);
     }
   }, [progressQuery.isFetched, progressQuery.data]);
 
   return (
-    <>
-      {progressQuery.isFetched &&
-        progressQuery.data &&
-        levelsData &&
-        userLevel && (
-          <div className='sm:w-1/4 w-full rounded-lg sm:p-2 sm:min-w-[200px] shadow-md'>
-            <div className='flex flex-col justify-between h-full'>
+    <div className='sm:w-1/4 w-full rounded-lg sm:p-2 sm:min-w-[200px] shadow-md'>
+      <div className='flex flex-col justify-between h-full'>
+        {isData ? (
+          progressQuery.isFetched &&
+          progressQuery.data &&
+          levelsData &&
+          userLevel && (
+            <>
               <span className='p-2 flex justify-center items-center'>
                 <OverlayProgressBarChart
                   nextLevel={capitalize(nextLevel)}
@@ -93,10 +100,28 @@ function Activity() {
                 nextLevel={capitalize(nextLevel)}
                 distanceToNextLevel={distanceToNextLevel}
               />
+            </>
+          )
+        ) : (
+          <span className='p-2 flex flex-col justify-center items-center h-full'>
+            <h4 className='font-bold text-gray-500'>Level Progress</h4>
+            <div className='flex flex-col items-center justify-between w-full h-full'>
+              <img
+                className='w-full'
+                src='/favicons/donut.svg'
+                alt='no data found'
+              />
+              <h3 className='text-gray-400'>No data found</h3>
+              <span className='flex flex-col gap-2 justify-center items-center'>
+                <p className='text-center text-gray-500 text-sm italic'>
+                  Record an exercise to get started.
+                </p>
+              </span>
             </div>
-          </div>
+          </span>
         )}
-    </>
+      </div>
+    </div>
   );
 }
 

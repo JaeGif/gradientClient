@@ -43,7 +43,7 @@ function useGeneralProgressData(
     return emptyProgressData;
   };
 
-  const generalTrendQuery = useQuery<ProgressData | []>({
+  const generalTrendQuery = useQuery<ProgressData>({
     queryKey: ['generalProgress', { id: userId }],
     queryFn: getGeneralProgressData,
     initialData: () => {
