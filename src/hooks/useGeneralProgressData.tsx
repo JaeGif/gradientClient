@@ -13,6 +13,17 @@ type ProgressData = {
     units: 'kg' | 'lb';
   };
 };
+const emptyProgressData: ProgressData = {
+  average: 0,
+  averagedStandards: {
+    beginner: 0,
+    novice: 0,
+    intermediate: 0,
+    advanced: 0,
+    elite: 0,
+    units: 'kg',
+  },
+};
 function useGeneralProgressData(
   userId?: string,
   gender?: 'm' | 'f',
@@ -25,23 +36,14 @@ function useGeneralProgressData(
       const res = await fetch(
         `${apiURL}api/standardizedPerformances?user=${userId}&count=${count}&userGender=${gender}`
       );
+      if (res.status === 404) return emptyProgressData;
       const data = await res.json();
       return data;
     }
-    return {
-      average: 0,
-      averagedStandards: {
-        beginner: 0,
-        novice: 0,
-        intermediate: 0,
-        advanced: 0,
-        elite: 0,
-        units: 'kg',
-      },
-    };
+    return emptyProgressData;
   };
 
-  const generalTrendQuery = useQuery<ProgressData>({
+  const generalTrendQuery = useQuery<ProgressData | []>({
     queryKey: ['generalProgress', { id: userId }],
     queryFn: getGeneralProgressData,
     initialData: () => {

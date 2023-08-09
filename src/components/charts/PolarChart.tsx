@@ -17,12 +17,18 @@ type PolarChartType = {
 };
 
 export function PolarChart({ dataset }: PolarChartType) {
+  console.log(dataset);
+
   const data = {
     labels: dataset.map((el) => el.name),
     datasets: [
       {
         label: '',
-        data: dataset.map((el) => el.data),
+        data: dataset.map((el) => {
+          if (el.data === 0) {
+            return 1;
+          } else return el.data;
+        }),
         backgroundColor: [
           'rgba(255, 99, 132, 0.5)',
           'rgba(54, 162, 235, 0.5)',

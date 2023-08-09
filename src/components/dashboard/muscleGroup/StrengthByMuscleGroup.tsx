@@ -18,11 +18,13 @@ function StrengthByMuscleGroup() {
   >();
   const userStandardPerformancesMax = usePerformedStandardsMax(userId);
   useEffect(() => {
+    console.log(userStandardPerformancesMax);
     if (!userStandardPerformancesMax.data) return;
     let checkArr = [];
     for (let i = 0; i < userStandardPerformancesMax.data.length; i++) {
       checkArr.push(userStandardPerformancesMax.data[i] || 0);
     }
+
     setMuscleGroupProgression(
       compareExerciseProgressAgainstMaxPossible(checkArr, {
         userGender,

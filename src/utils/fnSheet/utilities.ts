@@ -483,34 +483,55 @@ export const compareExerciseProgressAgainstMaxPossible = (
   // for shoulders shoulder press
   // for core, avg all
   for (let i = 0; i < performances.length; i++) {
-    result.push(
-      parseInt(
-        (
-          (performances[i] /
-            genderedStandards[i].level.elite.weight[config.userUnits]) *
-          100
-        ).toFixed(2)
-      )
-    );
+    if (performances[i] !== 0)
+      result.push(
+        parseInt(
+          (
+            (performances[i] /
+              genderedStandards[i].level.elite.weight[config.userUnits]) *
+            100
+          ).toFixed(2)
+        )
+      );
+    else result.push(0);
   }
+  const calculateData = (indexArr: number[]) => {
+    let count = 0;
+    let runningTotal = 0;
+    for (let i = 0; i < indexArr.length; i++) {
+      if (indexArr[i] !== 0) {
+        count++;
+        runningTotal += indexArr[i];
+      }
+    }
+    if (count === 0) return 0;
+    else return parseFloat((runningTotal / count).toFixed(2));
+  };
+  const chestData = result[0];
+  const backData = calculateData([result[1], result[3]]);
+  const legsData = calculateData([result[2], result[3]]);
+  const shouldersData = result[4];
+  const coreData = calculateData([
+    result[0],
+    result[1],
+    result[2],
+    result[3],
+    result[4],
+  ]);
   const data = [
-    { name: 'Chest', data: result[0] },
-    { name: 'Back', data: parseInt(((result[1] + result[3]) / 2).toFixed(2)) },
+    { name: 'Chest', data: chestData },
+    { name: 'Back', data: backData },
     {
       name: 'Legs',
-      data: parseInt(((result[2] + result[3]) / 2).toFixed(2)),
+      data: legsData,
     },
-    { name: 'Shoulders', data: result[4] },
+    { name: 'Shoulders', data: shouldersData },
     {
       name: 'Core',
-      data: parseInt(
-        (
-          (result[0] + result[1] + result[2] + result[3] + result[4]) /
-          5
-        ).toFixed(2)
-      ),
+      data: coreData,
     },
   ];
+  console.log(data);
 
   return data;
 };
