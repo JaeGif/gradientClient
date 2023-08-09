@@ -97,7 +97,7 @@ function StandardsAnalysis({ exerciseId, average }: StandardsAnalysisProps) {
             <p className='text-sm font-semibold'>Next Level: </p>
 
             <p>
-              {capitalize(closestStandard.level)} {closestStandard.weight}
+              {capitalize(closestStandard.level)} at {closestStandard.weight}
               {userPreferenceWeight}
             </p>
           </span>

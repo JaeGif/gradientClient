@@ -23,7 +23,7 @@ function ExerciseCurrentLevel({
   const [xLabels, setXLabels] = useState<string[]>([]);
   const [datasets, setDatasets] = useState<any>();
   const [options, setOptions] = useState<any>();
-  const [timeFrame, setTimeFrame] = useState('30 days');
+  const [timeFrame, setTimeFrame] = useState('<= 30 Performances');
   const [state, addToCache] = useCustomMemo();
 
   const userWeight = useUser()!.weight;

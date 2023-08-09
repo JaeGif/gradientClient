@@ -3,7 +3,6 @@ import useLinearRegression from '../../hooks/useLinearRegression';
 type GeneralTrendRegressionAnalysisProps = {
   exerciseId: string;
   average: boolean;
-  timePeriod?: string;
 };
 import useCustomMemo from '../../hooks/useCustomMemo';
 import { useAuth } from '../../utils/AuthProvider';
@@ -11,7 +10,6 @@ import { useUser } from '../../utils/UserProvider';
 function GeneralTrendRegressionAnalysis({
   exerciseId,
   average,
-  timePeriod = '30 Day',
 }: GeneralTrendRegressionAnalysisProps) {
   const [regressionSlope, setRegressionSlope] = useState<number>();
   const [positive, setPositive] = useState<boolean>();
@@ -58,7 +56,7 @@ function GeneralTrendRegressionAnalysis({
 
   return (
     <div className='flex justify-start items-center gap-1 text-sm'>
-      <p className='font-semibold'>{timePeriod} Trend: </p>
+      <p className='font-semibold'>Performance Trend: </p>
       {regressionSlope && typeof positive !== 'undefined' && (
         <span className='flex justify-start items-center gap-2'>
           <p>

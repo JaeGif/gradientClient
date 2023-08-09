@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 
 import { CacheContext } from '../../App';
+import { useUser } from '../../utils/UserProvider';
 type RecentPerformanceDeltaProps = {
   exerciseId: string;
   average: boolean;
@@ -12,7 +13,7 @@ function RecentPerformanceDelta({
   const store = useContext(CacheContext);
   const [positive, setPositive] = useState<boolean>();
   const [delta, setDelta] = useState<number>();
-
+  const units = useUser()!.preferences.unit;
   const signOfSlope = (slope: number) => {
     const sign = Math.sign(slope);
     switch (sign) {
@@ -63,6 +64,7 @@ function RecentPerformanceDelta({
             <p>
               {positive && '+'}
               {delta}
+              {units}
             </p>
           </span>
           <img

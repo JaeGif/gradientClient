@@ -6,7 +6,7 @@ import useDataPointThreshold from './useDataPointThreshold';
 function useLineChartOptions(
   recentExerciseQuery: UseQueryResult<any, unknown>,
   data: number[],
-  timeFrame: string,
+  performanceFrame: string,
   userGender: 'm' | 'f',
   absolute: boolean
 ) {
@@ -38,7 +38,7 @@ function useLineChartOptions(
       x: {
         title: {
           display: true,
-          text: `${timeFrame}`,
+          text: `${performanceFrame}`,
         },
         grid: {
           display: false,
@@ -50,7 +50,7 @@ function useLineChartOptions(
         display: false,
       },
       annotation: {
-        drawTime: 'afterDatasetsDraw',
+        drawperformance: 'afterDatasetsDraw',
         annotations: annotationList ? { ...annotationList } : {},
       },
       decimation: {

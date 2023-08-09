@@ -23,7 +23,7 @@ function ExerciseOneRepMax({
   const [xLabels, setXLabels] = useState<string[]>([]);
   const [datasets, setDatasets] = useState<any>();
   const [options, setOptions] = useState<any>();
-  const [timeFrame, setTimeFrame] = useState('30 days'); // set this is fetched at right intervals
+  const [timeFrame, setTimeFrame] = useState('<= 30 Performances'); // set this is fetched at right intervals
   const [state, addToCache] = useCustomMemo();
 
   const userWeight = useUser()!.weight;
