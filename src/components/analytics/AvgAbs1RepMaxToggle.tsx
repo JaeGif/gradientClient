@@ -50,7 +50,7 @@ function AvgAbs1RepMaxToggle({
             <img className='h-6 hover:animate-spin' src='/favicons/swap.svg' />
           </button>
           {showAbsolute ? (
-            <span className='w-[600px] overflow-x-scroll'>
+            <span className='min-w-[600px] overflow-x-scroll'>
               <ExerciseOneRepMax
                 key={uniqid()}
                 exerciseId={exerciseId}
@@ -58,7 +58,7 @@ function AvgAbs1RepMaxToggle({
               />
             </span>
           ) : (
-            <span className='w-[600px] overflow-x-scroll'>
+            <span className='min-w-[600px] overflow-x-scroll'>
               <ExerciseCurrentLevel
                 key={uniqid()}
                 exerciseId={exerciseId}
