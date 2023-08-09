@@ -75,7 +75,7 @@ function RecordExercise({
               src='/favicons/edit.svg'
             />
           </span>
-          <img
+          <div
             onClick={() => {
               handleSets(index, data.sets.length, {
                 reps: undefined,
@@ -83,11 +83,16 @@ function RecordExercise({
                 unit: userUnit,
               });
             }}
-            title='Add Set'
-            className='h-8 hover:cursor-pointer'
-            alt='add new set'
-            src='/favicons/new.svg'
-          />
+            className='text-center flex justify-center items-center hover:cursor-pointer'
+          >
+            <p className='text-lg'>Add Set</p>
+            <img
+              title='Add Set'
+              className='h-8'
+              alt='add new set'
+              src='/favicons/new.svg'
+            />
+          </div>
         </div>
       ) : (
         <div className='flex flex-col'>
