@@ -21,8 +21,7 @@ function Profile({ user, goals }: ProfileProps) {
               <UserGoals user={user} goals={goals} />
             </div>
             <EditProfileSections user={user} goals={goals} />
-            {/*             <UserPreferences user={user} />
-             */}
+            <UserPreferences user={user} />
           </div>
         </div>
       )}
