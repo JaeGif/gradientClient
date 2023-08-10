@@ -21,11 +21,12 @@ export default function Dashboard() {
   const notesQuery = useNotes(userId).getNotesQuery;
   const performedStandardsQuery = usePerformedStandardsMax(userId);
   const progressQuery = useGeneralProgressData(userId, userGender);
-  const [isLoading, setIsLoading] = useState(true);
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     if (notesQuery.data && performedStandardsQuery.data && progressQuery.data) {
       setIsLoading(false);
+    } else {
+      setIsLoading(true);
     }
   }, [
     notesQuery.isFetched,
@@ -33,31 +34,27 @@ export default function Dashboard() {
     progressQuery.isFetched,
   ]);
   return (
-    <>
+    <div
+      className={
+        'flex flex-wrap w-full h-full gap-5 justify-center pt-1 sm:p-6'
+      }
+    >
       <GoalContext.Provider value={goal}>
-        {isLoading ? (
-          <div
-            className={
-              'fixed w-full top-0 right-0 h-screen flex flex-col items-center gap-5 p-5'
-            }
-          >
-            <LoadingScreen />
-          </div>
+        {!notesQuery.isFetched ||
+        !performedStandardsQuery.isFetched ||
+        !progressQuery.isFetched ? (
+          <LoadingScreen />
         ) : (
-          <div
-            className={
-              'flex flex-wrap w-full h-full gap-5 justify-center pt-1 sm:p-6'
-            }
-          >
+          <>
             <Stats />
             <GeneralProgressChart />
             <Activity />
             <StrengthByMuscleGroup />
             <Notes />
-          </div>
+          </>
         )}
       </GoalContext.Provider>
-    </>
+    </div>
   );
 }
 

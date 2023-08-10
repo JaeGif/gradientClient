@@ -6,6 +6,7 @@ import AvgAbs1RepMaxToggle from '../../../components/analytics/AvgAbs1RepMaxTogg
 import uniqid from 'uniqid';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 import { Exercise } from '../../../types/Interfaces';
+import LoadingScreen from '../../../components/transtions/LoadingScreen';
 
 function SelectedMuscleGroup() {
   const userId = useAuth()!.user!.id;
@@ -50,7 +51,7 @@ function SelectedMuscleGroup() {
         muscleSpecificExercisesQuery.data.length === 0 ? (
         <p>No exercises in this category</p>
       ) : (
-        <TailSpin stroke='#000000' />
+        <LoadingScreen />
       )}
     </div>
   );

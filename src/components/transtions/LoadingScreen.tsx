@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion';
 function LoadingScreen() {
   return (
-    <div className='h-full w-full lg:ml-[15rem] flex justify-center items-center flex-col'>
+    <div className='w-full h-full flex justify-center items-center'>
       <motion.svg
-        width='100%'
-        height='80%'
+        width='300px'
         viewBox='0 0 24 24'
         id='delta'
         data-name='delta'
@@ -43,7 +42,6 @@ function LoadingScreen() {
           strokeWidth={1}
         ></path>
       </motion.svg>
-      <h2>Loading Dashboard</h2>
     </div>
   );
 }
