@@ -28,7 +28,7 @@
 }
 @layer components {
   .dark {
-    @apply bg-[rgb(35,35,35)] text-white;
+    @apply bg-[rgb(20,20,20)] text-white;
   }
   .light {
     @apply bg-white;
