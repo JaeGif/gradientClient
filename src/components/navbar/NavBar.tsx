@@ -10,7 +10,7 @@ function NavBar({ setTheme }: NavBarProps) {
   const theme = useContext(ThemeContext);
   return (
     <>
-      <div className='hidden lg:flex lg:min-w-[260px] w-screen lg:w-1/5  lg:min-h-screen lg:max-h-screen pt-4'></div>
+      <div className='hidden debug lg:flex lg:min-w-[250px] mr-10 lg:min-h-screen lg:max-h-screen pt-4'></div>
       <nav className='dark:bg-[rgb(30,30,30)] bg-white shadow-[0_-1px_50px_1px_rgba(0,0,0,.2)] sm:border-none sm:gap-10 z-10 fixed bottom-0 left-0 lg:top-0 flex lg:flex-col w-screen lg:w-1/5 lg:min-w-[250px] lg:min-h-screen lg:max-h-screen lg:pl-4 lg:pr-4 lg:pt-4 lg:shadow-md'>
         <span className='hidden lg:flex flex-col justify-center items-center gap-2'>
           <img className='h-10' src='/gradient-icon.png' />

@@ -42,7 +42,7 @@ function RadarLevels({
   userExerciseLevels,
 }: RadarLevelsProps) {
   const theme = useContext(ThemeContext);
-  const gridLines = theme === 'dark' ? 'rgb(60,60,60)' : 'rgb(30,30,30)';
+  const gridLines = theme === 'dark' ? 'rgb(60,60,60)' : 'rgba(200,200,200)';
   const [isSmall, setIsSmall] = useState(false);
   const userLiftGoal = useContext(GoalContext)?.lifts;
   const isUnder1200 = useMediaQuery('(max-width: 1200px)');
@@ -175,14 +175,14 @@ function RadarLevels({
         scales: {
           r: {
             ticks: {
-              color: theme === 'dark' ? 'rgb(90,90,90)' : 'rgb(30,30,30)',
+              color: theme === 'dark' ? 'rgb(90,90,90)' : 'rgb(150,150,150)',
               backdropColor: theme === 'dark' ? 'rgb(35,35,35)' : '#FFFFFF',
               callback: (value) => {
                 return `${value} ${units}`;
               },
             },
             grid: {
-              color: theme === 'dark' ? 'rgb(90,90,90)' : 'rgb(30,30,30)',
+              color: theme === 'dark' ? 'rgb(90,90,90)' : 'rgb(200,200,200)',
             },
             angleLines: {
               display: true,
