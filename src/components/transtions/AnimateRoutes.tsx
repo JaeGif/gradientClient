@@ -11,7 +11,6 @@ import Record from '../record/Record';
 import Analytics from '../../pages/home/analytics/Analytics';
 import SelectedMuscleGroup from '../../pages/home/analytics/SelectedMuscleGroup';
 import NotFound from '../../pages/error/NotFound';
-import PageTransition from './PageTransition';
 function AnimateRoutes() {
   const location = useLocation();
   return (
@@ -34,7 +33,6 @@ function AnimateRoutes() {
           path='analytics/*'
           element={
             <>
-              <PageTransition />
               <Analytics />
             </>
           }

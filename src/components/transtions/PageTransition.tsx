@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
-
-function PageTransition() {
+import LoadingScreen from './LoadingScreen';
+type PageTransitionProps = {
+  isLoading?: boolean;
+};
+function PageTransition({ isLoading = false }: PageTransitionProps) {
   return (
     <>
       <motion.div

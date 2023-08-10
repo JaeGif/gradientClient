@@ -4,7 +4,6 @@ import uniqid from 'uniqid';
 import { useAuth } from '../../utils/AuthProvider';
 import CreateExercise from './CreateExercise';
 import { useUser } from '../../utils/UserProvider';
-import PageTransition from '../transtions/PageTransition';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 function Record() {
   const userId = useAuth()!.user!.id;
@@ -173,7 +172,6 @@ function Record() {
   };
   return (
     <>
-      <PageTransition />
       <div className='flex flex-col w-screen lg:w-[calc(100vw-20rem)] h-full sm:p-2 gap-2'>
         <div className='shadow-md p-4 pt-2 flex gap-2 flex-col rounded-md'>
           <h1>Record Exercise</h1>

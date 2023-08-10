@@ -7,13 +7,11 @@ import Stats from '../../components/dashboard/statistics/Stats';
 import useGetUserGoals from '../../hooks/useGetUserGoals';
 import { useAuth } from '../../utils/AuthProvider';
 import { GoalType } from '../../types/Interfaces';
-import ThreeDots from 'react-loading-icons/dist/esm/components/three-dots';
 import useNotes from '../../hooks/useNotes';
 import usePerformedStandardsMax from '../../hooks/usePerformedStandardsMax';
 import useGeneralProgressData from '../../hooks/useGeneralProgressData';
-import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 import { useUser } from '../../utils/UserProvider';
-import PageTransition from '../../components/transtions/PageTransition';
+import LoadingScreen from '../../components/transtions/LoadingScreen';
 const GoalContext = React.createContext<GoalType | null>(null);
 
 export default function Dashboard() {
@@ -36,25 +34,19 @@ export default function Dashboard() {
   ]);
   return (
     <>
-      <PageTransition />
       <GoalContext.Provider value={goal}>
         {isLoading ? (
           <div
             className={
-              isLoading
-                ? 'fixed w-full top-0 right-0 h-screen flex flex-col items-center gap-5 p-5'
-                : 'invisible hidden'
+              'fixed w-full top-0 right-0 h-screen flex flex-col items-center gap-5 p-5'
             }
           >
-            <h1 className='m-0 p-0'>Loading Dashboard</h1>
-            <TailSpin stroke='#000000' />
+            <LoadingScreen />
           </div>
         ) : (
           <div
             className={
-              isLoading
-                ? 'hidden'
-                : 'flex flex-wrap w-full h-full gap-5 justify-center pt-1 sm:p-6'
+              'flex flex-wrap w-full h-full gap-5 justify-center pt-1 sm:p-6'
             }
           >
             <Stats />

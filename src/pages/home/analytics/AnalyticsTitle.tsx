@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { capitalize } from '../../../utils/fnSheet/utilities';
-import PageTransition from '../../../components/transtions/PageTransition';
 import { useMatch } from 'react-router-dom';
 function AnalyticsTitle() {
   const location = useLocation();

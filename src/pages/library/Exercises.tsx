@@ -3,7 +3,6 @@ import ExerciseLibrary from '../../components/exercises/previousExercises/Exerci
 import ExerciseSearch from '../../components/exercises/exerciseSearch/ExerciseSearch';
 import { Exercise } from '../../types/Interfaces';
 import RecentlySearched from '../../components/exercises/exerciseSearch/RecentlySearched';
-import PageTransition from '../../components/transtions/PageTransition';
 function Exercises() {
   const [searchedExercise, setSearchedExercise] = useState<Exercise>();
   const [recentlySearchedExercises, setRecentlySearchedExercises] = useState<
@@ -20,7 +19,6 @@ function Exercises() {
   }, [searchedExercise]);
   return (
     <>
-      <PageTransition />
       <div className='flex flex-col w-screen lg:w-[calc(100vw-20rem)] gap-5 sm:p-2'>
         <span className='flex flex-wrap flex-col p-2 sm:pl-4 shadow-md rounded-md'>
           <h1>Exercise Library</h1>
