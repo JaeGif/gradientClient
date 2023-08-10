@@ -131,7 +131,7 @@ function UserPreferences({ user }: UserPreferencesProps) {
                 name='new password'
                 id='new password'
                 type='password'
-                className='p-2 rounded-md bg-gray-200'
+                className='dark:bg-[rgb(40,40,40)] p-2 rounded-md bg-gray-200'
               />
               <label htmlFor='new password' className='text-sm'>
                 Confirm Password
@@ -143,7 +143,7 @@ function UserPreferences({ user }: UserPreferencesProps) {
                 name='confirm password'
                 id='confirm password'
                 type='password'
-                className='p-2 rounded-md bg-gray-200'
+                className='dark:bg-[rgb(40,40,40)] p-2 rounded-md bg-gray-200'
               />
             </div>
             <button onClick={changePassword} className='text-blue-400'>

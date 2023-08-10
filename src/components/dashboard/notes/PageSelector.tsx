@@ -1,5 +1,6 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useContext, useEffect, useState } from 'react';
 import PageCounter from './PageCounter';
+import { ThemeContext } from '../../../App';
 
 type PageSelectorProps = {
   children?: ReactNode;
@@ -21,18 +22,27 @@ function PageSelector({
   page,
   totalPages,
 }: PageSelectorProps) {
+  const theme = useContext(ThemeContext);
   return (
     <div className='flex justify-center items-center gap-2'>
       <span className='w-full flex justify-between items-center'>
         <img
           className='h-6 hover:cursor-pointer'
           onClick={() => firstPageFn()}
-          src='/favicons/first_chevron.svg'
+          src={
+            theme === 'dark'
+              ? '/favicons/first_chevron-white.svg'
+              : '/favicons/first_chevron.svg'
+          }
         />
         <img
           className='h-6 hover:cursor-pointer'
           onClick={() => previousPageFn()}
-          src='/favicons/left_chevron.svg'
+          src={
+            theme === 'dark'
+              ? '/favicons/left_chevron-white.svg'
+              : '/favicons/left_chevron.svg'
+          }
         />
       </span>
       <PageCounter
@@ -44,12 +54,20 @@ function PageSelector({
         <img
           className='h-6 hover:cursor-pointer'
           onClick={() => nextPageFn()}
-          src='/favicons/right_chevron.svg'
+          src={
+            theme === 'dark'
+              ? '/favicons/right_chevron-white.svg'
+              : '/favicons/right_chevron.svg'
+          }
         />
         <img
           className='h-6 hover:cursor-pointer'
           onClick={() => lastPageFn()}
-          src='/favicons/last_chevron.svg'
+          src={
+            theme === 'dark'
+              ? '/favicons/last_chevron-white.svg'
+              : '/favicons/last_chevron.svg'
+          }
         />
       </span>
     </div>

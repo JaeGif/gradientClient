@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ExerciseCurrentLevel from './ExerciseCurrentLevel';
 import ExerciseOneRepMax from './ExerciseOneRepMax';
 import ChartAnalysis from './ChartAnalysis';
@@ -8,6 +8,7 @@ import Audio from 'react-loading-icons/dist/esm/components/audio';
 import { useAuth } from '../../utils/AuthProvider';
 import { Exercise } from '../../types/Interfaces';
 import { capitalize } from '../../utils/fnSheet/utilities';
+import { ThemeContext } from '../../App';
 
 type AvgAbs1RepMaxToggleProps = {
   exerciseName: string;
@@ -21,6 +22,7 @@ function AvgAbs1RepMaxToggle({
   i,
   idxArr,
 }: AvgAbs1RepMaxToggleProps) {
+  const theme = useContext(ThemeContext);
   const [showAbsolute, setShowAbsolute] = useState<boolean>(false);
   const toggleChartViews = () => {
     setShowAbsolute((prev) => !prev);
@@ -34,7 +36,7 @@ function AvgAbs1RepMaxToggle({
       style={{
         borderLeftColor: `rgba(${highlightColor}, ${opacityValue})`,
       }}
-      className={`flex flex-col max-w-[100vw] shadow-md border-l-[5px] justify-center p-6 rounded-md overflow-scroll`}
+      className={`dark:bg-[rgb(30,30,30)] flex flex-col max-w-[100vw] shadow-md border-l-[5px] justify-center p-6 rounded-md overflow-scroll`}
     >
       {' '}
       {recentExerciseQuery.data && recentExerciseQuery.data.length ? (
@@ -44,10 +46,17 @@ function AvgAbs1RepMaxToggle({
               e.stopPropagation();
               toggleChartViews();
             }}
-            className='flex justify-between gap-2 items-center border-2 border-gray-700 rounded-md w-fit p-2 text-sm '
+            className='dark:hover:bg-[rgb(60,60,60)] dark:bg-[rgb(50,50,50)] flex justify-between gap-2 items-center light:border-2 border-gray-700 rounded-md w-fit p-2 text-sm '
           >
             {showAbsolute ? 'Absolute' : 'Average'}
-            <img className='h-6 hover:animate-spin' src='/favicons/swap.svg' />
+            <img
+              className='h-6 hover:animate-spin'
+              src={
+                theme === 'dark'
+                  ? '/favicons/swap-white.svg'
+                  : '/favicons/swap.svg'
+              }
+            />
           </button>
           {showAbsolute ? (
             <span className='min-w-[600px] overflow-x-scroll'>

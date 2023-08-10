@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import LineChart from '../charts/LineChart';
 import { Chart, Filler } from 'chart.js';
 import use1RepMax from '../../hooks/use1RepMax';
@@ -10,6 +10,7 @@ import useCustomMemo from '../../hooks/useCustomMemo';
 import { UseQueryResult } from '@tanstack/react-query';
 import { useAuth } from '../../utils/AuthProvider';
 import { useUser } from '../../utils/UserProvider';
+import { ThemeContext } from '../../App';
 type ExerciseOneRepMaxProps = {
   exerciseId: string;
   recentExerciseQuery: UseQueryResult<any, unknown>;
@@ -20,6 +21,8 @@ function ExerciseOneRepMax({
   exerciseId,
   recentExerciseQuery,
 }: ExerciseOneRepMaxProps) {
+  const theme = useContext(ThemeContext);
+
   const [xLabels, setXLabels] = useState<string[]>([]);
   const [datasets, setDatasets] = useState<any>();
   const [options, setOptions] = useState<any>();
@@ -65,7 +68,8 @@ function ExerciseOneRepMax({
           data,
           timeFrame,
           userGender,
-          true
+          true,
+          theme
         );
         setOptions(options);
       }

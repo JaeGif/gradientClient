@@ -35,7 +35,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
   const userGoalsMutation = useUserGoalsMutation().putUserGoalsMutation;
 
   return (
-    <div className='flex flex-col gap-5 bg-slate-100 p-2 rounded-md'>
+    <div className='dark:bg-[rgb(30,30,30)] flex flex-col gap-5 bg-slate-100 p-2 rounded-md'>
       <div className='flex flex-wrap gap-5'>
         <div className='flex flex-col gap-2'>
           <h3>Body Goals</h3>
@@ -46,7 +46,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                 setEdited(true);
                 setBodyFatPercentageGoal(parseFloat(e.target.value));
               }}
-              className='p-2 bg-slate-200 rounded-sm'
+              className='dark:bg-[rgb(40,40,40)] p-2 bg-slate-200 rounded-sm'
               type='number'
               placeholder={`${goals.bodyFatPercentage || ''}%`}
             />
@@ -58,7 +58,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                 setEdited(true);
                 setWeightGoal(parseFloat(e.target.value));
               }}
-              className='p-2 bg-slate-200 rounded-sm'
+              className='dark:bg-[rgb(40,40,40)] p-2 bg-slate-200 rounded-sm'
               type='number'
               placeholder={`${goals.weight || ''}${user.preferences.unit}`}
             />
@@ -73,7 +73,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                 setEdited(true);
                 setBenchPressGoal(parseFloat(e.target.value));
               }}
-              className='p-2 bg-slate-200 rounded-sm'
+              className='dark:bg-[rgb(40,40,40)] p-2 bg-slate-200 rounded-sm'
               type='number'
               placeholder={`${goals.lifts.benchPress || ''}${
                 user.preferences.unit
@@ -87,7 +87,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                 setEdited(true);
                 setDeadliftGoal(parseFloat(e.target.value));
               }}
-              className='p-2 bg-slate-200 rounded-sm'
+              className='dark:bg-[rgb(40,40,40)] p-2 bg-slate-200 rounded-sm'
               type='number'
               placeholder={`${goals.lifts.deadlift || ''}${
                 user.preferences.unit
@@ -101,7 +101,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                 setEdited(true);
                 setPullupGoal(parseFloat(e.target.value));
               }}
-              className='p-2 bg-slate-200 rounded-sm'
+              className='dark:bg-[rgb(40,40,40)] p-2 bg-slate-200 rounded-sm'
               type='number'
               placeholder={`${goals.lifts.pullup || ''}${
                 user.preferences.unit
@@ -115,7 +115,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                 setEdited(true);
                 setShoulderPressGoal(parseFloat(e.target.value));
               }}
-              className='p-2 bg-slate-200 rounded-sm'
+              className='dark:bg-[rgb(40,40,40)] p-2 bg-slate-200 rounded-sm'
               type='number'
               placeholder={`${goals.lifts.shoulderPress || ''}${
                 user.preferences.unit
@@ -129,7 +129,7 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                 setEdited(true);
                 setSquatsGoal(parseFloat(e.target.value));
               }}
-              className='p-2 bg-slate-200 rounded-sm'
+              className='dark:bg-[rgb(40,40,40)] p-2 bg-slate-200 rounded-sm'
               type='number'
               placeholder={`${goals.lifts.squats || ''}${
                 user.preferences.unit

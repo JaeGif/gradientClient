@@ -20,7 +20,7 @@ function Exercises() {
   return (
     <>
       <div className='flex flex-col w-screen lg:w-[calc(100vw-20rem)] gap-5 sm:p-2'>
-        <span className='flex flex-wrap flex-col p-2 sm:pl-4 shadow-md rounded-md'>
+        <span className='dark:bg-[rgb(35,35,35)] flex flex-wrap flex-col p-2 sm:pl-4 shadow-md rounded-md'>
           <h1>Exercise Library</h1>
           <p className='text-slate-400'>View or edit your exercise history</p>
         </span>

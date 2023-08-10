@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import RecordExercise from './RecordExercise';
 import uniqid from 'uniqid';
 import { useAuth } from '../../utils/AuthProvider';
 import CreateExercise from './CreateExercise';
 import { useUser } from '../../utils/UserProvider';
+import { ThemeContext } from '../../App';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 function Record() {
+  const theme = useContext(ThemeContext);
   const userId = useAuth()!.user!.id;
   const userUnit = useUser()!.preferences.unit;
   const [creatingExercise, setCreatingExercise] = useState(false);
@@ -173,7 +175,7 @@ function Record() {
   return (
     <>
       <div className='flex flex-col w-screen lg:w-[calc(100vw-20rem)] h-full sm:p-2 gap-2'>
-        <div className='shadow-md p-4 pt-2 flex gap-2 flex-col rounded-md'>
+        <div className='dark:bg-[rgb(35,35,35)] shadow-md p-4 pt-2 flex gap-2 flex-col rounded-md'>
           <h1>Record Exercise</h1>
           <span className='flex flex-wrap justify-between'>
             <span
@@ -202,7 +204,7 @@ function Record() {
                   },
                 ]);
               }}
-              className='bg-slate-300 rounded-md p-2 w-fit flex justify-center items-center gap-2 hover:cursor-pointer hover:bg-slate-200'
+              className='bg-slate-300 dark:bg-[rgb(60,60,60)] rounded-md p-2 w-fit flex justify-center items-center gap-2 hover:cursor-pointer hover:bg-slate-200'
             >
               <span className='flex gap-1'>
                 <h6>Add </h6>
@@ -211,12 +213,16 @@ function Record() {
               </span>
               <img
                 className='h-8'
-                src='/favicons/new.svg'
+                src={
+                  theme === 'dark'
+                    ? '/favicons/new-white.svg'
+                    : '/favicons/new.svg'
+                }
                 alt='new exercise button'
               />
             </span>
             <button
-              className='bg-slate-400 pl-4 pr-4 rounded-md hover:bg-blue-20'
+              className='bg-slate-400 dark:bg-[rgb(60,60,60)] pl-4 pr-4 rounded-md hover:bg-blue-20'
               onClick={() => {
                 submitExercises();
               }}

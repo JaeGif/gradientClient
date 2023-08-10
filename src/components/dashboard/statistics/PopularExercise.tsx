@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useAuth } from '../../../utils/AuthProvider';
 import usePerformedStandardsMax from '../../../hooks/usePerformedStandardsMax';
 import { compareExercisesAgainstStandards } from '../../../utils/fnSheet/utilities';
 import { useUser } from '../../../utils/UserProvider';
+import { ThemeContext } from '../../../App';
 
 function PopularExercise() {
   const userId = useAuth()!.user!.id;
   const userGender = useUser()!.gender;
   const userUnits = useUser()!.preferences.unit;
+  const theme = useContext(ThemeContext);
 
   // exercise where you are the strongest
   const [best, setBest] = useState<{
@@ -73,7 +75,7 @@ function PopularExercise() {
   return (
     <>
       {best && worst && (
-        <div className='relative shadow-md p-2 rounded-lg sm:h-full flex w-[calc(100%-1rem)] sm:w-1/4 flex-col justify-center items-center gap-2 text-center'>
+        <div className='dark:bg-[rgb(35,35,35)] relative shadow-md p-2 rounded-lg sm:h-full flex w-[calc(100%-1rem)] sm:w-1/4 flex-col justify-center items-center gap-2 text-center'>
           {isStrongest ? (
             <>
               <h2 className='text-base lg:text-xl'>Strongest</h2>
@@ -93,7 +95,11 @@ function PopularExercise() {
             <img
               alt='toggle'
               className='h-6 hover:cursor-pointer hover:animate-spin'
-              src='/favicons/swap.svg'
+              src={
+                theme === 'dark'
+                  ? 'favicons/swap-white.svg'
+                  : '/favicons/swap.svg'
+              }
               onClick={() => {
                 setIsStrongest((prev) => !prev);
               }}

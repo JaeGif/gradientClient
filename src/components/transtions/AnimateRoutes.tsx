@@ -11,7 +11,11 @@ import Record from '../record/Record';
 import Analytics from '../../pages/home/analytics/Analytics';
 import SelectedMuscleGroup from '../../pages/home/analytics/SelectedMuscleGroup';
 import NotFound from '../../pages/error/NotFound';
-function AnimateRoutes() {
+
+type AnimateRoutesProps = {
+  setTheme: React.Dispatch<React.SetStateAction<'light' | 'dark'>>;
+};
+function AnimateRoutes({ setTheme }: AnimateRoutesProps) {
   const location = useLocation();
   return (
     <Routes>
@@ -20,7 +24,7 @@ function AnimateRoutes() {
       <Route
         element={
           <div className='flex justify-center gap-5'>
-            <NavBar />
+            <NavBar setTheme={setTheme} />
             <RequireAuth />
           </div>
         }

@@ -83,7 +83,7 @@ function Activity() {
   }, [progressQuery.isFetched, progressQuery.data]);
 
   return (
-    <div className='sm:w-1/4 w-full rounded-lg sm:p-2 sm:min-w-[200px] shadow-md'>
+    <div className='dark:bg-[rgb(35,35,35)] sm:w-1/4 w-full rounded-lg sm:p-2 sm:min-w-[200px] shadow-md'>
       <div className='flex flex-col justify-between h-full'>
         {isData ? (
           progressQuery.isFetched &&

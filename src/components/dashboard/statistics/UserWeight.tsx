@@ -5,6 +5,7 @@ import { UserQueryResult } from '../../../types/Interfaces';
 import { useQueryClient } from '@tanstack/react-query';
 import useUserQuery from '../../../hooks/useUserQuery';
 import { kgToLb, lbToKg } from '../../../utils/fnSheet/utilities';
+import { ThemeContext } from '../../../App';
 type UserWeightProps = {
   user: UserQueryResult;
 };
@@ -14,6 +15,7 @@ function UserWeight({ user }: UserWeightProps) {
   const userUnits = user.preferences.unit;
   const weightGoal = useContext(GoalContext)?.weight;
   const weightGoalUnits = useContext(GoalContext)?.unit;
+  const theme = useContext(ThemeContext);
 
   const [editing, setEditing] = useState(false);
   const [newWeight, setNewWeight] = useState(userWeight);
@@ -79,14 +81,14 @@ function UserWeight({ user }: UserWeightProps) {
       onClick={(e) => {
         handleDoubleClick(e);
       }}
-      className='w-[calc(100%-1rem)] relative shadow-md p-2 rounded-lg sm:h-full flex min-w-[33%] sm:w-1/4 flex-col justify-center items-center gap-2 text-center'
+      className='dark:bg-[rgb(35,35,35)] w-[calc(100%-1rem)] relative shadow-md p-2 rounded-lg sm:h-full flex min-w-[33%] sm:w-1/4 flex-col justify-center items-center gap-2 text-center'
     >
       <h2 className='text-base lg:text-xl'>Current Weight</h2>
 
       {editing ? (
         <input
           type='number'
-          className='p-2'
+          className='p-2 dark:bg-[rgb(30,30,30)]'
           autoFocus
           onKeyDown={(e) => {
             if (e.key === 'Enter') submitEdits();
@@ -116,7 +118,9 @@ function UserWeight({ user }: UserWeightProps) {
           title='Record Weight'
           alt='record'
           aria-label='record weight'
-          src='/favicons/edit.svg'
+          src={
+            theme === 'dark' ? '/favicons/edit-white.svg' : '/favicons/edit.svg'
+          }
           onClick={() => {
             setEditing(true);
           }}

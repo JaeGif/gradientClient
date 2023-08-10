@@ -30,7 +30,7 @@ function ExerciseLibrary({ searchedExerciseId }: ExerciseLibraryProps) {
   ]);
   return (
     <div className='flex flex-col'>
-      <span className='flex w-[calc(100%)] justify-between p-2 text-white bg-slate-700 sm:rounded-t-md'>
+      <span className='dark:bg-[rgb(40,40,40)] flex w-[calc(100%)] justify-between p-2 text-white bg-slate-700 sm:rounded-t-md'>
         <p>Exercise</p>
         <p>Performed Sets</p>
         <p>

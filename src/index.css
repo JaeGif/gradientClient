@@ -28,10 +28,10 @@
 }
 @layer components {
   .dark {
-    @apply bg-primary text-secondary;
+    @apply bg-[rgb(35,35,35)] text-white;
   }
   .light {
-    @apply bg-secondary text-primary;
+    @apply bg-white;
   }
   .debug {
     @apply border-2 border-red-500 border-solid;

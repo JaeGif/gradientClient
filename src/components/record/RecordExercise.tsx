@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import useMatchingExerciseSearch from '../../hooks/useMatchingExerciseSearch';
 import { useAuth } from '../../utils/AuthProvider';
 import uniqid from 'uniqid';
 import { capitalize } from '../../utils/fnSheet/utilities';
 import SetPerformed from './SetPerformed';
 import { useUser } from '../../utils/UserProvider';
+import { ThemeContext } from '../../App';
 
 type RecordExerciseProps = {
   handleExerciseId: Function;
@@ -37,6 +38,7 @@ function RecordExercise({
   index,
   setCreatingExercise,
 }: RecordExerciseProps) {
+  const theme = useContext(ThemeContext);
   const userUnit = useUser()!.preferences.unit;
   const [s, setS] = useState<string>();
   const [isSearching, setIsSearching] = useState(false);
@@ -60,7 +62,7 @@ function RecordExercise({
   }, [matchingExercisesQuery.isFetched]);
 
   return (
-    <div className='shadow-md p-6 rounded-sm flex flex-col gap-2'>
+    <div className='dark:bg-[rgb(35,35,35)] shadow-md p-6 rounded-sm flex flex-col gap-2'>
       {data.exercise && data.exercise.name ? (
         <div className='flex justify-between items-center'>
           <span className='flex gap-2 items-center '>
@@ -72,7 +74,11 @@ function RecordExercise({
               }}
               className='h-4 hover:cursor-pointer'
               alt='change exercise'
-              src='/favicons/edit.svg'
+              src={
+                theme === 'dark'
+                  ? '/favicons/edit-white.svg'
+                  : '/favicons/edit.svg'
+              }
             />
           </span>
           <div
@@ -90,7 +96,11 @@ function RecordExercise({
               title='Add Set'
               className='h-8'
               alt='add new set'
-              src='/favicons/new.svg'
+              src={
+                theme === 'dark'
+                  ? '/favicons/new-white.svg'
+                  : '/favicons/new.svg'
+              }
             />
           </div>
         </div>
@@ -101,7 +111,7 @@ function RecordExercise({
             onChange={(e) => {
               setS(e.target.value);
             }}
-            className='border-[1px] rounded-md rounded-b-none p-2'
+            className='dark:bg-[rgb(35,35,35)] border-[1px] rounded-md rounded-b-none p-2'
             type='text'
             placeholder='Search for exercise...'
           />
@@ -111,7 +121,7 @@ function RecordExercise({
                 matchedExercises.length &&
                 matchedExercises.map((exercise) => (
                   <div
-                    className='p-2 hover:bg-slate-100 hover:cursor-pointer rounded-sm'
+                    className='p-2 hover:bg-slate-100 dark:hover:dark:bg-[rgb(40,40,40)] hover:cursor-pointer rounded-sm'
                     key={uniqid()}
                     onClick={(e) => {
                       e.stopPropagation();

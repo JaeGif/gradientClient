@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import remarkGfm from 'remark-gfm';
 import useNotes from '../../../hooks/useNotes';
@@ -7,10 +7,11 @@ import PageSelector from './PageSelector';
 import PageCounter from './PageCounter';
 import Note from './Note';
 import uniqid from 'uniqid';
+import { ThemeContext } from '../../../App';
 function Notes() {
   const userId = useAuth()!.user!.id;
   const notesQuery = useNotes(userId);
-
+  const theme = useContext(ThemeContext);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [newNote, setNewNote] = useState(false);
@@ -49,7 +50,7 @@ function Notes() {
     setPage(e.target.value);
   };
   return (
-    <div className='relative shadow-md w-full sm:w-2/3 rounded-lg p-2 min-w-[200px] h-96'>
+    <div className='dark:bg-[rgb(35,35,35)] relative shadow-md w-full sm:w-2/3 rounded-lg p-2 min-w-[200px] h-96'>
       <span className='flex justify-between items-center'>
         <span className='flex justify-center gap-2 items-center'>
           <h2>Notes</h2>
@@ -61,7 +62,11 @@ function Notes() {
             <img
               title='Markdown Guide'
               className='hover: cursor-pointer h-6'
-              src='/favicons/info.svg'
+              src={
+                theme === 'dark'
+                  ? '/favicons/info-white.svg'
+                  : '/favicons/info.svg'
+              }
               alt='markdown syntax link'
               aria-label='markdown syntax link'
             />
@@ -70,7 +75,9 @@ function Notes() {
         <img
           onClick={handleNewNotePage}
           className='hover:cursor-pointer h-8'
-          src='/favicons/new.svg'
+          src={
+            theme === 'dark' ? '/favicons/new-white.svg' : '/favicons/new.svg'
+          }
           alt='start new note'
           title='New Note'
           aria-label='start new note'

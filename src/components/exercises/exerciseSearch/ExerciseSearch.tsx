@@ -40,15 +40,15 @@ function ExerciseSearch({ setSearchedExercise }: ExerciseSearchProps) {
           setSearching(true);
           setS(e.target.value);
         }}
-        className='border-[1px] rounded-md rounded-b-none p-2 w-full'
+        className='border-[1px] rounded-md rounded-b-none p-2 w-full dark:bg-[rgb(40,40,40)]'
         type='text'
         placeholder='Search for exercise...'
       />
       {searching && matchedExercises && matchedExercises.length && (
-        <div className='flex flex-col border-[1px] border-t-0 rounded-t-none rounded-sm border-b-slate-200 max-h-[35vh] overflow-scroll'>
+        <div className='dark:bg-[rgb(30,30,30)] flex flex-col border-[1px] border-t-0 rounded-t-none rounded-sm border-b-slate-200 max-h-[35vh] overflow-scroll'>
           {matchedExercises.map((exercise) => (
             <div
-              className='p-2 hover:bg-slate-100 hover:cursor-pointer rounded-sm'
+              className='p-2 dark:hover:bg-[rgb(40,40,40)] hover:bg-slate-100 hover:cursor-pointer rounded-sm'
               key={uniqid()}
               onClick={() => {
                 setSearching(false);

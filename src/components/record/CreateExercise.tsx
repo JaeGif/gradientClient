@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
+import { ThemeContext } from '../../App';
 
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 
@@ -7,6 +8,7 @@ type CreateExerciseProps = {
   setCreatingExercise: Function;
 };
 function CreateExercise({ setCreatingExercise }: CreateExerciseProps) {
+  const theme = useContext(ThemeContext);
   const [exerciseName, setExerciseName] = useState<string>();
   const [muscleId, setMuscleId] = useState<string>();
   const [submitting, setSubmitting] = useState(false);
@@ -36,13 +38,13 @@ function CreateExercise({ setCreatingExercise }: CreateExerciseProps) {
         e.stopPropagation();
         setCreatingExercise(false);
       }}
-      className='p-2 fixed bg-slate-200 bg-opacity-75 w-full h-full top-0 left-0 z-50 flex justify-center items-center'
+      className='p-2 fixed light:bg-slate-200 bg-opacity-75 w-full h-full top-0 left-0 z-50 flex justify-center items-center'
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className='flex flex-col bg-blue-100 rounded-md gap-5'
+        className='dark:bg-[rgb(45,45,45)] flex flex-col bg-blue-100 rounded-md gap-5'
       >
-        <h2 className='bg-slate-700 rounded-t-md pr-4 pl-4 pt-2 pb-2 text-white text-center'>
+        <h2 className='bg-slate-700 dark:bg-[rgb(30,30,30)] rounded-t-md pr-4 pl-4 pt-2 pb-2 text-white text-center'>
           Create Exercise
         </h2>
         <div className='flex flex-col p-4 gap-5'>
@@ -53,7 +55,7 @@ function CreateExercise({ setCreatingExercise }: CreateExerciseProps) {
               onChange={(e) => {
                 setExerciseName(e.target.value);
               }}
-              className='p-2 rounded-md'
+              className='p-2 rounded-md dark:bg-[rgb(30,30,30)]'
               id='name'
               name='name'
               type='text'
@@ -68,7 +70,7 @@ function CreateExercise({ setCreatingExercise }: CreateExerciseProps) {
               onChange={(e) => {
                 setMuscleId(e.target.value);
               }}
-              className='p-2 bg-white rounded-md'
+              className='p-2 bg-white rounded-md dark:bg-[rgb(30,30,30)]'
               name='muscle'
               id='muscle'
             >
@@ -90,10 +92,14 @@ function CreateExercise({ setCreatingExercise }: CreateExerciseProps) {
             <button
               onClick={() => createExercise()}
               type='button'
-              className='p-2 pl-4 pr-4 hover:bg-slate-700 hover:text-white border-2 border-slate-700 rounded-md'
+              className='dark:bg-[rgb(30,30,30)] dark:hover:bg-slate-700 p-2 pl-4 pr-4 hover:bg-slate-700 hover:text-white light:border-2 border-slate-700 rounded-md'
             >
               {submitting ? (
-                <TailSpin className='h-6' fill='#000000' stroke='#000000' />
+                <TailSpin
+                  className='h-6'
+                  fill={theme === 'dark' ? '#FFFFFF' : '#000000'}
+                  stroke='#000000'
+                />
               ) : (
                 <p>Submit</p>
               )}

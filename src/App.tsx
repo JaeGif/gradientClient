@@ -17,10 +17,11 @@ import { UserProvider } from './utils/UserProvider';
 import AnimateRoutes from './components/transtions/AnimateRoutes';
 type MemoStateObject = { [key: string]: any };
 
-const ThemeContext = React.createContext<'light' | 'dark'>('dark');
+const ThemeContext = React.createContext<'light' | 'dark'>('light');
 const CacheContext = React.createContext<any>(null);
 
 function App() {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [cache, setCache] = useState<MemoStateObject | undefined>({
     updateFlag: false,
   });
@@ -32,16 +33,20 @@ function App() {
     handleSetCache: handleSetCache,
   };
   return (
-    <AuthProvider>
-      <CacheContext.Provider value={cacheController}>
-        <UserProvider>
-          <AnimateRoutes />
-        </UserProvider>
-        {/*         <ReactQueryDevtools />
-         */}{' '}
-      </CacheContext.Provider>
-    </AuthProvider>
+    <div className={theme}>
+      <AuthProvider>
+        <CacheContext.Provider value={cacheController}>
+          <UserProvider>
+            <ThemeContext.Provider value={theme}>
+              <AnimateRoutes setTheme={setTheme} />
+            </ThemeContext.Provider>
+          </UserProvider>
+          {/*         <ReactQueryDevtools />
+           */}{' '}
+        </CacheContext.Provider>
+      </AuthProvider>
+    </div>
   );
 }
 
-export { App, CacheContext };
+export { App, CacheContext, ThemeContext };

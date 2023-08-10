@@ -11,6 +11,7 @@ import {
 import { useContext, useEffect, useState } from 'react';
 import { GoalContext } from '../../pages/home/Dashboard';
 import useMediaQuery from '../../hooks/useMediaQuery';
+import { ThemeContext } from '../../App';
 ChartJS.register(
   RadialLinearScale,
   PointElement,
@@ -40,6 +41,8 @@ function RadarLevels({
   exerciseLevels,
   userExerciseLevels,
 }: RadarLevelsProps) {
+  const theme = useContext(ThemeContext);
+  const gridLines = theme === 'dark' ? 'rgb(60,60,60)' : 'rgb(30,30,30)';
   const [isSmall, setIsSmall] = useState(false);
   const userLiftGoal = useContext(GoalContext)?.lifts;
   const isUnder1200 = useMediaQuery('(max-width: 1200px)');
@@ -172,13 +175,20 @@ function RadarLevels({
         scales: {
           r: {
             ticks: {
+              color: theme === 'dark' ? 'rgb(90,90,90)' : 'rgb(30,30,30)',
+              backdropColor: theme === 'dark' ? 'rgb(35,35,35)' : '#FFFFFF',
               callback: (value) => {
                 return `${value} ${units}`;
               },
             },
+            grid: {
+              color: theme === 'dark' ? 'rgb(90,90,90)' : 'rgb(30,30,30)',
+            },
             angleLines: {
               display: true,
+              color: gridLines,
             },
+
             suggestedMin: 0,
           },
         },

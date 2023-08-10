@@ -1,16 +1,17 @@
 import React, { useContext, useState } from 'react';
-import { useAuth } from '../../../utils/AuthProvider';
+
 import { GoalContext } from '../../../pages/home/Dashboard';
 import { UserQueryResult } from '../../../types/Interfaces';
 import useUserQuery from '../../../hooks/useUserQuery';
 import { useQueryClient } from '@tanstack/react-query';
+import { ThemeContext } from '../../../App';
 
 type UserBodyFatProps = {
   user: UserQueryResult;
 };
 function UserBodyFat({ user }: UserBodyFatProps) {
   const userBodyFat = user.bodyFatPercentage!;
-
+  const theme = useContext(ThemeContext);
   const bodyFatGoal = useContext(GoalContext)?.bodyFatPercentage;
   const [editing, setEditing] = useState(false);
   const [newBodyFatPercentage, setNewBodyFatPercentage] =
@@ -34,12 +35,12 @@ function UserBodyFat({ user }: UserBodyFatProps) {
     }
   };
   return (
-    <div className='w-[calc(100%-1rem)] relative shadow-md p-2 rounded-lg sm:h-full flex sm:w-1/4 flex-col justify-center items-center gap-2 text-center'>
+    <div className='w-[calc(100%-1rem)] relative shadow-md p-2 rounded-lg sm:h-full flex sm:w-1/4 flex-col justify-center items-center gap-2 text-center dark:bg-[rgb(35,35,35)]'>
       <h2 className='text-base lg:text-xl'>Body Fat Percentage</h2>
       {editing ? (
         <input
           type='number'
-          className='p-2'
+          className='p-2 dark:bg-[rgb(30,30,30)]'
           autoFocus
           onKeyDown={(e) => {
             if (e.key === 'Enter') submitEdits();
@@ -64,7 +65,9 @@ function UserBodyFat({ user }: UserBodyFatProps) {
           title='Record Body Fat'
           className='h-6 hover:cursor-pointer hover:animate-bounce'
           aria-label='record body fat'
-          src='/favicons/edit.svg'
+          src={
+            theme === 'dark' ? '/favicons/edit-white.svg' : '/favicons/edit.svg'
+          }
           onClick={() => {
             setEditing(true);
           }}

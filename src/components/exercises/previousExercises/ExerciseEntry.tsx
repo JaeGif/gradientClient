@@ -80,14 +80,14 @@ function ExerciseEntry({ data, index }: ExerciseEntryProps) {
       className={
         index % 2 === 0
           ? editing
-            ? 'bg-blue-20 bg-opacity-40 max-w-[calc(100%)] relative border-2 border-blue-300 flex items-center'
-            : 'bg-blue-20 bg-opacity-40 max-w-[calc(100%)] relative flex items-center hover:bg-slate-100'
+            ? 'bg-blue-20 dark:bg-[rgb(30,30,30)] bg-opacity-40 max-w-[calc(100%)] relative light:border-2 light:border-blue-300 flex items-center'
+            : 'bg-blue-20 dark:bg-[rgb(30,30,30)] bg-opacity-40 max-w-[calc(100%)] relative flex items-center dark:hover:bg-[rgb(35,35,35)] hover:bg-slate-100'
           : editing
-          ? 'max-w-[calc(100%)] relative border-2 border-blue-300 flex items-center'
-          : 'max-w-[calc(100%)] relative flex items-center hover:bg-slate-100'
+          ? 'max-w-[calc(100%)] dark:bg-[rgb(40,40,40)] relative light:border-2 light:border-blue-300 flex items-center'
+          : 'max-w-[calc(100%)] dark:bg-[rgb(40,40,40)] relative flex items-center dark:hover:bg-[rgb(45,45,45)] hover:bg-slate-100'
       }
     >
-      <span className='min-w-full p-1 overflow-scroll sm:pl-4 sm:pr-4 flex gap-2 sm:gap-5 border-2 border-slate-100 justify-between items-center'>
+      <span className='min-w-full p-1 overflow-scroll sm:pl-4 sm:pr-4 flex gap-2 sm:gap-5 light:border-2 border-slate-100 justify-between items-center'>
         <div className='flex flex-col flex-wrap'>
           <p className=''>{capitalize(data.exercise.name)}</p>
           <p className='text-sm text-slate-500'>

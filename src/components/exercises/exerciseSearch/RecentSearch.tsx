@@ -9,7 +9,7 @@ type RecentSearchProps = {
 function RecentSearch({ exercise, selectExercise }: RecentSearchProps) {
   return (
     <span
-      className='p-2 bg-slate-100 hover:bg-slate-200 hover:cursor-pointer overflow-scroll flex gap-5 items-center'
+      className='p-2 dark:bg-[rgb(30,30,30)] bg-slate-100 dark:hover:bg-[rgb(40,40,40)] hover:bg-slate-200 hover:cursor-pointer overflow-scroll flex gap-5 items-center'
       onClick={() => {
         selectExercise(exercise);
       }}

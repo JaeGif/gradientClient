@@ -16,7 +16,7 @@ function Analytics() {
   return (
     <>
       <div className='gap-2 flex flex-col w-screen lg:w-[calc(100vw-20rem)] sm:p-2'>
-        <div className='max-w-screen shadow-md p-2 sm:pl-4 rounded-md'>
+        <div className='dark:bg-[rgb(35,35,35)] max-w-screen shadow-md p-2 sm:pl-4 rounded-md'>
           <AnalyticsTitle />
           <AnalyticsFilter />
         </div>

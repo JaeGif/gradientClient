@@ -32,11 +32,11 @@ function SelectedMuscleGroup() {
     }
   }, [muscleSpecificExercisesQuery.isFetched, location.pathname]);
   return (
-    <div className='flex flex-wrap justify-center items-center'>
+    <div className='dark:bg-[rgb(20,20,20)] rounded-md flex flex-wrap justify-center items-center'>
       {muscleSpecificExercisesQuery.data &&
       muscleSpecificExercisesQuery.data.length &&
       exercise ? (
-        <div className='flex flex-col gap-5 w-full'>
+        <div className='dark:bg-[rgb(20,20,20)] flex flex-col gap-5 w-full'>
           {exercise.map((exercise, i, idxArr) => (
             <AvgAbs1RepMaxToggle
               exerciseName={exercise.name}
@@ -49,7 +49,7 @@ function SelectedMuscleGroup() {
         </div>
       ) : muscleSpecificExercisesQuery.data &&
         muscleSpecificExercisesQuery.data.length === 0 ? (
-        <p>No exercises in this category</p>
+        <p className='p-4'>No exercises in this category</p>
       ) : (
         muscleSpecificExercisesQuery.isFetching && <LoadingScreen />
       )}

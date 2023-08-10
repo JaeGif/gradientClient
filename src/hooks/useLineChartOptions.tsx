@@ -3,13 +3,17 @@ import { capitalize } from '../utils/fnSheet/utilities';
 import useStandards from './useStandards';
 import useAnnotationStandard from './useAnnotationStandard';
 import useDataPointThreshold from './useDataPointThreshold';
+import { useContext } from 'react';
+import { ThemeContext } from '../App';
 function useLineChartOptions(
   recentExerciseQuery: UseQueryResult<any, unknown>,
   data: number[],
   performanceFrame: string,
   userGender: 'm' | 'f',
-  absolute: boolean
+  absolute: boolean,
+  theme: 'dark' | 'light'
 ) {
+  const gridColor = theme === 'dark' ? 'rgb(60,60,60)' : 'rgb(35,35,35)';
   const standardsDataset = useStandards(
     recentExerciseQuery.data[0].exercise.id,
     { unit: recentExerciseQuery.data[0].sets[0].unit },
@@ -22,8 +26,12 @@ function useLineChartOptions(
 
     scales: {
       y: {
+        grid: {
+          color: gridColor,
+        },
         title: {
           display: true,
+
           text: absolute
             ? 'Calculated' +
               ' ' +

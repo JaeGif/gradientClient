@@ -23,7 +23,7 @@ function PageCounter({
     >
       {edit ? (
         <input
-          className='w-4'
+          className='w-4 dark:bg-[rgb(30,30,30)]'
           type='number'
           max={10}
           min={1}

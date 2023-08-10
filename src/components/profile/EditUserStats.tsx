@@ -26,7 +26,7 @@ function EditUserStats({ user }: EditUserStatsProps) {
     }
   }, [newWeight, newBodyFatPercentage]);
   return (
-    <div className='flex flex-col gap-5 justify-between bg-slate-100 p-2 rounded-md'>
+    <div className='dark:bg-[rgb(30,30,30)] flex flex-col gap-5 justify-between bg-slate-100 p-2 rounded-md'>
       <div className='flex flex-col gap-2'>
         <h3>User Stats</h3>
         <div className='flex flex-col gap-5'>
@@ -39,7 +39,7 @@ function EditUserStats({ user }: EditUserStatsProps) {
                 setEdited(true);
                 setNewWeight(parseFloat(e.target.value));
               }}
-              className='bg-slate-200 rounded-sm p-2'
+              className='dark:bg-[rgb(40,40,40)] bg-slate-200 rounded-sm p-2'
               id='weight'
               name='weight'
               type='number'
@@ -55,7 +55,7 @@ function EditUserStats({ user }: EditUserStatsProps) {
                 setEdited(true);
                 setNewBodyFatPercentage(parseFloat(e.target.value));
               }}
-              className='bg-slate-200 rounded-sm p-2'
+              className='dark:bg-[rgb(40,40,40)] bg-slate-200 rounded-sm p-2'
               id='bfp'
               name='bfp'
               type='number'
