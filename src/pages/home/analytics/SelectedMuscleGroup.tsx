@@ -51,7 +51,7 @@ function SelectedMuscleGroup() {
         muscleSpecificExercisesQuery.data.length === 0 ? (
         <p>No exercises in this category</p>
       ) : (
-        <LoadingScreen />
+        muscleSpecificExercisesQuery.isFetching && <LoadingScreen />
       )}
     </div>
   );
