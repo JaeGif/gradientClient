@@ -14,7 +14,7 @@ import Record from './components/record/Record';
 import Exercises from './pages/library/Exercises';
 import UserProfile from './pages/profile/UserProfile';
 import { UserProvider } from './utils/UserProvider';
-import CreateAccountSequence from './pages/CreateAccountSequence';
+import AnimateRoutes from './components/transtions/AnimateRoutes';
 type MemoStateObject = { [key: string]: any };
 
 const ThemeContext = React.createContext<'light' | 'dark'>('dark');
@@ -35,44 +35,7 @@ function App() {
     <AuthProvider>
       <CacheContext.Provider value={cacheController}>
         <UserProvider>
-          <Routes>
-            <Route path='login' element={<Login />} />
-            <Route path='register' element={<Register />} />
-            <Route
-              element={
-                <div className='flex justify-center gap-5'>
-                  <NavBar />
-                  <RequireAuth />
-                </div>
-              }
-            >
-              <Route path='dashboard' element={<Dashboard />} />
-              <Route path='settings' element={<UserProfile />} />
-              <Route path='exercises' element={<Exercises />} />
-              <Route path='record' element={<Record />} />
-              <Route path='analytics/*' element={<Analytics />}>
-                <Route
-                  path='muscleGroups'
-                  element={
-                    <>
-                      {location.pathname === '/analytics/muscleGroups' ? (
-                        <Navigate to={'all'} />
-                      ) : (
-                        <Outlet />
-                      )}
-                    </>
-                  }
-                >
-                  <Route
-                    path=':muscleGroup'
-                    element={<SelectedMuscleGroup />}
-                  />
-                </Route>
-              </Route>
-            </Route>
-            <Route path='/' element={<Navigate to={'/dashboard'} />} />
-            <Route path='/*' element={<NotFound />} />
-          </Routes>
+          <AnimateRoutes />
         </UserProvider>
         {/*         <ReactQueryDevtools />
          */}{' '}

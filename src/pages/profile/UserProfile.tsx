@@ -5,19 +5,23 @@ import useGetUserGoals from '../../hooks/useGetUserGoals';
 import { GoalType } from '../../types/Interfaces';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 import { useUser } from '../../utils/UserProvider';
+import PageTransition from '../../components/transtions/PageTransition';
 
 function UserProfile() {
   const user = useUser()!;
   const goal: GoalType = useGetUserGoals(user!.id);
   console.log(goal);
   return (
-    <div className='flex w-full h-full justify-center items-center p-2'>
-      {goal ? (
-        <Profile user={user!} goals={goal} />
-      ) : (
-        <TailSpin stroke='#000000' />
-      )}
-    </div>
+    <>
+      <PageTransition />
+      <div className='flex w-full h-full justify-center items-center p-2'>
+        {goal ? (
+          <Profile user={user!} goals={goal} />
+        ) : (
+          <TailSpin stroke='#000000' />
+        )}
+      </div>
+    </>
   );
 }
 

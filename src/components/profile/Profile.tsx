@@ -20,8 +20,14 @@ function Profile({ user, goals }: ProfileProps) {
               <UserStats user={user} />
               <UserGoals user={user} goals={goals} />
             </div>
-            <EditProfileSections user={user} goals={goals} />
-            <UserPreferences user={user} />
+            <details className='hover:cursor-pointer text-lg'>
+              <summary>Edit Profile Sections</summary>
+              <EditProfileSections user={user} goals={goals} />
+            </details>
+            <details className='hover:cursor-pointer text-lg'>
+              <summary>Settings</summary>
+              <UserPreferences user={user} />
+            </details>
           </div>
         </div>
       )}
