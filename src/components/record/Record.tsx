@@ -173,81 +173,79 @@ function Record() {
     // IF submission is successful then the promise should make a quick message popup and refresh the forms
   };
   return (
-    <>
-      <div className='flex flex-col w-screen lg:w-[calc(100vw-20rem)] h-full sm:p-2 gap-2'>
-        <div className='dark:bg-[rgb(35,35,35)] shadow-md p-4 pt-2 flex gap-2 flex-col rounded-md'>
-          <h1>Record Exercise</h1>
-          <span className='flex flex-wrap justify-between'>
-            <span
-              onClick={() => {
-                setExerciseData((prev) => [
-                  ...prev,
-                  {
-                    exercise: {
-                      id: '',
-                      muscleGroupsId: '',
-                      name: '',
-                      reps: undefined,
-                      sets: undefined,
-                      standardized: false,
-                    },
-                    performedWorkout: '844dfd43-7360-45a3-a6f9-14c5e663df05',
-                    user: userId,
-                    sets: [
-                      {
-                        reps: undefined,
-                        weight: undefined,
-                        unit: userUnit,
-                        logged: false,
-                      },
-                    ],
+    <div className='flex flex-col w-screen lg:w-[calc(100vw-20rem)] min-h-[calc(100%-6rem)] sm:p-2 gap-2'>
+      <div className='dark:bg-[rgb(35,35,35)] shadow-md p-4 pt-2 flex gap-2 flex-col rounded-md'>
+        <h1>Record Exercise</h1>
+        <span className='flex flex-wrap justify-between'>
+          <span
+            onClick={() => {
+              setExerciseData((prev) => [
+                ...prev,
+                {
+                  exercise: {
+                    id: '',
+                    muscleGroupsId: '',
+                    name: '',
+                    reps: undefined,
+                    sets: undefined,
+                    standardized: false,
                   },
-                ]);
-              }}
-              className='bg-slate-300 dark:bg-[rgb(60,60,60)] rounded-md p-2 w-fit flex justify-center items-center gap-2 hover:cursor-pointer hover:bg-slate-200'
-            >
-              <span className='flex gap-1'>
-                <h6>Add </h6>
-                <h6 className='hidden sm:flex'> New </h6>
-                <h6>Exercise</h6>
-              </span>
-              <img
-                className='h-8'
-                src={
-                  theme === 'dark'
-                    ? '/favicons/new-white.svg'
-                    : '/favicons/new.svg'
-                }
-                alt='new exercise button'
-              />
+                  performedWorkout: '844dfd43-7360-45a3-a6f9-14c5e663df05',
+                  user: userId,
+                  sets: [
+                    {
+                      reps: undefined,
+                      weight: undefined,
+                      unit: userUnit,
+                      logged: false,
+                    },
+                  ],
+                },
+              ]);
+            }}
+            className='bg-slate-300 dark:bg-[rgb(60,60,60)] rounded-md p-2 w-fit flex justify-center items-center gap-2 hover:cursor-pointer hover:bg-slate-200'
+          >
+            <span className='flex gap-1'>
+              <h6>Add </h6>
+              <h6 className='hidden sm:flex'> New </h6>
+              <h6>Exercise</h6>
             </span>
-            <button
-              className='bg-slate-400 dark:bg-[rgb(60,60,60)] pl-4 pr-4 rounded-md hover:bg-blue-20'
-              onClick={() => {
-                submitExercises();
-              }}
-            >
-              Submit
-            </button>
-          </span>
-        </div>
-        <div className='relative flex flex-wrap gap-5 justify-center items-start'>
-          {creatingExercise && (
-            <CreateExercise setCreatingExercise={setCreatingExercise} />
-          )}
-          {exerciseData.map((data, i) => (
-            <RecordExercise
-              setCreatingExercise={setCreatingExercise}
-              index={i}
-              data={data}
-              key={uniqid()}
-              handleExerciseId={handleExerciseId}
-              handleSets={handleUpdateSets}
+            <img
+              className='h-8'
+              src={
+                theme === 'dark'
+                  ? '/favicons/new-white.svg'
+                  : '/favicons/new.svg'
+              }
+              alt='new exercise button'
             />
-          ))}
-        </div>
+          </span>
+          <button
+            className='bg-slate-400 dark:bg-[rgb(60,60,60)] pl-4 pr-4 rounded-md hover:bg-blue-20'
+            onClick={() => {
+              submitExercises();
+            }}
+          >
+            Submit
+          </button>
+        </span>
       </div>
-    </>
+      <div className='relative flex flex-wrap gap-5 justify-center items-start'>
+        {creatingExercise && (
+          <CreateExercise setCreatingExercise={setCreatingExercise} />
+        )}
+        {exerciseData.map((data, i) => (
+          <RecordExercise
+            setCreatingExercise={setCreatingExercise}
+            index={i}
+            data={data}
+            key={uniqid()}
+            handleExerciseId={handleExerciseId}
+            handleSets={handleUpdateSets}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 

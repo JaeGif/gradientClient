@@ -1,5 +1,6 @@
 import { useAuth } from '../../utils/AuthProvider';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import Footer from '../Footer';
 
 function RequireAuth() {
   const auth = useAuth();
@@ -11,6 +12,7 @@ function RequireAuth() {
     return (
       <div className='mb-14 lg:mb-0 dark:bg-[rgb(20,20,20)] w-full min-h-[calc(100vh-6rem)] lg:min-h-screen h-full lg:ml-[22vw]'>
         <Outlet />
+        <Footer />
       </div>
     );
   }
