@@ -13,7 +13,7 @@ const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 
 const AuthContext = createContext<{
   user: User | null;
-  login: (email: string, password: string) => void;
+  login: (email: string, password: string) => false | Promise<boolean>;
   logout: () => void;
   token: string | null;
 } | null>(null);
@@ -49,8 +49,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
   const login = (email: string, password: string) => {
-    console.log('start login');
-    if (!email || !password) return;
+    if (!email || !password) return false;
+
     const loginUserWithCredentials = async () => {
       const data = {
         email: email,
@@ -78,9 +78,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(userResult);
         setToken(result.data.token);
         persistLoginLocalStorage(userResult, result.data.token);
-      }
+        return true;
+      } else return false;
     };
-    loginUserWithCredentials();
+    return loginUserWithCredentials();
   };
   const logout = () => {
     setUser(null);

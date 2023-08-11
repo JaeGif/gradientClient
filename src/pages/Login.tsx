@@ -6,12 +6,16 @@ import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 function Login() {
   const auth = useAuth();
   const [attemptingLogin, setAttemptingLogin] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(true);
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (email && password) {
-      auth!.login(email, password);
+      const success = await auth!.login(email, password);
+      if (!success) setAttemptingLogin(false);
+
+      setIsSuccess(success);
     } else {
       setAttemptingLogin(false);
     }
@@ -57,6 +61,7 @@ function Login() {
               placeholder='Type your password'
             />
           </div>
+
           <div className='w-full'>
             <button
               type='submit'
@@ -72,6 +77,11 @@ function Login() {
                 'Login'
               )}
             </button>
+            <p>
+              <em className='text-red-500 text-sm not-italic'>
+                {!isSuccess && 'Incorrect email or password'}
+              </em>
+            </p>
             {/*           <p>or</p>
           <div>
             <button>Google</button>
