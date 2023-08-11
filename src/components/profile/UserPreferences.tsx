@@ -4,11 +4,13 @@ import { useQueryClient } from '@tanstack/react-query';
 import useUserQuery from '../../hooks/useUserQuery';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 
+import { useTheme } from '../../utils/ThemeProvider';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 type UserPreferencesProps = {
   user: UserQueryResult;
 };
 function UserPreferences({ user }: UserPreferencesProps) {
+  const { theme, handleChangingTheme } = useTheme();
   const [standard, setStandard] = useState(user.preferences.standard);
   const [unit, setUnit] = useState(user.preferences.unit);
   const [submitting, setSubmitting] = useState(false);
@@ -148,6 +150,16 @@ function UserPreferences({ user }: UserPreferencesProps) {
             <button onClick={changePassword} className='text-blue-400'>
               {submitting ? <TailSpin stroke='#000000' /> : 'Confirm Password'}
             </button>
+          </div>
+          <div className='flex flex-col'>
+            <p>Theme</p>
+            <select
+              className='dark:bg-[rgb(40,40,40)] p-2 rounded-md bg-gray-200'
+              onChange={(e) => handleChangingTheme(e.target.value)}
+            >
+              <option value={'light'}>Light</option>
+              <option value={'dark'}>Dark</option>
+            </select>
           </div>
         </div>
       </span>
