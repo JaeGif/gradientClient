@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useLastestPerformances from '../../../hooks/useLatestPerformances';
 import { useAuth } from '../../../utils/AuthProvider';
-import { PerformanceFull, PerformedExercise } from '../../../types/Interfaces';
+import { PerformanceFull } from '../../../types/Interfaces';
 import ExerciseEntry from './ExerciseEntry';
 import uniqid from 'uniqid';
 import { useQueryClient } from '@tanstack/react-query';

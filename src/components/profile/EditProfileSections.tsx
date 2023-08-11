@@ -1,8 +1,6 @@
-import React from 'react';
 import EditUserStats from './EditUserStats';
 import EditUserGoals from './EditUserGoals';
 import { GoalType, UserQueryResult } from '../../types/Interfaces';
-import { User } from '../../types/Interfaces';
 type EditProfileSectionsProps = {
   user: UserQueryResult;
   goals: GoalType;

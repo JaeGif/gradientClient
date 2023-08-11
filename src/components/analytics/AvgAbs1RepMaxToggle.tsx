@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import ExerciseCurrentLevel from './ExerciseCurrentLevel';
 import ExerciseOneRepMax from './ExerciseOneRepMax';
 import ChartAnalysis from './ChartAnalysis';
@@ -8,7 +8,7 @@ import Audio from 'react-loading-icons/dist/esm/components/audio';
 import { useAuth } from '../../utils/AuthProvider';
 import { Exercise } from '../../types/Interfaces';
 import { capitalize } from '../../utils/fnSheet/utilities';
-import { ThemeContext } from '../../App';
+import { useTheme } from '../../utils/ThemeProvider';
 
 type AvgAbs1RepMaxToggleProps = {
   exerciseName: string;
@@ -22,7 +22,7 @@ function AvgAbs1RepMaxToggle({
   i,
   idxArr,
 }: AvgAbs1RepMaxToggleProps) {
-  const theme = useContext(ThemeContext);
+  const theme = useTheme().theme;
   const [showAbsolute, setShowAbsolute] = useState<boolean>(false);
   const toggleChartViews = () => {
     setShowAbsolute((prev) => !prev);

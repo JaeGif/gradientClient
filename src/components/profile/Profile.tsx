@@ -1,10 +1,8 @@
-import React from 'react';
-import { GoalType, User, UserQueryResult } from '../../types/Interfaces';
+import { GoalType, UserQueryResult } from '../../types/Interfaces';
 import UserStats from './UserStats';
 import UserPreferences from './UserPreferences';
 import UserGoals from './UserGoals';
 import EditProfileSections from './EditProfileSections';
-import useUserQuery from '../../hooks/useUserQuery';
 type ProfileProps = {
   user: UserQueryResult;
   goals: GoalType;

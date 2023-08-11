@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../utils/AuthProvider';
+import { Link } from 'react-router-dom';
 import CreateAccountSequence from './CreateAccountSequence';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 type ValidityObject = {
@@ -10,7 +9,6 @@ type ValidityObject = {
   confirmPassword: boolean;
 };
 function Register() {
-  const navigate = useNavigate();
   const [registerStatus, setRegisterStatus] = useState(0);
   const [attemptingRegister, setAttemptingRegister] = useState(false);
   const [emailTaken, setEmailTaken] = useState(false);

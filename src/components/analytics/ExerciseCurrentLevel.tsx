@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import LineChart from '../charts/LineChart';
 import { Chart, Filler } from 'chart.js';
 import use1RepMax from '../../hooks/use1RepMax';
@@ -8,9 +8,8 @@ import useLineChartDataSets from '../../hooks/useLineChartDataSets';
 import useLinearRegression from '../../hooks/useLinearRegression';
 import useCustomMemo from '../../hooks/useCustomMemo';
 import { UseQueryResult } from '@tanstack/react-query';
-import { useAuth } from '../../utils/AuthProvider';
 import { useUser } from '../../utils/UserProvider';
-import { ThemeContext } from '../../App';
+import { useTheme } from '../../utils/ThemeProvider';
 type ExerciseCurrentLevelProps = {
   exerciseId: string;
   recentExerciseQuery: UseQueryResult<any, unknown>;
@@ -21,7 +20,7 @@ function ExerciseCurrentLevel({
   exerciseId,
   recentExerciseQuery,
 }: ExerciseCurrentLevelProps) {
-  const theme = useContext(ThemeContext);
+  const theme = useTheme().theme;
 
   const [xLabels, setXLabels] = useState<string[]>([]);
   const [datasets, setDatasets] = useState<any>();

@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import { useState } from 'react';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
-import { ThemeContext } from '../../App';
+import { useTheme } from '../../utils/ThemeProvider';
 
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 
@@ -8,7 +8,7 @@ type CreateExerciseProps = {
   setCreatingExercise: Function;
 };
 function CreateExercise({ setCreatingExercise }: CreateExerciseProps) {
-  const theme = useContext(ThemeContext);
+  const theme = useTheme().theme;
   const [exerciseName, setExerciseName] = useState<string>();
   const [muscleId, setMuscleId] = useState<string>();
   const [submitting, setSubmitting] = useState(false);

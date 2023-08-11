@@ -1,6 +1,6 @@
-import React, { ReactNode, useContext, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
 import PageCounter from './PageCounter';
-import { ThemeContext } from '../../../App';
+import { useTheme } from '../../../utils/ThemeProvider';
 
 type PageSelectorProps = {
   children?: ReactNode;
@@ -22,7 +22,7 @@ function PageSelector({
   page,
   totalPages,
 }: PageSelectorProps) {
-  const theme = useContext(ThemeContext);
+  const theme = useTheme().theme;
   return (
     <div className='flex justify-center items-center gap-2'>
       <span className='w-full flex justify-between items-center'>

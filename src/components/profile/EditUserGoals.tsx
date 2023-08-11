@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { User, UserQueryResult } from '../../types/Interfaces';
+import { useState } from 'react';
+import { UserQueryResult } from '../../types/Interfaces';
 import { GoalType } from '../../types/Interfaces';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 import { useQueryClient } from '@tanstack/react-query';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 type InfoProps = {
   nextLevel: string;
   currentLevel: string;

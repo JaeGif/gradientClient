@@ -1,4 +1,3 @@
-import React from 'react';
 import { Exercise } from '../../../types/Interfaces';
 import RecentSearch from './RecentSearch';
 import uniqid from 'uniqid';

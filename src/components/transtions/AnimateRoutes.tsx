@@ -11,55 +11,56 @@ import Record from '../record/Record';
 import Analytics from '../../pages/home/analytics/Analytics';
 import SelectedMuscleGroup from '../../pages/home/analytics/SelectedMuscleGroup';
 import NotFound from '../../pages/error/NotFound';
+import { useTheme } from '../../utils/ThemeProvider';
 
-type AnimateRoutesProps = {
-  setTheme: React.Dispatch<React.SetStateAction<'light' | 'dark'>>;
-};
-function AnimateRoutes({ setTheme }: AnimateRoutesProps) {
+function AnimateRoutes() {
   const location = useLocation();
+  const theme = useTheme().theme;
   return (
-    <Routes>
-      <Route path='login' element={<Login />} />
-      <Route path='register' element={<Register />} />
-      <Route
-        element={
-          <div className='flex justify-center gap-5'>
-            <NavBar setTheme={setTheme} />
-            <RequireAuth />
-          </div>
-        }
-      >
-        <Route path='dashboard' element={<Dashboard />} />
-        <Route path='settings' element={<UserProfile />} />
-        <Route path='exercises' element={<Exercises />} />
-        <Route path='record' element={<Record />} />
+    <div className={theme}>
+      <Routes>
+        <Route path='login' element={<Login />} />
+        <Route path='register' element={<Register />} />
         <Route
-          path='analytics/*'
           element={
-            <>
-              <Analytics />
-            </>
+            <div className='flex justify-center gap-5'>
+              <NavBar />
+              <RequireAuth />
+            </div>
           }
         >
+          <Route path='dashboard' element={<Dashboard />} />
+          <Route path='settings' element={<UserProfile />} />
+          <Route path='exercises' element={<Exercises />} />
+          <Route path='record' element={<Record />} />
           <Route
-            path='muscleGroups'
+            path='analytics/*'
             element={
               <>
-                {location.pathname === '/analytics/muscleGroups' ? (
-                  <Navigate to={'all'} />
-                ) : (
-                  <Outlet />
-                )}
+                <Analytics />
               </>
             }
           >
-            <Route path=':muscleGroup' element={<SelectedMuscleGroup />} />
+            <Route
+              path='muscleGroups'
+              element={
+                <>
+                  {location.pathname === '/analytics/muscleGroups' ? (
+                    <Navigate to={'all'} />
+                  ) : (
+                    <Outlet />
+                  )}
+                </>
+              }
+            >
+              <Route path=':muscleGroup' element={<SelectedMuscleGroup />} />
+            </Route>
           </Route>
         </Route>
-      </Route>
-      <Route path='/' element={<Navigate to={'/dashboard'} />} />
-      <Route path='/*' element={<NotFound />} />
-    </Routes>
+        <Route path='/' element={<Navigate to={'/dashboard'} />} />
+        <Route path='/*' element={<NotFound />} />
+      </Routes>
+    </div>
   );
 }
 

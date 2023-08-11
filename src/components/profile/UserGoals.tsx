@@ -1,5 +1,4 @@
-import React from 'react';
-import { GoalType, User, UserQueryResult } from '../../types/Interfaces';
+import { GoalType, UserQueryResult } from '../../types/Interfaces';
 
 type UserGoalsProps = {
   user: UserQueryResult;

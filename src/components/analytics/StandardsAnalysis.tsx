@@ -3,7 +3,6 @@ import useNextHighestNumber from '../../hooks/useNextHighestNumber';
 import { capitalize } from '../../utils/fnSheet/utilities';
 import useCustomMemo from '../../hooks/useCustomMemo';
 import { standards } from '../../data/standards';
-import { useAuth } from '../../utils/AuthProvider';
 import { useUser } from '../../utils/UserProvider';
 type StandardsAnalysisProps = {
   exerciseId: string;

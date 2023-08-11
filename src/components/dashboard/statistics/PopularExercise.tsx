@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../../utils/AuthProvider';
 import usePerformedStandardsMax from '../../../hooks/usePerformedStandardsMax';
 import { compareExercisesAgainstStandards } from '../../../utils/fnSheet/utilities';
 import { useUser } from '../../../utils/UserProvider';
-import { ThemeContext } from '../../../App';
+import { useTheme } from '../../../utils/ThemeProvider';
 
 function PopularExercise() {
   const userId = useAuth()!.user!.id;
   const userGender = useUser()!.gender;
   const userUnits = useUser()!.preferences.unit;
-  const theme = useContext(ThemeContext);
+  const theme = useTheme().theme;
 
   // exercise where you are the strongest
   const [best, setBest] = useState<{

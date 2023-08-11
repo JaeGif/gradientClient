@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { capitalize } from '../../../utils/fnSheet/utilities';
 import uniqid from 'uniqid';
 import { useAuth } from '../../../utils/AuthProvider';

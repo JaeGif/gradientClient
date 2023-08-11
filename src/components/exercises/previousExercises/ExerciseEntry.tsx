@@ -1,15 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Exercise,
-  PerformanceFull,
-  PerformedSets,
-} from '../../../types/Interfaces';
+import { useState, useEffect } from 'react';
+import { PerformanceFull } from '../../../types/Interfaces';
 import { capitalize, convertDate } from '../../../utils/fnSheet/utilities';
 import uniqid from 'uniqid';
 import { motion } from 'framer-motion';
 import useLastestPerformances from '../../../hooks/useLatestPerformances';
 import { useQueryClient } from '@tanstack/react-query';
-import { useAuth } from '../../../utils/AuthProvider';
 import { useUser } from '../../../utils/UserProvider';
 type ExerciseEntryProps = {
   data: PerformanceFull;

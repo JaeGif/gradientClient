@@ -1,17 +1,14 @@
-import { useState, useEffect, useContext } from 'react';
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
-import remarkGfm from 'remark-gfm';
+import { useState, useEffect } from 'react';
 import useNotes from '../../../hooks/useNotes';
 import { useAuth } from '../../../utils/AuthProvider';
 import PageSelector from './PageSelector';
-import PageCounter from './PageCounter';
 import Note from './Note';
 import uniqid from 'uniqid';
-import { ThemeContext } from '../../../App';
+import { useTheme } from '../../../utils/ThemeProvider';
 function Notes() {
   const userId = useAuth()!.user!.id;
   const notesQuery = useNotes(userId);
-  const theme = useContext(ThemeContext);
+  const theme = useTheme().theme;
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [newNote, setNewNote] = useState(false);

@@ -4,14 +4,14 @@ import { GoalContext } from '../../../pages/home/Dashboard';
 import { UserQueryResult } from '../../../types/Interfaces';
 import useUserQuery from '../../../hooks/useUserQuery';
 import { useQueryClient } from '@tanstack/react-query';
-import { ThemeContext } from '../../../App';
+import { useTheme } from '../../../utils/ThemeProvider';
 
 type UserBodyFatProps = {
   user: UserQueryResult;
 };
 function UserBodyFat({ user }: UserBodyFatProps) {
   const userBodyFat = user.bodyFatPercentage!;
-  const theme = useContext(ThemeContext);
+  const theme = useTheme().theme;
   const bodyFatGoal = useContext(GoalContext)?.bodyFatPercentage;
   const [editing, setEditing] = useState(false);
   const [newBodyFatPercentage, setNewBodyFatPercentage] =

@@ -1,13 +1,10 @@
-import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ThemeContext } from '../../App';
 import Moon from '../../themes/Moon';
 import Sun from '../../themes/Sun';
-type NavBarProps = {
-  setTheme: React.Dispatch<React.SetStateAction<'light' | 'dark'>>;
-};
-function NavBar({ setTheme }: NavBarProps) {
-  const theme = useContext(ThemeContext);
+import { useTheme } from '../../utils/ThemeProvider';
+
+function NavBar() {
+  const { theme, handleChangingTheme } = useTheme();
   return (
     <>
       <nav className='dark:bg-[rgb(30,30,30)] bg-white shadow-[0_-1px_50px_1px_rgba(0,0,0,.2)] sm:border-none sm:gap-10 z-10 fixed bottom-0 left-0 lg:top-0 flex lg:flex-col w-screen lg:w-1/5 lg:min-w-[250px] lg:min-h-screen lg:max-h-screen lg:pl-4 lg:pr-4 lg:pt-4 lg:shadow-md'>
@@ -125,8 +122,8 @@ function NavBar({ setTheme }: NavBarProps) {
             <div
               className='hover:cursor-pointer'
               onClick={() => {
-                if (theme === 'light') setTheme('dark');
-                if (theme === 'dark') setTheme('light');
+                if (theme === 'light') handleChangingTheme('dark');
+                if (theme === 'dark') handleChangingTheme('light');
               }}
             >
               {theme === 'dark' ? <Sun /> : <Moon />}

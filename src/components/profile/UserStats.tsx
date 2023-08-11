@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User, UserQueryResult } from '../../types/Interfaces';
+import { UserQueryResult } from '../../types/Interfaces';
 import { kgToLb, lbToKg } from '../../utils/fnSheet/utilities';
 type UserStatsProps = {
   user: UserQueryResult;

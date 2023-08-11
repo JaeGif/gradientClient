@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import useRecentExerciseData from '../../../hooks/useRecentExerciseData';
+import { useEffect, useState } from 'react';
 import usePerformedStandardsMax from '../../../hooks/usePerformedStandardsMax';
 import { useAuth } from '../../../utils/AuthProvider';
 import { compareExerciseProgressAgainstMaxPossible } from '../../../utils/fnSheet/utilities';

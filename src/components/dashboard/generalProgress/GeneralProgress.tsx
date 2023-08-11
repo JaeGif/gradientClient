@@ -3,7 +3,6 @@ import { standards } from '../../../data/standards';
 import { useAuth } from '../../../utils/AuthProvider';
 import usePerformedStandardsMax from '../../../hooks/usePerformedStandardsMax';
 import { useEffect, useState } from 'react';
-import useUserQuery from '../../../hooks/useUserQuery';
 import { useUser } from '../../../utils/UserProvider';
 function GeneralProgressChart() {
   // use max values from last 30 days on standard exercises as the users current values

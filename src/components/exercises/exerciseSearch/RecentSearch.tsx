@@ -1,4 +1,3 @@
-import React from 'react';
 import { Exercise } from '../../../types/Interfaces';
 import { capitalize } from '../../../utils/fnSheet/utilities';
 

@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useMatchingExerciseSearch from '../../hooks/useMatchingExerciseSearch';
 import { useAuth } from '../../utils/AuthProvider';
 import uniqid from 'uniqid';
 import { capitalize } from '../../utils/fnSheet/utilities';
 import SetPerformed from './SetPerformed';
 import { useUser } from '../../utils/UserProvider';
-import { ThemeContext } from '../../App';
+import { useTheme } from '../../utils/ThemeProvider';
 
 type RecordExerciseProps = {
   handleExerciseId: Function;
@@ -38,7 +38,7 @@ function RecordExercise({
   index,
   setCreatingExercise,
 }: RecordExerciseProps) {
-  const theme = useContext(ThemeContext);
+  const theme = useTheme().theme;
   const userUnit = useUser()!.preferences.unit;
   const [s, setS] = useState<string>();
   const [isSearching, setIsSearching] = useState(false);

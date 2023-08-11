@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 
 type PageCounterProps = {
   page: number;

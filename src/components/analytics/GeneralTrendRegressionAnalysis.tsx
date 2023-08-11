@@ -5,7 +5,6 @@ type GeneralTrendRegressionAnalysisProps = {
   average: boolean;
 };
 import useCustomMemo from '../../hooks/useCustomMemo';
-import { useAuth } from '../../utils/AuthProvider';
 import { useUser } from '../../utils/UserProvider';
 function GeneralTrendRegressionAnalysis({
   exerciseId,

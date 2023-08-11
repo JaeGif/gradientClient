@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useAuth } from '../../../utils/AuthProvider';
 import { GoalContext } from '../../../pages/home/Dashboard';
 import { UserQueryResult } from '../../../types/Interfaces';
 import { useQueryClient } from '@tanstack/react-query';
 import useUserQuery from '../../../hooks/useUserQuery';
 import { kgToLb, lbToKg } from '../../../utils/fnSheet/utilities';
-import { ThemeContext } from '../../../App';
+import { useTheme } from '../../../utils/ThemeProvider';
 type UserWeightProps = {
   user: UserQueryResult;
 };
@@ -15,7 +14,7 @@ function UserWeight({ user }: UserWeightProps) {
   const userUnits = user.preferences.unit;
   const weightGoal = useContext(GoalContext)?.weight;
   const weightGoalUnits = useContext(GoalContext)?.unit;
-  const theme = useContext(ThemeContext);
+  const theme = useTheme().theme;
 
   const [editing, setEditing] = useState(false);
   const [newWeight, setNewWeight] = useState(userWeight);

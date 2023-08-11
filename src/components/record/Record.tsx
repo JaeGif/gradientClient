@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
+import { useState } from 'react';
 import RecordExercise from './RecordExercise';
 import uniqid from 'uniqid';
 import { useAuth } from '../../utils/AuthProvider';
 import CreateExercise from './CreateExercise';
 import { useUser } from '../../utils/UserProvider';
-import { ThemeContext } from '../../App';
+import { useTheme } from '../../utils/ThemeProvider';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 function Record() {
-  const theme = useContext(ThemeContext);
+  const theme = useTheme().theme;
   const userId = useAuth()!.user!.id;
   const userUnit = useUser()!.preferences.unit;
   const [creatingExercise, setCreatingExercise] = useState(false);
