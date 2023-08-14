@@ -154,6 +154,7 @@ function UserPreferences({ user }: UserPreferencesProps) {
           <div className='flex flex-col'>
             <p>Theme</p>
             <select
+              defaultValue={theme}
               className='dark:bg-[rgb(40,40,40)] p-2 rounded-md bg-gray-200'
               onChange={(e) => handleChangingTheme(e.target.value)}
             >
