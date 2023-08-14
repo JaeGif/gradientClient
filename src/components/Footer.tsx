@@ -5,7 +5,7 @@ function Footer() {
     <div className='text-gray-500 text-xs flex flex-col justify-center items-center p-6'>
       <span>Gradient Fitness</span>
       <span>
-        <em>Copyright © 2023 Jacob Gifford</em>
+        <em>Copyright © {new Date().getFullYear()} Jacob Gifford</em>
       </span>
     </div>
   );
