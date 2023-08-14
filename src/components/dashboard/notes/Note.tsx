@@ -51,7 +51,7 @@ function Note({ note }: NoteProps) {
       {editing ? (
         <input
           type='text'
-          className='w-full p-2'
+          className='w-full p-2 dark:bg-[rgb(40,40,40)]'
           placeholder='Keep notes written in markdown...'
           onKeyDown={(e) => handleEnterPress(e)}
           defaultValue={text}
