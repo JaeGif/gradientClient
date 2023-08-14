@@ -113,7 +113,7 @@ function UserPreferences({ user }: UserPreferencesProps) {
               <option value={'ratio'}>Body Weight Ratio</option>
             </select>
           </div> */}
-        <div className='flex flex-col'>
+        {/*        <div className='flex flex-col'>
           <p>Units</p>
           <select
             onChange={(e) => {
@@ -136,7 +136,7 @@ function UserPreferences({ user }: UserPreferencesProps) {
             <option value={'light'}>Light</option>
             <option value={'dark'}>Dark</option>
           </select>
-        </div>
+        </div> */}
         <div className='flex flex-col'>
           <p>Change Password</p>
           <div className='flex flex-col p-2 gap-2'>
