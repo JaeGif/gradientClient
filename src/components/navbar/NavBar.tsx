@@ -10,9 +10,12 @@ function NavBar() {
       <nav className='dark:bg-[rgb(30,30,30)] bg-white shadow-[0_-1px_50px_1px_rgba(0,0,0,.2)] sm:border-none sm:gap-10 z-10 fixed bottom-0 left-0 lg:top-0 flex lg:flex-col w-screen lg:w-1/5 lg:min-w-[250px] lg:min-h-screen lg:max-h-screen lg:pl-4 lg:pr-4 lg:pt-4 lg:shadow-md'>
         <span className='hidden lg:flex flex-col justify-center items-center gap-2'>
           <img className='h-10' src='/gradient-icon.png' />
-          <span className='flex gap-1'>
-            <h1 className='text-xl'>Gradient</h1>
-            <h1 className='text-xl'>Fitness</h1>
+          <span className='flex flex-col justify-center items-center gap-1'>
+            <div className='flex gap-1'>
+              <h1 className='text-xl'>Gradient</h1>
+              <h1 className='text-xl'>Fitness</h1>
+            </div>
+            <p>v0.1.0</p>
           </span>
         </span>
         <div className='flex w-full justify-center items-center lg:flex-col lg:justify-between lg:h-full lg:pb-10'>
