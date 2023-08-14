@@ -18,8 +18,14 @@ export default function Dashboard() {
   const userId = useAuth()!.user!.id;
   const userGender = useUser()!.gender;
   const goal: GoalType = useGetUserGoals(userId);
+  const userWeight = useUser()?.weight.value;
+  const userUnits = useUser()!.preferences.unit;
   const notesQuery = useNotes(userId).getNotesQuery;
-  const performedStandardsQuery = usePerformedStandardsMax(userId);
+  const performedStandardsQuery = usePerformedStandardsMax(
+    userWeight!,
+    userId,
+    userUnits
+  );
   const progressQuery = useGeneralProgressData(userId, userGender);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {

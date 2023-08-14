@@ -24,7 +24,6 @@ function SelectedMuscleGroup() {
       muscleSpecificExercisesQuery.data.length
     ) {
       let result = [];
-      console.log(muscleSpecificExercisesQuery.data);
       for (let i = 0; i < muscleSpecificExercisesQuery.data.length; i++) {
         result.push(muscleSpecificExercisesQuery.data[i]);
       }

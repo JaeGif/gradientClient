@@ -12,6 +12,7 @@ import { useContext, useEffect, useState } from 'react';
 import { GoalContext } from '../../pages/home/Dashboard';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import { useTheme } from '../../utils/ThemeProvider';
+import { kgToLb, lbToKg } from '../../utils/fnSheet/utilities';
 ChartJS.register(
   RadialLinearScale,
   PointElement,
@@ -44,8 +45,16 @@ function RadarLevels({
   const theme = useTheme().theme;
   const gridLines = theme === 'dark' ? 'rgb(60,60,60)' : 'rgba(200,200,200)';
   const [isSmall, setIsSmall] = useState(false);
+  const userGoalUnit = useContext(GoalContext)?.unit;
   const userLiftGoal = useContext(GoalContext)?.lifts;
   const isUnder1200 = useMediaQuery('(max-width: 1200px)');
+  const [liftingGoals, setLiftingGoals] = useState([
+    userLiftGoal?.benchPress,
+    userLiftGoal?.pullup,
+    userLiftGoal?.squats,
+    userLiftGoal?.deadlift,
+    userLiftGoal?.shoulderPress,
+  ]);
   useEffect(() => {
     if (isUnder1200) {
       setIsSmall(true);
@@ -64,6 +73,29 @@ function RadarLevels({
       window.removeEventListener('resize', handleWindowResize);
     };
   }, [isUnder1200]);
+
+  useEffect(() => {
+    if (userGoalUnit !== units && liftingGoals) {
+      if (units === 'kg') {
+        setLiftingGoals(
+          liftingGoals.map((lift) => {
+            console.log('lb -> kg');
+            if (lift) return lbToKg(lift);
+            else return undefined;
+          })
+        );
+      } else if (units === 'lb') {
+        setLiftingGoals(
+          liftingGoals.map((lift) => {
+            console.log('kg -> lb');
+            if (lift) return kgToLb(lift);
+            else return undefined;
+          })
+        );
+      }
+    }
+  }, [userGoalUnit, userLiftGoal, units]);
+
   const data = {
     labels: userExerciseLevels.map((el) => el.exercise),
     datasets: [
@@ -76,13 +108,7 @@ function RadarLevels({
       },
       {
         label: 'Goal',
-        data: [
-          userLiftGoal?.benchPress,
-          userLiftGoal?.pullup,
-          userLiftGoal?.squats,
-          userLiftGoal?.deadlift,
-          userLiftGoal?.shoulderPress,
-        ],
+        data: liftingGoals,
         borderWidth: 0,
         fill: false,
         pointBorderWidth: 2,

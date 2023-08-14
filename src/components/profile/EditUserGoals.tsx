@@ -4,12 +4,14 @@ import { GoalType } from '../../types/Interfaces';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 import { useQueryClient } from '@tanstack/react-query';
 import useUserGoalsMutation, { GoalPutType } from '../../hooks/useUserGoals';
+import { useTheme } from '../../utils/ThemeProvider';
 
 type EditUserGoalsProps = {
   user: UserQueryResult;
   goals: GoalType;
 };
 function EditUserGoals({ user, goals }: EditUserGoalsProps) {
+  const theme = useTheme().theme;
   const [submitting, setSubmitting] = useState(false);
   const [edited, setEdited] = useState(false);
 
@@ -164,7 +166,6 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
                   });
 
                   setSubmitting(false);
-                  console.log('submitted');
                 },
               }
             );
@@ -173,7 +174,10 @@ function EditUserGoals({ user, goals }: EditUserGoalsProps) {
         className='flex items-center justify-center border-2 border-slate-500 p-2 hover:bg-slate-500 hover:text-white rounded-sm'
       >
         {submitting ? (
-          <TailSpin className='h-6' stroke='#000000' />
+          <TailSpin
+            className='h-6'
+            stroke={theme === 'dark' ? '#FFFFFF' : '#000000'}
+          />
         ) : (
           'Submit Goals'
         )}

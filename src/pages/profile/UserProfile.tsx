@@ -9,7 +9,6 @@ import { useUser } from '../../utils/UserProvider';
 function UserProfile() {
   const user = useUser()!;
   const goal: GoalType = useGetUserGoals(user!.id);
-  console.log(goal);
   return (
     <>
       <div className='flex w-full h-full justify-center items-center p-2'>

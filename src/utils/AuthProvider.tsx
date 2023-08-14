@@ -40,7 +40,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!storage) return;
     const storageData = JSON.parse(storage);
     if (storageData.token && storageData.user && storageData.user.id) {
-      console.log('get from storage');
       setUser(storageData.user);
       setToken(storageData.token);
     } else {
@@ -90,7 +89,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!user && !token) retrieveLoginLocalStorage();
     if (user && user.id && token) {
-      console.log('attempt redirect');
       const redirectPath = location.state?.path || '/dashboard';
       navigate(redirectPath);
     }

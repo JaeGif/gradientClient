@@ -9,6 +9,7 @@ function PopularExercise() {
   const userId = useAuth()!.user!.id;
   const userGender = useUser()!.gender;
   const userUnits = useUser()!.preferences.unit;
+  const userWeight = useUser()!.weight.value;
   const theme = useTheme().theme;
 
   // exercise where you are the strongest
@@ -23,7 +24,11 @@ function PopularExercise() {
     exercise: string;
   }>();
   const [isStrongest, setIsStrongest] = useState(true);
-  const userStandardsPerformancesMax = usePerformedStandardsMax(userId, 10);
+  const userStandardsPerformancesMax = usePerformedStandardsMax(
+    userWeight,
+    userId,
+    userUnits
+  );
 
   useEffect(() => {
     if (userStandardsPerformancesMax.data) {

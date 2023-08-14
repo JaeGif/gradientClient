@@ -9,15 +9,19 @@ function StrengthByMuscleGroup() {
   const userId = useAuth()!.user!.id;
   const userGender = useUser()!.gender;
   const userUnits = useUser()!.preferences.unit;
+  const userWeight = useUser()!.weight.value;
   const [muscleGroupProgression, setMuscleGroupProgression] = useState<
     {
       name: string;
       data: number;
     }[]
   >();
-  const userStandardPerformancesMax = usePerformedStandardsMax(userId);
+  const userStandardPerformancesMax = usePerformedStandardsMax(
+    userWeight,
+    userId,
+    userUnits
+  );
   useEffect(() => {
-    console.log(userStandardPerformancesMax);
     if (!userStandardPerformancesMax.data) return;
     let checkArr = [];
     for (let i = 0; i < userStandardPerformancesMax.data.length; i++) {

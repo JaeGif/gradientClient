@@ -76,9 +76,7 @@ function Activity() {
       const percentageOfNextLevel =
         parseFloat(((currentDistance / delta) * 100).toFixed(2)) || 0;
 
-      console.log(delta, currentDistance, percentageOfNextLevel);
       setDistanceToNextLevel(percentageOfNextLevel);
-      console.log(currentLevel, nextLevel);
     }
   }, [progressQuery.isFetched, progressQuery.data]);
 

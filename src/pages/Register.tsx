@@ -43,7 +43,6 @@ function Register() {
   const handleRegister = () => {
     if (email && password && confirmPassword) {
       registerUser();
-      console.log('send to register api route');
     }
     // if register returns 200, redirect to the sign up questionaire
   };
@@ -147,7 +146,6 @@ function Register() {
       setValidObj({ ...validObj, email: false });
       email.reportValidity();
     } else {
-      console.log(res);
     }
   };
 

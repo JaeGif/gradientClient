@@ -3,7 +3,7 @@ import { AuthProvider } from './utils/AuthProvider';
 import { UserProvider } from './utils/UserProvider';
 import AnimateRoutes from './components/transtions/AnimateRoutes';
 import { ThemeProvider } from './utils/ThemeProvider';
-
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 type MemoStateObject = { [key: string]: any };
 
 const CacheContext = React.createContext<any>(null);
@@ -28,8 +28,7 @@ function App() {
               <AnimateRoutes />
             </ThemeProvider>
           </UserProvider>
-          {/*         <ReactQueryDevtools />
-           */}{' '}
+          <ReactQueryDevtools />
         </CacheContext.Provider>
       </AuthProvider>
     </>

@@ -12,13 +12,19 @@ function GeneralProgressChart() {
   >(null);
 
   const userGender = useUser()!.gender;
+  const userWeight = useUser()!.weight.value;
   const genderedStandards = standards.gender[userGender];
   const units = useUser()!.preferences.unit;
   const userId = useAuth()!.user!.id;
   // bench, pullup, squat, deadlift, shoulder press
-  const userStandardsPerformancesMax = usePerformedStandardsMax(userId, 10);
+  const userStandardsPerformancesMax = usePerformedStandardsMax(
+    userWeight,
+    userId,
+    units
+  );
+
   useEffect(() => {
-    if (userStandardsPerformancesMax.data) {
+    if (userStandardsPerformancesMax && userStandardsPerformancesMax.data) {
       const userPerformances: {
         exercise: string;
         value: number;
@@ -45,9 +51,14 @@ function GeneralProgressChart() {
         },
       ];
 
-      setUserExerciseLevels(userPerformances);
+      setUserExerciseLevels((prev) => userPerformances);
     }
-  }, [userStandardsPerformancesMax.isFetched]);
+  }, [
+    userStandardsPerformancesMax.isFetched,
+    userStandardsPerformancesMax.isSuccess,
+    userStandardsPerformancesMax.fetchStatus,
+    units,
+  ]);
   return (
     <>
       {userExerciseLevels && (
