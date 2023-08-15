@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PerformedSets } from '../types/Interfaces';
+import { useUser } from '../utils/UserProvider';
 function use1RepMax(
   data: any[],
   average: boolean,
@@ -17,26 +18,30 @@ function use1RepMax(
 
   const calculateMax = (sets: PerformedSets[]) => {
     let avgForElementArr: number[] = [];
-
+    const userUnit = useUser()!.preferences.unit;
     for (let i = 0; i < sets.length; i++) {
       if (sets[i].reps >= 5) {
         if (isPullups && userWeight) {
           const brzycki =
-            (sets[i].weight + userWeight) * (36 / (37 - sets[i].reps)) -
+            (sets[i].weightUnits![userUnit] + userWeight) *
+              (36 / (37 - sets[i].reps)) -
             userWeight;
           avgForElementArr.push(brzycki);
         } else {
-          const brzycki = sets[i].weight * (36 / (37 - sets[i].reps));
+          const brzycki =
+            sets[i].weightUnits![userUnit] * (36 / (37 - sets[i].reps));
           avgForElementArr.push(brzycki);
         }
       } else if (sets[i].reps < 5 && sets[i].reps !== 0) {
         if (isPullups && userWeight) {
           const epley =
-            (sets[i].weight + userWeight) * (1 + sets[i].reps / 30) -
+            (sets[i].weightUnits![userUnit] + userWeight) *
+              (1 + sets[i].reps / 30) -
             userWeight;
           avgForElementArr.push(epley);
         } else {
-          const epley = sets[i].weight * (1 + sets[i].reps / 30);
+          const epley =
+            sets[i].weightUnits![userUnit] * (1 + sets[i].reps / 30);
           avgForElementArr.push(epley);
         }
       } else return 0;

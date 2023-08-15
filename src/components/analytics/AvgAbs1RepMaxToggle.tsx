@@ -9,6 +9,7 @@ import { useAuth } from '../../utils/AuthProvider';
 import { Exercise } from '../../types/Interfaces';
 import { capitalize } from '../../utils/fnSheet/utilities';
 import { useTheme } from '../../utils/ThemeProvider';
+import { useUser } from '../../utils/UserProvider';
 
 type AvgAbs1RepMaxToggleProps = {
   exerciseName: string;
@@ -27,6 +28,7 @@ function AvgAbs1RepMaxToggle({
   const toggleChartViews = () => {
     setShowAbsolute((prev) => !prev);
   };
+  const userUnits = useUser()!.preferences.unit;
   const userId = useAuth()!.user!.id;
   const recentExerciseQuery = useRecentExerciseData(exerciseId, userId);
   const opacityValue = (i + 1) / idxArr.length;

@@ -2,6 +2,7 @@ export interface SetsPerformedDataType {
   index: number;
   reps: number;
   weight: number;
+  weightUnits?: { kg: number; lb: number };
   unit: 'kg' | 'lb';
   rtf?: number;
 }
@@ -82,6 +83,7 @@ export interface MuscleGroup {
 export interface PerformedSets {
   index: number;
   weight: number;
+  weightUnits?: { kg: number; lb: number };
   reps: number;
   rtf?: number;
 }

@@ -24,4 +24,5 @@ function useRecentExerciseData(exerciseId: string, userId: string) {
   });
   return recentExerciseQuery;
 }
+
 export default useRecentExerciseData;

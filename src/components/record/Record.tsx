@@ -5,6 +5,7 @@ import { useAuth } from '../../utils/AuthProvider';
 import CreateExercise from './CreateExercise';
 import { useUser } from '../../utils/UserProvider';
 import { useTheme } from '../../utils/ThemeProvider';
+import { kgToLb, lbToKg } from '../../utils/fnSheet/utilities';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 function Record() {
   const theme = useTheme().theme;
@@ -27,6 +28,7 @@ function Record() {
       sets: {
         reps?: number;
         weight?: number;
+        weightUnits?: { kg?: number; lb?: number };
         unit: 'kg' | 'lb';
         logged: boolean;
       }[];
@@ -44,7 +46,13 @@ function Record() {
       performedWorkout: '844dfd43-7360-45a3-a6f9-14c5e663df05',
       user: userId,
       sets: [
-        { reps: undefined, weight: undefined, unit: userUnit, logged: false },
+        {
+          reps: undefined,
+          weight: undefined,
+          weightUnits: { kg: undefined, lb: undefined },
+          unit: userUnit,
+          logged: false,
+        },
       ],
     },
   ]);
@@ -70,6 +78,7 @@ function Record() {
     set: {
       reps?: number;
       weight?: number;
+      weightUnits?: { kg?: number; lb?: number };
       unit: 'kg' | 'lb';
       logged: boolean;
     }
@@ -96,6 +105,7 @@ function Record() {
         index: number;
         reps?: number;
         weight?: number;
+        weightUnits?: { kg?: number; lb?: number };
         unit: 'kg' | 'lb';
       }[];
     }) => {
@@ -123,6 +133,7 @@ function Record() {
               index: number;
               reps?: number;
               weight?: number;
+              weightUnits?: { kg?: number; lb?: number };
               unit: 'kg' | 'lb';
             }[];
           } = {
@@ -137,6 +148,16 @@ function Record() {
                 index: j,
                 reps: exerciseData[i].sets[j].reps,
                 weight: exerciseData[i].sets[j].weight,
+                weightUnits: {
+                  kg:
+                    userUnit === 'kg'
+                      ? exerciseData[i].sets[j].weight
+                      : lbToKg(exerciseData[i].sets[j].weight!),
+                  lb:
+                    userUnit === 'lb'
+                      ? exerciseData[i].sets[j].weight
+                      : kgToLb(exerciseData[i].sets[j].weight!),
+                },
                 unit: exerciseData[i].sets[j].unit,
               });
             }
