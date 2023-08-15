@@ -37,18 +37,18 @@ function ExerciseCurrentLevel({
       setXLabels(labels);
       // check cache for data, if it's not there, just do the calculation
       // O(1) hash table so constant time for cache lookup
-      let data;
       let isPullups = false;
       if (exerciseId === '6a10f694-25bd-4824-b2a2-bfb21b4167c4') {
         isPullups = true;
       }
-      data = use1RepMax(
+      const data = use1RepMax(
         recentExerciseQuery.data,
         true,
         userUnits,
         isPullups,
         userWeight.value
       );
+      addToCache(`${exerciseId}_Avg1RM`, data);
 
       if (data) {
         const datasetsPre = useLineChartDataSets(
@@ -59,6 +59,7 @@ function ExerciseCurrentLevel({
         setDatasets(datasetsPre);
         const options = useLineChartOptions(
           recentExerciseQuery,
+          userUnits,
           data,
           timeFrame,
           userGender,

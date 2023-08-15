@@ -31,7 +31,6 @@ function ExerciseOneRepMax({
   const userWeight = useUser()!.weight;
   const userGender = useUser()!.gender;
   const userUnits = useUser()!.preferences.unit;
-
   useEffect(() => {
     if (recentExerciseQuery.data && recentExerciseQuery.data.length !== 0) {
       const labels = useExerciseDateLabels(recentExerciseQuery);
@@ -46,11 +45,13 @@ function ExerciseOneRepMax({
       }
       data = use1RepMax(
         recentExerciseQuery.data,
+
         false,
         userUnits,
         isPullups,
         userWeight.value
       ); // returns a number[] of the 1rm for each set
+      addToCache(`${exerciseId}_Abs1RM`, data);
 
       if (data) {
         const datasetsPre = useLineChartDataSets(
@@ -61,6 +62,7 @@ function ExerciseOneRepMax({
         setDatasets(datasetsPre);
         const options = useLineChartOptions(
           recentExerciseQuery,
+          userUnits,
           data,
           timeFrame,
           userGender,
