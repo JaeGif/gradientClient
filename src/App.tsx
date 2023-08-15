@@ -28,7 +28,6 @@ function App() {
               <AnimateRoutes />
             </ThemeProvider>
           </UserProvider>
-          <ReactQueryDevtools />
         </CacheContext.Provider>
       </AuthProvider>
     </>
