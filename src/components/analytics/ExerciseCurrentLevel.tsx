@@ -30,6 +30,7 @@ function ExerciseCurrentLevel({
 
   const userWeight = useUser()!.weight;
   const userGender = useUser()!.gender;
+  const userUnits = useUser()!.preferences.unit;
   useEffect(() => {
     if (recentExerciseQuery.data && recentExerciseQuery.data.length !== 0) {
       const labels = useExerciseDateLabels(recentExerciseQuery);
@@ -37,21 +38,18 @@ function ExerciseCurrentLevel({
       // check cache for data, if it's not there, just do the calculation
       // O(1) hash table so constant time for cache lookup
       let data;
-      if (!state || !state[`${exerciseId}_Avg1RM`]) {
-        let isPullups = false;
-        if (exerciseId === '6a10f694-25bd-4824-b2a2-bfb21b4167c4') {
-          isPullups = true;
-        }
-        data = use1RepMax(
-          recentExerciseQuery.data,
-          true,
-          isPullups,
-          userWeight.value
-        );
-        addToCache(`${exerciseId}_Avg1RM`, data);
-      } else {
-        data = state[`${exerciseId}_Avg1RM`];
+      let isPullups = false;
+      if (exerciseId === '6a10f694-25bd-4824-b2a2-bfb21b4167c4') {
+        isPullups = true;
       }
+      data = use1RepMax(
+        recentExerciseQuery.data,
+        true,
+        userUnits,
+        isPullups,
+        userWeight.value
+      );
+
       if (data) {
         const datasetsPre = useLineChartDataSets(
           data,

@@ -113,7 +113,7 @@ function UserPreferences({ user }: UserPreferencesProps) {
               <option value={'ratio'}>Body Weight Ratio</option>
             </select>
           </div> */}
-        {/*         <div className='flex flex-col'>
+        <div className='flex flex-col'>
           <p>Units</p>
           <select
             onChange={(e) => {
@@ -125,7 +125,7 @@ function UserPreferences({ user }: UserPreferencesProps) {
             <option value={'kg'}>Kilograms (kg)</option>
             <option value={'lb'}>Pounds (lb)</option>
           </select>
-        </div> */}
+        </div>
         <div className='flex flex-col'>
           <p>Theme</p>
           <select

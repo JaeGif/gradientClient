@@ -4,6 +4,7 @@ import { useUser } from '../utils/UserProvider';
 function use1RepMax(
   data: any[],
   average: boolean,
+  userUnit: 'kg' | 'lb',
   isPullups: boolean = false,
   userWeight?: number
 ) {
@@ -18,7 +19,6 @@ function use1RepMax(
 
   const calculateMax = (sets: PerformedSets[]) => {
     let avgForElementArr: number[] = [];
-    const userUnit = useUser()!.preferences.unit;
     for (let i = 0; i < sets.length; i++) {
       if (sets[i].reps >= 5) {
         if (isPullups && userWeight) {
@@ -61,6 +61,7 @@ function use1RepMax(
     estimatedORMArray = data.map((el: any) => calculateMax(el.sets));
   }
   if (!estimatedORMArray) return [];
+
   return estimatedORMArray;
 }
 

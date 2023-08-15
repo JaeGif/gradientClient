@@ -30,6 +30,7 @@ function ExerciseOneRepMax({
 
   const userWeight = useUser()!.weight;
   const userGender = useUser()!.gender;
+  const userUnits = useUser()!.preferences.unit;
 
   useEffect(() => {
     if (recentExerciseQuery.data && recentExerciseQuery.data.length !== 0) {
@@ -39,21 +40,17 @@ function ExerciseOneRepMax({
       // check cache for data, if it's not there, just do the calculation
       // O(1) hash table so constant time for cache lookup
       let data;
-      if (!state || !state[`${exerciseId}_Abs1RM`]) {
-        let isPullups = false;
-        if (exerciseId === '6a10f694-25bd-4824-b2a2-bfb21b4167c4') {
-          isPullups = true;
-        }
-        data = use1RepMax(
-          recentExerciseQuery.data,
-          false,
-          isPullups,
-          userWeight.value
-        ); // returns a number[] of the 1rm for each set
-        addToCache(`${exerciseId}_Abs1RM`, data);
-      } else {
-        data = state[`${exerciseId}_Abs1RM`];
+      let isPullups = false;
+      if (exerciseId === '6a10f694-25bd-4824-b2a2-bfb21b4167c4') {
+        isPullups = true;
       }
+      data = use1RepMax(
+        recentExerciseQuery.data,
+        false,
+        userUnits,
+        isPullups,
+        userWeight.value
+      ); // returns a number[] of the 1rm for each set
 
       if (data) {
         const datasetsPre = useLineChartDataSets(
