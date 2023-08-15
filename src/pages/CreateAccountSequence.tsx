@@ -46,18 +46,18 @@ function CreateAccountSequence({
               <option value={'f'}>Female</option>
             </select>
           </span>
-          {/*         <span className='flex flex-col gap-1'>
-          <label htmlFor='weight'>Preferred Units</label>
-          <select
-            onChange={(e) => {
-              setUnits(e.target.value as 'kg' | 'lb');
-            }}
-            className='p-2 rounded-md bg-[rgb(34,37,39)]'
-          >
-            <option value={'kg'}>Kilograms (kg)</option>
-            <option value={'lb'}>Pounds (lb)</option>
-          </select>
-        </span> */}
+          <span className='flex flex-col gap-1'>
+            <label htmlFor='weight'>Preferred Units</label>
+            <select
+              onChange={(e) => {
+                setUnits(e.target.value as 'kg' | 'lb');
+              }}
+              className='p-2 rounded-md bg-[rgb(34,37,39)]'
+            >
+              <option value={'kg'}>Kilograms (kg)</option>
+              <option value={'lb'}>Pounds (lb)</option>
+            </select>
+          </span>
           <span className='flex flex-col gap-1'>
             <label htmlFor='weight'>Weight</label>
             <input
