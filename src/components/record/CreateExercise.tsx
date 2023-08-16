@@ -73,6 +73,7 @@ function CreateExercise({ setCreatingExercise }: CreateExerciseProps) {
               className='p-2 bg-white rounded-md dark:bg-[rgb(30,30,30)]'
               name='muscle'
               id='muscle'
+              defaultValue={'66ad75bf-cc39-4b1d-b9df-86569940a787'}
             >
               <option value='66ad75bf-cc39-4b1d-b9df-86569940a787'>
                 Chest
