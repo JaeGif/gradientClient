@@ -6,13 +6,14 @@ import CreateExercise from './CreateExercise';
 import { useUser } from '../../utils/UserProvider';
 import { useTheme } from '../../utils/ThemeProvider';
 import { kgToLb, lbToKg } from '../../utils/fnSheet/utilities';
+import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 function Record() {
   const theme = useTheme().theme;
   const userId = useAuth()!.user!.id;
   const userUnit = useUser()!.preferences.unit;
   const [creatingExercise, setCreatingExercise] = useState(false);
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [exerciseData, setExerciseData] = useState<
     {
       exercise: {
@@ -118,6 +119,7 @@ function Record() {
         body: JSON.stringify(data),
       });
       const result = await res.json();
+      if (result) setIsSubmitting(false);
       return result.performedExercise;
     };
 
@@ -244,10 +246,15 @@ function Record() {
           <button
             className='bg-slate-400 dark:bg-[rgb(60,60,60)] pl-4 pr-4 rounded-md hover:bg-blue-20'
             onClick={() => {
+              setIsSubmitting(true);
               submitExercises();
             }}
           >
-            Submit
+            {isSubmitting ? (
+              <TailSpin className='h-6' stroke={'#FFFFFF'} />
+            ) : (
+              'Submit'
+            )}
           </button>
         </span>
       </div>
