@@ -42,10 +42,11 @@ const Set = memo(({ index, i, handleSets, set }: SetProps) => {
       />
       <button
         onClick={() => {
-          if (weight && reps && userUnits) {
+          if (reps && userUnits) {
+            if (!weight) setWeight(0);
             // i is the set index, index is the exercise index
             handleSets(index, i, {
-              weight: weight,
+              weight: weight || 0,
               reps: reps,
               unit: userUnits,
               logged: true,

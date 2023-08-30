@@ -105,8 +105,8 @@ function Record() {
       sets: {
         index: number;
         reps?: number;
-        weight?: number;
-        weightUnits?: { kg?: number; lb?: number };
+        weight?: number | undefined;
+        weightUnits?: { kg?: number | undefined; lb?: number | undefined };
         unit: 'kg' | 'lb';
       }[];
     }) => {
@@ -154,11 +154,11 @@ function Record() {
                   kg:
                     userUnit === 'kg'
                       ? exerciseData[i].sets[j].weight
-                      : lbToKg(exerciseData[i].sets[j].weight!),
+                      : lbToKg(exerciseData[i].sets[j].weight || 0),
                   lb:
                     userUnit === 'lb'
                       ? exerciseData[i].sets[j].weight
-                      : kgToLb(exerciseData[i].sets[j].weight!),
+                      : kgToLb(exerciseData[i].sets[j].weight || 0),
                 },
                 unit: exerciseData[i].sets[j].unit,
               });

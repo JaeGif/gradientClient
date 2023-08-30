@@ -12,6 +12,7 @@ import usePerformedStandardsMax from '../../hooks/usePerformedStandardsMax';
 import useGeneralProgressData from '../../hooks/useGeneralProgressData';
 import { useUser } from '../../utils/UserProvider';
 import LoadingScreen from '../../components/transtions/LoadingScreen';
+
 const GoalContext = React.createContext<GoalType | null>(null);
 
 export default function Dashboard() {
