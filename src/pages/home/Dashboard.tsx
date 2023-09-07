@@ -19,7 +19,8 @@ export default function Dashboard() {
   const userId = useAuth()!.user!.id;
   const userGender = useUser()!.gender;
   const goal: GoalType = useGetUserGoals(userId);
-  const userWeight = useUser()?.weight.value;
+  let userWeight = 100;
+  userWeight = useUser()!.weight.value;
   const userUnits = useUser()!.preferences.unit;
   const notesQuery = useNotes(userId).getNotesQuery;
   const performedStandardsQuery = usePerformedStandardsMax(
