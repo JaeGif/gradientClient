@@ -19,19 +19,20 @@ export default function Dashboard() {
   const userId = useAuth()!.user!.id;
   const userGender = useUser()!.gender;
   const goal: GoalType = useGetUserGoals(userId);
-  let userWeight = 100;
-  userWeight = useUser()!.weight?.value;
+  const userWeight = useUser()!.weight?.value;
   const userUnits = useUser()!.preferences?.unit;
   const notesQuery = useNotes(userId).getNotesQuery;
   const performedStandardsQuery = usePerformedStandardsMax(
-    userWeight!,
+    userWeight,
     userId,
     userUnits
   );
   const progressQuery = useGeneralProgressData(userId, userGender);
   const [isLoading, setIsLoading] = useState(false);
+  const [userWeightFound, setUserWeightFound] = useState(false);
 
   useEffect(() => {
+    if (userWeight) setUserWeightFound(true);
     if (notesQuery.data && performedStandardsQuery.data && progressQuery.data) {
       setIsLoading(false);
     } else {
@@ -41,7 +42,9 @@ export default function Dashboard() {
     notesQuery.isFetched,
     performedStandardsQuery.isFetched,
     progressQuery.isFetched,
+    userWeight,
   ]);
+
   return (
     <div
       className={
