@@ -64,15 +64,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify(data),
       });
       const result = await response.json();
-      if (result.data && result.data.user.id) {
+      console.log(result);
+      if (result.data && result.data.user && result.data.token) {
+        const userData = await fetchUserData(
+          result.data.user,
+          result.data.token
+        );
         let userResult: User = {
-          id: result.data.user.id,
-          username: result.data.user.username,
-          gender: result.data.user.gender,
-          preferences: result.data.user.preferences,
-          weight: result.data.user.weight,
-          bodyFatPercentage: result.data.user.bodyFatPercentage,
-          age: result.data.user.age,
+          id: userData.id,
+          username: userData.username,
+          gender: userData.gender,
+          preferences: userData.preferences,
+          weight: userData.weight,
+          bodyFatPercentage: userData.bodyFatPercentage,
+          age: userData.age,
         };
         setUser(userResult);
         setToken(result.data.token);
@@ -81,6 +86,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } else return false;
     };
     return loginUserWithCredentials();
+  };
+  const fetchUserData = async (userId: string, token: string) => {
+    const res = await fetch(`${apiURL}api/users/${userId}`, {
+      headers: { Authorization: 'Bearer' + ' ' + token },
+    });
+    const data = await res.json();
+    return data.user;
   };
   const logout = () => {
     setUser(null);
