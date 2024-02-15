@@ -1,8 +1,9 @@
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
-import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { PerformedExercise, PerformedSets } from '../types/Interfaces';
+const token = JSON.parse(localStorage.getItem('gradientLoggedInUser')!).token;
+
 function useLastestPerformances(
   userId?: string,
   exerciseId?: string,
@@ -12,7 +13,8 @@ function useLastestPerformances(
 
   const getLastestPerformances = async (): Promise<any> => {
     const res = await fetch(
-      `${apiURL}api/performedexercises?exercise=${exerciseId}&user=${userId}&sort=desc&limit=${limit}`
+      `${apiURL}api/performedexercises?exercise=${exerciseId}&user=${userId}&sort=desc&limit=${limit}`,
+      { headers: { Authorization: 'Bearer' + ' ' + token } }
     );
     const data = await res.json();
     return data.performedExercises;

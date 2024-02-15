@@ -2,13 +2,17 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useAuth } from '../utils/AuthProvider';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
+const token = JSON.parse(localStorage.getItem('gradientLoggedInUser')!).token;
 
 function useUserQuery() {
   const auth = useAuth();
   const userId = auth!.user?.id;
   const getUserData = async () => {
     if (!userId) return {};
-    const res = await fetch(`${apiURL}api/users/${userId}`, { mode: 'cors' });
+    const res = await fetch(`${apiURL}api/users/${userId}`, {
+      mode: 'cors',
+      headers: { Authorization: 'Bearer' + ' ' + token },
+    });
     const data = await res.json();
     return data.user;
   };
@@ -33,7 +37,10 @@ function useUserQuery() {
     const res = await fetch(`${apiURL}api/users/${optionalUser}`, {
       mode: 'cors',
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer' + ' ' + token,
+      },
       body: JSON.stringify(update),
     });
   };

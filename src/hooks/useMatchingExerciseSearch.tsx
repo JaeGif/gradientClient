@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
+const token = JSON.parse(localStorage.getItem('gradientLoggedInUser')!).token;
 
 function useMatchingExerciseSearch(s: string | undefined, userId: string) {
   const getMatchingExercises = async () => {
@@ -9,6 +10,7 @@ function useMatchingExerciseSearch(s: string | undefined, userId: string) {
       {
         mode: 'cors',
         method: 'GET',
+        headers: { Authorization: 'Bearer' + ' ' + token },
       }
     );
     const data = await res.json();

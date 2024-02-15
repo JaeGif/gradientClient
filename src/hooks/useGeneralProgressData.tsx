@@ -1,6 +1,8 @@
 import React from 'react';
 import { useQueryClient, useQuery } from '@tanstack/react-query';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
+const token = JSON.parse(localStorage.getItem('gradientLoggedInUser')!).token;
+
 type ProgressData = {
   average: number;
   averagedStandards: {
@@ -34,7 +36,8 @@ function useGeneralProgressData(
   const getGeneralProgressData = async (): Promise<ProgressData> => {
     if (gender) {
       const res = await fetch(
-        `${apiURL}api/standardizedPerformances?user=${userId}&count=${count}&userGender=${gender}`
+        `${apiURL}api/standardizedPerformances?user=${userId}&count=${count}&userGender=${gender}`,
+        { headers: { Authorization: 'Bearer' + ' ' + token } }
       );
       if (res.status === 404) return emptyProgressData;
       const data = await res.json();
