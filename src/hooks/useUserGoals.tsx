@@ -1,7 +1,6 @@
 import React from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
-const token = JSON.parse(localStorage.getItem('gradientLoggedInUser')!).token;
 
 export type GoalPutType = {
   unit?: 'kg' | 'lb';
@@ -16,6 +15,8 @@ export type GoalPutType = {
   bodyFatPercentage?: number;
 };
 function useUserGoalsMutation() {
+  const token = JSON.parse(localStorage.getItem('gradientLoggedInUser')!).token;
+
   const putUserGoals = async (goalId: string, goal: GoalPutType) => {
     const res = await fetch(`${apiURL}api/goals/${goalId}`, {
       mode: 'cors',

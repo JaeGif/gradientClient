@@ -25,7 +25,7 @@ function Activity() {
   const userId = useAuth()!.user!.id;
   const userGender = useUser()!.gender;
   const progressQuery = useGeneralProgressData(userId, userGender);
-
+  console.log('activity check');
   useEffect(() => {
     if (progressQuery.data && progressQuery.isFetched) {
       if (progressQuery.data.average === 0) {
@@ -33,7 +33,9 @@ function Activity() {
       } else {
         setIsData(true);
       }
+      console.log('passing');
       let checkArr = [
+        { level: 'untrained', weight: 15 },
         {
           level: 'beginner',
           weight: progressQuery.data.averagedStandards.beginner,
@@ -61,24 +63,30 @@ function Activity() {
         progressQuery.data.average,
         checkArr
       );
+      console.log(nextLevelData);
+
       setNextLevel(nextLevelData.level);
       const nextLevelValue: number = progressQuery.data.averagedStandards[
         nextLevelData.level
       ] as number;
       const currentLevel = getCurrentLevelFromNextLevel(nextLevelData.level);
       setCurrentLevel(currentLevel);
+      console.log(currentLevel);
+      console.log(progressQuery.data);
       const currentLevelValue: number = progressQuery.data.averagedStandards[
         currentLevel
       ] as number;
       setUserLevel(currentLevelValue);
+      console.log(currentLevelValue);
       const delta = nextLevelValue - currentLevelValue;
       const currentDistance = progressQuery.data.average - currentLevelValue;
       const percentageOfNextLevel =
         parseFloat(((currentDistance / delta) * 100).toFixed(2)) || 0;
 
       setDistanceToNextLevel(percentageOfNextLevel);
+      console.log(distanceToNextLevel);
     }
-  }, [progressQuery.isFetched, progressQuery.data]);
+  }, [progressQuery.isFetched, progressQuery.data, nextLevel]);
 
   return (
     <div className='dark:bg-[rgb(35,35,35)] sm:w-1/4 w-full rounded-lg sm:p-2 sm:min-w-[200px] shadow-md'>
@@ -86,8 +94,7 @@ function Activity() {
         {isData ? (
           progressQuery.isFetched &&
           progressQuery.data &&
-          levelsData &&
-          userLevel && (
+          levelsData && (
             <>
               <span className='p-2 flex justify-center items-center'>
                 <OverlayProgressBarChart

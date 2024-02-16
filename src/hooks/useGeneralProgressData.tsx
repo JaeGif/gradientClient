@@ -1,7 +1,6 @@
 import React from 'react';
 import { useQueryClient, useQuery } from '@tanstack/react-query';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
-const token = JSON.parse(localStorage.getItem('gradientLoggedInUser')!).token;
 
 type ProgressData = {
   average: number;
@@ -32,6 +31,7 @@ function useGeneralProgressData(
   count = 5
 ) {
   const queryClient = useQueryClient();
+  const token = JSON.parse(localStorage.getItem('gradientLoggedInUser')!).token;
 
   const getGeneralProgressData = async (): Promise<ProgressData> => {
     if (gender) {

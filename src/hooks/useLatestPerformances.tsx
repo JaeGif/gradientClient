@@ -2,7 +2,6 @@ const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { PerformedExercise, PerformedSets } from '../types/Interfaces';
-const token = JSON.parse(localStorage.getItem('gradientLoggedInUser')!).token;
 
 function useLastestPerformances(
   userId?: string,
@@ -10,6 +9,7 @@ function useLastestPerformances(
   limit: number = 10
 ) {
   const queryClient = useQueryClient();
+  const token = JSON.parse(localStorage.getItem('gradientLoggedInUser')!).token;
 
   const getLastestPerformances = async (): Promise<any> => {
     const res = await fetch(
