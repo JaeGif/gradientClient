@@ -21,7 +21,9 @@ function CreateAccountSequence({
   const [weight, setWeight] = useState<number>();
   const [attemptingLogin, setAttemptingLogin] = useState(false);
   const login = useAuth()!.login;
+  const navigate = useNavigate();
   const userMutation = useUserQuery().putUserStatsMutation();
+  console.log(email, password);
 
   return (
     <>
@@ -103,7 +105,15 @@ function CreateAccountSequence({
                   },
                   {
                     onSuccess: () => {
-                      login(email, password);
+                      login(email, password)
+                        .then(() => navigate('/dashboard'))
+                        .catch(() => setAttemptingLogin(false));
+                    },
+                    onError: () => {
+                      console.log('failure');
+                    },
+                    onSettled: () => {
+                      setAttemptingLogin(false);
                     },
                   }
                 );

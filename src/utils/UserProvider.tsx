@@ -11,6 +11,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
   >(undefined);
 
   useEffect(() => {
+    console.log(freshUserData);
+
     if (userQuery.data) {
       setFreshUserData(userQuery.data);
     }

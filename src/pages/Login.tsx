@@ -14,7 +14,7 @@ function Login() {
     if (email && password) {
       const success = await auth!.login(email, password);
       if (!success) setAttemptingLogin(false);
-
+      console.log(success, 'attempt login');
       setIsSuccess(success);
     } else {
       setAttemptingLogin(false);

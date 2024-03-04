@@ -1,14 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
 
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
+
 function useMuscleSpecificExercises(muscleGroup: string, userId: string) {
+  const token = JSON.parse(localStorage.getItem('gradientLoggedInUser')!).token;
+
   const getMuscleSpecificExercises = async () => {
     const res = await fetch(
       `${apiURL}api/exercises?muscleGroup=${muscleGroup}`,
       {
         mode: 'cors',
         method: 'GET',
+        headers: { Authorizationn: 'Bearer' + ' ' + token },
       }
     );
 

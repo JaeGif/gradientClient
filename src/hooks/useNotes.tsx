@@ -2,12 +2,15 @@ const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { Note } from '../types/Interfaces';
+
 function useNotes(userId?: string) {
   const queryClient = useQueryClient();
+  const token = JSON.parse(localStorage.getItem('gradientLoggedInUser')!).token;
 
   const getNotes = async (): Promise<any> => {
     const res = await fetch(`${apiURL}api/notes?user=${userId}`, {
       mode: 'cors',
+      headers: { Authorization: 'Bearer' + ' ' + token },
     });
     const data = await res.json();
     return data.userNotes;

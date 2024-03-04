@@ -13,7 +13,7 @@ const apiURL = import.meta.env.VITE_LOCAL_API_URL;
 
 const AuthContext = createContext<{
   user: User | null;
-  login: (email: string, password: string) => false | Promise<boolean>;
+  login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
   token: string | null;
 } | null>(null);
@@ -38,6 +38,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const retrieveLoginLocalStorage = () => {
     const storage = localStorage.getItem('gradientLoggedInUser');
     if (!storage) return;
+    console.log('check storage exists here');
     const storageData = JSON.parse(storage);
     if (storageData.token && storageData.user && storageData.user.id) {
       setUser(storageData.user);
@@ -48,8 +49,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
   const login = (email: string, password: string) => {
-    if (!email || !password) return false;
-
     const loginUserWithCredentials = async () => {
       const data = {
         email: email,
@@ -64,29 +63,45 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify(data),
       });
       const result = await response.json();
-      if (result.data && result.data.user.id) {
+      console.log(result);
+      if (result.data && result.data.user && result.data.token) {
+        const userData = await fetchUserData(
+          result.data.user,
+          result.data.token
+        );
         let userResult: User = {
-          id: result.data.user.id,
-          username: result.data.user.username,
-          gender: result.data.user.gender,
-          preferences: result.data.user.preferences,
-          weight: result.data.user.weight,
-          bodyFatPercentage: result.data.user.bodyFatPercentage,
-          age: result.data.user.age,
+          id: userData.id,
+          username: userData.username,
+          gender: userData.gender,
+          preferences: userData.preferences,
+          weight: userData.weight,
+          bodyFatPercentage: userData.bodyFatPercentage,
+          age: userData.age,
         };
+        console.log(userData);
         setUser(userResult);
         setToken(result.data.token);
         persistLoginLocalStorage(userResult, result.data.token);
         return true;
-      } else return false;
+      }
+      return false;
     };
     return loginUserWithCredentials();
+  };
+  const fetchUserData = async (userId: string, token: string) => {
+    const res = await fetch(`${apiURL}api/users/${userId}`, {
+      headers: { Authorization: 'Bearer' + ' ' + token },
+    });
+    const data = await res.json();
+    console.log('user fetch', data);
+    return data.user;
   };
   const logout = () => {
     setUser(null);
   };
 
   useEffect(() => {
+    console.log(user);
     if (!user && !token) retrieveLoginLocalStorage();
     if (user && user.id && token) {
       const redirectPath = location.state?.path || '/dashboard';
