@@ -6,6 +6,8 @@ import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 function Login() {
   const auth = useAuth();
   const [attemptingLogin, setAttemptingLogin] = useState(false);
+  const [attemptingGuestLogin, setAttemptingGuestLogin] = useState(false);
+
   const [isSuccess, setIsSuccess] = useState(true);
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
@@ -14,11 +16,17 @@ function Login() {
     if (email && password) {
       const success = await auth!.login(email, password);
       if (!success) setAttemptingLogin(false);
-      console.log(success, 'attempt login');
       setIsSuccess(success);
     } else {
       setAttemptingLogin(false);
     }
+  };
+  const guestLogin = async () => {
+    setAttemptingGuestLogin(true);
+
+    const success = await auth!.login('giffordjacob0@gmail.com', 'cat0both');
+    if (!success) setAttemptingGuestLogin(false);
+    setIsSuccess(success);
   };
   return (
     <div className='flex h-screen bg-[rgb(86,94,101)] justify-center items-center'>
@@ -82,11 +90,17 @@ function Login() {
                 {!isSuccess && 'Incorrect email or password'}
               </em>
             </p>
-            {/*           <p>or</p>
-          <div>
-            <button>Google</button>
-            <button>Github</button>
-          </div> */}
+            <div className='flex flex-col justify-center items-center w-full'>
+              <p>or</p>
+
+              <button className='text-green-500' onClick={guestLogin}>
+                {attemptingGuestLogin ? (
+                  <TailSpin className='h-7' stroke='#FFFFFF' />
+                ) : (
+                  'Guest Login'
+                )}
+              </button>
+            </div>
           </div>
           <span className='w-full'>
             <em className='not-italic'>

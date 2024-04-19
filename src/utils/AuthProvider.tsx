@@ -38,7 +38,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const retrieveLoginLocalStorage = () => {
     const storage = localStorage.getItem('gradientLoggedInUser');
     if (!storage) return;
-    console.log('check storage exists here');
     const storageData = JSON.parse(storage);
     if (storageData.token && storageData.user && storageData.user.id) {
       setUser(storageData.user);
@@ -63,7 +62,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify(data),
       });
       const result = await response.json();
-      console.log(result);
       if (result.data && result.data.user && result.data.token) {
         const userData = await fetchUserData(
           result.data.user,
@@ -78,7 +76,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           bodyFatPercentage: userData.bodyFatPercentage,
           age: userData.age,
         };
-        console.log(userData);
         setUser(userResult);
         setToken(result.data.token);
         persistLoginLocalStorage(userResult, result.data.token);
@@ -93,7 +90,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       headers: { Authorization: 'Bearer' + ' ' + token },
     });
     const data = await res.json();
-    console.log('user fetch', data);
     return data.user;
   };
   const logout = () => {
@@ -101,7 +97,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    console.log(user);
     if (!user && !token) retrieveLoginLocalStorage();
     if (user && user.id && token) {
       const redirectPath = location.state?.path || '/dashboard';

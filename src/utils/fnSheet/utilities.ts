@@ -83,7 +83,7 @@ export const getCurrentLevelFromNextLevel = (nextLevel: string) => {
     case 'elite':
       return 'advanced';
     default:
-      return 'untrained';
+      return 'elite';
   }
 };
 
