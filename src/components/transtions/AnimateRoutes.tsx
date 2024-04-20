@@ -49,8 +49,8 @@ function AnimateRoutes() {
               <Route path=':muscleGroup' element={<SelectedMuscleGroup />} />
             </Route>
           </Route>
+          <Route path='/*' element={<Dashboard />} />
         </Route>
-        <Route path='/*' element={<NotFound />} />
       </Routes>
     </div>
   );
