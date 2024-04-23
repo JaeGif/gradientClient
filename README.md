@@ -6,7 +6,7 @@ Gradient is a fitness analytics platform to help you shape and quantify your fit
 
 I personally wanted to use a fitness analytics platform, but I kept running into 2 main issues. Firstly, most fitness analytics platforms don't share or quantify the data that's actually important to measure progress. Secondly, they're REALLY expensive.
 
-I wanted to build a free ( - hosting costs) option for myself that's a bit more advanced than market analytics tools. Gradient is friendly to new users and approachable, but it's true strength lies with intermediate to advanced lifters or exercise professionals who can best plan and adapt exercise strategies based on the app.
+I wanted to build a free ( - hosting costs) option for myself that offers what I want compared to market analytics tools. Gradient is friendly to new users and approachable, but it's true strength lies with intermediate to advanced lifters or exercise professionals who can best plan and adapt exercise strategies based on the app.
 
 I worked in collaboration with personal trainers, and performed a great deal of exercise science research, diving deep into published papers to find the best information to share with the end users. The end result, is Gradient.
 
