@@ -9,6 +9,9 @@ function Login() {
   const [attemptingGuestLogin, setAttemptingGuestLogin] = useState(false);
 
   const [isSuccess, setIsSuccess] = useState(true);
+  const [networkError, setNetworkError] = useState<'Some error occurred' | ''>(
+    ''
+  );
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
 
@@ -23,10 +26,14 @@ function Login() {
   };
   const guestLogin = async () => {
     setAttemptingGuestLogin(true);
-
-    const success = await auth!.login('giffordjacob0@gmail.com', 'cat0both');
+    let success;
+    try {
+      success = await auth!.login('giffordjacob0@gmail.com', 'cat0both');
+    } catch (error) {
+      if (error) setNetworkError('Some error occurred');
+    }
     if (!success) setAttemptingGuestLogin(false);
-    setIsSuccess(success);
+    if (success) setIsSuccess(success);
   };
   return (
     <div className='flex h-screen bg-[rgb(86,94,101)] justify-center items-center'>
@@ -88,6 +95,7 @@ function Login() {
             <p>
               <em className='text-red-500 text-sm not-italic'>
                 {!isSuccess && 'Incorrect email or password'}
+                {networkError}
               </em>
             </p>
             <div className='flex flex-col justify-center items-center w-full'>
