@@ -5,7 +5,6 @@ import Footer from '../Footer';
 function RequireAuth() {
   const auth = useAuth();
   const location = useLocation();
-  console.log(auth);
   if (!auth!.user) {
     return <Navigate to='/login' state={{ path: location.pathname }} replace />;
   } else {
