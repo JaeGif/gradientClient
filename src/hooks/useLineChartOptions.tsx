@@ -3,7 +3,6 @@ import { capitalize } from '../utils/fnSheet/utilities';
 import useStandards from './useStandards';
 import useAnnotationStandard from './useAnnotationStandard';
 import useDataPointThreshold from './useDataPointThreshold';
-import { useContext } from 'react';
 function useLineChartOptions(
   recentExerciseQuery: UseQueryResult<any, unknown>,
   userUnits: 'kg' | 'lb',

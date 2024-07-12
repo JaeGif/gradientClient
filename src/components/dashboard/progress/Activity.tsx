@@ -25,7 +25,6 @@ function Activity() {
   const userId = useAuth()!.user!.id;
   const userGender = useUser()!.gender;
   const progressQuery = useGeneralProgressData(userId, userGender);
-
   useEffect(() => {
     if (progressQuery.data && progressQuery.isFetched) {
       if (progressQuery.data.average === 0) {
@@ -34,6 +33,7 @@ function Activity() {
         setIsData(true);
       }
       let checkArr = [
+        { level: 'untrained', weight: 15 },
         {
           level: 'beginner',
           weight: progressQuery.data.averagedStandards.beginner,
@@ -61,12 +61,14 @@ function Activity() {
         progressQuery.data.average,
         checkArr
       );
+
       setNextLevel(nextLevelData.level);
       const nextLevelValue: number = progressQuery.data.averagedStandards[
         nextLevelData.level
       ] as number;
       const currentLevel = getCurrentLevelFromNextLevel(nextLevelData.level);
       setCurrentLevel(currentLevel);
+
       const currentLevelValue: number = progressQuery.data.averagedStandards[
         currentLevel
       ] as number;
@@ -78,7 +80,7 @@ function Activity() {
 
       setDistanceToNextLevel(percentageOfNextLevel);
     }
-  }, [progressQuery.isFetched, progressQuery.data]);
+  }, [progressQuery.isFetched, progressQuery.data, nextLevel]);
 
   return (
     <div className='dark:bg-[rgb(35,35,35)] sm:w-1/4 w-full rounded-lg sm:p-2 sm:min-w-[200px] shadow-md'>
@@ -86,8 +88,7 @@ function Activity() {
         {isData ? (
           progressQuery.isFetched &&
           progressQuery.data &&
-          levelsData &&
-          userLevel && (
+          levelsData && (
             <>
               <span className='p-2 flex justify-center items-center'>
                 <OverlayProgressBarChart

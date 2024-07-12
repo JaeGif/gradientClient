@@ -33,14 +33,7 @@ function AnimateRoutes() {
           <Route path='settings' element={<UserProfile />} />
           <Route path='exercises' element={<Exercises />} />
           <Route path='record' element={<Record />} />
-          <Route
-            path='analytics/*'
-            element={
-              <>
-                <Analytics />
-              </>
-            }
-          >
+          <Route path='analytics/*' element={<Analytics />}>
             <Route
               path='muscleGroups'
               element={
@@ -56,9 +49,8 @@ function AnimateRoutes() {
               <Route path=':muscleGroup' element={<SelectedMuscleGroup />} />
             </Route>
           </Route>
+          <Route path='/*' element={<Dashboard />} />
         </Route>
-        <Route path='/' element={<Navigate to={'/dashboard'} />} />
-        <Route path='/*' element={<NotFound />} />
       </Routes>
     </div>
   );

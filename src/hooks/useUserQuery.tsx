@@ -2,13 +2,22 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useAuth } from '../utils/AuthProvider';
 const apiURL = import.meta.env.VITE_LOCAL_API_URL;
+let token = '';
 
 function useUserQuery() {
   const auth = useAuth();
   const userId = auth!.user?.id;
   const getUserData = async () => {
     if (!userId) return {};
-    const res = await fetch(`${apiURL}api/users/${userId}`, { mode: 'cors' });
+    const storage = localStorage.getItem('gradientLoggedInUser');
+
+    if (storage) {
+      token = JSON.parse(storage).token;
+    }
+    const res = await fetch(`${apiURL}api/users/${userId}`, {
+      mode: 'cors',
+      headers: { Authorization: 'Bearer' + ' ' + token },
+    });
     const data = await res.json();
     return data.user;
   };
@@ -29,11 +38,19 @@ function useUserQuery() {
     let optionalUser = '';
     if (userId) optionalUser = userId;
     else if (update.registerUserId) optionalUser = update.registerUserId;
+    const storage = localStorage.getItem('gradientLoggedInUser');
+
+    if (storage) {
+      token = JSON.parse(storage).token;
+    }
 
     const res = await fetch(`${apiURL}api/users/${optionalUser}`, {
       mode: 'cors',
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer' + ' ' + token,
+      },
       body: JSON.stringify(update),
     });
   };

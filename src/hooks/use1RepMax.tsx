@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
 import { PerformedSets } from '../types/Interfaces';
-import { useUser } from '../utils/UserProvider';
 function use1RepMax(
   data: any[],
   average: boolean,

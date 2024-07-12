@@ -6,7 +6,12 @@ import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 function Login() {
   const auth = useAuth();
   const [attemptingLogin, setAttemptingLogin] = useState(false);
+  const [attemptingGuestLogin, setAttemptingGuestLogin] = useState(false);
+
   const [isSuccess, setIsSuccess] = useState(true);
+  const [networkError, setNetworkError] = useState<'Some error occurred' | ''>(
+    ''
+  );
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
 
@@ -14,11 +19,21 @@ function Login() {
     if (email && password) {
       const success = await auth!.login(email, password);
       if (!success) setAttemptingLogin(false);
-
       setIsSuccess(success);
     } else {
       setAttemptingLogin(false);
     }
+  };
+  const guestLogin = async () => {
+    setAttemptingGuestLogin(true);
+    let success;
+    try {
+      success = await auth!.login('giffordjacob0@gmail.com', 'cat0both');
+    } catch (error) {
+      if (error) setNetworkError('Some error occurred');
+    }
+    if (!success) setAttemptingGuestLogin(false);
+    if (success) setIsSuccess(success);
   };
   return (
     <div className='flex h-screen bg-[rgb(86,94,101)] justify-center items-center'>
@@ -80,13 +95,20 @@ function Login() {
             <p>
               <em className='text-red-500 text-sm not-italic'>
                 {!isSuccess && 'Incorrect email or password'}
+                {networkError}
               </em>
             </p>
-            {/*           <p>or</p>
-          <div>
-            <button>Google</button>
-            <button>Github</button>
-          </div> */}
+            <div className='flex flex-col justify-center items-center w-full'>
+              <p>or</p>
+
+              <button className='text-green-500' onClick={guestLogin}>
+                {attemptingGuestLogin ? (
+                  <TailSpin className='h-7' stroke='#FFFFFF' />
+                ) : (
+                  'Guest Login'
+                )}
+              </button>
+            </div>
           </div>
           <span className='w-full'>
             <em className='not-italic'>

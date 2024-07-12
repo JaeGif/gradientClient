@@ -14,8 +14,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     if (userQuery.data) {
       setFreshUserData(userQuery.data);
     }
-    console.log(userQuery.status);
-  }, [userQuery.data, userQuery.status]);
+  }, [userQuery.data, userQuery.status, freshUserData]);
   if (userQuery.status === 'loading') {
     return (
       <div className='w-screen h-screen flex flex-col justify-center items-center gap-5'>
